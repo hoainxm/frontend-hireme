@@ -1,0 +1,46 @@
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.header {
+  padding: 0px !important;
+  background: $blue-3;
+  z-index: 101;
+  transition: all .1s;
+
+  .container {
+    padding: 24px;
+
+    .brand {
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 114px;
+        height: 40px;
+        margin-right: 16px;
+        cursor: pointer;
+
+        @media (min-width: 1024px) {
+          height: 44px;
+        }
+
+        @media (min-width: 1366px) {
+          height: 48px;
+        }
+      }
+    }
+
+    .navbar {
+      max-height: 48px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      
+      .btnContact {
+        margin: 0px 24px;
+      }
+    }
+  }
+}

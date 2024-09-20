@@ -1,0 +1,175 @@
+@import '../../../assets/color.scss';
+@import '../../../assets/font.scss';
+
+.sideBar {
+  z-index: 100;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 308px;
+  height: 100%;
+  background: $white;
+  padding: 112px 16px 16px 16px;
+  user-select: none;
+  transition: all 0.5s ease;
+
+  // @media (max-width: 991px) {
+  //   display: none;
+  // }
+
+  .navItem {
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 8px;
+
+    .menu {
+      width: fit-content;
+      padding: 16px;
+      border-radius: 8px;
+
+      &:hover {
+        background: $blue-1;
+      }
+    }
+
+    .item {
+      cursor: pointer;
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      transition: all 1s ease-in;
+
+      &:hover:not(.isActive):not(.isDisabled) {
+        background: $blue-1;
+      }
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      &.isDisabled {
+        cursor: not-allowed;
+        .text {
+          color: $gray-2;
+          font-weight: 700;
+        }
+      }
+
+      &.isActive {
+        .text {
+          color: $blue-3;
+          font-weight: 700;
+        }
+      }
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      .text {
+        margin-left: 12px;
+        @extend .heading6;
+      }
+    }
+
+    .dropDown {
+      margin-top: 4px;
+      margin-bottom: 4px;
+
+      .subItem {
+        padding-left: 24px;
+        margin-left: 26px;
+        border-left: 1px solid $blue-2;
+
+        .item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          padding: 12px 16px;
+          border-radius: 4px;
+
+          &.isDisabled {
+            cursor: not-allowed;
+
+            p {
+              color: $gray-2;
+              font-weight: 600;
+            }
+            svg {
+              fill: $gray-2;
+            }
+          }
+
+          &.isActive {
+            background: $blue-2;
+
+            p {
+              color: $blue-3;
+              font-weight: 600;
+            }
+          }
+
+          &:hover:not(.isActive):not(.isDisabled) {
+            background: $blue-1;
+          }
+
+          p {
+            flex: 1;
+            text-align: left;
+            @extend .body-text;
+          }
+
+          svg {
+            flex-shrink: 0;
+            margin-left: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.productsContainer {
+  padding-left: 24px;
+
+  .products {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    background: $white;
+    border: 1px solid $blue-2;
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px rgba(7, 96, 226, 0.2);
+    padding: 16px;
+
+    .product {
+      @extend .body-text;
+      cursor: pointer;
+      flex: 1;
+      text-align: left;
+      max-width: 224px;
+      padding: 12px 16px;
+
+      &.isActive {
+        background: $blue-2;
+        color: $blue-3;
+        font-weight: 600;
+      }
+
+      &:hover:not(.isActive) {
+        background: $blue-1;
+      }
+    }
+  }
+}

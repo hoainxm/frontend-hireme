@@ -1,0 +1,239 @@
+/** @format */
+
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.sideBar {
+  height: 100%;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease;
+  background-color: $white;
+  overflow-x: hidden;
+  padding-top: 87px;
+  z-index: 100;
+
+  .isActive {
+    width: 250px;
+  }
+
+  @media (max-width: 991px) {
+    display: none !important;
+  }
+
+  .menuItem {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .eachName {
+    display: none;
+    padding: 12px 16px 12px 12px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: $primary;
+    font-size: 18px;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: $dark !important;
+    font-size: 15px;
+    line-height: 25px;
+    border-left: 4px solid $white;
+
+    &:hover {
+      background-color: $nav-item;
+      border-left: 4px solid $primary;
+    }
+
+    &.isActive {
+      background-color: $nav-item !important;
+      border-left: 4px solid $primary;
+      font-weight: 700;
+      color: $blue !important;
+    }
+  }
+
+  span {
+    margin-left: 16px;
+  }
+
+  .timeAttendance {
+    padding: 12px 16px 12px 12px;
+    text-decoration: none;
+    color: $primary;
+    font-size: 18px;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $dark !important;
+    font-size: 15px;
+    line-height: 25px;
+    border-left: 4px solid $white;
+    margin-bottom: 8px;
+
+    &:hover {
+      background: $nav-item !important;
+      border-left: 4px solid $primary;
+      cursor: pointer;
+    }
+
+    &.isActive {
+      background-color: $nav-item !important;
+      border-left: 4px solid $primary;
+      font-weight: 500;
+      color: $blue !important;
+    }
+  }
+
+  .dropDown {
+    margin-bottom: 8px;
+    margin-top: -8px;
+    width: 100%;
+    text-decoration: none;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-left: 4px solid $primary;
+    -webkit-transition: all 50ms ease;
+    -moz-transition: all 50ms ease;
+    -ms-transition: all 50ms ease;
+    -o-transition: all 50ms ease;
+    transition: all 50ms ease;
+
+    .arrowIcon {
+      margin-left: auto;
+    }
+
+    ul {
+      width: 100%;
+    }
+    .circle {
+      padding: 12px 0px 12px 34px;
+      color: #5e6c84;
+
+      &.isActiveCircle {
+        color: $primary;
+      }
+    }
+
+    .subItem {
+      margin-left: 8px;
+      margin-right: 24px;
+      color: $label;
+      font-size: 14px;
+      font-weight: 400;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #5e6c84 !important;
+      font-size: 14px;
+      line-height: 25px;
+
+      &.isActiveSubItem {
+        color: $primary !important;
+        font-weight: 700;
+      }
+    }
+
+    &.isActive {
+      background-color: #f5fcff !important;
+      border-left: 4px solid $primary;
+      font-weight: 500;
+      visibility: visible;
+    }
+  }
+}
+.sideBarExpand {
+  width: 270px;
+}
+
+#shortcut-tooltip {
+  .tooltip-inner {
+    background-color: $lang-border !important;
+    color: $text-disable !important;
+    padding: 6px 8px !important;
+    font-weight: 400;
+    font-size: 13px !important;
+  }
+
+  .arrow::before {
+    border-bottom-color: transparent !important;
+    border-right-color: $lang-border !important;
+  }
+}
+
+.customDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 0px;
+  margin-right: 0px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+
+  .contentDialog {
+    min-height: 100vh;
+    border: none;
+    border-radius: 0px !important;
+    background: $white;
+    min-width: 50vw;
+
+    .modalHeader {
+      border-bottom: 1px solid $blue-2;
+
+      .logo {
+        height: 32px;
+      }
+    }
+
+    .modalFooter {
+      justify-content: flex-start;
+    }
+
+    .navbar {
+      height: 100%;
+
+      .navItem {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+
+        svg {
+          margin-right: 8px;
+        }
+
+        a, .font {
+          @extend .heading5;
+          text-decoration: none;
+          color: $black !important;
+
+          &.isActive {
+            font-weight: 800;
+          }
+
+          &:not(.isActive)::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: $blue-2;
+            transition: width .3s;
+          }
+
+          &:not(.isActive):hover::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }  
+}

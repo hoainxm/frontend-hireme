@@ -1,0 +1,89 @@
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.ctable {
+  &.responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 540px;
+
+    th {
+      z-index: 2;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      vertical-align: middle;
+      border: 1px solid $blue-1;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    color: $gray-4;
+    thead {
+      th {
+        @extend .body-text;
+        text-transform: capitalize;
+        vertical-align: bottom;
+        background: $blue-3;
+        border: 1px solid transparent;
+        color: $white;
+        font-weight: 600;
+        white-space: nowrap;
+        border: none !important;
+
+        &:first-child {
+          border-top-left-radius: 4px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 4px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        white-space: nowrap;
+
+        &:nth-child(even) {
+          background: $table-row;
+        }
+
+        td {
+          @extend .body-text;
+          color: $blue-4;
+        }
+
+        &:last-child {
+          border-bottom: 1px solid $blue-1;
+        }
+      }
+    }
+
+    td,
+    th {
+      padding: 12px 24px;
+      vertical-align: middle;
+      border: 1px solid transparent;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+}

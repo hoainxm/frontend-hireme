@@ -1,0 +1,309 @@
+/** @format */
+
+@import "../../../../common/ui/assets/color.scss";
+@import "../../../../common/ui/assets/font.scss";
+
+.columnLeft {
+  flex: 0 0 50%;
+  max-width: 50%;
+
+  @media (max-width: 1600px) {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}
+
+.columnRight {
+  flex: 0 0 50%;
+  max-width: 50%;
+
+  @media (max-width: 1600px) {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+}
+
+.projectLayout {
+  width: 100%;
+
+  .left, .right {
+    padding: 0px;
+  }
+
+  .left {
+    max-width: 666px;
+    height: 100%;
+    text-align: left;
+
+    .summary {
+      margin-bottom: 24px;
+
+      .summaryTitle {
+        @extend .heading5;
+        font-weight: 700;
+      }
+
+      .summaryContent {
+        margin-top: 16px;
+        @extend .heading6;
+      }
+    }
+
+    .highlight {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 16px;
+
+
+      .highlightTitle {
+        @extend .heading5;
+        font-weight: 700;
+      }
+
+      .highlightItem {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 12px;
+        @extend .heading6;
+
+        .rectangle {
+          flex-shrink: 0;
+          width: 12px;
+          height: 12px;
+          background-color: $blue-3;
+          margin-top: 5px
+        }
+      }
+    }
+  }
+
+  .right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .imageContainer {
+      position: relative;
+      width: 100%;
+      min-height: 396px;
+
+      .firstImage {
+        width: 50%;
+        z-index: 1;
+        bottom: 0px;
+        left: 20px;
+        position: absolute;
+        background: $blue-1;
+
+        &::before {
+          display: block;
+          content: "";
+          width: 80px;
+          height: 80px;
+          position: absolute;
+          bottom: -11px;
+          left: -11px;
+          border-bottom: 3px solid $blue-2;
+          border-left: 3px solid $blue-2;
+        }
+      }
+
+      .secondImage {
+        position: absolute;  
+        top: 0px;
+        right: 0px;
+        width: 84.5%;
+      }
+    }
+
+    .tlockerContainer {
+      position: relative;
+      width: 100%;
+      min-height: 357px;
+
+      .firstImage {
+        z-index: 1;
+        bottom: 0px;
+        position: absolute;
+        background: $blue-1;
+        padding: 8px;
+        border-radius: 12px;
+        display: flex;
+        gap: 8px;
+
+        &::before {
+          display: block;
+          content: "";
+          width: 80px;
+          height: 80px;
+          position: absolute;
+          bottom: -4px;
+          left: -4px;
+          border-bottom: 3px solid $blue-2;
+          border-left: 3px solid $blue-2;
+        }
+      }
+
+      .secondImage {
+        position: absolute;  
+        top: 0px;
+        right: 0px;
+        display: flex;
+        gap: 8px;
+      }
+    }
+
+    .ocrMCareContainer {
+      position: relative;
+      width: 100%;
+      min-height: 357px;
+
+      .firstImage {
+        z-index: 1;
+        bottom: 0px;
+        position: absolute;
+        background: $blue-1;
+        padding: 8px;
+        border-radius: 12px;
+        display: flex;
+        gap: 8px;
+
+        .ocrVideo {
+          &::before {
+            display: block;
+            content: "";
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            bottom: -4px;
+            left: -4px;
+            border-bottom: 3px solid $blue-2;
+            border-left: 3px solid $blue-2;
+          }
+        }
+      }
+
+      .secondImage {
+        position: absolute;  
+        top: 0px;
+        right: 0px;
+        display: flex;
+        gap: 8px;
+
+        @media (max-width: 1536px) {
+          right: -40px;
+          gap: 0px;
+        }
+
+        @media (max-width: 1360px) {
+          right: -60px;
+          gap: 0px;
+        }
+      }
+    }
+
+    .docReaderContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      
+      .videoContainer {
+        position: relative;
+        padding: 8px;
+
+        &::before {
+          display: block;
+          content: "";
+          width: 80px;
+          height: 80px;
+          position: absolute;
+          bottom: -4px;
+          left: -4px;
+          border-bottom: 3px solid $blue-2;
+          border-left: 3px solid $blue-2;
+        }
+      }
+    }
+
+    .cdpVideo {
+      padding: 10px;
+      height: 100%;
+
+      &::before, &::after {
+        content: "";
+        position: absolute;
+        width: 112px;
+        height: 112px;
+        border: solid $blue-2;
+        
+      }
+
+      &::before {
+        border-width: 3px 3px 0 0;
+        right: 0px;
+        top: 0px;
+      }
+
+      &::after {
+        border-width: 0 0 3px 3px;
+        bottom: 0px;
+        left: 0px;
+      }
+    }
+  }
+}
+
+.projectTabs {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: left;
+  background: transparent;
+  row-gap: 8px;
+  column-gap: 2px;
+
+  @media (max-width: 1368px) {
+    justify-content: center;
+  }
+
+  .projectTab {
+    cursor: pointer;
+    width: 233px;
+    max-height: 72px;
+    box-shadow: none;
+    background: $blue-1;
+    border: 2px solid transparent;
+    border-left-color: $blue-2;
+    padding: 8px 16px;
+    margin-left: -2px;
+    transition: all .1s;
+    user-select: none;
+
+    @extend .heading5;
+    text-align: left;
+
+    &:hover {
+      border-color: transparent;
+      background: rgba($color: $blue-2, $alpha: .3);
+    }
+    
+    &.active {
+      border-left-color: $blue-3;
+      color: $blue-3;
+      font-weight: 700;
+      background: $white;
+    }
+
+    &.hasSlash {
+      word-break: break-all;
+    }
+  }
+}
+
+.projectContent {
+  background: transparent;
+  margin-top: 40px;
+}

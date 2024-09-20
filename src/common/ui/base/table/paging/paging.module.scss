@@ -1,0 +1,60 @@
+@import '../../../assets/color.scss';
+@import '../../../assets/font.scss';
+
+.paging {
+  display: inline-block;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item {
+      cursor: pointer;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2px;
+      margin-left: 4px;
+      margin-right: 4px;
+      border-radius: 4px;
+      @extend .button-text;
+      color: $blue-4;
+
+      &.number {
+        width: 36px;
+        height: 36px;
+        background: $blue-1;
+
+        &:hover {
+          background: $blue-2;
+        }
+      }
+
+      &.active {
+        background: $white;
+        border: 1px solid $blue-3;
+
+        .next,
+        .prev {
+          filter: none !important;
+          cursor: pointer;
+        }
+      }
+
+      &.prevNext {
+        background: transparent;
+      }
+
+      .arrow {
+        margin: 10px;
+      }
+
+      .arrow.disabled,
+      .arrow.disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

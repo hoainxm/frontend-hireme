@@ -1,0 +1,374 @@
+/*
+################
+  ALL COMMENT FOR RESPONSIVE
+################
+*/
+
+@import '../../common/ui/assets/font.scss';
+@import '../../common/ui/assets/color.scss';
+
+.bannerSection {
+  display: flex;
+  justify-content: center;
+  min-height: 728px;
+
+  .wrapper {
+    width: 100%;
+    height: inherit;
+    // background: $blue-3 url('../../common/ui/assets/images/BackgroundBanner.png') no-repeat center center/cover;
+    background: #00113f;
+    // background: $white;
+
+    @media (max-width: 1280px) {
+      width: 1280px;
+    }
+
+    .container {
+      max-width: 85%;
+      height: inherit;
+      display: flex;
+      justify-content: flex-start;
+      margin: 0px auto;
+      color: $white;
+      // color: #0b3299 !important;
+
+      .columnLeftFirstBanner {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0px;
+
+        @media (min-width: 1536px) {
+          flex: 0 0 40%;
+          max-width: 40%;
+        }
+      }
+
+      .columnRightFirstBanner {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (min-width: 1536px) {
+          flex: 0 0 60%;
+          max-width: 60%;
+        }
+      }
+
+      .columnLeftSecondBanner {
+        flex: 0 0 100%;
+        max-width: 100%;
+        max-height: 200px;
+        padding: 0px;
+
+        @media (min-width: 1536px) {
+          flex: 0 0 35%;
+          max-width: 35%;
+        }
+      }
+
+      .columnRightSecondBanner {
+        position: relative;
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-height: 400px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (min-width: 1536px) {
+          flex: 0 0 65%;
+          max-width: 65%;
+        }
+
+        .brainContainer {
+          height: 100%;
+          width: 100%;
+          background: url('../../common/ui/assets/images/BrainObject.png') no-repeat left center/contain;
+
+          @media (min-width: 1280px) {
+            height: 88%;
+          }
+
+          @media (min-width: 1536px) {
+            height: 82%;
+          }
+        }
+      }
+
+      .left {
+        max-width: 100%;
+        margin-top: 72px;
+        text-align: center;
+
+        @media (min-width: 1536px) {
+          text-align: left;
+          max-width: 528px;
+        }
+
+        .details {
+          margin-top: 32px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-flow: row nowrap;
+
+          @media (min-width: 1536px) {
+            flex-flow: column nowrap;
+            align-items: flex-start;
+          }
+
+          .detail {
+            display: flex;
+            align-items: center;
+            margin-top: 0px;
+            margin-right: 32px;
+
+            @media (min-width: 1536px) {
+              margin-top: 32px;
+              margin-right: 0px;
+            }
+
+            .ellipse {
+              background-image: url('../../common/ui/assets/images/EllipseBlur.svg');
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 16px;
+              padding: 20px;
+            }
+
+            h4 {
+              text-align: left;
+              vertical-align: middle;
+
+              span {
+                @extend .heading3;
+                font-size: 32px;
+                font-weight: 800;
+              }
+            }
+          }
+        }
+      }
+
+      .bannerProductItem {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        color: $white;
+
+        &.cv {
+          top: 0%;
+          left: 54.2%;
+
+          @media (min-width: 1280px) {
+            top: 4%;
+            left: 47.2%;
+          }
+
+          @media (min-width: 1536px) {
+            top: 9%;
+            left: 54.2%;
+          }
+        }
+
+        &.nlp {
+          top: 20.4%;
+          left: 64%;
+
+          @media (min-width: 1280px) {
+            top: 22.4%;
+            left: 54.2%;
+          }
+
+          @media (min-width: 1536px) {
+            top: 25.4%;
+            left: 63%;
+          }
+        }
+
+        &.da {
+          top: 45%;
+          left: 64%;
+
+          @media (min-width: 1280px) {
+            top: 42.4%;
+            left: 54.2%;
+          }
+
+          @media (min-width: 1536px) {
+            top: 47%;
+            left: 63%;
+          }
+        }
+
+        &.sp {
+          top: 63%;
+          left: 56.2%;
+
+          @media (min-width: 1280px) {
+            top: 60%;
+            left: 47.2%;
+          }
+
+          @media (min-width: 1536px) {
+            top: 66%;
+            left: 54.2%;
+          }
+        }
+
+        .iconWrapper {
+          display: flex;
+          align-items: center;
+
+          .iconContainer {
+            position: relative;
+
+            .image {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 48px;
+              height: 48px;
+            }
+          }
+
+          .line {
+            width: 34px;
+            height: 21px;
+          }
+        }
+
+        .content {
+          @extend .heading4;
+          margin-top: 2px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+.gridThreeColumns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  // Style for responsive
+
+  // grid-template-columns: repeat(1, 1fr);
+  // gap: 24px;
+
+  // @media (min-width: 717px) {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
+
+  // @media (min-width: 1024px) {
+  //   grid-template-columns: repeat(3, 1fr);
+  // }
+}
+
+.gridFourColumns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  // Style for responsive
+
+  // grid-template-columns: repeat(1, 1fr);
+
+  // @media (min-width: 667px) {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
+
+  // @media (min-width: 1280px) {
+  //   grid-template-columns: repeat(4, 1fr);
+  // }
+}
+
+.computerVision {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  margin-top: 88px;
+
+  @media (max-width: 1600px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 36px;
+  }
+
+  .left,
+  .right {
+    flex-shrink: 0;
+    position: relative;
+    max-width: 666px;
+
+    .title {
+      position: absolute;
+      top: -8%;
+      left: 50%;
+      transform: translate(-50%, 8%);
+      background-image: url('../../common/ui/assets/images/CVTitle.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 16px 18px;
+      color: $white;
+      min-width: 438px;
+
+      @extend .heading4;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .gridLayout {
+      width: 100%;
+      padding: 0px 40px;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .center {
+    width: 100%;
+    position: relative;
+
+    .image {
+      z-index: 2;
+      position: absolute;
+      width: 115%;
+      max-width: fit-content;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+
+      @media (max-width: 1700px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.partners {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 0px -2px;
+}

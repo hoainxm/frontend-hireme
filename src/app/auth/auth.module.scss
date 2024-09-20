@@ -1,0 +1,314 @@
+/** @format */
+@import '../../common/ui/assets/color';
+@import '../../common/ui/assets/font.scss';
+
+.authContent {
+  position: relative;
+  padding: 32px;
+  transition: padding 0.1s ease-in-out;
+
+  @media (min-width: 512px) {
+    padding: 72px;
+  }
+
+  @media (min-width: 667px) {
+    padding: 80px;
+  }
+
+  .hint {
+    max-width: 448px;
+    text-align: center;
+    margin-bottom: 16px;
+
+    .hintError {
+      @extend .body-text;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      color: $red;
+
+      @media (max-width: 1200px) {
+        font-size: 15px;
+      }
+
+      @media (max-width: 992px) {
+        font-size: 14px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .turnBack {
+    cursor: pointer;
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      p {
+        color: $blue-3;
+      }
+      svg {
+        fill: $blue-3;
+      }
+    }
+  }
+
+  .authTitle {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+
+    img:first-child {
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      @extend .heading3;
+      margin-bottom: 8px;
+      transition: font-size 0.1s ease-in-out;
+
+      @media (max-width: 768px) {
+        font-size: 36px;
+      }
+    }
+
+    img:last-child {
+      transform: rotate(180deg);
+    }
+  }
+
+  .authSubTitle {
+    @extend .body-text;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .form {
+    transition: width 0.2s ease-in-out;
+
+    .promptContent {
+      @extend .body-text;
+      margin-top: 32px;
+      margin-bottom: -16px;
+      text-align: left;
+      color: $gray-3;
+    }
+
+    .inputGroup {
+      margin-bottom: 16px;
+    }
+
+    .remember {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @extend .body-text;
+
+      a {
+        white-space: nowrap;
+        @extend .body-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 32px;
+      margin-bottom: 32px;
+
+      @media (max-width: 576px) {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
+
+    .alternative {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        text-align: center;
+        white-space: nowrap;
+        margin: 0px 4px;
+        color: $gray-3;
+
+        @media (max-width: 576px) {
+          font-size: 14px;
+        }
+      }
+
+      div {
+        width: 100%;
+        height: 10px;
+        background-image: url('../../common/ui/assets/images/Line.svg');
+        background-repeat: no-repeat;
+
+        @media (max-width: 992px) {
+          display: none;
+        }
+      }
+
+      div:last-child {
+        transform: rotate(180deg);
+      }
+    }
+
+    .btnSocialGroup {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+
+      button {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        // background: $white;
+        background: #032170;
+        color: $gray-4;
+        border: 1px solid $blue-3;
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+          background: $button-disabled !important;
+          border: 1px solid $button-disabled !important;
+        }
+
+        &:focus {
+          outline: 3px solid $blue-2;
+        }
+
+        &:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    .redirect {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      @extend .body-text;
+
+      p {
+        margin-right: 8px;
+      }
+
+      @media (max-width: 768px) {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .langContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .resetSuccessful {
+    @extend .form;
+    text-align: center;
+
+    p {
+      @extend .body-text;
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.formatPassword {
+  min-width: 448px;
+  background: $white;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 16px;
+
+  div {
+    @extend .body-text;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 8px;
+
+    &.isValid {
+      color: $gray-4;
+
+      &::before {
+        content: '';
+        display: inline-flex;
+        width: 12px;
+        height: 12px;
+        padding-bottom: 2px;
+        margin-right: 8px;
+        background-image: url('../../common/ui/assets/images/CheckIcon.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 12px 12px;
+      }
+    }
+
+    &.isInvalid {
+      color: $red;
+
+      &::before {
+        content: '';
+        display: inline-flex;
+        width: 12px;
+        height: 12px;
+        padding-bottom: 2px;
+        margin-right: 8px;
+        background-image: url('../../common/ui/assets/images/ErrorIcon.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 12px 12px;
+      }
+    }
+  }
+
+  div:last-child {
+    margin-bottom: 0px;
+  }
+
+  @media (min-width: 576px) {
+    min-width: 350px;
+  }
+
+  @media (min-width: 992px) {
+    min-width: 400px;
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 448px;
+  }
+}

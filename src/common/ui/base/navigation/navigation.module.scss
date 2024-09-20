@@ -1,0 +1,33 @@
+@import '../../assets/color.scss';
+
+.scrollNavigation {
+  z-index: 4;
+  position: fixed;
+  right: 40px;
+  top: 39.4%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  .dot {
+    outline: none;
+    width: 12px;
+    height: 12px;
+    // background-color: $blue-3;
+    background-color: #00113f;
+    border: 0.5px solid $white;
+    border-radius: 100%;
+    padding: 0px;
+    transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+
+    &.isSelected {
+      width: 20px;
+      height: 20px;
+      background-color: $white;
+      // border: 1px solid $blue-3;
+      border: 1px solid #00113f;
+    }
+  }
+}

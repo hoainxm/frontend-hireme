@@ -1,0 +1,17 @@
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="clip0">
+   <rect id="svg_1" x="13" y="3" transform="rotate(90 13,3.0000000000000013) " fill="white" height="10" width="10"/>
+  </clipPath>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="514" width="514" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g transform="rotate(180 7.999572277069091,8.442998886108398) " id="svg_2" clip-path="url(#clip0)">
+   <path id="svg_3" fill="#333333" d="m7.99956,10.886c-0.15362,0 -0.30722,-0.0587 -0.42434,-0.1758l-3.68552,-3.68552c-0.23444,-0.23445 -0.23444,-0.61456 0,-0.84892c0.23436,-0.23435 0.6144,-0.23435 0.84886,0l3.261,3.26119l3.26104,-3.26107c0.2344,-0.23435 0.6144,-0.23435 0.8488,0c0.2345,0.23435 0.2345,0.61447 0,0.84891l-3.68551,3.68561c-0.11717,0.117 -0.27077,0.1756 -0.42433,0.1756z"/>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,15 @@
+/** @format */
+
+@import "../../assets/color.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0 !important;
+  transition: all 0.5s ease;
+
+  @media (max-width: 1280px) {
+    min-width: 1280px;
+  }
+}

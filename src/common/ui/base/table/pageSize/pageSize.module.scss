@@ -1,0 +1,37 @@
+/** @format */
+
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.pageSizeFrame {
+  display: flex;
+  align-items: center;
+  @extend .button-text;
+
+  .selectPageSizeFrame {
+    position: relative;
+    margin: 0px 12px;
+
+    .pageSize {
+      min-width: fit-content;
+      max-width: 63px;
+      padding: 8px 32px 8px 12px;
+      border-radius: 4px;
+      @extend .button-text;
+    }
+
+    .displayPageSize {
+      z-index: 1;
+      position: absolute;
+      pointer-events: none;
+      top: 57%;
+      left: 20%;
+      width: fit-content;
+      background: $white;
+      transform: translateY(-57%);
+      @extend .button-text;
+      font-weight: 700;
+    }
+  }
+}
+

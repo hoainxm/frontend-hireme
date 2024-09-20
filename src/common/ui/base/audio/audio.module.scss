@@ -1,0 +1,99 @@
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.wrapperAudio {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  border-radius: 16px;
+  border: 1px solid $blue-3;
+  padding: 24px;
+
+  .processBar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background-color: $gray-1;
+  }
+  input[type='range']::-webkit-slider-thumb,
+  input[type='range']::-moz-range-thumb,
+  input[type='range']::-ms-thumb {
+    -webkit-appearance: auto;
+    height: 6px;
+    width: 4px;
+    background: $black;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track,
+  input[type='range']::-moz-range-track,
+  input[type='range']::-ms-track {
+    -webkit-appearance: auto;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  .timer {
+    width: 120px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .speedControl {
+    position: relative;
+
+    .inputContent {
+      height: 30px;
+      padding: 4px 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 20px;
+      background-color: $blue-1;
+      cursor: pointer;
+
+      span {
+        display: inline-block;
+        width: 44px;
+        text-align: center;
+      }
+    }
+    .dropdown {
+      color: $gray-3;
+      position: absolute;
+      top: 32px;
+      left: 0;
+      width: 100%;
+      background-color: $white;
+      border: 1px solid $gray-1;
+      border-radius: 4px;
+      padding: 4px 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      & > div {
+        padding: 0px 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        img,
+        .boxEmpty {
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: $blue-1;
+        }
+      }
+    }
+  }
+}

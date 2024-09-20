@@ -1,0 +1,255 @@
+@import '../../../common/ui/assets/color.scss';
+@import '../../../common/ui/assets/font.scss';
+
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    color: $blue-4;
+    margin-bottom: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .section {
+    flex: 1;
+  }
+}
+
+.infoField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: -1.5px;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $blue-1;
+    width: fit-content;
+    border-radius: 12px 12px 0px 0px;
+    border-width: 1.5px 1.5px 0px 1.5px;
+    border-color: $blue-2;
+    border-style: solid;
+    padding: 8px 24px;
+
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $white;
+      border-radius: 100%;
+    }
+
+    .label {
+      @extend .heading6;
+      margin-left: 8px;
+      color: $blue-4;
+      font-weight: 600;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex: 1;
+    border: 1.5px solid $blue-2;
+    border-radius: 0px 12px 12px 12px;
+    box-shadow: 4px 4px 8px #2a7ef929;
+    padding: 16px;
+    align-items: center;
+
+    .image {
+      height: 150px;
+    }
+
+    .indicatorsWrapper {
+      margin-left: 12px;
+      align-self: flex-start;
+    }
+  }
+}
+
+.caseErrorField {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .errorImageContainer {
+    position: relative;
+
+    .errorImage {
+      width: 100%;
+      max-width: 150px;
+      max-height: 148px;
+    }
+
+    .errorIcon {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: $gray-6;
+    margin-top: 16px;
+    border-radius: 8px;
+
+    .text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      @extend .button-text;
+      margin: 8px 12px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 90%;
+        background: $gray-6;
+        bottom: 0px;
+        left: 0px;
+        height: 0px;
+      }
+    }
+  }
+}
+
+.indicatorsContainer {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+
+  .indicatorsTitle {
+    @extend .body-text;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .indicatorList {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+
+    .indicatorsLabel {
+      border-radius: 20px;
+      padding: 8px 16px;
+      background: $gray-6;
+      margin-bottom: 8px;
+      @extend .body-text;
+    }
+  }
+}
+
+.expand {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 24px;
+  @extend .body-text;
+  font-weight: 600;
+  background: $blue-2;
+}
+
+.modalContainer {
+  min-width: 71.875% !important;
+
+  & > div {
+    border: none;
+    border-radius: 8px;
+  }
+}
+
+.modalBody {
+  position: relative;
+  padding: 0px !important;
+  height: 78.7% !important;
+
+  .modalHeader {
+    padding: 32px 32px 24px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    background: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .modalHeaderTitle {
+      color: $blue-4;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  .modalContent {
+    overflow: auto;
+    max-height: 544px;
+    padding: 0px 32px 24px 32px;
+
+    @media (min-width: 1440px) {
+      max-height: 644px;
+    }
+
+    @media (min-width: 1680px) {
+      max-height: 744px;
+    }
+
+    .webCamContainer {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: stretch;
+      gap: 16px;
+
+      & > div {
+        flex: 1;
+      }
+
+      .wrapperContainer {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+      }
+    }
+
+    .modalFooter {
+      padding-top: 24px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .webcamBtnGroup {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 16px;
+      }
+
+      .btnGotIt {
+        width: 19.15%;
+      }
+    }
+  }
+}

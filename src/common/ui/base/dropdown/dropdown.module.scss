@@ -1,0 +1,88 @@
+@import "../../assets/color.scss";
+@import "../../assets/font.scss";
+
+.lang {
+  &.isOnHeader {
+    & > a {
+      height: 48px;
+    }
+  }
+
+  & > a {
+    display: flex;
+    align-items: center;
+    border: 1px solid $gray-1;
+    border-radius: 4px;
+    padding: 4px 8px !important;
+    width: fit-content !important;
+
+    @media (min-width: 1366px) {
+      padding: 8px 16px !important;
+    }
+
+    &::after {
+      display: none;
+    }
+
+    & > div {
+      &.wrapper {
+        display: inline-flex;
+        align-items: center;
+
+        & > .showLabel {
+          display: flex;
+          align-items: center;
+          min-width: 116px;
+        }
+
+        & > :not(.showLabel) {
+          min-width: auto;
+        }
+
+        svg:first-child {
+          margin-right: 8px;
+        }
+
+        p {
+          color: $gray-4;
+          margin-top: 3px;
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+
+  & > div {
+    margin-top: 4px !important;
+  }
+
+  .langItem {
+    cursor: pointer;
+    width: 168px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-left: 2px solid transparent;
+    @extend .body-text;
+
+    &:hover {
+      border-left: 2px solid $blue-3;
+    }
+
+    &.active {
+      border-color: $blue;
+      position: relative;
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+
+    p {
+      @extend .body-text;
+      color: $gray-4;
+      margin-top: 3px;
+      margin-bottom: 0px;
+    }
+  }
+}

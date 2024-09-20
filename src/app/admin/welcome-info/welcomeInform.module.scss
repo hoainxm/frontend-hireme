@@ -1,0 +1,39 @@
+/** @format */
+
+@import "../../../common/ui/assets/color.scss";
+
+.container {
+  .checkBoxField {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+  }
+
+  .previewImg {
+    object-fit: contain !important;
+  }
+
+  .blueBorder {
+    border: 1px dashed $primary !important;
+    margin-bottom: 8px;
+  }
+
+  .colorPicker {
+    padding: 3px !important;
+    height: 34px;
+    max-width: 60px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: auto;
+    }
+  }
+
+  .colorPickerHint {
+    flex-grow: 1;
+    margin-left: 16px;
+  }
+}

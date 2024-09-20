@@ -1,0 +1,168 @@
+/** @format */
+/*
+################
+  ALL COMMENT FOR RESPONSIVE
+################
+*/
+
+@import '../../../assets/color.scss';
+@import '../../../assets/font.scss';
+
+.header {
+  padding: 0px !important;
+  // background: $blue-3;
+  background: #00113f;
+  z-index: 101;
+  transition: all 0.1s;
+
+  @media (max-width: 1280px) {
+    min-width: 1280px;
+  }
+
+  .container {
+    max-width: 85%;
+    margin: 0px auto;
+    padding: 24px 0px;
+
+    .brand {
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        height: 40px;
+        margin-right: 16px;
+        cursor: pointer;
+
+        @media (min-width: 1024px) {
+          height: 44px;
+        }
+
+        @media (min-width: 1366px) {
+          height: 48px;
+        }
+      }
+    }
+
+    .navbar {
+      max-height: 48px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 0px;
+      // Style for responsive
+
+      // display: none;
+
+      // @media (min-width: 992px) {
+      //   display: flex;
+      // }
+
+      & > .navItem {
+        position: relative;
+        cursor: pointer;
+        padding: 0px;
+        margin-right: 24px;
+
+        @media (min-width: 1024px) {
+          margin-right: 40px;
+        }
+
+        @media (min-width: 1366px) {
+          margin-right: 48px;
+        }
+
+        a,
+        p {
+          @extend .heading5;
+          text-decoration: none;
+          color: $white !important;
+          // color: $black !important;
+          margin-bottom: 0px;
+
+          &.isActive {
+            font-weight: 800;
+
+            &::after {
+              content: '';
+              display: block;
+              width: 100%;
+            }
+          }
+
+          &:not(.isActive)::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0px;
+            display: block;
+            width: 100%;
+            height: 6px;
+            background-image: url('../../../assets/images/LineWhite.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 0% 100%;
+            opacity: 0;
+            transition: background-size 0.3s ease, opacity 0.3s;
+          }
+
+          &:not(.isActive):hover::after {
+            background-position: left;
+            background-size: cover;
+            opacity: 1;
+          }
+
+          @media (max-width: 1113px) {
+            font-size: 18px;
+          }
+
+          @media (max-width: 1070px) {
+            font-size: 16px;
+          }
+
+          @media (max-width: 1025px) {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .profileContainer {
+        margin-right: 24px;
+
+        @media (min-width: 1024px) {
+          margin-right: 40px;
+        }
+
+        @media (min-width: 1366px) {
+          margin-right: 48px;
+        }
+
+        .btnLogin {
+          @media (max-width: 1113px) {
+            font-size: 18px;
+          }
+
+          @media (max-width: 1070px) {
+            font-size: 16px;
+          }
+
+          @media (max-width: 1025px) {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  & > div {
+    width: 217px;
+
+    & > a {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 18px 4px 15px;
+    }
+  }
+}

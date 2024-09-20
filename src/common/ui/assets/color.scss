@@ -1,0 +1,248 @@
+/**
+ * All color using in this website is defined here
+ *
+ */
+
+// $primary: #1eb2ff; // Primary color, Btn, icon, action, select
+
+$primary: #4d9dff;
+
+$dark-primary: #0682dd;
+
+$gradient: linear-gradient(148.2deg, rgba(30, 178, 255, 0.75) 32.22%, rgba(5, 143, 242, 0.75) 112.96%);
+
+$blue-light-gradient: linear-gradient(270deg, #058ff2 2.93%, rgba(30, 178, 255, 0.75) 100%);
+
+$black-gradient: linear-gradient(rgba(140, 153, 175, 1), rgba(43, 53, 70, 1));
+
+$light-blue: #c9e7fc;
+
+$blue: #1baefd;
+
+$dark-blue: #007ed9;
+
+$bg-blue: #f2faff;
+
+$bd-blue: #1eb2ff;
+
+$white: #ffffff;
+
+$grey-white: #eeedf2;
+
+$light-grey: #656873;
+
+$bg-grey: #e5e5e5;
+
+$dark: #333333; // Body text
+
+$bg: #fafafa; // Background
+
+$bg-textbox: #f8f8f8; // Background text box
+
+$textbox-border: #dfe1e6; // Textbox border
+
+$bg-drop-gadget: #e0e2e8; // Background drop gadget
+
+$add-gadget-border: #c2c2c2; // Add gadget border
+
+$badge-text-grey: #858585;
+
+$badge-border-grey: #bcbcbc;
+
+$badge-background-grey: #e8e8e8;
+
+$label: #5e6c84;
+
+$green: #24e780;
+
+$dark-green: #1bac5f;
+
+$light-green: #e2feef;
+
+$orange: #ffc567;
+
+$badge-border-yellow: #ebbb10;
+
+$dark-orange: #efa617;
+
+$noti-orange: #ffab48;
+
+$orange-1: #f38300;
+
+$orange-2: #ffe8cc;
+
+$orange-tag: rgba(255, 206, 145, 1);
+
+$light-org: #fff5e3;
+
+$yellow: #ffd15b;
+
+$magenta: #f596db;
+
+$red: #f04338;
+
+$dark-red: #b01b1b;
+
+$light-red: #ffe9eb;
+
+$red-1: #e35021;
+
+$red-2: #ffded3;
+
+$shadow: rgba(0, 0, 0, 0.1);
+
+$bg-badge-light: rgba(30, 178, 255, 0.1);
+
+$cyan: #23cbb7;
+
+$bg-textbox-disable: #dedede;
+
+$gray-border: #979797;
+
+$light-grey: #ebebeb;
+
+$background-grey: rgba(243, 244, 246, 1);
+
+$text-disable: #959595;
+
+$text-disable-opacity: #b6b6b6;
+
+$light-disable: #f8f8f8;
+
+$bg-tooltip: #212121;
+
+$shadow-gray: #eeeeee;
+
+$lang: #e0f2ff;
+
+$lang-border: #eaebed;
+
+$bg-drop-gadget: #f1f1f1;
+
+$bg-selected-row: #d8e8ff;
+
+$border-table: #ededed;
+
+$table-header: #eff8ff; // Background table header
+
+$border-chart: #e1e1e1;
+
+$table-row: #f5f5f5;
+
+$black: #000000;
+
+$bg-modal: rgba(51, 51, 51, 0.8);
+
+$blue-border: #54c0f3;
+
+$noti-bg-blue: #dff0fd;
+
+$nav-item: #e8f7ff;
+
+$noti-bg-red: #ffecec;
+
+$noti-bg-blue: #dff0fd;
+
+$noti-bg-yellow: #f9edd6;
+
+$noti-bg-green: #d2f3e2;
+
+$middle-green: #39b145;
+
+$d-green: #00ba56;
+
+$badge-background-green: #e3fbee;
+
+$notiPopup-border-orange: #ff641a;
+
+$notiPopup-bg-cyan: #f1fffd;
+
+$notiPopup-bg-red: #fff5f4;
+
+$notiPopup-bg-orange: #fff3eb;
+
+/*
+* =====================
+* Color for AIC Website
+* =====================
+*/
+$blue-1: #f2f7fc;
+
+$blue-2: #cae7ff;
+
+$blue-3: #2a7ef9;
+
+$blue-4: #001851;
+
+$blue-tag: rgba(163, 200, 252, 1);
+
+$blue-gradient: linear-gradient(90deg, #104dde 0%, #2a7ef9 100%);
+$blue-5: #a3c8ff;
+
+$blue-background: #f3f4f6;
+
+$blue-gradient: linear-gradient(90deg, #104dde 0%, #2a7ef9 100%);
+
+$white: #ffffff;
+
+$black: #000000;
+
+$gray-1: #d9d9d9;
+
+$gray-2: #adadad;
+
+$gray-3: #646464;
+
+$gray-4: #333333;
+
+$grey-5: #f6f6f6;
+
+$gray-5: #919191;
+
+$gray-6: #ebebeb;
+
+$red: #de2d2d;
+
+$grey-6: #6c757d;
+
+$light-gray: #e7e7e7;
+$yellow: #ffcb14;
+
+$bg: #efefef;
+
+$red: #de2d2d;
+
+$green: #00b700;
+
+$bg: #efefef;
+
+$button-hover: #4792ff;
+
+$button-pressed: #085edb;
+
+$button-loading: #6ca8ff;
+
+$button-disabled: #979797;
+
+// $copy-right-background: #2671e0;
+$copy-right-background: #001754;
+
+$dropdown-hover-background: #efefef;
+
+$health-device-background: #f3f7fc;
+
+$red-bg: #fff6f5;
+$green-bg: #f2fff8;
+$orange-color: #e78c00;
+$orange-bg: #fff6e6;
+$blue-color: #0b59c8;
+$light-blue-bg: #f5fbff;
+$hover-bg-option: #e5f3fe;
+$hover-bg-chip: #f6fcff;
+$health-device-background: #f3f7fc;
+
+$toast-success-background: #e8ffe8;
+
+$toast-warning-background: #fff9dc;
+
+$toast-error-background: #ffe8e8;

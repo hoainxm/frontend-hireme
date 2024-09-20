@@ -1,0 +1,38 @@
+/** @format */
+
+@import "../../assets/color.scss";
+
+.contentLayout {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 50%;
+    }
+
+    .btn {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 50%;
+    }
+  }
+
+  .padd {
+    margin-top: 26px;
+    position: relative;
+  }
+
+  .content {
+    @extend .padd;
+    background-color: $white;
+    box-shadow: 0px 2px 10px $shadow;
+    border-radius: 12px;
+    padding: 24px;
+  }
+}

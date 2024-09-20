@@ -1,0 +1,339 @@
+@import '~bootstrap/scss/bootstrap';
+
+@import './color.scss';
+
+@import './font.scss';
+
+@import './custom.scss';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: $gray-4;
+}
+
+button {
+  @extend .body-text;
+}
+
+a {
+  color: $blue-3;
+}
+
+input,
+select,
+textarea {
+  @extend .body-text;
+}
+
+label {
+  @extend .button-text;
+  margin-bottom: 8px;
+  color: $gray-3;
+
+  &.required {
+    &:after {
+      content: '*';
+      width: 6px;
+      color: $red;
+      margin-left: 2px;
+    }
+  }
+
+  &.optional {
+    &:after {
+      content: '(optional)';
+      color: $gray-2;
+      margin-left: 2px;
+    }
+  }
+
+  &.device-label {
+    width: 100%;
+    color: $label;
+    margin-bottom: 9px;
+  }
+}
+
+.cihint {
+  @extend .button-text;
+  color: $gray-3;
+  margin-top: 4px;
+  width: 100%;
+}
+
+h1 {
+  @extend .heading1;
+  margin: 0;
+}
+
+h2 {
+  @extend .heading2;
+  margin: 0;
+}
+
+h3 {
+  @extend .heading3;
+  margin: 0;
+}
+
+h4 {
+  @extend .heading4;
+  margin: 0;
+}
+
+h5 {
+  @extend .heading5;
+  margin: 0;
+}
+
+h6 {
+  @extend .heading6;
+  margin: 0;
+}
+
+p {
+  @extend .body-text;
+  margin: 0;
+}
+
+@media (min-width: 1366px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 100%;
+  }
+}
+
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm,
+.container {
+  padding: 0;
+  margin: revert;
+}
+
+main > .container {
+  min-height: calc(100vh - 96px);
+  // overflow: hidden;
+
+  @media (max-width: 1280px) {
+    // min-width: 1280px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}
+
+#mainContent,
+#trial-main {
+  background: $blue-background;
+}
+
+.navbar > .container {
+  padding: 16px 16px;
+}
+
+.bicon {
+  margin-right: 8px;
+}
+
+.left90 {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+}
+
+.right90 {
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+}
+
+/** Scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+
+  &:horizontal {
+    height: 8px;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-drop-gadget;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $add-gadget-border;
+  border-radius: 5px;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-moz-scrollbar-button:decrement,
+::-moz-scrollbar-button:increment,
+::-webkit-scrollbar-button:decrement,
+::-webkit-scrollbar-button:increment {
+  width: 0px;
+}
+
+* {
+  scrollbar-color: $add-gadget-border $bg-drop-gadget;
+  scrollbar-width: thin;
+}
+
+/** Custom spinner */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  background: $white url('../assets/ic/16px/up_down.svg') no-repeat center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1em;
+  margin-right: 6px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.mw {
+  min-width: 150px;
+}
+
+.imageNoData {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & > div {
+    color: $text-disable;
+    margin-bottom: 194px;
+    margin-top: 16px;
+  }
+}
+
+.validated {
+  color: $red;
+}
+
+.borderValidated {
+  border: 1px solid $red !important;
+}
+
+.blank-frame {
+  margin: 81px 0px 81px 0px;
+}
+
+.flex-base-between {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#product-mega-menu {
+  display: flex;
+  align-items: center;
+  padding: 0px !important;
+
+  &::after {
+    margin-left: 0px;
+  }
+
+  & ~ .dropdown-menu {
+    min-width: 1001px;
+    min-height: 210px;
+    left: 32% !important;
+    transform: translateX(-32%);
+    background: transparent;
+    padding-top: 14px;
+    box-shadow: none;
+  }
+
+  svg {
+    margin-left: 8px;
+  }
+}
+
+/*
+  This class use for adding color to fill property in svg
+*/
+.black {
+  fill: $black;
+}
+
+.white {
+  fill: $white;
+}
+
+.blue {
+  fill: $blue-3;
+}
+
+.firstGray {
+  fill: $gray-1;
+}
+
+.fourthGray {
+  fill: $gray-4;
+}
+
+.fifthGray {
+  fill: $gray-5;
+}
+
+.red {
+  fill: $red;
+}

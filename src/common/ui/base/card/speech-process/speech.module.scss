@@ -1,0 +1,83 @@
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.wrapper {
+  min-height: 200px;
+
+  .group {
+    position: relative;
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%;
+    min-height: 202px;
+
+    .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 64px 32px 48px 32px;
+      gap: 16px;
+      width: 100%;
+      height: 100%;
+      max-height: 188px;
+      max-width: 516px;
+      background: $blue-1;
+      border: 2px solid transparent;
+      border-image: linear-gradient(
+        to bottom, 
+        $white,
+        rgba(255, 255, 255, 0) 50.52%, 
+        $white 100%) 1;
+      box-shadow: inset 0px 0px 24px rgba(255, 255, 255, 0.25);
+
+
+      .icon {
+        flex-shrink: 0;
+        margin-left: -2px;
+        width: 48px;
+        height: 48px;
+
+        @media (min-width: 412px) {
+          width: 56px;
+          height: 56px;
+        }
+      }
+
+      .content {
+        @extend .heading4;
+        text-align: left;
+      }
+    }
+
+    .rectangle {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 100%;
+      height: 100%;
+      max-height: 184px;
+      max-width: 512px;
+      border: 3px solid transparent;
+      border-image: linear-gradient(
+        -45deg,
+        rgba(15.73, 76.87, 222.06, 0.6),
+        rgba(255, 255, 255, 0) 51.04%,
+        rgba(42, 126, 249, 0.8) 100%
+      ) 1;
+
+      @media (min-width: 1920px) {
+        top: 18px;
+        left: 18px;
+      }
+
+      @media (min-width: 1280px) {
+        top: 16px;
+        left: 16px;
+      }
+    }
+  }
+}

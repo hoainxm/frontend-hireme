@@ -1,0 +1,21 @@
+@import "../../../assets/color.scss";
+
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  margin: -2px;
+  background: $white;
+  border: 2px solid transparent;
+  border-image: linear-gradient(
+    to bottom, 
+    rgb(202, 231, 255), 
+    rgba(202, 231, 255, 0) 50.52%, 
+    rgb(202, 231, 255) 100%) 1;
+
+  .partnerImage {
+    width: 151px;
+    height: 103px;
+  }
+}

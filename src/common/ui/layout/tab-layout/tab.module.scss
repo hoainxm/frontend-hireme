@@ -1,0 +1,60 @@
+/** @format */
+
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.tabContent {
+  background-color: $white;
+  border-radius: 0px 8px 8px;
+  z-index: 100;
+
+  .content {
+    padding: 24px;
+  }
+}
+
+.header {
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+
+  .tab {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 8px 0px 0px;
+    padding: 8px 24px;
+    max-height: 48px;
+    background: rgba(255, 255, 255, 0.3);
+    border-top: 2px solid $white;
+    border-right: 2px solid $white;
+    border-left: 2px solid $white;
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0px;
+    }
+
+    &.active {
+      background: $white;
+      border-color: $blue-3;
+      border-left: none;
+      border-right: none;
+
+      .tabItem {
+        color: $blue-3;
+      }
+    }
+
+    .tabItem {
+      flex: 1;
+      text-align: center;
+      color: $gray-3;
+      @extend .body-text;
+    }
+  }
+}

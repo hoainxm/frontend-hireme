@@ -1,0 +1,31 @@
+@import '../../../assets/color.scss';
+@import '../../../assets/font.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  background: $blue-5;
+  border-radius: 4px;
+
+  .inner {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    align-self: stretch;
+    padding: 7px 16px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(125deg, rgb(255, 255, 255), rgba(255, 255, 255, 0) 48.44%, rgb(255, 255, 255) 100%) 1;
+    box-shadow: inset 0px 0px 8px rgba(255, 255, 255, 0.25);
+    white-space: nowrap;
+
+    .count {
+      color: $blue-4;
+      font-weight: 800;
+      margin-left: 8px;
+    }
+  }
+}

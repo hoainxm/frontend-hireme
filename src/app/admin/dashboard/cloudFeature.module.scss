@@ -1,0 +1,82 @@
+/** @format */
+
+@import "../../../common/ui/assets/color.scss";
+
+.filterForm {
+  display: flex;
+
+  .inputField {
+    min-width: 240px;
+    max-width: 300px;
+  }
+}
+
+.apiKeyForm {
+  .content {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    .contentBlock {
+      flex-basis: 0;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+  }
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+
+  button {
+    width: 100px;
+
+    &[type="submit"] {
+      margin-left: 16px;
+    }
+  }
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+
+  .buttonText {
+    margin-left: 10px;
+    color: $primary;
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+
+.packageFeatureWrapper {
+  .packageFeatureInfo {
+    display: flex;
+
+    & > div {
+      flex: 1;
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 16px;
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid $shadow;
+      padding-top: 16px;
+    }
+
+    & > :first-child {
+      margin-left: -15px;
+    }
+
+    & > :last-child {
+      margin-right: -15px;
+    }
+  }
+}

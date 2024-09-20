@@ -1,0 +1,36 @@
+/** @format */
+
+@import '../../common/ui/assets/color.scss';
+@import '../../common/ui/assets/font.scss';
+
+.errorPage {
+  @extend .button-text;
+  font-size: 16px !important;
+  text-align: center;
+  margin: 0;
+
+  &.fullPage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .header {
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .content {
+    margin-bottom: 64px;
+    white-space: pre-line;
+  }
+
+  .link {
+    @extend .body-text;
+    font-size: 15px !important;
+    line-height: 140% !important;
+    color: $white;
+  }
+}

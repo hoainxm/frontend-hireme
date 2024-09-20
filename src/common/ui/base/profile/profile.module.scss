@@ -1,0 +1,79 @@
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.profileContainer {
+  & > a {
+    padding: 0px !important;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+
+    img {
+      width: 36px;
+      height: 36px;
+
+      @media (min-width: 1024px) {
+        width: 40px;
+        height: 40px;
+      }
+
+      @media (min-width: 1366px) {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    svg {
+      margin-top: 4px;
+    }
+
+    p {
+      max-width: 120px;
+      @extend .heading5;
+      padding-top: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-bottom: 0px;
+      margin: 0px 8px;
+
+      @media (max-width: 1101px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .profileItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+
+    .font {
+      margin-left: 8px;
+      @extend .body-text;
+      color: $gray-4;
+    }
+
+    &:hover {
+      border-left: 2px solid $blue-3;
+      background: $dropdown-hover-background;
+    }
+
+    &:focus {
+      color: $gray-4;
+    }
+  }
+
+  .divider {
+    margin: 8px 16px;
+    border: 1px solid $blue-2;
+  }
+}

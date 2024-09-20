@@ -1,0 +1,64 @@
+/** @format */
+
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.auth {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../assets/images/AuthBackground.png);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: padding 0.1s ease-in-out;
+
+  .logoContainer {
+    position: absolute;
+    top: 56px;
+    left: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    img {
+      cursor: pointer;
+    }
+
+    p {
+      @extend .heading4;
+      color: $white;
+    }
+
+    @media (max-width: 1440px) {
+      display: none;
+    }
+  }
+
+  .contentContainer {
+    max-width: 656px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 0.25) inset;
+    padding: 16px;
+    margin: 16px;
+
+    .content {
+      background: $white;
+      transition: padding 0.1s ease-in-out;
+    }
+
+    @media (min-width: 768px) {
+      padding: 24px;
+    }
+
+    @media (min-width: 1200px) {
+      margin: 0px;
+    }
+  }
+}

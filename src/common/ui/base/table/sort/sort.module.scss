@@ -1,0 +1,35 @@
+
+th {
+  .sortable {
+    cursor: pointer;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+    .sortUp, .sortDown {
+        display: none;
+    }
+    &.asc {
+        .sortUp {
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .sort {
+            display: none;
+        }
+    }
+    &.desc {
+        .sortDown {
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .sort {
+            display: none;
+        }
+    }
+    .sort {
+        margin-left: 5px;
+    }
+  }
+}

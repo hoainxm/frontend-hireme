@@ -1,0 +1,306 @@
+/** @format */
+
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+@import '../../assets';
+
+.cselect {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  @extend .button-text;
+
+  .disabled {
+    cursor: not-allowed !important;
+  }
+
+  .display {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    min-height: 34px;
+    padding: 6px;
+    border-radius: 4px;
+
+    .item {
+      @extend .input-text;
+      display: inline-block;
+      padding-left: 4px;
+    }
+
+    .selectedItem {
+      @extend .item;
+      // padding: 4px 12px;
+      background-color: $primary;
+      color: $white;
+      border-radius: 24px;
+      cursor: default;
+      max-width: 74%;
+
+      .cancel {
+        margin-left: 8px;
+        cursor: pointer;
+      }
+
+      .textItem {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 90%;
+      }
+    }
+
+    .singleSelected {
+      @extend .item;
+      @extend .body-text;
+      padding: 2px 12px;
+      color: $dark;
+      margin: 0px;
+      width: 95%;
+      max-height: 26px;
+    }
+
+    .hint {
+      padding: 4px 12px;
+      opacity: 0.6;
+      min-height: 26px;
+      line-height: 16px;
+    }
+
+    .inputSearch {
+      padding: 8px 12px;
+      min-height: 34px;
+    }
+
+    .searchInput {
+      width: 100%;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 16px;
+      background-image: url('../../assets/ic/16px/arrow/enable.svg');
+      background-repeat: no-repeat;
+      background-size: 16px 16px;
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: invert(86%) sepia(0%) saturate(29%) hue-rotate(180deg) brightness(91%) contrast(92%);
+    }
+  }
+
+  .displayAutoCompile {
+    @extend .display;
+    padding: 3px 0;
+
+    &::after {
+      right: 13px;
+    }
+    .searchInputAutoCompile {
+      min-height: 32px;
+      border: solid 1px $textbox-border;
+      width: 100%;
+      line-height: initial;
+      padding: 8px 30px 8px 12px;
+      text-overflow: ellipsis;
+
+      &:focus {
+        border: 1px solid $primary;
+        border-radius: 0;
+      }
+    }
+  }
+
+  .top {
+    position: absolute;
+    top: 36px;
+    left: 0;
+    background-color: $white;
+    border: 1px solid $textbox-border;
+    border-radius: 4px;
+    width: 100%;
+    z-index: 150;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    background-color: $white;
+    border: 1px solid $textbox-border;
+    border-radius: 4px;
+    width: 100%;
+    z-index: 150;
+  }
+
+  .alignEnd {
+    right: 0 !important;
+    left: auto;
+  }
+
+  .fitContent {
+    width: max-content !important;
+    min-width: 100%;
+    z-index: 301;
+  }
+  .dropdown {
+    .dropdownHeader {
+      padding: 8px 8px 10px;
+      border-bottom: 1px solid $textbox-border;
+
+      .search {
+        margin-bottom: 12px;
+        margin-left: 8px;
+      }
+
+      .checkAll {
+        margin: 0 8px;
+      }
+    }
+
+    .dropdownContent {
+      max-height: 255px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: 5px 0;
+
+      .optionItem {
+        margin: 0 5px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 11px;
+        cursor: pointer;
+
+        .limitText {
+          max-width: 300px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        &:not(.optionItemChoice):hover {
+          background-color: $bg-drop-gadget;
+        }
+      }
+      .optionItemChoice {
+        @extend .optionItem;
+        background-color: rgba($primary, 0.1);
+      }
+      .noData {
+        color: $text-disable;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        padding: 16px 8px;
+        text-align: center;
+      }
+    }
+
+    .dropdownContentWithButton {
+      max-height: 255px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      .optionItem {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 24px;
+
+        .optionName {
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .icon {
+          cursor: pointer;
+          :active {
+            background-color: blue;
+          }
+        }
+
+        &:hover {
+          background-color: $bg-drop-gadget;
+        }
+      }
+    }
+  }
+
+  .blueButton {
+    font-weight: 500;
+    font-size: 15px;
+    color: $primary;
+    padding: 14px 24px 14px;
+    cursor: pointer;
+  }
+
+  .inputContainer {
+    display: flex;
+
+    .input {
+      width: 73.6%;
+      margin: 14px 24px 14px;
+      min-height: 32px;
+      padding: 8px;
+      border: solid 1px $textbox-border;
+
+      :focus {
+        border: solid 1px $textbox-border;
+      }
+    }
+
+    .button {
+      align-items: flex-start;
+      display: flex;
+      align-items: center;
+      margin-right: 24px;
+    }
+
+    @media (max-width: 768px) {
+      display: grid;
+
+      .input {
+        margin: 14px;
+        width: 80%;
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+      }
+    }
+  }
+
+  select {
+    display: none;
+  }
+}
+
+.disabled {
+  background: $bg-textbox !important;
+  color: $text-disable;
+  cursor: default !important;
+  background-image: transparent !important;
+
+  &::after {
+    content: '';
+    display: block;
+    background-image: none !important;
+  }
+
+  .childDisabled {
+    color: $text-disable !important;
+  }
+}

@@ -1,0 +1,46 @@
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: $blue-1;
+  padding: 24px 40px;
+
+  .iconWrapper {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $blue-2;
+    opacity: 0.7;
+    border-radius: 50%;
+
+    .iconContainer {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      background: $white;
+      box-shadow: 0px 4px 4px rgba($color: $blue-3, $alpha: .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .content {
+    @extend .heading4;
+    margin-top: 16px;
+    text-align: center;
+    align-self: stretch;
+  }
+}

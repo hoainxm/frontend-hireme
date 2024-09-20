@@ -1,0 +1,52 @@
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.wrapper {
+  scroll-margin-top: 96px;
+  width: 100%;
+  will-change: transform;
+  transform: translateZ(0);
+
+  @media (max-width: 1280px) {
+    width: 1280px;
+  }
+
+  &.white {
+    background: $white;
+  }
+
+  &.blue {
+    background: $blue-1;
+  }
+
+  &:not(.isContrast) {
+    h1 {
+      color: $blue-4;
+    }
+  }
+
+  &.isContrast {
+    h1,
+    h4 {
+      color: $white;
+    }
+  }
+
+  .container {
+    max-width: 85%;
+    margin: 0px auto;
+    padding: 104px 0px;
+    text-align: center;
+    min-height: 400px;
+
+    .titleContainer {
+      max-width: 1080px;
+      margin: 0px auto;
+      margin-bottom: 48px;
+
+      h4 {
+        font-weight: 500;
+      }
+    }
+  }
+}

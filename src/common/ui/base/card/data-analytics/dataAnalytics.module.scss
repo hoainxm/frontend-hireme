@@ -1,0 +1,20 @@
+@import "../../../assets/color.scss";
+@import "../../../assets/font.scss";
+
+.wrapper {
+  max-height: 135px;
+  background: rgba($color: $white, $alpha: .2);
+  box-shadow: 0px 0px 16px 0px rgba($color: $white, $alpha: .25) inset;
+  padding: 10px;
+
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+    padding: 40px 0px;
+
+    @extend .heading4;
+  }
+}

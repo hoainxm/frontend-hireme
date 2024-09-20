@@ -1,0 +1,48 @@
+@import "../../assets/color.scss";
+@import "../../assets/font.scss";
+
+.tooltip {
+  max-width: 248px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: $gray-4;
+  border-radius: 14px;
+  padding: 4px 8px;
+  color: $white;
+  visibility: hidden;
+  @extend .button-text;
+
+  &.visible {
+    visibility: visible;
+  }
+
+  &.isContrast {
+    background: $white;
+    color: $gray-4;
+  }
+
+  &.left, &.left-start, &.left-end {
+    margin-right: 8px
+  }
+
+  &.right, &.right-start, &.right-end {
+    margin-left: 8px
+  }
+
+  &.top, &.top-start, &.top-end {
+    margin-bottom: 8px
+  }
+
+  &.bottom, &.bottom-start, &.bottom-end {
+    margin-top: 8px
+  }
+}
+
+.content {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

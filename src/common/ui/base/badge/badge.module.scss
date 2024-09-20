@@ -1,0 +1,194 @@
+/** @format */
+
+@import '../../assets/color.scss';
+@import '../../assets/font.scss';
+
+.badge {
+  @extend .table-header-text;
+  display: flex;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 16px;
+  white-space: nowrap;
+  width: max-content;
+  justify-content: center;
+
+  &.danger {
+    border-color: $red;
+    color: $red;
+    background-color: $light-red;
+  }
+
+  &.success {
+    border-color: $d-green;
+    color: $d-green;
+    background-color: $badge-background-green;
+  }
+
+  &.warning {
+    border-color: $badge-border-yellow;
+    color: $badge-border-yellow;
+    background-color: $light-org;
+  }
+
+  &.secondary {
+    border-color: $badge-border-grey;
+    color: $badge-text-grey;
+    background-color: $badge-background-grey;
+  }
+
+  &.blue {
+    border-color: $primary;
+    color: $primary;
+    background-color: $light-blue;
+  }
+
+  &.orange {
+    border-color: $orange-1;
+    color: $orange-1;
+    background-color: $orange-2;
+  }
+
+  &.lightRed {
+    border-color: $red-1;
+    color: $red-1;
+    background-color: $red-2;
+  }
+
+  &.gray {
+    border-color: $grey-6;
+    color: $grey-6;
+    background-color: $light-gray;
+  }
+}
+
+// Style inputContainer class for color only
+.inputContainer {
+  $red-variable: $red;
+  $green-variable: $d-green;
+  $lightBlue-variable: $primary;
+  $blue-variable: $blue-color;
+  $orange-variable: $orange-color;
+  $gray-variable: rgba($dark, 0.7);
+
+  &.red {
+    border-color: $red;
+    color: $red;
+    fill: $red;
+    background-color: $red-bg;
+  }
+
+  &.green {
+    border-color: $green-variable;
+    color: $green-variable;
+    fill: $green-variable;
+    background-color: $green-bg;
+  }
+
+  &.lightBlue {
+    border-color: $lightBlue-variable;
+    color: $lightBlue-variable;
+    fill: $lightBlue-variable;
+    background-color: $light-blue-bg;
+  }
+
+  &.blue {
+    border-color: $blue-variable;
+    color: $blue-variable;
+    fill: $blue-variable;
+    background-color: rgba($blue-color, 0.1);
+  }
+
+  &.orange {
+    border-color: $orange-variable;
+    color: $orange-variable;
+    fill: $orange-variable;
+    background-color: $orange-bg;
+  }
+
+  &.gray {
+    border-color: $gray-variable;
+    color: $gray-variable;
+    fill: $gray-variable;
+    background-color: $table-row;
+  }
+
+  .dot {
+    &.red {
+      background-color: $red-variable;
+    }
+
+    &.green {
+      background-color: $green-variable;
+    }
+
+    &.lightBlue {
+      background-color: $lightBlue-variable;
+    }
+
+    &.blue {
+      background-color: $blue-variable;
+    }
+
+    &.orange {
+      background-color: $orange-variable;
+    }
+
+    &.gray {
+      background-color: $gray-variable;
+    }
+  }
+}
+
+.inputContainer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 8px 12px;
+  height: 32px;
+  width: fit-content;
+  background: $white;
+  border-radius: 16px;
+  border: 1px solid $textbox-border;
+
+  &.small {
+    height: 24px;
+  }
+
+  &.large {
+    height: 32px;
+
+    .textInput {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  .textInput {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .arrowIcon {
+    margin-left: 2px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    margin-right: 8px;
+  }
+
+  &.allowEdit:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    transition: all 0.2s ease;
+
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+}

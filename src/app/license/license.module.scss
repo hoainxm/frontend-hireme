@@ -1,0 +1,47 @@
+@import '../../common/ui/assets/color.scss';
+@import '../../common/ui/assets/font.scss';
+
+.mainLayout {
+  background: $blue-background;
+
+  .container {
+    max-width: 62.5%;
+    margin: 20px auto;
+
+    .title {
+      @extend .heading4;
+      font-weight: 800;
+      margin: 8px 0px 24px 0px;
+    }
+
+    .cellApiKey {
+      min-width: 154px;
+      display: inline-flex;
+      justify-content: space-between;
+
+      .actionApiKey {
+        display: inline-flex;
+        gap: 8px;
+
+        .btn {
+          cursor: pointer;
+
+          &.disabled {
+            cursor: not-allowed;
+          }
+        }
+
+        .line {
+          border: 1px solid $gray-1;
+          height: 100%;
+        }
+      }
+    }
+
+    .cellAction {
+      cursor: pointer;
+      color: $blue-3;
+      font-weight: 600;
+    }
+  }
+}

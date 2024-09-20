@@ -1,0 +1,13 @@
+@import "../../assets/color.scss";
+@import "../../assets/font.scss";
+
+.breadcrumbContainer {
+  background: transparent;
+  list-style: none;
+  padding: 0px;
+  margin-bottom: 0px;
+
+  & > li {
+    @extend .button-text;
+  }
+}

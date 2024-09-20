@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@icon/*": ["common/ui/assets/icon/*"],
+      "@images/*": ["common/ui/assets/images/*"],
+      "@base/*": ["common/ui/base/*"],
+      "@layout/*": ["common/ui/layout/*"],
+      "@hooks/*": ["common/utils/hooks/*"],
+      "@models/*": ["models/*"]
+    }
+  },
+  "include": ["src"]
+}

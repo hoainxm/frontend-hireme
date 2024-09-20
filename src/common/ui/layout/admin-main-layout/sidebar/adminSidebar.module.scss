@@ -1,0 +1,79 @@
+/** @format */
+
+@import "../../../assets/color.scss";
+
+.sideBar {
+  background-color: white;
+  width: fit-content;
+  height: 100%;
+  z-index: 100;
+  transition: 0.5s ease;
+  margin-right: 24px;
+  position: absolute;
+
+  @media (max-width: 992px) {
+    display: none;
+  }
+
+  .mainShortCut {
+    list-style-type: none;
+
+    .shortcut {
+      padding: 16px 0 16px 16px;
+      text-decoration: none;
+      border-left: 4px solid $white;
+      color: $dark;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $nav-item;
+        border-left: 4px solid $primary;
+      }
+
+      .shortcutIcon {
+        margin-right: 16px;
+      }
+    }
+
+    .active {
+      background-color: $nav-item;
+      border-left: 4px solid $primary;
+      color: $primary;
+      font-weight: 700;
+    }
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdownShortCut {
+    padding: 16px 0 16px 16px;
+    text-decoration: none;
+    display: block;
+    border-left: 4px solid $white;
+    color: $dark;
+    font-size: 14px;
+    background-color: $nav-item;
+    border-left: 4px solid $primary;
+
+    .subItem {
+      margin-left: 56px;
+    }
+
+    .subActive {
+      color: $primary;
+      font-weight: 700;
+    }
+  }
+}
+
+.expand {
+  transition: 0.5s ease;
+  width: 270px;
+}

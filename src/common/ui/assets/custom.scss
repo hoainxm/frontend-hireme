@@ -1,0 +1,669 @@
+/** @format */
+
+@import './color.scss';
+@import './font.scss';
+
+/** Custom dropdown toggle */
+.dropdown-toggle {
+  &::after {
+    background-image: url('./ic/16px/arrow/drop-white.svg');
+    background-repeat: no-repeat;
+    border: none;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
+
+  &#nav-profile,
+  &#nav-lang {
+    display: inline-flex;
+    align-items: center;
+    color: $white;
+  }
+
+  &#nav-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    color: $text-disable;
+  }
+
+  &#nav-item-active {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    color: $primary;
+  }
+}
+
+.dropdown-menu {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+
+  @media (max-width: 992px) {
+    position: absolute !important;
+  }
+}
+
+.dropdown-menu,
+.show {
+  z-index: 200;
+}
+
+#nav-notifi,
+#noti-drop {
+  background: transparent;
+  border: none;
+
+  &::after {
+    display: none;
+  }
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/** Define input state style */
+.cinput {
+  input {
+    border: none;
+    padding: 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.wasvalidated {
+  .cinput,
+  .ctext-area {
+    &:valid,
+    &.isvalid {
+      // border: 1px solid $green !important;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-origin: content-box;
+
+      & ~ .cihint {
+        color: $green;
+      }
+    }
+
+    &:invalid,
+    &.isinvalid {
+      border: 1px solid $red !important;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-origin: content-box;
+
+      & ~ .cihint {
+        color: $red;
+      }
+    }
+  }
+}
+
+/** Custom tooltip */
+.tooltip-inner {
+  background: $bg-tooltip !important;
+  color: #fff !important;
+  padding: 12px !important;
+  border-radius: 5px !important;
+}
+
+.bs-tooltip-auto[x-placement^='bottom'] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  border-bottom-color: $bg-tooltip !important;
+}
+
+.bs-tooltip-auto[x-placement^='top'] .arrow::before,
+.bs-tooltip-top .arrow::before {
+  border-top-color: $bg-tooltip !important;
+}
+
+.bs-tooltip-auto[x-placement^='left'] .arrow::before,
+.bs-tooltip-left .arrow::before {
+  border-left-color: $bg-tooltip !important;
+}
+
+.bs-tooltip-auto[x-placement^='right'] .arrow::before,
+.bs-tooltip-right .arrow::before {
+  border-right-color: $bg-tooltip !important;
+}
+
+/** Custom Calendar */
+.flatpickr-input {
+  border: none;
+  padding: 0px;
+  width: inherit;
+  @extend .input-text;
+  font-weight: 400;
+  color: $dark;
+  font-size: 14px !important;
+  line-height: 16px !important;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $text-disable;
+    font-size: 14px !important;
+    line-height: 16px !important;
+  }
+
+  &:disabled {
+    background: $bg-textbox !important;
+    color: $text-disable !important;
+  }
+}
+
+.flatpickr-calendar {
+  width: 260px !important;
+}
+
+.flatpickr-month {
+  height: 60px !important;
+  display: flex !important;
+  align-items: center;
+
+  .flatpickr-current-month {
+    height: 60px !important;
+    max-width: 196px !important; // 196px = 260px(container)- 2*8px (2 x margin) - 2*24px(weight of arrow) | due to Flatpickr
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px !important;
+
+    .flatpickr-monthDropdown-months {
+      margin: 0px !important;
+      height: 32px !important;
+      width: 105px;
+      padding: 0px 8px !important;
+      border: 1px solid $textbox-border !important;
+      border-radius: 8px !important;
+      color: $dark !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      line-height: 17px !important;
+      -moz-appearance: none; /* Firefox */
+      -webkit-appearance: none; /* Safari and Chrome */
+      appearance: none;
+      background: url(./ic/16px/arrow/drop-dark.svg) no-repeat;
+      background-position-x: calc(100% - 8px);
+      background-position-y: 50%;
+    }
+
+    .numInputWrapper {
+      margin-left: 4px !important;
+      width: 72px !important;
+      background: none !important;
+
+      .arrowDown,
+      .arrowUp {
+        display: none;
+        border: none;
+      }
+
+      &:hover {
+        .arrowDown,
+        .arrowUp {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0px !important;
+        }
+      }
+
+      input {
+        text-align: center;
+      }
+    }
+  }
+
+  .cur-year {
+    padding: 8px !important;
+    max-height: 32px !important;
+    color: $dark !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 17px !important;
+    border: 1px solid $textbox-border !important;
+    border-radius: 6px !important;
+  }
+
+  .numInput {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -webkit-appearance: none;
+      background: none !important;
+    }
+
+    &:hover {
+      background: $white !important;
+    }
+  }
+}
+
+.flatpickr-next-month,
+.flatpickr-prev-month {
+  height: 60px !important;
+  width: 24px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px !important;
+  margin-right: 8px;
+
+  svg {
+    fill: $add-gadget-border;
+
+    &:hover {
+      fill: $primary !important;
+    }
+  }
+
+  &:hover {
+    svg {
+      fill: $primary !important;
+    }
+  }
+}
+
+.flatpickr-prev-month {
+  margin: 0px 0px 0px 8px !important;
+}
+
+.flatpickr-innerContainer {
+  .flatpickr-rContainer {
+    width: 260px !important;
+    max-width: 260px !important;
+    padding: 0px 18px !important;
+
+    .flatpickr-weekdays {
+      border-bottom: 1px solid $textbox-border;
+      margin-bottom: 6px; //6px instead of 8px because each days container has 3px margin => 6+2=8px
+
+      span {
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        font-family: Roboto;
+        color: $dark;
+        padding: 3px;
+      }
+    }
+
+    .flatpickr-days {
+      max-width: 260px !important;
+      width: 100% !important;
+      margin-bottom: 14px; ////14px instead of 16px because each days container has 2px margin => 14+2=16px
+
+      .flatpickr-day {
+        font-family: Roboto !important;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        color: $dark !important;
+        height: 24px !important;
+        max-width: 24px !important;
+        margin: 2px 4px;
+        padding: 2px 8px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          background: $primary !important;
+          border: none !important;
+          color: $white !important;
+        }
+      }
+
+      .dayContainer {
+        max-width: 260px !important;
+        min-width: 0px !important;
+      }
+    }
+  }
+}
+
+.flatpickr-time {
+  padding: 8px 50px !important;
+  min-height: 48px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .numInputWrapper {
+    height: 32px !important;
+    display: flex;
+    align-items: center;
+    max-width: 52px !important;
+    background: none !important;
+
+    &:hover {
+      height: 32px !important;
+      background: none !important;
+    }
+
+    .arrowDown,
+    .arrowUp {
+      display: none;
+      border: none;
+    }
+
+    .flatpickr-minute,
+    .flatpickr-hour {
+      width: 52px;
+      padding: 5px 15px 5px 18px !important;
+      font-size: 16px !important;
+      line-height: 23px !important;
+      font-weight: 400;
+      border-top: 1px solid $textbox-border;
+      border-bottom: 1px solid $textbox-border;
+      border-left: 1px solid $textbox-border;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      background: white !important;
+
+      &:hover {
+        background: white !important;
+      }
+    }
+
+    .flatpickr-minute {
+      width: 52px;
+      padding: 5px 18px 5px 15px !important; //Use 15px because 16px makes the text garbled due to font size
+      border-left: none !important;
+      border-top-left-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-right: 1px solid $textbox-border;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      background: white !important;
+
+      &:hover {
+        background: white !important;
+      }
+    }
+  }
+
+  .flatpickr-time-separator {
+    border-top: 1px solid $textbox-border !important;
+    border-bottom: 1px solid $textbox-border !important;
+    max-height: 32px !important;
+    width: 4px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/** Custom modal */
+.modal-content {
+  border-radius: 16px !important;
+  width: 100%;
+
+  .modal-header {
+    padding: 16px 24px;
+
+    .close {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .modal-body {
+    padding: 16px 24px;
+  }
+}
+
+.modal {
+  &.card-modal {
+    background: rgba(51, 51, 51, 0.8);
+    .modal-dialog {
+      max-width: 100vw !important;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      margin: 1px;
+
+      .modal-content {
+        background: none;
+        border: none;
+
+        .close {
+          opacity: 1;
+          padding: 0;
+          float: unset;
+        }
+
+        .modal-header,
+        .modal-footer {
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 880px;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    max-width: 448px;
+  }
+}
+
+/** Custom breadcrumbs */
+.breadcrumb-item + .breadcrumb-item {
+  padding-left: 4px;
+
+  &::before {
+    content: '';
+    margin-right: 4px;
+    width: 18px;
+    height: 18px;
+    transform: rotate(-90deg);
+    background: url('../assets/ic/16px/arrow/drop-gray.svg') no-repeat center center/contain;
+    color: $gray-2;
+  }
+}
+
+/** Custom dropdown of header */
+.dropdown-toggle {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+
+  &::after {
+    background-image: url(../assets/ic/16px/arrow/enable.svg);
+  }
+}
+
+/** Custom popup */
+.popup {
+  .close-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+/** Custome checkbox input */
+.custom-control-label {
+  &:before {
+    border-color: $textbox-border;
+  }
+}
+.custom-control-input {
+  ~ label {
+    padding: 0;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 140%;
+    padding-top: 2px;
+    color: $dark;
+  }
+
+  &:checked ~ .custom-control-label {
+    &:before {
+      border: $primary;
+      background-color: $primary;
+    }
+  }
+}
+
+// circle avatar
+.circle-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.table-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/**Text box*/
+.ctext-area {
+  border-radius: 2px;
+  border: 1px solid $textbox-border;
+  width: 100%;
+
+  &:focus {
+    border: 1px solid $primary;
+    outline: none;
+  }
+}
+
+/** Custom select arrow*/
+select:default {
+  color: $text-disable;
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Some browsers will not display the caret when using calc, so we put the fallback first */
+  background: url('./ic/16px/arrow/drop-dark.svg') white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
+  background: url('./ic/16px/arrow/drop-dark.svg') white no-repeat calc(100% - 8px) !important; /* Better placement regardless of input width */
+}
+
+// custom popover
+.popover {
+  background: $white;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: auto;
+  max-width: none;
+  font-family: Roboto;
+  font-style: normal;
+}
+
+// checkbox
+.input-checkbox {
+  width: 18px;
+  height: 18px;
+  background: $white;
+  border: 1px solid #dfe1e6;
+}
+
+/** Remove password eyes icon */
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+/**Override css of week picker calendar*/
+.weekpicker .DayPicker-Month {
+  border-collapse: separate;
+}
+.weekpicker .DayPicker-WeekNumber {
+  outline: none;
+  font-size: 14px;
+  padding-right: 10px !important;
+}
+.weekpicker .DayPicker-Day {
+  outline: none;
+  border: 1px solid transparent;
+  padding: 0px !important;
+  border-radius: 0px !important;
+}
+.weekpicker .DayPicker-Day--hoverRange {
+  background-color: $bg-blue !important;
+}
+
+.weekpicker .DayPicker-Day--selectedRange {
+  background-color: $light-blue !important;
+  border-top-color: $blue-border;
+  border-bottom-color: $blue-border;
+  border-left-color: $light-blue;
+  border-right-color: $light-blue;
+}
+
+.weekpicker .DayPicker-Day--today {
+  color: $primary !important;
+}
+
+.weekpicker .DayPicker-Day--selectedRangeStart {
+  background-color: $light-blue !important;
+  border-left: 1px solid $blue-border;
+  color: $white !important;
+  font-weight: 600 !important;
+}
+
+.weekpicker .DayPicker-Day--selectedRangeEnd {
+  background-color: $light-blue !important;
+  border-right: 1px solid $blue-border;
+  color: $white !important;
+  font-weight: 600 !important;
+}
+
+.weekpicker .DayPicker-Day--selectedRange:not(.DayPicker-Day--outside).DayPicker-Day--selected,
+.weekpicker .DayPicker-Day--hoverRange:not(.DayPicker-Day--outside).DayPicker-Day--selected {
+  border-radius: 0 !important;
+  color: $dark !important;
+}
+.weekpicker .DayPicker-Day--hoverRange:hover {
+  border-radius: 0 !important;
+}
+.weekpicker .DayPicker-Caption {
+  font-size: 14px;
+}
+
+.weekpicker .DayPicker-NavButton--prev {
+  background-image: url(./ic/16px/arrow/thin-arrow.svg) !important;
+  background-size: auto;
+}
+.weekpicker .DayPicker-NavButton--next {
+  background-image: url(./ic/16px/arrow/thin-arrow.svg) !important;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  background-size: auto;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+.swiper-button-prev {
+  left: 0;
+}
