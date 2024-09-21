@@ -173,7 +173,9 @@ const Register: FC<Props> = (props: Props) => {
           />
           {errors.password?.type === 'required' && <CInputHint>{t(`${errors.password.message}`)}</CInputHint>}
         </Form.Group>
+
         <FormatPasswordRule value={watch('password') || ''} target={refPassword} isFocus={checkShowFormatPassword()} />
+
         <Form.Group className={style.inputGroup}>
           <Form.Label>{t('field.cfmPassword')}</Form.Label>
           <CInput
@@ -192,6 +194,51 @@ const Register: FC<Props> = (props: Props) => {
           {errors.confirm_password?.type === 'required' && <CInputHint>{t(`${errors.confirm_password.message}`)}</CInputHint>}
           {errors.confirm_password?.type === 'validate' && <CInputHint>{t('field.error.confirm_password')}</CInputHint>}
           {errorState.confirm_password && <CInputHint>{t('error.cfmPass')}</CInputHint>}
+        </Form.Group>
+
+        <Form.Group className={style.inputGroup}>
+          <Form.Label>{t('field.birthday')}</Form.Label>
+          <CInput
+            id='birthday'
+            type='date'
+            name='birthday'
+            iref={register({
+              required: 'field.error.required',
+            })}
+            placeholder={t('field.hint.birthday')}
+          />
+        </Form.Group>
+
+        <Form.Group className={style.inputGroup}>
+          <Form.Label>{t('field.gender')}</Form.Label>
+          <Form.Control
+            as='select'
+            name='gender'
+            ref={register({
+              required: 'field.error.required',
+            })}
+            isValid={!errors.gender}
+            isInvalid={!!errors.gender}
+          >
+            <option value='male'>{t('field.male')}</option>
+            <option value='female'>{t('field.female')}</option>
+            <option value='other'>{t('field.other')}</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group className={style.inputGroup}>
+          <Form.Label>{t('field.address')}</Form.Label>
+          <CInput
+            id='address'
+            autoComplete='off'
+            type='text'
+            name='address'
+            iref={register({
+              required: 'field.error.required',
+            })}
+            placeholder={t('field.hint.address')}
+            maxLength={200}
+          />
         </Form.Group>
 
         <Form.Group></Form.Group>

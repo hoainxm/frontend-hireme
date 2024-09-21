@@ -29,7 +29,7 @@ export const AuthLayout: FC<Props> = (props: Props) => {
     <main className={style.auth}>
       <div className={style.logoContainer}>
         <Image src={LogoWhite} onClick={redirectToHomePage} />
-        <p>{t('title.name')}</p>
+        {/* <p>{t('title.name')}</p> */}
       </div>
       <div className={style.contentContainer}>
         <div className={style.content}>{children}</div>
