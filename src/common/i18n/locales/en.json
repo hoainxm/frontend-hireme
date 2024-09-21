@@ -138,7 +138,7 @@
   "field.cfmPassword": "Confirm password",
   "field.hint.birthday": "Chooose your birthday",
   "field.hint.gender": "Choose your gender",
-  "field.hint.address": "Enter your address",
+  "field.hint.address": "Enter address",
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",
   "error.tenantAliasExists": "Tenant alias already exists",

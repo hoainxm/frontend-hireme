@@ -3,7 +3,7 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 
 import { Image } from 'react-bootstrap';
-import LogoWhite from '@images/LogoWhiteWithLine.png';
+import LogoWhite from '@images/LogoWhite.png';
 import { PageURL } from '../../../../models/enum';
 import { configViewSetMeta } from '../../../../common/utils/common';
 import style from './authLayout.module.scss';
@@ -29,7 +29,7 @@ export const AuthLayout: FC<Props> = (props: Props) => {
     <main className={style.auth}>
       <div className={style.logoContainer}>
         <Image src={LogoWhite} onClick={redirectToHomePage} />
-        <p>{t('title.name')}</p>
+        {/* <p>{t('title.name')}</p> */}
       </div>
       <div className={style.contentContainer}>
         <div className={style.content}>{children}</div>
