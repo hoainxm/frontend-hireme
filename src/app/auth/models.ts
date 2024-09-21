@@ -17,13 +17,16 @@ export interface UserProfile {
   is_superuser: boolean;
   user_id: string;
   last_name: string;
-  tenant_logo: string;
+  birthday: string;
+  gender: string;
+  address: string;
+  // tenant_logo: string;
   social_token: string;
   username: string;
   last_login: string;
   default_pool: string;
   is_blacklist: boolean;
-  tenant: string;
+  // tenant: string;
   is_reset_password: string;
   user_roles: Array<UserRole>;
 }
