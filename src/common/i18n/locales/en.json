@@ -127,6 +127,8 @@
   "support.Support": "Support",
 
   "field.hint.tenant_name": "Enter tenant",
+  "field.fullName": "Full name",
+  "field.hint.fullName": "Enter full name",
   "field.lastName": "Last name",
   "field.hint.lastName": "Enter last name",
   "field.lastAndMiddleName": "Last and middle name",

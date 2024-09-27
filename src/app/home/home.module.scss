@@ -295,7 +295,8 @@
 .computerVision {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;

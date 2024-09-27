@@ -80,8 +80,13 @@ export const NORMAL_CHAR_PATTERN: RegExp = /^[A-Za-z0-9\s\p{Letter}']+$/iu;
 
 export const USERNAME_PATTERN = /^[A-Za-z][A-Za-z0-9]+$/;
 
+// export const PASS_PATTERN: RegExp =
+//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+// export const PASS_PATTERN: RegExp =
+// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+
 export const PASS_PATTERN: RegExp =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
 
 export const PASSWORD_MAX_LENGTH: RegExp = /.{8,}/;
 
@@ -89,7 +94,9 @@ export const UPPERCASE_ONLY_PATTERN: RegExp = /[A-Z]/;
 
 export const LOWERCASE_ONLY_PATTERN: RegExp = /[a-z]/;
 
-export const SPECIAL_ONLY_PATTERN: RegExp = /^(?:[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]|^\S*$)$/;
+// export const SPECIAL_ONLY_PATTERN: RegExp = /^(?:[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]|^\S*$)$/;
+
+export const SPECIAL_ONLY_PATTERN: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 
 export const NUMERIC_ONLY_PATTERN: RegExp = /\d/;
 
