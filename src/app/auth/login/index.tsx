@@ -191,10 +191,10 @@ const Login: FC<Props> = (props: Props) => {
                 <SVGIcon icon='GoogleFill' size={24} />
                 Google
               </button>
-              <button disabled>
+              {/* <button disabled>
                 <SVGIcon icon='FacebookFill' size={24} />
                 Facebook
-              </button>
+              </button> */}
             </div>
             <div className={style.redirect}>
               <p>{t('auth.noAccount')} </p>

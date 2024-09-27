@@ -98,7 +98,7 @@ const Register: FC<Props> = (props: Props) => {
   return (
     <AuthFormLayout title='auth.register' hasLanguageDropDown loginError={errorMsg} otherError={errorState.email ? 'error.emailExists' : ''}>
       <Form onSubmit={handleSubmit(onRegisValid, onRegisInvalid)} noValidate className={style.form}>
-        <Form.Row>
+        {/* <Form.Row>
           <Col sm={7}>
             <Form.Group className={style.inputGroup}>
               <Form.Label>{t('field.lastAndMiddleName')}</Form.Label>
@@ -137,7 +137,26 @@ const Register: FC<Props> = (props: Props) => {
               {errors.first_name?.type === 'maxLength' && <CInputHint>{`${t('field.error.maxLength')} 200`}</CInputHint>}
             </Form.Group>
           </Col>
-        </Form.Row>
+        </Form.Row> */}
+
+        <Form.Group className={style.inputGroup}>
+          <Form.Label>{t('field.fullName')}</Form.Label>
+          <CInput
+            type='text'
+            name='full_name'
+            placeholder={t('field.hint.fullName')}
+            iref={register({
+              required: 'field.error.required',
+              pattern: NORMAL_CHAR_PATTERN,
+              maxLength: 200,
+            })}
+            valid={!errors.full_name}
+          />
+          {errors.full_name?.type === 'required' && <CInputHint>{t(`${errors.full_name.message}`)}</CInputHint>}
+          {errors.full_name?.type === 'pattern' && <CInputHint>{t('field.error.character')}</CInputHint>}
+          {errors.full_name?.type === 'maxLength' && <CInputHint>{`${t('field.error.maxLength')} 200`}</CInputHint>}
+        </Form.Group>
+
         <Form.Group className={style.inputGroup}>
           <Form.Label>{t('field.email')}</Form.Label>
           <CInput
@@ -205,8 +224,10 @@ const Register: FC<Props> = (props: Props) => {
             iref={register({
               required: 'field.error.required',
             })}
-            placeholder={t('field.hint.birthday')}
+            // placeholder={t('field.hint.birthday')}
+            valid={!errors.birthday}
           />
+          {errors.birthday?.type === 'required' && <CInputHint>{t(`${errors.birthday.message}`)}</CInputHint>}
         </Form.Group>
 
         <Form.Group className={style.inputGroup}>
@@ -230,7 +251,7 @@ const Register: FC<Props> = (props: Props) => {
           <Form.Label>{t('field.address')}</Form.Label>
           <CInput
             id='address'
-            autoComplete='off'
+            // autoComplete='off'
             type='text'
             name='address'
             iref={register({
@@ -238,7 +259,9 @@ const Register: FC<Props> = (props: Props) => {
             })}
             placeholder={t('field.hint.address')}
             maxLength={200}
+            valid={!errors.address}
           />
+          {errors.address?.type === 'required' && <CInputHint>{t(`${errors.address.message}`)}</CInputHint>}
         </Form.Group>
 
         <Form.Group></Form.Group>
