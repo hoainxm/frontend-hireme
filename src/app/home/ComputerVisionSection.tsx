@@ -20,10 +20,10 @@ export const ComputerVisionSection: FC<Props> = (props) => {
   return (
     <SectionLayout
       id={sectionId}
-      // title="product.computerVision"
-      // subTitle="product.computerVision.subTitle"'
-      title='Find Your Dream Job Today'
-      subTitle='Explore top job opportunities and connect with leading employers to jumpstart your career.'
+      title='product.computerVision'
+      subTitle='product.computerVision.subTitle'
+      // title='Find Your Dream Job Today'
+      // subTitle='Explore top job opportunities and connect with leading employers to jumpstart your career.'
     >
       <div className={style.computerVision}>
         <div className={style.left}>
