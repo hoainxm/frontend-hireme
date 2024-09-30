@@ -20,21 +20,15 @@ import Vehicle from '@images/Vehicle.svg';
 import AgeGender from '@images/AgeGender.svg';
 import Speed from '@images/Speed.svg';
 
-import ADG from '@images/ADG.png';
-import ADLINK from '@images/ADLINK.png';
 import ADVANTECH from '@images/ADVANTECH.png';
+import INTEL from '@images/INTEL.png';
 import ASUS from '@images/ASUS.png';
 import BKAV from '@images/BKAV.png';
-import HIK from '@images/HIK.png';
-import INTEL from '@images/INTEL.png';
-import NTC from '@images/NTC.png';
 import NVIDIA from '@images/NVIDIA.png';
-import RENESAS from '@images/RENESAS.png';
-import SENTEK from '@images/SENTEK.png';
-import SOPHOGO from '@images/SOPHOGO.png';
-import THADO from '@images/THADO.png';
-import VANLTECH from '@images/VANLTECH.png';
-import VULETECH from '@images/VULETECH.png';
+import TOPCV from '@images/TopCV.png';
+import VIETNAMWORKS from '@images/VIETNAMWORKS.png';
+import LINKEDIN from '@images/LINKEDIN.png';
+import ADLINK from '@images/ADLINK.png';
 
 import { IconMapName } from '../../common/ui/assets/icon';
 import { TabItem } from '../../common/ui/layout/model';
@@ -54,7 +48,7 @@ import { SpeechSection } from './SpeechSection';
 import { TypicalProjectSection } from './TypicalProjectSection';
 import { ServiceSection } from './ServiceSection';
 import { PartnerSection } from './PartnerSection';
-import { WhyTMASection } from './WhyTMASection';
+import { WhyHireMeSection } from './WhyHireMeSection';
 import { CDP } from './components/projects/CDP';
 import { YOUTUBE_VIDEO_ID } from '../../common/utils/constants';
 import { SectionID } from '../../models/enum';
@@ -98,30 +92,18 @@ export const BANNER_PRODUCT_ITEMS = [
   },
 ];
 
-export const WHY_TMA_ITEMS: Array<Item> = [
+export const WHY_HIRE_ME_ITEMS: Array<Item> = [
   {
     icon: 'Customer',
-    content: 'home.whyTMA.customer',
+    content: 'home.whyHireMe.customer',
   },
   {
     icon: 'AISpeed',
-    content: 'home.whyTMA.speed',
-  },
-  {
-    icon: 'Hardware',
-    content: 'home.whyTMA.hardware',
-  },
-  {
-    icon: 'LowerCost',
-    content: 'home.whyTMA.lowCost',
+    content: 'home.whyHireMe.speed',
   },
   {
     icon: 'Project',
-    content: 'home.whyTMA.experienceImplement',
-  },
-  {
-    icon: 'Technology',
-    content: 'home.whyTMA.updateNewTech',
+    content: 'home.whyHireMe.experienceImplement',
   },
 ];
 
@@ -265,7 +247,7 @@ export const SERVICE_ITEMS: Array<Item> = [
   },
 ];
 
-export const PARTNER_IMAGES = [NVIDIA, ASUS, INTEL, RENESAS, ADLINK, SOPHOGO, NTC, THADO, ADG, VULETECH, BKAV, SENTEK, ADVANTECH, VANLTECH, HIK];
+export const PARTNER_IMAGES = [ADLINK, NVIDIA, ASUS, INTEL, BKAV, ADVANTECH, TOPCV, VIETNAMWORKS, LINKEDIN];
 
 export const TYPICAL_PROJECT_TABS: Array<TabItem & { videoId: string; component: FC<any> }> = [
   { name: 'project.iph', contentId: 'iphtab', videoId: YOUTUBE_VIDEO_ID.IPH, component: IPH },
@@ -304,11 +286,11 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
     text: 'product.speechProcessing',
     section: SpeechSection,
   },
-  {
-    sectionId: SectionID.HOME_PROJECT,
-    text: 'title.project',
-    section: TypicalProjectSection,
-  },
+  // {
+  //   sectionId: SectionID.HOME_PROJECT,
+  //   text: 'title.project',
+  //   section: TypicalProjectSection,
+  // },
   {
     sectionId: SectionID.HOME_SERVICE,
     text: 'title.service',
@@ -321,7 +303,7 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
   },
   {
     sectionId: SectionID.HOME_WHY,
-    text: 'title.whyTMA',
-    section: WhyTMASection,
+    text: 'title.whyHireMe',
+    section: WhyHireMeSection,
   },
 ];

@@ -1,5 +1,5 @@
-@import "../../../assets/color.scss";
-@import "../../../assets/font.scss";
+@import '../../../assets/color.scss';
+@import '../../../assets/font.scss';
 
 .wrapper {
   display: flex;
@@ -7,12 +7,12 @@
   justify-content: flex-start;
   align-items: center;
   max-height: 250px;
-  background: url("../../../assets/images/CooperationModelBackground.png") no-repeat center center/cover;
+  background: url('../../../assets/images/Background1.png') no-repeat center center/cover;
   padding: 48px;
   color: $white;
 
   .ellipse {
-    background: url("../../../assets/images/EllipseBlur.svg") no-repeat center/contain;
+    background: url('../../../assets/images/EllipseBlur.svg') no-repeat center/contain;
     display: flex;
     align-items: center;
     justify-content: center;
