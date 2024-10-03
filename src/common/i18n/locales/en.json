@@ -242,8 +242,8 @@
   "cooperationModel.consultant": "Recruitment strategy consulting",
   "cooperationModel.api": "Recruitment platform and API integration",
 
-  "product.computerVision": "Computer Vision",
-  "product.computerVision.subTitle": "Solution for identification, in-depth analysis based on images, easy to integrate with existing camera systems.",
+  "product.recruitingSection": "HireMe Recruitment Platform",
+  "product.recruitingSection.subTitle": "Solution for identifying and deeply analyzing job candidates, easily integrated with existing recruitment systems.",
 
   "product.naturalLanguage": "Natural Language Processing",
   "product.naturalLanguage.subTitle": "Apply new technologies to optimize the ability to analyze, process, and understand natural language, meeting the diverse needs of different industries and fields.",
@@ -377,7 +377,26 @@
   "product.ocr.type.paper": "Paper",
   "product.ocr.type.lcd": "LCD",
 
-  "product.od": "Object Detection",
+  "product.employer": "Employers",
+  "product.employer.posting": "Posting Recruitments",
+  "product.employer.hire": "Filtering Candidates",
+  "product.employer.contact": "Direct Contacts",
+  "product.employer.viewprofile": "Viewing Profiles",
+  "product.employer.filemanage": "Managing Process",
+  "product.employer.rating": "Evaluating Candidates",
+  "product.employer.buildconpany": "Building Brand",
+  "product.employer.location": "Sharing Job Postings",
+
+  "product.candidate": "Candidates",
+  "product.candidate.profile": "Personal Profile",
+  "product.candidate.searching": "Job Searching",
+  "product.candidate.apply": "Directly Applying",
+  "product.candidate.notifications": "Receiving Job Alerts",
+  "product.candidate.process": "Tracking Application Process",
+  "product.candidate.export": "Contacting Employers",
+  "product.candidate.contactwith": "Job Recommend",
+  "product.candidate.buildingnetwork": "Professional Network",
+
   "product.od.faceRecognition": "Face recognition",
   "product.od.facialExpressionRecognition": "Facial express recognition",
   "product.od.actionRecognition": "Action recognition",

@@ -376,9 +376,6 @@
     flex-flow: row nowrap;
     gap: 24px;
     animation: slide 30s linear infinite; // Animation dài hơn để có chuyển động mượt mà
-    &:hover {
-      animation-play-state: paused; // Dừng khi hover
-    }
   }
 
   @keyframes slide {

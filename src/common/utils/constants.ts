@@ -217,12 +217,12 @@ export const PROFILE_ITEMS = [
     icon: 'ManageAccount',
     isActive: false,
   },
-  {
-    name: PageName.LICENSE_MANAGEMENT,
-    url: PageURL.LICENSE_MANAGEMENT,
-    icon: 'License',
-    isActive: false,
-  },
+  // {
+  //   name: PageName.LICENSE_MANAGEMENT,
+  //   url: PageURL.LICENSE_MANAGEMENT,
+  //   icon: 'License',
+  //   isActive: false,
+  // },
 ];
 
 export const CONTACT_INFORMATION = [
@@ -352,7 +352,7 @@ export const PRODUCT_ITEMS: { [key: string]: MegaMenuItem } = {
       },
       [ProductLabel.OD]: {
         isActive: false,
-        isDisabled: true,
+        isDisabled: false,
         isTitle: true,
         url: PageURL.PRODUCT_OD,
         subName: {
@@ -396,18 +396,18 @@ export const PRODUCT_ITEMS: { [key: string]: MegaMenuItem } = {
     },
   },
   [ProductLabel.NATURAL_LANGUAGE]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
   [ProductLabel.DATA_ANALYTICS]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
   [ProductLabel.AUDIO_SPEECH]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
 };

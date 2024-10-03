@@ -20,8 +20,8 @@ export interface LoginFormInputs {
 }
 
 export interface RegisterFormInputs {
-  first_name: string;
-  last_name: string;
+  // first_name: string;
+  // last_name: string;
   full_name: string;
   email: string;
   confirm_password: string;
