@@ -3,22 +3,23 @@ import BannerNLP from '@images/BannerNLP.png';
 import BannerDA from '@images/BannerDA.png';
 import BannerSpeechProcessing from '@images/BannerSpeechProcessing.png';
 
-import HealthDevice from '@images/HealthDevice.svg';
-import Inbody from '@images/Inbody.svg';
-import Prescription from '@images/Prescription.svg';
-import Bill from '@images/Bill.svg';
-import Docs from '@images/Docs.svg';
-import IDCard from '@images/IDCard.svg';
-import LicensePlate from '@images/LicensePlate.svg';
+import Posting from '@images/Posting.svg';
+import Hire from '@images/Hire.svg';
+import Contact from '@images/Contact.svg';
+import ViewProfile from '@images/ViewProfile.svg';
+import FileManage from '@images/FileManage.svg';
+import Rating from '@images/Rating.svg';
+import BuildingCompany from '@images/BuildingCompany.svg';
+import Location from '@images/Location.svg';
 
-import FaceID from '@images/FaceID.svg';
-import Emotion from '@images/Emotion.svg';
-import Activity from '@images/Activity.svg';
-import Animals from '@images/Animals.svg';
-import Children from '@images/Children.svg';
-import Vehicle from '@images/Vehicle.svg';
-import AgeGender from '@images/AgeGender.svg';
-import Speed from '@images/Speed.svg';
+import Profile from '@images/Profile.svg';
+import Searching from '@images/Searching.svg';
+import Apply from '@images/Apply.svg';
+import Notifications from '@images/Notifications.svg';
+import Process from '@images/Process.svg';
+import ContactWith from '@images/ContactWith.svg';
+import Export from '@images/Export.svg';
+import BuildingNetwork from '@images/BuildingNetwork.svg';
 
 import ADVANTECH from '@images/ADVANTECH.png';
 import INTEL from '@images/INTEL.png';
@@ -41,7 +42,7 @@ import { TLocker } from './components/projects/TLocker';
 import { OCRMCare } from './components/projects/OCRMCare';
 import { DocumentReader } from './components/projects/DocumentReader';
 import { Banner } from './Banner';
-import { ComputerVisionSection } from './ComputerVisionSection';
+import { RecrutingSection } from './RecruitingSection';
 import { NLPSection } from './NLPSection';
 import { DASection } from './DASection';
 import { SpeechSection } from './SpeechSection';
@@ -107,69 +108,73 @@ export const WHY_HIRE_ME_ITEMS: Array<Item> = [
   },
 ];
 
-export const OCR_ITEMS = [
+export const EMPLOYERS = [
   {
-    image: HealthDevice,
-    content: 'product.ocr.medicalDevice',
+    image: Posting,
+    content: 'product.employer.posting',
   },
   {
-    image: Inbody,
-    content: 'product.ocr.inBody',
+    image: Hire,
+    content: 'product.employer.hire',
   },
   {
-    image: Prescription,
-    content: 'product.ocr.prescription',
+    image: Contact,
+    content: 'product.employer.contact',
   },
   {
-    image: Bill,
-    content: 'product.ocr.bill',
+    image: ViewProfile,
+    content: 'product.employer.viewprofile',
   },
   {
-    image: Docs,
-    content: 'product.ocr.docs',
+    image: FileManage,
+    content: 'product.employer.filemanage',
   },
   {
-    image: IDCard,
-    content: 'product.ocr.idCard',
+    image: Rating,
+    content: 'product.employer.rating',
   },
   {
-    image: LicensePlate,
-    content: 'product.ocr.licensePlate',
+    image: BuildingCompany,
+    content: 'product.employer.buildconpany',
+  },
+  {
+    image: Location,
+    content: 'product.employer.location',
   },
 ];
 
-export const OD_ITEMS = [
+export const CANDIDATES = [
   {
-    image: FaceID,
-    content: 'product.od.faceRecognition',
+    image: Profile,
+    content: 'product.candidate.profile',
   },
   {
-    image: Emotion,
-    content: 'product.od.facialExpressionRecognition',
+    image: Searching,
+    content: 'product.candidate.searching',
   },
   {
-    image: Activity,
-    content: 'product.od.actionRecognition',
+    image: Apply,
+    content: 'product.candidate.apply',
   },
   {
-    image: Animals,
-    content: 'product.od.objectDetection',
+    image: Notifications,
+    content: 'product.candidate.notifications',
   },
   {
-    image: Children,
-    content: 'product.od.childrenRecognition',
+    image: Process,
+    content: 'product.candidate.process',
   },
   {
-    image: Vehicle,
-    content: 'product.od.vehicleRecognition',
+    image: Export,
+    content: 'product.candidate.export',
   },
   {
-    image: AgeGender,
-    content: 'product.od.agePrediction',
+    image: ContactWith,
+    content: 'product.candidate.contactwith',
   },
   {
-    image: Speed,
-    content: 'product.od.vehicleSpeedEstimation',
+    image: BuildingNetwork,
+    content: 'product.candidate.buildingnetwork',
   },
 ];
 
@@ -268,24 +273,24 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
   },
   {
     sectionId: SectionID.HOME_CV,
-    text: 'product.computerVision',
-    section: ComputerVisionSection,
+    text: 'product.recruitingSection',
+    section: RecrutingSection,
   },
-  {
-    sectionId: SectionID.HOME_NLP,
-    text: 'product.naturalLanguage',
-    section: NLPSection,
-  },
-  {
-    sectionId: SectionID.HOME_DA,
-    text: 'product.dataAnalytics',
-    section: DASection,
-  },
-  {
-    sectionId: SectionID.HOME_AS,
-    text: 'product.speechProcessing',
-    section: SpeechSection,
-  },
+  // {
+  //   sectionId: SectionID.HOME_NLP,
+  //   text: 'product.naturalLanguage',
+  //   section: NLPSection,
+  // },
+  // {
+  //   sectionId: SectionID.HOME_DA,
+  //   text: 'product.dataAnalytics',
+  //   section: DASection,
+  // },
+  // {
+  //   sectionId: SectionID.HOME_AS,
+  //   text: 'product.speechProcessing',
+  //   section: SpeechSection,
+  // },
   // {
   //   sectionId: SectionID.HOME_PROJECT,
   //   text: 'title.project',
