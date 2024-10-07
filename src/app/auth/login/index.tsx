@@ -210,7 +210,7 @@ const Login: FC<Props> = (props: Props) => {
               <div></div>
             </div>
             <div className={style.btnSocialGroup}>
-              <button disabled>
+              <button type='button'>
                 <SVGIcon icon='GoogleFill' size={24} />
                 Google
               </button>
