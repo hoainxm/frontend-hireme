@@ -77,7 +77,7 @@ export const TopNavigation: FC<Props> = (props) => {
             id='product-mega-menu'
             show={showMegaMenu}
             className={style.navItem}
-            onMouseEnter={() => setShowMegaMenu(true)}
+            onMouseEnter={() => setShowMegaMenu(false)}
             onMouseLeave={() => setShowMegaMenu(false)}
             title={
               <>

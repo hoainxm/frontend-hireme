@@ -187,11 +187,17 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
+  // {
+  //   name: PageName.NEWS,
+  //   url: PageURL.NEWS,
+  //   sectionId: SectionID.HOME_BANNER,
+  //   isActive: false,
+  // },
   {
-    name: PageName.NEWS,
-    url: PageURL.NEWS,
+    name: PageName.JOBS,
+    url: PageURL.JOBS,
     sectionId: SectionID.HOME_BANNER,
-    isActive: false,
+    isActive: true,
   },
 ];
 

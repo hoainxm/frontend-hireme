@@ -26,6 +26,7 @@ export enum PageURL {
   PRODUCT = '/product',
   ABOUT_US = '/about',
   NEWS = '/news',
+  JOBS = '/jobs',
   CATEGORY = '/news/categories',
   PROFILE_MANAGEMENT = '/profile',
   LICENSE_MANAGEMENT = '/license-management',
@@ -80,9 +81,11 @@ export enum PageURL {
 export enum PageName {
   // User
   HOME = 'user.home',
+  JOBS = 'user.jobs',
   PRODUCT = 'user.product',
   ABOUT_US = 'user.aboutUs',
   NEWS = 'user.news',
+
   PROFILE_MANAGEMENT = 'user.profile.management',
   LICENSE_MANAGEMENT = 'user.license.management',
 

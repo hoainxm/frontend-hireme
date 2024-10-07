@@ -23,8 +23,8 @@ import { CreateDynamicTemplate } from '../app/trial/ocr/dynamic-template/CreateD
 import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamicResult';
 import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
-import News from '../app/news';
-import Category from '../app/news/Category';
+import Jobs from '../app/jobs';
+import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
@@ -68,8 +68,8 @@ export const PUBLIC_ROUTE = [
     component: ResetPassword,
   },
   {
-    path: PageURL.NEWS,
-    component: News,
+    path: PageURL.JOBS,
+    component: Jobs,
   },
   {
     path: PageURL.CATEGORY,

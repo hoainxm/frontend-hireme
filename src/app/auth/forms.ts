@@ -12,11 +12,16 @@ export interface AuthWelcomeInfo {
   zalo_logo?: string;
 }
 
+// export interface LoginFormInputs {
+//   username: string;
+//   email: string;
+//   password: string;
+//   tenant_alias: string;
+// }
+
 export interface LoginFormInputs {
   username: string;
-  email: string;
   password: string;
-  tenant_alias: string;
 }
 
 export interface RegisterFormInputs {
@@ -39,4 +44,9 @@ export interface ResetPasswordFormInputs {
   token?: string;
   new_password: string;
   confirm_password: string;
+}
+
+export interface Login {
+  username: string;
+  password: string;
 }

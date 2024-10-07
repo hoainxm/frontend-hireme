@@ -292,7 +292,7 @@
   // }
 }
 
-.computerVision {
+.recruitingRole {
   position: relative;
   display: flex;
   // justify-content: space-between;
@@ -330,6 +330,13 @@
       @extend .heading4;
       font-weight: 800;
       white-space: nowrap;
+
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .title:hover {
+      transform: translate(-50%, 8%) scale(1.05);
+      opacity: 0.9;
     }
 
     .gridLayout {
