@@ -3,7 +3,9 @@
   "title.project": "Projects",
   "title.service": "Service",
   "title.ourPartner": "Partners",
+  "title.partner": "Partners",
   "title.whyHireMe": "Why Hire Me",
+  "title.update": "Upgrade Your Experience",
   "field.home": "Dashboard",
   "field.numeric": "No.",
   "field.action": "Action",
@@ -140,6 +142,11 @@
   "level.junior": "Junior",
   "level.senior": "Senior",
   "level.intern": "Intern",
+  "level.basic": "Basic Package",
+  "level.standard": "Standard Package",
+  "level.premium": "Premium Package",
+  "button.buyNow": "BUY NOW",
+  "button.experience": "EXPERIENCE NOW",
 
   "selectStatus": "Status",
   "status.active": "Active",
@@ -257,6 +264,7 @@
   "all.news": "All News",
   "news": "News",
   "joblist": "The best jobs",
+  "joblist.title": "Discover your dream job from top hiring opportunities on HireMe",
 
   "admin.home": "Dashboard",
   "admin.inform.title": "Welcome information",
@@ -278,6 +286,7 @@
 
   "product.recruitingSection": "HireMe Recruitment Platform",
   "product.recruitingSection.subTitle": "Solution for identifying and deeply analyzing job candidates, easily integrated with existing recruitment systems.",
+  "product.updateSection": "Update Experience",
 
   "product.naturalLanguage": "Natural Language Processing",
   "product.naturalLanguage.subTitle": "Apply new technologies to optimize the ability to analyze, process, and understand natural language, meeting the diverse needs of different industries and fields.",

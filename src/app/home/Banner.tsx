@@ -7,6 +7,7 @@ import { Palette } from '../../models/enum';
 import { Col, Image, Row } from 'react-bootstrap';
 import { CSwiper } from '@base/swiper';
 import Solutions from '@images/Solutions.png';
+import World from '@images/World.png';
 
 interface Props {
   sectionId: string;
@@ -38,6 +39,38 @@ const FirstBanner: FC = () => {
         </Col>
         <Col className={style.columnRightFirstBanner}>
           <Image src={Solutions} width='100%' />
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+const SecondBanner: FC = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div className={style.wrapper}>
+      <Row className={style.container}>
+        <Col className={style.columnLeftSecondBanner}>
+          <div className={style.left}>
+            <h1>{t('title.name')}</h1>
+            <h4 className='mt-3'>{t('home.banner01.content')}</h4>
+            <div className={style.details}>
+              {STRENGTH_POINTS.map((sp, index) => (
+                <div key={index} className={style.detail}>
+                  <div className={style.ellipse}>
+                    <SVGIcon icon={sp.icon} color={Palette.WHITE} size={48} />
+                  </div>
+                  <h4>
+                    <Trans i18nKey={sp.content} components={{ span: <span /> }} />
+                  </h4>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Col>
+        <Col className={style.columnRightSecondBanner}>
+          <Image src={World} width='100%' />
         </Col>
       </Row>
     </div>
@@ -88,7 +121,7 @@ export const Banner: FC<Props> = (props) => {
 
   return (
     <section id={sectionId} className={style.bannerSection}>
-      <CSwiper isContrast isAutoPlay isLoop isZoom isInFrontSlide className={style.wrapper} listSlide={[FirstBanner]} />
+      <CSwiper isContrast isAutoPlay isLoop isZoom isInFrontSlide className={style.wrapper} listSlide={[FirstBanner, SecondBanner]} />
     </section>
   );
 };

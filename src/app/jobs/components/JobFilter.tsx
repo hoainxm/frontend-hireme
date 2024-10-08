@@ -8,13 +8,34 @@ import style from '../jobs.module.scss';
 import Back from '@icon/Back.svg';
 import locationData from './location.json';
 import { Form } from 'react-bootstrap';
+import { Job } from '../model';
+
+// import { Province, District, Ward } from '../model';
+
+interface Ward {
+  Id: string;
+  Name: string;
+  Level?: string;
+}
+
+interface District {
+  Id: string;
+  Name: string;
+  Wards: Ward[];
+}
+
+interface Province {
+  Id: string;
+  Name: string;
+  Districts: District[];
+}
 
 interface JobFilterProps {
   onFilter: (filters: any) => void;
 }
 
 const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
-  const { t } = useTranslation(); // Translation hook
+  const { t } = useTranslation();
   const [selectedProvince, setSelectedProvince] = useState<string>('');
   const [selectedDistrict, setSelectedDistrict] = useState<string>('');
   const [selectedWard, setSelectedWard] = useState<string>('');
@@ -26,7 +47,9 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
   const [level, setLevel] = useState<string>('');
   const [isActive, setIsActive] = useState<boolean | ''>('');
 
-  // Handle province selection and update districts
+  const locationData: Province[] = [];
+
+  // Ensure `find` works correctly with the typed locationData
   useEffect(() => {
     const province = locationData.find((p: Province) => p.Id === selectedProvince);
     if (province) {
@@ -39,7 +62,7 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
     }
   }, [selectedProvince]);
 
-  // Handle district selection and update wards
+  // Update wards based on selected district
   useEffect(() => {
     const district = districts.find((d: District) => d.Id === selectedDistrict);
     if (district) {
@@ -60,11 +83,11 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
       level,
       isActive,
     };
-    onFilter(filters); // Pass the filters to parent component
+    onFilter(filters); // Pass the filters to the parent component
   };
 
   return (
-    <Form className={style.jobfilter}>
+    <Form className={style.jobfilter} onSubmit={handleFilter}>
       <div className={style.location}>
         <div className={style.filterGroup}>
           <label htmlFor='province'>{t('field.selectProvince')}</label>
@@ -115,12 +138,8 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
         </div>
 
         <div className={style.filterGroup}>
-          <label htmlFor='level'>{t('field.level')}</label> {/* Added htmlFor */}
-          <select
-            id='level' // Added id for accessibility
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-          >
+          <label htmlFor='level'>{t('field.level')}</label>
+          <select id='level' value={level} onChange={(e) => setLevel(e.target.value)}>
             <option value=''>{t('selectLevel')}</option>
             <option value='INTERN'>{t('level.intern')}</option>
             <option value='FRESHER'>{t('level.fresher')}</option>
@@ -130,22 +149,9 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
         </div>
       </div>
 
-      {/* <div className={style.filterGroup}>
-        <label>{t('field.salary')}</label>
-        <input type='number' placeholder={t('minSalary')} onChange={(e) => setSalaryRange({ ...salaryRange, min: parseInt(e.target.value) })} />
-        <input type='number' placeholder={t('maxSalary')} onChange={(e) => setSalaryRange({ ...salaryRange, max: parseInt(e.target.value) })} />
-      </div> */}
-
-      {/* <div className={style.filterGroup}>
-        <label>{t('field.status')}</label>
-        <select value={String(isActive)} onChange={(e) => setIsActive(e.target.value === 'true' ? true : false)}>
-          <option value=''>{t('selectStatus')}</option>
-          <option value='true'>{t('status.active')}</option>
-          <option value='false'>{t('status.inactive')}</option>
-        </select>
-      </div> */}
-
-      <button>{t('field.filter')}</button>
+      <button type='submit' className={style.filterButton}>
+        {t('field.filter')}
+      </button>
     </Form>
   );
 };

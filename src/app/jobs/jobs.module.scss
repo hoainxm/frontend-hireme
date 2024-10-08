@@ -15,7 +15,7 @@ main > .container {
     max-width: 100%;
     margin: 0px auto;
     padding: 56px 0px;
-    background: #00113f;
+    background: #032170;
     // background-color: #0a4e99;
 
     .top {
@@ -214,13 +214,14 @@ main > .container {
     padding: 12px;
     border: none;
     border-radius: 4px;
-    background-color: #00113f;
+    background-color: #032170;
     color: white;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease; // Added transform transition
 
     &:hover {
+      cursor: pointer;
       background-color: #0a4e99;
       transform: translateY(-2px);
     }
@@ -256,8 +257,13 @@ $subtext-color: #666;
     transition: transform 0.3s, box-shadow 0.3s;
 
     &:hover {
+      cursor: pointer;
       transform: translateY(-5px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-color: #032170;
+      .jobTitle {
+        color: #007bff !important;
+      }
     }
 
     .jobDetails {
@@ -276,6 +282,7 @@ $subtext-color: #666;
           font-size: 1.5em;
           font-weight: bold;
           color: $text-color;
+          transition: color 0.3s;
 
           .companyName {
             font-size: 1rem;
@@ -323,6 +330,7 @@ $subtext-color: #666;
           transition: background-color 0.3s;
 
           &:hover {
+            cursor: pointer;
             background-color: #0a4e99;
           }
         }
@@ -382,6 +390,7 @@ $subtext-color: #666;
     transition: background-color 0.3s ease;
 
     &:hover {
+      cursor: pointer;
       background-color: #0a4e99;
       color: white;
     }
@@ -392,4 +401,68 @@ $subtext-color: #666;
       font-weight: bold;
     }
   }
+}
+
+.jobDetailContainer {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.jobTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.location,
+.companyName,
+.level,
+.salary,
+.quantity,
+.startDate,
+.endDate,
+.createdBy {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.companyContainer {
+  display: flex;
+  align-items: center;
+}
+
+.companyLogo {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+.skillsHeader {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.skillsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skillItem {
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.loading {
+  font-size: 18px;
+  color: #007bff;
+}
+
+.error,
+.noJob {
+  font-size: 18px;
+  color: red;
 }

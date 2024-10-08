@@ -43,7 +43,7 @@ import { OCRMCare } from './components/projects/OCRMCare';
 import { DocumentReader } from './components/projects/DocumentReader';
 import { Banner } from './Banner';
 import { RecrutingSection } from './RecruitingSection';
-import { NLPSection } from './NLPSection';
+// import { NLPSection } from './UpdateSection';
 import { DASection } from './DASection';
 import { SpeechSection } from './SpeechSection';
 import { TypicalProjectSection } from './TypicalProjectSection';
@@ -53,6 +53,7 @@ import { WhyHireMeSection } from './WhyHireMeSection';
 import { CDP } from './components/projects/CDP';
 import { YOUTUBE_VIDEO_ID } from '../../common/utils/constants';
 import { SectionID } from '../../models/enum';
+import UpdateSection from './UpdateSection';
 
 interface Item {
   icon: keyof typeof IconMapName;
@@ -273,14 +274,9 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
   },
   {
     sectionId: SectionID.HOME_CV,
-    text: 'product.recruitingSection',
+    text: 'product.recruiting',
     section: RecrutingSection,
   },
-  // {
-  //   sectionId: SectionID.HOME_NLP,
-  //   text: 'product.naturalLanguage',
-  //   section: NLPSection,
-  // },
   // {
   //   sectionId: SectionID.HOME_DA,
   //   text: 'product.dataAnalytics',
@@ -303,12 +299,17 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
   },
   {
     sectionId: SectionID.HOME_PARTNERS,
-    text: 'title.ourPartner',
+    text: 'title.partner',
     section: PartnerSection,
   },
   {
     sectionId: SectionID.HOME_WHY,
     text: 'title.whyHireMe',
     section: WhyHireMeSection,
+  },
+  {
+    sectionId: SectionID.HOME_UPDATE,
+    text: 'product.updateSection',
+    section: UpdateSection,
   },
 ];

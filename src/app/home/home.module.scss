@@ -16,7 +16,7 @@
     width: 100%;
     height: inherit;
     // background: $blue-3 url('../../common/ui/assets/images/BackgroundBanner.png') no-repeat center center/cover;
-    background: #00113f;
+    background: #032170;
     // background: $white;
 
     @media (max-width: 1280px) {
@@ -335,6 +335,7 @@
     }
 
     .title:hover {
+      cursor: pointer;
       transform: translate(-50%, 8%) scale(1.05);
       opacity: 0.9;
     }
@@ -392,5 +393,121 @@
     100% {
       transform: translateX(-50%); // Kết thúc ở giữa danh sách
     }
+  }
+}
+
+.updateSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  font-family: SVN-Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 140%;
+}
+
+.plan {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+
+  .features {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+    li {
+      margin: 10px 0;
+      font-size: 1.3rem;
+    }
+  }
+
+  button {
+    border: none;
+    padding: 10px 0;
+    border-radius: 25px;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+}
+
+.headerBasic {
+  background-color: #e74c3c;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  font-size: 1.6rem;
+  h3 {
+    color: white;
+    font-size: 1.8rem;
+  }
+  p {
+    color: white;
+    font-size: 1.5rem;
+  }
+}
+
+.headerStandard {
+  background-color: #3498db;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  font-size: 1.6rem;
+  h3 {
+    color: white;
+    font-size: 1.8rem;
+  }
+  p {
+    color: white;
+    font-size: 1.5rem;
+  }
+}
+
+.headerPremium {
+  background-color: #2ecc71;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  font-size: 1.6rem;
+  h3 {
+    color: white;
+    font-size: 1.8rem;
+  }
+  p {
+    color: white;
+    font-size: 1.5rem;
+  }
+}
+
+.basicButton {
+  background-color: #e74c3c;
+  &:hover {
+    background-color: #c0392b;
+  }
+}
+
+.standardButton {
+  background-color: #3498db;
+  &:hover {
+    background-color: #2980b9;
+  }
+}
+
+.premiumButton {
+  background-color: #2ecc71;
+  &:hover {
+    background-color: #27ae60;
   }
 }
