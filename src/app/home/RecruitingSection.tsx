@@ -7,6 +7,7 @@ import { SectionLayout } from '../../common/ui/layout/section-layout';
 import { Image } from 'react-bootstrap';
 import Left from '@images/LeftSide.svg';
 import Right from '@images/RightSide.svg';
+import { Palette } from '../../models/enum';
 
 interface Props {
   sectionId: string;
@@ -17,7 +18,7 @@ export const RecrutingSection: FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <SectionLayout id={sectionId} title='product.recruitingSection' subTitle='product.recruitingSection.subTitle'>
+    <SectionLayout id={sectionId} title='product.recruitingSection' subTitle='product.recruitingSection.subTitle' backgroundColor={Palette.BLUE}>
       <div className={style.recruitingRole}>
         <div className={style.left}>
           <Image src={Left} width='100%' />

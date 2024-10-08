@@ -7,9 +7,18 @@ export interface Job {
   salary: number;
   quantity: number;
   level: string;
+  // description: string;
   startDate: string;
   endDate: string;
   isActive: boolean;
+  // createdBy: {
+  //   _id: string;
+  //   email: string;
+  // };
+  // isDeleted: boolean;
+  // deletedAt: string | null;
+  // createdAt: string;
+  // updatedAt: string;
 }
 
 export const mockJobs: Job[] = [

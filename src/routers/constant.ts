@@ -24,7 +24,7 @@ import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamic
 import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
-import Category from '../app/jobs/Category';
+// import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
@@ -35,7 +35,7 @@ export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_DYNAMIC_TEMPLATE, component: DynamicTemplate },
   { path: PageURL.OCR_DYNAMIC_TEMPLATE_RESULT, component: ShowDynamicResult },
   { path: PageURL.TEXT_TO_SPEECH, component: TextToSpeech },
-  { path: PageURL.CATEGORY, component: Category },
+  // { path: PageURL.CATEGORY, component: Category },
 ];
 
 export const PUBLIC_ROUTE = [
@@ -71,10 +71,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.JOBS,
     component: Jobs,
   },
-  {
-    path: PageURL.CATEGORY,
-    component: Category,
-  },
+  // {
+  //   path: PageURL.CATEGORY,
+  //   component: Category,
+  // },
 ];
 
 export const PRIVATE_ROUTE = [

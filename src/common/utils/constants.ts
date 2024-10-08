@@ -176,6 +176,12 @@ export const NAV_ITEMS = [
     isActive: false,
   },
   {
+    name: PageName.JOBS,
+    url: PageURL.JOBS,
+    sectionId: SectionID.HOME_BANNER,
+    isActive: true,
+  },
+  {
     name: PageName.PRODUCT,
     url: PageURL.PRODUCT,
     sectionId: SectionID.HOME_BANNER,
@@ -193,12 +199,6 @@ export const NAV_ITEMS = [
   //   sectionId: SectionID.HOME_BANNER,
   //   isActive: false,
   // },
-  {
-    name: PageName.JOBS,
-    url: PageURL.JOBS,
-    sectionId: SectionID.HOME_BANNER,
-    isActive: true,
-  },
 ];
 
 export const SOCIAL_LINKS = [
