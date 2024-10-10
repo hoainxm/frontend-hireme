@@ -3,20 +3,22 @@ import { useTranslation } from 'react-i18next';
 import React, { FC, HTMLAttributes, useEffect, useState, useTransition } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { updateSectionDot } from '@layout/slice';
 import { BackToTop } from '@base/button/BackToTop';
 import Back from '@icon/Back.svg';
 import locationData from './location.json';
 import { Form } from 'react-bootstrap';
+import { Job } from '../../jobs/model';
+import { Link, useHistory } from 'react-router-dom';
 
 interface JobListProps {
   jobs: Job[];
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs }) => {
-  const { t } = useTranslation(); // Translation hook
+  const { t } = useTranslation();
+  const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 10;
+  const jobsPerPage = 15;
 
   const totalPages = Math.ceil(jobs.length / jobsPerPage);
 
@@ -26,6 +28,11 @@ const JobList: React.FC<JobListProps> = ({ jobs }) => {
 
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleJobClick = (jobId: string) => {
+    // Navigate to job detail page
+    history.push(`/jobs/${jobId}`);
   };
 
   const getRemainingDays = (endDate: string) => {
@@ -74,6 +81,7 @@ const JobList: React.FC<JobListProps> = ({ jobs }) => {
           </button>
         ))}
       </div>
+      <BackToTop />
     </div>
   );
 };

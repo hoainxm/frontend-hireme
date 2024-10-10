@@ -19,33 +19,33 @@ interface SideBarSliceInitial {
 }
 
 const initialState: MainSliceInitial = {
-  userInfo: {
-    id: 1,
-    username: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c_namm0704@gmail.com',
-    tenant: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c',
-    social_token: 's7uj66',
-    user_id: 'namm0704@gmail.com',
-    first_name: 'Nam',
-    last_name: 'Phan Nguyen Hoai',
-    email: 'namm0704@gmail.com',
-    full_name: 'Phan Nguyen Hoai Nam',
-    // gender: 'O',
-    avatar: null,
-    // additional_info: null,
-    is_superuser: false,
-    is_reset_password: 'false',
-    // created_on: '03/05/2024',
-    tenant_logo: '',
-    last_login: '',
-    default_pool: '',
-    is_blacklist: false,
-    user_roles: [
-      {
-        role: 'SUPER ADMIN',
-        department: '',
-      },
-    ],
-  },
+  // userInfo: {
+  //   id: 1,
+  //   username: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c_namm0704@gmail.com',
+  //   tenant: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c',
+  //   social_token: 's7uj66',
+  //   user_id: 'namm0704@gmail.com',
+  //   first_name: 'Nam',
+  //   last_name: 'Phan Nguyen Hoai',
+  //   email: 'namm0704@gmail.com',
+  //   full_name: 'Phan Nguyen Hoai Nam',
+  //   gender: 'O',
+  //   avatar: null,
+  //   additional_info: null,
+  //   is_superuser: false,
+  //   is_reset_password: 'false',
+  //   created_on: '03/05/2024',
+  //   tenant_logo: '',
+  //   last_login: '',
+  //   default_pool: '',
+  //   is_blacklist: false,
+  //   user_roles: [
+  //     {
+  //       role: 'SUPER ADMIN',
+  //       department: '',
+  //     },
+  //   ],
+  // },
 };
 
 const sideBarInitial: SideBarSliceInitial = {

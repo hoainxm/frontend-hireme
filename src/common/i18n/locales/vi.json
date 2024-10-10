@@ -3,7 +3,9 @@
   "title.project": "Dự án tiêu biểu",
   "title.service": "Dịch vụ",
   "title.ourPartner": "Đối tác của chúng tôi",
-  "title.whyHireMe": "Tại sao lựa chọn HireMe",
+  "title.partner": "Đối tác",
+  "title.whyHireMe": "Tại sao nên lựa chọn HireMe",
+  "title.update": "Nâng cấp trải nghiệm",
   "field.home": "Trang chủ",
   "field.numeric": "STT",
   "field.action": "Tác vụ",
@@ -139,6 +141,11 @@
   "level.junior": "Junior",
   "level.senior": "Senior",
   "level.intern": "Thực tập sinh",
+  "level.basic": "Gói cơ bản",
+  "level.standard": "Gói tiêu chuẩn",
+  "level.premium": "Gói cao cấp",
+  "button.buyNow": "MUA NGAY",
+  "button.experience": "TRẢI NGHIỆM NGAY",
 
   "selectStatus": "Trạng thái",
   "status.active": "Đang hoạt động",
@@ -256,6 +263,7 @@
   "all.news": "Tất cả tin tức",
   "news": "Tin tức",
   "joblist": "Việc làm tốt nhất",
+  "joblist.title": "Khám phá công việc mơ ước từ những cơ hội tuyển dụng hàng đầu trên HireMe",
 
   "admin.home": "Trang chủ",
   "admin.inform.title": "Thông tin chào mừng",
@@ -276,7 +284,9 @@
   "cooperationModel.api": "Nền tảng tuyển dụng và tích hợp API",
 
   "product.recruitingSection": "Nền tảng tuyển dụng HireMe",
+  "product.recruiting": "Nền tảng tuyển dụng",
   "product.recruitingSection.subTitle": "Giải pháp nhận diện và phân tích chuyên sâu ứng viên, dễ dàng tích hợp với các hệ thống tuyển dụng hiện có.",
+  "product.updateSection": "Nâng cấp trải nghiệm",
 
   "product.naturalLanguage": "Xử lý ngôn ngữ tự nhiên",
   "product.naturalLanguage.subTitle": "Áp dụng các công nghệ mới, nhằm tối ưu khả năng phân tích, xử lý, và hiểu ngôn ngữ tự nhiên,  đáp ứng nhu cầu đa dạng của các ngành và lĩnh vực khác nhau.",

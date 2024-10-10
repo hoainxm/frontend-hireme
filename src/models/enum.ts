@@ -218,7 +218,8 @@ export enum HTTPStatusCode {
 export enum SectionID {
   HOME_BANNER = 'aG9tZVBhZ2VCYW5uZXI',
   HOME_CV = 'aG9tZVBhZ2VDb21wdXRlclZpc2lvbg',
-  HOME_NLP = 'aG9tZVBhZ2VOTFA',
+  // HOME_NLP = 'aG9tZVBhZ2VOTFA',
+  HOME_UPDATE = 'aG9tZVBhZ2VOTFA',
   HOME_DA = 'aG9tZVBhZ2VEYXRhQW5hbHl0aWNz',
   HOME_AS = 'aG9tZVBhZ2VBdWRpb1NwZWVjaA',
   HOME_PROJECT = 'aG9tZVBhZ2VQcm9qZWN0cw',

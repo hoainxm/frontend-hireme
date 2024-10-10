@@ -8,7 +8,11 @@ import { useTranslation } from 'react-i18next';
 import style from './jobs.module.scss';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
-import { mockJobs } from './jobData';
+import JobDetail from './components/JobDetail';
+import { mockJobs } from '../../app/jobs/jobData';
+import { PartnerSection } from '../../app/home/PartnerSection';
+import { UpdateSection } from '../../app/home/UpdateSection';
+import { Job } from '../jobs/model';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -24,7 +28,7 @@ export const Jobs: FC<Props> = (props) => {
     dispatch(updateSectionDot(SectionID.HOME_BANNER));
   };
 
-  const [jobs, setJobs] = useState<Job[]>([]); // Assuming you fetch this from an API
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
 
   const handleFilter = (filters: any) => {
@@ -54,14 +58,20 @@ export const Jobs: FC<Props> = (props) => {
       <section id={sectionId} className={style.bannerSection}>
         <div className={style.bannerContainer}>
           <div className={style.top}>
-            <h1 className={style.topTitle}>{t('joblist')}</h1>
+            <h1 className={style.topTitle}>
+              {t('joblist')}
+              <h5>{t('joblist.title')}</h5>
+            </h1>
           </div>
         </div>
       </section>
       <JobFilter onFilter={handleFilter} />
       {/* <JobList jobs={filteredJobs.length > 0 ? filteredJobs : jobs} /> */}
       <JobList jobs={mockJobs} />
+      {/* <JobDetail jobId={'2'} /> */}
       <BackToTop resetScrollNavigation={scrollToTop} />
+      <PartnerSection sectionId={sectionId} />
+      <UpdateSection sectionId={sectionId} />
     </MainLayout>
   );
 };
