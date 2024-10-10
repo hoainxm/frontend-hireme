@@ -93,6 +93,7 @@
 
   .form {
     transition: width 0.2s ease-in-out;
+    padding-bottom: 20px;
 
     .promptContent {
       @extend .body-text;
