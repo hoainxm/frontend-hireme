@@ -20,20 +20,18 @@ export interface AuthWelcomeInfo {
 // }
 
 export interface LoginFormInputs {
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface RegisterFormInputs {
-  // first_name: string;
-  // last_name: string;
-  full_name: string;
+  name: string;
   email: string;
-  confirm_password: string;
+  confirm_password?: string;
   password: string;
-  birthday: string;
-  gender: string;
-  address: string;
+  // birthday: string;
+  // gender: string;
+  // address: string;
 }
 
 export interface ForgotPasswordFormInputs {
@@ -42,11 +40,5 @@ export interface ForgotPasswordFormInputs {
 
 export interface ResetPasswordFormInputs {
   token?: string;
-  new_password: string;
-  confirm_password: string;
-}
-
-export interface Login {
-  username: string;
-  password: string;
+  newPassword: string;
 }

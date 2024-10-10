@@ -27,9 +27,9 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const doLogin = (loginData: LoginFormInputs): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/web-token/`, loginData);
-};
+// export const doLogin = (loginData: LoginFormInputs): AxiosPromise<any> => {
+//   return doPost(`${authAPIUrl}/web-token/`, loginData);
+// };
 
 export const doRegister = (registerData: RegisterFormInputs): AxiosPromise<any> => {
   return doPost(`${authAPIUrl}/register`, registerData);
