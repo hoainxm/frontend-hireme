@@ -40,8 +40,13 @@ const Register: FC<Props> = (props: Props) => {
     confirm_password: false,
   });
 
-  const onRegisValid: SubmitHandler<RegisterFormInputs> = (data, event) => {
-    doRegister(data)
+  const onRegisValid: SubmitHandler<RegisterFormInputs> = async (data, event) => {
+    // Exclude confirm_password from the data to be sent to the backend
+    const { confirm_password, ...filteredData } = data;
+
+    console.log('data', filteredData);
+
+    doRegister(filteredData)
       .then((res) => {
         Confirm.success({
           title: t('sucess.title'),
@@ -143,18 +148,18 @@ const Register: FC<Props> = (props: Props) => {
           <Form.Label>{t('field.fullName')}</Form.Label>
           <CInput
             type='text'
-            name='full_name'
+            name='name'
             placeholder={t('field.hint.fullName')}
             iref={register({
               required: 'field.error.required',
               pattern: NORMAL_CHAR_PATTERN,
               maxLength: 200,
             })}
-            valid={!errors.full_name}
+            valid={!errors.name}
           />
-          {errors.full_name?.type === 'required' && <CInputHint>{t(`${errors.full_name.message}`)}</CInputHint>}
-          {errors.full_name?.type === 'pattern' && <CInputHint>{t('field.error.character')}</CInputHint>}
-          {errors.full_name?.type === 'maxLength' && <CInputHint>{`${t('field.error.maxLength')} 200`}</CInputHint>}
+          {errors.name?.type === 'required' && <CInputHint>{t(`${errors.name.message}`)}</CInputHint>}
+          {errors.name?.type === 'pattern' && <CInputHint>{t('field.error.character')}</CInputHint>}
+          {errors.name?.type === 'maxLength' && <CInputHint>{`${t('field.error.maxLength')} 200`}</CInputHint>}
         </Form.Group>
 
         <Form.Group className={style.inputGroup}>
@@ -215,7 +220,7 @@ const Register: FC<Props> = (props: Props) => {
           {errorState.confirm_password && <CInputHint>{t('error.cfmPass')}</CInputHint>}
         </Form.Group>
 
-        <Form.Group className='input-group'>
+        {/* <Form.Group className='input-group'>
           <Form.Label>{t('field.birthday')}</Form.Label>
           <CInput
             id='birthday'
@@ -262,7 +267,7 @@ const Register: FC<Props> = (props: Props) => {
             valid={!errors.address}
           />
           {errors.address?.type === 'required' && <CInputHint>{t(`${errors.address.message}`)}</CInputHint>}
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group></Form.Group>
         <p className={style.promptContent}>

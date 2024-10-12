@@ -83,7 +83,7 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
       level,
       isActive,
     };
-    onFilter(filters); // Pass the filters to the parent component
+    onFilter(filters);
   };
 
   return (
