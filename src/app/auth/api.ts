@@ -4,7 +4,7 @@ import { BASE_URL } from './../../common/utils/constants';
 import axios, { AxiosPromise } from 'axios';
 import { doGet, doPost } from '../../common/utils/baseAPI';
 import { Tenant } from './models';
-import { LoginFormInputs, RegisterFormInputs, ForgotPasswordFormInputs, ResetPasswordFormInputs, Login } from './forms';
+import { LoginFormInputs, RegisterFormInputs, ForgotPasswordFormInputs, ResetPasswordFormInputs, EmailVerifyFormInputs } from './forms';
 
 const authAPIUrl = 'api/v1/auth';
 // const authAPIUrl = `${BASE_URL}/api/auth`;
@@ -51,7 +51,15 @@ export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any
   return doPost(`${authAPIUrl}/resetPassword`, data);
 };
 
-export const loginApi = (loginData: Login) => {
-  return doPost(`${authAPIUrl}/login`, loginData);
+export const loginApi = (data: LoginFormInputs): AxiosPromise<any> => {
+  return doPost(`${authAPIUrl}/login`, data);
   // return axios.post('http://localhost:8000/api/v1/auth/login', loginData);
+};
+
+export const doReSendVerifyEmail = (data: EmailVerifyFormInputs): AxiosPromise<any> => {
+  return doGet(`${authAPIUrl}/resend-verify-account`, data);
+};
+
+export const doVerifyEmailToken = (tokenCheckVerify: string): AxiosPromise<any> => {
+  return doGet(`${authAPIUrl}/verify-account`, { params: { tokenCheckVerify } });
 };

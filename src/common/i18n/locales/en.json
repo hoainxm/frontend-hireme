@@ -165,6 +165,18 @@
   "setting.title": "Setting",
   "support.Support": "Support",
 
+  "emailVerify.title": "Verify Your Email",
+  "emailVerify.success.title": "Email Verified",
+  "emailVerify.subtitle": "Enter your registered email and you will receive a link to verify your email.",
+  "emailVerify.success.first": "Your email has been successfully verified.",
+  "emailVerify.success.second": "You can now proceed to log in.",
+  "emailVerify.loading": "Verifying your email, please wait...",
+  "emailVerify.user.error": "Email does not exist in the system.",
+  "emailVerify.resend.success": "Verification email has been sent successfully. Please check your inbox.",
+  "emailVerify.resend.error": "There was an error verifying the email. Please try again.",
+  "btn.resendVerify": "Send Verification Code",
+  "error.tokenVerifyInvalid": "The verification token is invalid.",
+
   "field.hint.tenant_name": "Enter tenant",
   "field.fullName": "Full name",
   "field.hint.fullName": "Enter full name",

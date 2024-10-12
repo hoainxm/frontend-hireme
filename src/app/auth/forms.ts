@@ -29,9 +29,6 @@ export interface RegisterFormInputs {
   email: string;
   confirm_password?: string;
   password: string;
-  // birthday: string;
-  // gender: string;
-  // address: string;
 }
 
 export interface ForgotPasswordFormInputs {
@@ -41,4 +38,9 @@ export interface ForgotPasswordFormInputs {
 export interface ResetPasswordFormInputs {
   token?: string;
   newPassword: string;
+  confirm_password?: string;
+}
+
+export interface EmailVerifyFormInputs {
+  email: string;
 }
