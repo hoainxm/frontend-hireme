@@ -24,6 +24,7 @@ import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamic
 import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
+import { EmailVerify } from '../app/auth/email-verify';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -70,6 +71,10 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.JOBS,
     component: Jobs,
+  },
+  {
+    path: PageURL.EMAIL_VERIFY,
+    component: EmailVerify,
   },
   // {
   //   path: PageURL.CATEGORY,

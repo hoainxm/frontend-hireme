@@ -221,7 +221,7 @@ export const PROFILE_ITEMS = [
     name: PageName.PROFILE_MANAGEMENT,
     url: PageURL.PROFILE_MANAGEMENT,
     icon: 'ManageAccount',
-    isActive: false,
+    isActive: true,
   },
   // {
   //   name: PageName.LICENSE_MANAGEMENT,

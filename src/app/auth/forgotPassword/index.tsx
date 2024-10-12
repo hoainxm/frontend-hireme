@@ -52,7 +52,6 @@ export const ForgotPassword = (): ReactElement => {
       formRef.current?.classList.add('wasvalidated');
       setErrorMessage(undefined);
     }
-    // eslint-disable-next-line
   }, [formState, formRef.current]);
 
   return (
