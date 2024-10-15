@@ -167,9 +167,12 @@
 
   "emailVerify.title": "Verify Your Email",
   "emailVerify.success.title": "Email Verified",
+  "emailVerify.fail.title": "Email Failed",
   "emailVerify.subtitle": "Enter your registered email and you will receive a link to verify your email.",
   "emailVerify.success.first": "Your email has been successfully verified.",
   "emailVerify.success.second": "You can now proceed to log in.",
+  "emailVerify.fail.first": "Your email verification failed.",
+  "emailVerify.fail.second": "Please try again.",
   "emailVerify.loading": "Verifying your email, please wait...",
   "emailVerify.user.error": "Email does not exist in the system.",
   "emailVerify.resend.success": "Verification email has been sent successfully. Please check your inbox.",
@@ -222,6 +225,7 @@
   "btn.remove": "Remove",
   "btn.back": "Back",
   "btn.backToLogin": "Go to login page",
+  "btn.backToVerifyEmail": "Go to verify email page",
   "btn.tryNow": "Get started now",
   "btn.gotIt": "Got it",
   "btn.understood": "Understood",
@@ -659,5 +663,8 @@
 
   "toast.error.uploadImage": "Error uploading photo",
   "toast.error.imageSize": "Image size does not meet requirements.",
-  "toast.error.imageFormat": "Image format must be .png, .jpg, .jpeg"
+  "toast.error.imageFormat": "Image format must be .png, .jpg, .jpeg",
+
+  "fail.title": "Failed",
+  "error.existEmail": "Email already exists. Please try another email."
 }

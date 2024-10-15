@@ -24,7 +24,8 @@ import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamic
 import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
-import { EmailVerify } from '../app/auth/email-verify';
+import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
+import { VerifyEmail } from '../app/auth/verify-email';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -36,7 +37,6 @@ export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_DYNAMIC_TEMPLATE, component: DynamicTemplate },
   { path: PageURL.OCR_DYNAMIC_TEMPLATE_RESULT, component: ShowDynamicResult },
   { path: PageURL.TEXT_TO_SPEECH, component: TextToSpeech },
-  // { path: PageURL.CATEGORY, component: Category },
 ];
 
 export const PUBLIC_ROUTE = [
@@ -73,13 +73,13 @@ export const PUBLIC_ROUTE = [
     component: Jobs,
   },
   {
-    path: PageURL.EMAIL_VERIFY,
-    component: EmailVerify,
+    path: PageURL.RESEND_VERIFY_EMAIL,
+    component: ResendVerifyEmail,
   },
-  // {
-  //   path: PageURL.CATEGORY,
-  //   component: Category,
-  // },
+  {
+    path: PageURL.VERIFY_EMAIL,
+    component: VerifyEmail,
+  },
 ];
 
 export const PRIVATE_ROUTE = [

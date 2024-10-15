@@ -164,7 +164,7 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 
 export const COUNT_DOWN = {
   // Count per second
-  RESEND_EMAIL: 60,
+  RESEND_EMAIL: 10,
   TOAST_DURATION: 5000,
 };
 

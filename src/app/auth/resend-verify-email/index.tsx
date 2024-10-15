@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { doReSendVerifyEmail, doVerifyEmailToken } from '../api'; // Import các hàm API
+import { doReSendVerifyEmail, doVerifyEmailToken } from '../api';
 import { EmailVerifyFormInputs } from '../forms';
 import { PageURL } from '../../../models/enum';
 import style from '../auth.module.scss';
@@ -18,13 +18,11 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-export const EmailVerify = (): ReactElement => {
+export const ResendVerifyEmail = (): ReactElement => {
   const { t } = useTranslation();
   const history = useHistory();
   const { count, startCountdown } = useCountDown();
   const query = useQuery();
-
-  const tokenCheckVerify = query.get('token');
 
   const {
     handleSubmit,
@@ -32,19 +30,14 @@ export const EmailVerify = (): ReactElement => {
     formState: { errors, isSubmitting },
   } = useForm<EmailVerifyFormInputs>();
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [isVerifiedSuccessfully, setIsVerifiedSuccessfully] = useState<boolean>(false);
-  const [resendEmail, setResendEmail] = useState<string>(''); // email để resend verify link
-
-  const redirectToLoginPage = () => {
-    history.push(PageURL.LOGIN);
-  };
+  const [resendEmail, setResendEmail] = useState<string>('');
 
   const handleResendVerifyEmail: SubmitHandler<EmailVerifyFormInputs> = async (data) => {
     setErrorMessage('');
     try {
       await doReSendVerifyEmail(data);
       setErrorMessage(t('emailVerify.resend.success'));
-      startCountdown(COUNT_DOWN.RESEND_EMAIL); // Bắt đầu đếm ngược khi gửi lại email thành công
+      startCountdown(COUNT_DOWN.RESEND_EMAIL);
     } catch (error: AxiosError | any) {
       if (error.response?.status === 400 && error.response.data.message === 'User not found.') {
         setErrorMessage(t('emailVerify.user.error'));
@@ -54,45 +47,9 @@ export const EmailVerify = (): ReactElement => {
     }
   };
 
-  const verifyEmail = async () => {
-    if (tokenCheckVerify) {
-      try {
-        await doVerifyEmailToken(tokenCheckVerify);
-        setIsVerifiedSuccessfully(true); // Xác minh thành công
-      } catch (error: AxiosError | any) {
-        if (error.response?.status === 400) {
-          const dataResponse = error.response.data;
-          if (dataResponse.msg === 'Verification token invalid') {
-            setErrorMessage(t('error.tokenVerifyInvalid'));
-          } else {
-            setErrorMessage(t('error.stWrong'));
-          }
-        }
-      }
-    } else {
-      setErrorMessage(t('emailVerify.verify.error'));
-    }
-  };
-
-  useEffect(() => {
-    verifyEmail();
-  }, [tokenCheckVerify]);
-
   const checkCountDown = (): string => {
     return count > 0 ? `${t('btn.resendVerify')} (${t('count.afterCount', { value: count })})` : t('btn.resendVerify');
   };
-
-  if (isVerifiedSuccessfully) {
-    return (
-      <AuthFormLayout title={t('emailVerify.success.title')} icon={Success}>
-        <div className={style.resetSuccessful}>
-          <p>{t('emailVerify.success.first')}</p>
-          <p>{t('emailVerify.success.second')}</p>
-          <CButton label={t('btn.backToLogin')} className={`${style.btn} mb-0`} onClick={redirectToLoginPage} />
-        </div>
-      </AuthFormLayout>
-    );
-  }
 
   return (
     <AuthFormLayout title={t('emailVerify.title')} subTitle={t('emailVerify.subtitle')} backTo={PageURL.LOGIN} hasLanguageDropDown>
@@ -115,8 +72,8 @@ export const EmailVerify = (): ReactElement => {
             onChange={(e) => setResendEmail(e.target.value)}
             valid={!errors.email && !errorMessage}
           />
-          {errors.email && <CInputHint>{t(`${errors.email.message}`)}</CInputHint>}
-          {errorMessage && <CInputHint>{t(errorMessage)}</CInputHint>}
+          {errors.email && <CInputHint className={style.errorMessage}>{t(`${errors.email.message}`)}</CInputHint>}
+          {errorMessage && <CInputHint className={style.errorMessage}>{t(errorMessage)}</CInputHint>}
         </Form.Group>
         <CButton type='submit' label={checkCountDown()} className={`${style.btn} mb-0`} disabled={count > 0 || isSubmitting} loading={isSubmitting} />
       </Form>
