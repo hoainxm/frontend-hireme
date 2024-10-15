@@ -35,7 +35,7 @@ export const AuthFormLayout = (props: PropsWithChildren<Props>): ReactElement =>
         )}
         <div className={style.authTitle}>
           {icon && <Image src={icon} />}
-          <h3>{t(props.title)}</h3>
+          <h3 className='text-center'>{t(props.title)}</h3>
           <Image src={Line} />
           <Image src={Line} />
         </div>

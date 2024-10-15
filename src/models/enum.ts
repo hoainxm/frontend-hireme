@@ -43,9 +43,9 @@ export enum PageURL {
   REGISTER = '/register',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password/:id',
-  EMAIL_VERIFY = '/resend-verify-account',
+  RESEND_VERIFY_EMAIL = '/resend-verify-email',
+  VERIFY_EMAIL = '/verify-email',
   PRIVACY_POLICY = '/privacy-policy',
-
   COMPUTER_VISION = '/computer-vision',
 
   // OCR
