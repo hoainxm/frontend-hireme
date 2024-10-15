@@ -179,10 +179,13 @@
   "support.Support": "Hỗ trợ",
 
   "emailVerify.title": "Xác minh email của bạn",
-  "emailVerify.success.title": "Email đã được xác minh",
+  "emailVerify.success.title": "Thành công",
+  "emailVerify.fail.title": "Không thành công",
   "emailVerify.subtitle": "Nhập email đã đăng ký và bạn sẽ nhận được một liên kết để xác minh qua email.",
   "emailVerify.success.first": "Email của bạn đã được xác minh thành công.",
   "emailVerify.success.second": "Bạn có thể tiếp tục đăng nhập.",
+  "emailVerify.fail.first": "Xác minh email không thành công.",
+  "emailVerify.fail.second": "Vui lòng thử lại.",
   "emailVerify.loading": "Đang xác minh email của bạn, vui lòng đợi...",
   "emailVerify.user.error": "Email không tồn tại trong hệ thống.",
   "emailVerify.resend.success": "Email xác minh đã được gửi thành công. Vui lòng kiểm tra hộp thư của bạn.",
@@ -235,6 +238,7 @@
   "btn.remove": "Xóa",
   "btn.back": "Quay lại",
   "btn.backToLogin": "Đến trang đăng nhập",
+  "btn.backToVerifyEmail": "Đến trang xác minh",
   "btn.tryNow": "Trải nghiệm ngay",
   "btn.gotIt": "Đã hiểu",
   "btn.understood": "Đã hiểu",
@@ -665,5 +669,8 @@
 
   "toast.error.uploadImage": "Lỗi tải ảnh lên",
   "toast.error.imageSize": "Dung lượng ảnh chưa đáp ứng yêu cầu.",
-  "toast.error.imageFormat": "Định dạng ảnh phải là .png, .jpg, .jpeg"
+  "toast.error.imageFormat": "Định dạng ảnh phải là .png, .jpg, .jpeg",
+
+  "fail.title": "Thất bại",
+  "error.existEmail": "Email đã tồn tại. Vui lòng thử email khác."
 }

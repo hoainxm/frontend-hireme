@@ -4,11 +4,15 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+<<<<<<< HEAD
 <<<<<<< HEAD:src/app/auth/email-verify/index.tsx
 import { doReSendVerifyEmail, doVerifyEmailToken } from '../api'; // Import các hàm API đã sửa
 =======
 import { doReSendVerifyEmail, doVerifyEmailToken } from '../api';
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
+=======
+import { doReSendVerifyEmail, doVerifyEmailToken } from '../api';
+>>>>>>> e7ce729 (push code verify email)
 import { EmailVerifyFormInputs } from '../forms';
 import { PageURL } from '../../../models/enum';
 import style from '../auth.module.scss';
@@ -29,6 +33,7 @@ export const ResendVerifyEmail = (): ReactElement => {
   const { count, startCountdown } = useCountDown();
   const query = useQuery(); // Lấy query params từ URL
 
+<<<<<<< HEAD
 <<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   const tokenCheckVerify = query.get('token'); // Lấy token từ query params
   const emailFromURL = query.get('email'); // Lấy email từ query params
@@ -38,12 +43,15 @@ export const ResendVerifyEmail = (): ReactElement => {
 
 =======
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
+=======
+>>>>>>> e7ce729 (push code verify email)
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<EmailVerifyFormInputs>();
   const [errorMessage, setErrorMessage] = useState<string>();
+<<<<<<< HEAD
 <<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   const [isVerifiedSuccessfully, setIsVerifiedSuccessfully] = useState<boolean>(false);
   const [resendEmail, setResendEmail] = useState<string>(decodedEmail); // Sử dụng email giải mã
@@ -55,6 +63,9 @@ export const ResendVerifyEmail = (): ReactElement => {
 =======
   const [resendEmail, setResendEmail] = useState<string>('');
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
+=======
+  const [resendEmail, setResendEmail] = useState<string>('');
+>>>>>>> e7ce729 (push code verify email)
 
   // Gửi yêu cầu API để gửi lại email xác thực (qua body)
   const handleResendVerifyEmail: SubmitHandler<EmailVerifyFormInputs> = async (data) => {
@@ -72,6 +83,7 @@ export const ResendVerifyEmail = (): ReactElement => {
     }
   };
 
+<<<<<<< HEAD
 <<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   // Hàm xác minh email bằng token từ URL
   const verifyEmail = async () => {
@@ -102,10 +114,13 @@ export const ResendVerifyEmail = (): ReactElement => {
   // Tính toán nhãn cho nút đếm ngược
 =======
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
+=======
+>>>>>>> e7ce729 (push code verify email)
   const checkCountDown = (): string => {
     return count > 0 ? `${t('btn.resendVerify')} (${t('count.afterCount', { value: count })})` : t('btn.resendVerify');
   };
 
+<<<<<<< HEAD
 <<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   // Giao diện khi email đã được xác minh thành công
   if (isVerifiedSuccessfully) {
@@ -123,6 +138,8 @@ export const ResendVerifyEmail = (): ReactElement => {
   // Giao diện để nhập email và yêu cầu gửi lại email xác thực
 =======
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
+=======
+>>>>>>> e7ce729 (push code verify email)
   return (
     <AuthFormLayout title={t('emailVerify.title')} subTitle={t('emailVerify.subtitle')} backTo={PageURL.LOGIN} hasLanguageDropDown>
       <Form onSubmit={handleSubmit(handleResendVerifyEmail)} noValidate className={style.form}>

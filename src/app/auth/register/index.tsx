@@ -192,6 +192,7 @@ const Register: FC<Props> = (props: Props) => {
           {errorState.confirm_password && <CInputHint>{t('error.cfmPass')}</CInputHint>}
         </Form.Group>
 
+<<<<<<< HEAD
         <Form.Group className={style.inputGroup}>
           <Form.Label>{t('field.birthday')}</Form.Label>
           <CInput
@@ -237,6 +238,8 @@ const Register: FC<Props> = (props: Props) => {
           />
         </Form.Group>
 
+=======
+>>>>>>> e7ce729 (push code verify email)
         <Form.Group></Form.Group>
         <p className={style.promptContent}>
           <Trans i18nKey='auth.promptContent' components={{ strong: <Link to={PageURL.PRIVACY_POLICY} /> }} />

@@ -25,12 +25,17 @@ import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { EmailVerify } from '../app/auth/email-verify';
 import JobDetail from '../app/jobs/components/JobDetail';
 =======
 import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
 import { VerifyEmail } from '../app/auth/verify-email';
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f
+=======
+import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
+import { VerifyEmail } from '../app/auth/verify-email';
+>>>>>>> e7ce729 (push code verify email)
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -80,6 +85,7 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.RESEND_VERIFY_EMAIL,
     component: ResendVerifyEmail,
+<<<<<<< HEAD
   },
   {
     path: PageURL.VERIFY_EMAIL,
@@ -96,6 +102,13 @@ export const PUBLIC_ROUTE = [
   },
 =======
 >>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f
+=======
+  },
+  {
+    path: PageURL.VERIFY_EMAIL,
+    component: VerifyEmail,
+  },
+>>>>>>> e7ce729 (push code verify email)
 ];
 
 export const PRIVATE_ROUTE = [
