@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { doReSendVerifyEmail, doVerifyEmailToken } from '../api'; // Import các hàm API
+import { doReSendVerifyEmail, doVerifyEmailToken } from '../api'; // Import các hàm API đã sửa
 import { EmailVerifyFormInputs } from '../forms';
 import { PageURL } from '../../../models/enum';
 import style from '../auth.module.scss';
@@ -14,6 +14,7 @@ import { COUNT_DOWN, EMAIL_PATTERN } from '../../../common/utils/constants';
 import useCountDown from '../../../common/utils/hooks/useCountDown';
 import { AxiosError } from 'axios';
 
+// Hook để lấy query params từ URL
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -22,9 +23,13 @@ export const EmailVerify = (): ReactElement => {
   const { t } = useTranslation();
   const history = useHistory();
   const { count, startCountdown } = useCountDown();
-  const query = useQuery();
+  const query = useQuery(); // Lấy query params từ URL
 
-  const tokenCheckVerify = query.get('token');
+  const tokenCheckVerify = query.get('token'); // Lấy token từ query params
+  const emailFromURL = query.get('email'); // Lấy email từ query params
+
+  // Giải mã email bị mã hóa URL
+  const decodedEmail = emailFromURL ? decodeURIComponent(emailFromURL) : '';
 
   const {
     handleSubmit,
@@ -33,37 +38,40 @@ export const EmailVerify = (): ReactElement => {
   } = useForm<EmailVerifyFormInputs>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [isVerifiedSuccessfully, setIsVerifiedSuccessfully] = useState<boolean>(false);
-  const [resendEmail, setResendEmail] = useState<string>(''); // email để resend verify link
+  const [resendEmail, setResendEmail] = useState<string>(decodedEmail); // Sử dụng email giải mã
 
+  // Điều hướng đến trang đăng nhập
   const redirectToLoginPage = () => {
     history.push(PageURL.LOGIN);
   };
 
+  // Gửi yêu cầu API để gửi lại email xác thực (qua body)
   const handleResendVerifyEmail: SubmitHandler<EmailVerifyFormInputs> = async (data) => {
     setErrorMessage('');
     try {
-      await doReSendVerifyEmail(data);
+      await doReSendVerifyEmail(data); // Gửi email qua body
       setErrorMessage(t('emailVerify.resend.success'));
       startCountdown(COUNT_DOWN.RESEND_EMAIL); // Bắt đầu đếm ngược khi gửi lại email thành công
     } catch (error: AxiosError | any) {
       if (error.response?.status === 400 && error.response.data.message === 'User not found.') {
-        setErrorMessage(t('emailVerify.user.error'));
+        setErrorMessage('Email không tồn tại trong hệ thống.');
       } else {
         setErrorMessage(t('emailVerify.resend.error'));
       }
     }
   };
 
+  // Hàm xác minh email bằng token từ URL
   const verifyEmail = async () => {
     if (tokenCheckVerify) {
       try {
-        await doVerifyEmailToken(tokenCheckVerify);
+        await doVerifyEmailToken(tokenCheckVerify); // Gửi token qua params
         setIsVerifiedSuccessfully(true); // Xác minh thành công
       } catch (error: AxiosError | any) {
         if (error.response?.status === 400) {
           const dataResponse = error.response.data;
           if (dataResponse.msg === 'Verification token invalid') {
-            setErrorMessage(t('error.tokenVerifyInvalid'));
+            setErrorMessage(t('error.tokenInvalid'));
           } else {
             setErrorMessage(t('error.stWrong'));
           }
@@ -74,14 +82,17 @@ export const EmailVerify = (): ReactElement => {
     }
   };
 
+  // Xác minh email khi component được tải lần đầu tiên
   useEffect(() => {
-    verifyEmail();
+    verifyEmail(); // Xác minh email qua token từ URL
   }, [tokenCheckVerify]);
 
+  // Tính toán nhãn cho nút đếm ngược
   const checkCountDown = (): string => {
     return count > 0 ? `${t('btn.resendVerify')} (${t('count.afterCount', { value: count })})` : t('btn.resendVerify');
   };
 
+  // Giao diện khi email đã được xác minh thành công
   if (isVerifiedSuccessfully) {
     return (
       <AuthFormLayout title={t('emailVerify.success.title')} icon={Success}>
@@ -94,6 +105,7 @@ export const EmailVerify = (): ReactElement => {
     );
   }
 
+  // Giao diện để nhập email và yêu cầu gửi lại email xác thực
   return (
     <AuthFormLayout title={t('emailVerify.title')} subTitle={t('emailVerify.subtitle')} backTo={PageURL.LOGIN} hasLanguageDropDown>
       <Form onSubmit={handleSubmit(handleResendVerifyEmail)} noValidate className={style.form}>

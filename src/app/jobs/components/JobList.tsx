@@ -18,7 +18,7 @@ const JobList: React.FC<JobListProps> = ({ jobs }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 15;
+  const jobsPerPage = 10;
 
   const totalPages = Math.ceil(jobs.length / jobsPerPage);
 

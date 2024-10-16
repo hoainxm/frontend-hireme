@@ -25,6 +25,7 @@ import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
 import { EmailVerify } from '../app/auth/email-verify';
+import JobDetail from '../app/jobs/components/JobDetail';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -80,6 +81,10 @@ export const PUBLIC_ROUTE = [
   //   path: PageURL.CATEGORY,
   //   component: Category,
   // },
+  {
+    path: PageURL.JOBDETAIL,
+    component: JobDetail,
+  },
 ];
 
 export const PRIVATE_ROUTE = [

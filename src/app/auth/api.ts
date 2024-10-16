@@ -57,7 +57,7 @@ export const loginApi = (data: LoginFormInputs): AxiosPromise<any> => {
 };
 
 export const doReSendVerifyEmail = (data: EmailVerifyFormInputs): AxiosPromise<any> => {
-  return doGet(`${authAPIUrl}/resend-verify-account`, data);
+  return doPost(`${authAPIUrl}/resend-verify-account`, data);
 };
 
 export const doVerifyEmailToken = (tokenCheckVerify: string): AxiosPromise<any> => {
