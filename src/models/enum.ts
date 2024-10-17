@@ -27,6 +27,7 @@ export enum PageURL {
   ABOUT_US = '/about',
   NEWS = '/news',
   JOBS = '/jobs',
+  JOBDETAIL = '/job-detail/',
   CATEGORY = '/news/categories',
   PROFILE_MANAGEMENT = '/profile',
   LICENSE_MANAGEMENT = '/license-management',

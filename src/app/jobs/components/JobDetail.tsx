@@ -10,7 +10,6 @@ const JobDetail: React.FC<{ jobId: string }> = ({ jobId }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Hàm lấy thông tin chi tiết của job từ API
     const fetchJobDetail = async () => {
       try {
         setLoading(true);
