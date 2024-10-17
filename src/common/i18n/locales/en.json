@@ -117,9 +117,6 @@
   "field.male": "Male",
   "field.female": "Female",
   "field.other": "Other",
-
-<<<<<<< HEAD
-=======
   "field.selectProvince": "Province/City",
   "field.selectDistrict": "District",
   "field.selectWard": "Ward",
@@ -169,8 +166,6 @@
   "status.deleted": "Deleted",
 
   "timeRemaining": "days remaining to apply.",
-
->>>>>>> f0fc39b340ad0631ec04694330f68e18cf28c5ee
   "title.welcome": "Welcome to",
   "error.adminLoginInvalid": "Username or password is incorrect",
   "error.userLoginInvalid": "Wrong email or password.",
@@ -210,11 +205,7 @@
   "field.cfmPassword": "Confirm password",
   "field.hint.birthday": "Chooose your birthday",
   "field.hint.gender": "Choose your gender",
-<<<<<<< HEAD
-  "field.hint.address": "Enter your address",
-=======
-  "field.hint.address": "Enter address",
->>>>>>> f0fc39b340ad0631ec04694330f68e18cf28c5ee
+
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",
   "error.tenantAliasExists": "Tenant alias already exists",

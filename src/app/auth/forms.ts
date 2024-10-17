@@ -40,15 +40,10 @@ export interface ForgotPasswordFormInputs {
 
 export interface ResetPasswordFormInputs {
   token?: string;
-<<<<<<< HEAD
-  new_password: string;
-  confirm_password: string;
-=======
   newPassword: string;
   confirm_password?: string;
 }
 
 export interface EmailVerifyFormInputs {
   email: string;
->>>>>>> f0fc39b340ad0631ec04694330f68e18cf28c5ee
 }
