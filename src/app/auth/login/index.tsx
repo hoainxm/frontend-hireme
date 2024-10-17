@@ -5,26 +5,22 @@ import { DEFAULT_PAGE, DEFAULT_PAGE_NUM, EMAIL_PATTERN } from '../../../common/u
 import { ButtonSize, PageURL, ScopeKey, ScopeValue } from '../../../models/enum';
 import React, { FC, useEffect, useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import { doAdminLogin, loginApi } from '../api';
+import { doLogin } from '../api';
 
 import { AuthFormLayout } from '../shared/AuthFormLayout';
 import { AxiosError } from 'axios';
 import { CButton } from '../../../common/ui/base';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LoginFormInputs } from '../forms';
 import { RouteComponentProps } from 'react-router';
 import { SVGIcon } from '../../../common/ui/assets/icon';
-import { UserProfile } from '../models';
-import { encodeBase64 } from '../../../common/utils/common';
-import { getProfile } from '../../../common/ui/layout/api';
 import style from '../auth.module.scss';
-import { updateUserInfo } from '../../../common/ui/layout/slice';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { doPost } from 'common/utils/baseAPI';
-import { response } from 'express';
+import { Confirm } from '../../../common/utils/popup';
+import e from 'express';
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -57,71 +53,35 @@ const Login: FC<Props> = (props: Props) => {
 
   const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
     const requestData = {
-      // username: isSysAdminLogin ? data.username : data.email,
       email: data.email || '',
-      // tenant_alias: data.email || '',
       password: data.password,
     };
 
     setOnLoad(true);
-    const loginFunc = isSysAdminLogin ? doAdminLogin : loginApi;
-    loginFunc(requestData)
-      .then((res) => {
-        if (!rememberInfo) {
-          sessionStorage.setItem(ScopeKey.ACCESS_TOKEN, encodeBase64(res.data['access']));
-        }
-        // localStorage.setItem(ScopeKey.AUTOMATE_AUTH, AUTOMATE_MAP[`${rememberInfo}`]);
-        // localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.TRUE);
-        // localStorage.setItem('pageTable', JSON.stringify(DEFAULT_PAGE));
-        // localStorage.setItem('pageNumTable', JSON.stringify(DEFAULT_PAGE_NUM));
+    // doLogin(requestData)
+    //   .catch((e: AxiosError) => {
+    //     console.log('check ', e);
+    //     // if (e.response?.status === 401) {
+    //     //   event?.target.classList.add('wasvalidated');
+    //     //   Confirm.danger({
+    //     //     title: t('fail.title'),
+    //     //     content: t('error.existEmail'),
+    //     //   });
+    //     // } else {
+    //     //   console.log('Error occurred:', e);
+    //     // }
+    //   })
+    //   .then((res) => {
+    //     alert(res?.data.message);
+    //   })
+    //   .finally(() => {
+    //     setOnLoad(false);
+    //   });
 
-        getProfile()
-          .then((res) => {
-            const profileData: UserProfile = res.data;
-
-            // localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, profileData.is_superuser ? ScopeValue.TRUE : ScopeValue.FALSE);
-
-            localStorage.removeItem(ScopeKey.USER);
-            dispatch(updateUserInfo(profileData));
-            const page = profileData.is_superuser ? PageURL.ADMIN : state ? state.path : PageURL.HOME;
-            !profileData.is_superuser && profileData.is_reset_password
-              ? props.history.push(PageURL.RESET_PASSWORD)
-              : (window.location.href = `${window.location.origin}${page}`);
-          })
-          .catch((e: AxiosError) => {
-            setOnLoad(false);
-            props.history.push(PageURL.LOGIN);
-          });
-      })
-      .catch((e: AxiosError) => {
-        event?.target.classList.add('wasvalidated');
-        if (e.response?.status === 400) {
-          setOtherError(undefined);
-          setLoginError(isSysAdminLogin ? 'error.adminLoginInvalid' : 'error.userLoginInvalid');
-        } else if (e.response?.status === 403) {
-          if (e.response?.data.msg) {
-            setLoginError(undefined);
-            setOtherError('error.permission');
-          }
-        } else {
-          setOtherError(undefined);
-          setLoginError('error.stWrong');
-        }
-      })
-      .finally(() => {
-        setOnLoad(false);
-      });
-
-    const loginData = {
-      email: data.email,
-      password: data.password,
-    };
-
-    setOnLoad(true);
     try {
-      const res = await loginApi(loginData);
-      if (res && res.data) {
-        alert(res.data.message);
+      const res = await doLogin(requestData);
+      if (res && res?.data) {
+        alert(res?.data.message);
         setOnLoad(false);
       }
     } catch (error) {

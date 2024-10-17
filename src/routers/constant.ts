@@ -24,8 +24,13 @@ import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamic
 import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
+<<<<<<< HEAD
 import { EmailVerify } from '../app/auth/email-verify';
 import JobDetail from '../app/jobs/components/JobDetail';
+=======
+import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
+import { VerifyEmail } from '../app/auth/verify-email';
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -37,7 +42,6 @@ export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_DYNAMIC_TEMPLATE, component: DynamicTemplate },
   { path: PageURL.OCR_DYNAMIC_TEMPLATE_RESULT, component: ShowDynamicResult },
   { path: PageURL.TEXT_TO_SPEECH, component: TextToSpeech },
-  // { path: PageURL.CATEGORY, component: Category },
 ];
 
 export const PUBLIC_ROUTE = [
@@ -74,9 +78,14 @@ export const PUBLIC_ROUTE = [
     component: Jobs,
   },
   {
-    path: PageURL.EMAIL_VERIFY,
-    component: EmailVerify,
+    path: PageURL.RESEND_VERIFY_EMAIL,
+    component: ResendVerifyEmail,
   },
+  {
+    path: PageURL.VERIFY_EMAIL,
+    component: VerifyEmail,
+  },
+<<<<<<< HEAD
   // {
   //   path: PageURL.CATEGORY,
   //   component: Category,
@@ -85,6 +94,8 @@ export const PUBLIC_ROUTE = [
     path: PageURL.JOBDETAIL,
     component: JobDetail,
   },
+=======
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f
 ];
 
 export const PRIVATE_ROUTE = [

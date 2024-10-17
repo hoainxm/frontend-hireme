@@ -4,7 +4,11 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+<<<<<<< HEAD:src/app/auth/email-verify/index.tsx
 import { doReSendVerifyEmail, doVerifyEmailToken } from '../api'; // Import các hàm API đã sửa
+=======
+import { doReSendVerifyEmail, doVerifyEmailToken } from '../api';
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
 import { EmailVerifyFormInputs } from '../forms';
 import { PageURL } from '../../../models/enum';
 import style from '../auth.module.scss';
@@ -19,24 +23,28 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-export const EmailVerify = (): ReactElement => {
+export const ResendVerifyEmail = (): ReactElement => {
   const { t } = useTranslation();
   const history = useHistory();
   const { count, startCountdown } = useCountDown();
   const query = useQuery(); // Lấy query params từ URL
 
+<<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   const tokenCheckVerify = query.get('token'); // Lấy token từ query params
   const emailFromURL = query.get('email'); // Lấy email từ query params
 
   // Giải mã email bị mã hóa URL
   const decodedEmail = emailFromURL ? decodeURIComponent(emailFromURL) : '';
 
+=======
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<EmailVerifyFormInputs>();
   const [errorMessage, setErrorMessage] = useState<string>();
+<<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   const [isVerifiedSuccessfully, setIsVerifiedSuccessfully] = useState<boolean>(false);
   const [resendEmail, setResendEmail] = useState<string>(decodedEmail); // Sử dụng email giải mã
 
@@ -44,6 +52,9 @@ export const EmailVerify = (): ReactElement => {
   const redirectToLoginPage = () => {
     history.push(PageURL.LOGIN);
   };
+=======
+  const [resendEmail, setResendEmail] = useState<string>('');
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
 
   // Gửi yêu cầu API để gửi lại email xác thực (qua body)
   const handleResendVerifyEmail: SubmitHandler<EmailVerifyFormInputs> = async (data) => {
@@ -51,7 +62,7 @@ export const EmailVerify = (): ReactElement => {
     try {
       await doReSendVerifyEmail(data); // Gửi email qua body
       setErrorMessage(t('emailVerify.resend.success'));
-      startCountdown(COUNT_DOWN.RESEND_EMAIL); // Bắt đầu đếm ngược khi gửi lại email thành công
+      startCountdown(COUNT_DOWN.RESEND_EMAIL);
     } catch (error: AxiosError | any) {
       if (error.response?.status === 400 && error.response.data.message === 'User not found.') {
         setErrorMessage('Email không tồn tại trong hệ thống.');
@@ -61,6 +72,7 @@ export const EmailVerify = (): ReactElement => {
     }
   };
 
+<<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   // Hàm xác minh email bằng token từ URL
   const verifyEmail = async () => {
     if (tokenCheckVerify) {
@@ -88,10 +100,13 @@ export const EmailVerify = (): ReactElement => {
   }, [tokenCheckVerify]);
 
   // Tính toán nhãn cho nút đếm ngược
+=======
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
   const checkCountDown = (): string => {
     return count > 0 ? `${t('btn.resendVerify')} (${t('count.afterCount', { value: count })})` : t('btn.resendVerify');
   };
 
+<<<<<<< HEAD:src/app/auth/email-verify/index.tsx
   // Giao diện khi email đã được xác minh thành công
   if (isVerifiedSuccessfully) {
     return (
@@ -106,6 +121,8 @@ export const EmailVerify = (): ReactElement => {
   }
 
   // Giao diện để nhập email và yêu cầu gửi lại email xác thực
+=======
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f:src/app/auth/resend-verify-email/index.tsx
   return (
     <AuthFormLayout title={t('emailVerify.title')} subTitle={t('emailVerify.subtitle')} backTo={PageURL.LOGIN} hasLanguageDropDown>
       <Form onSubmit={handleSubmit(handleResendVerifyEmail)} noValidate className={style.form}>
@@ -127,8 +144,8 @@ export const EmailVerify = (): ReactElement => {
             onChange={(e) => setResendEmail(e.target.value)}
             valid={!errors.email && !errorMessage}
           />
-          {errors.email && <CInputHint>{t(`${errors.email.message}`)}</CInputHint>}
-          {errorMessage && <CInputHint>{t(errorMessage)}</CInputHint>}
+          {errors.email && <CInputHint className={style.errorMessage}>{t(`${errors.email.message}`)}</CInputHint>}
+          {errorMessage && <CInputHint className={style.errorMessage}>{t(errorMessage)}</CInputHint>}
         </Form.Group>
         <CButton type='submit' label={checkCountDown()} className={`${style.btn} mb-0`} disabled={count > 0 || isSubmitting} loading={isSubmitting} />
       </Form>

@@ -51,15 +51,19 @@ export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any
   return doPost(`${authAPIUrl}/resetPassword`, data);
 };
 
-export const loginApi = (data: LoginFormInputs): AxiosPromise<any> => {
+export const doLogin = (data: LoginFormInputs): AxiosPromise<any> => {
   return doPost(`${authAPIUrl}/login`, data);
   // return axios.post('http://localhost:8000/api/v1/auth/login', loginData);
 };
 
 export const doReSendVerifyEmail = (data: EmailVerifyFormInputs): AxiosPromise<any> => {
+<<<<<<< HEAD
   return doPost(`${authAPIUrl}/resend-verify-account`, data);
+=======
+  return doGet(`${authAPIUrl}/resend-verify-email?email=${data.email}`);
+>>>>>>> a8489aa79bfdf2041cadbc8995a6f73e88516b9f
 };
 
 export const doVerifyEmailToken = (tokenCheckVerify: string): AxiosPromise<any> => {
-  return doGet(`${authAPIUrl}/verify-account`, { params: { tokenCheckVerify } });
+  return doGet(`${authAPIUrl}/verify-email?tokenCheckVerify=${tokenCheckVerify}`);
 };
