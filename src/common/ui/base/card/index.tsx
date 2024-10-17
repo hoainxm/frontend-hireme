@@ -1,5 +1,5 @@
 import { HighLightProductCard } from './high-light-product';
-import { ComputerVisionCard } from './computer-vision';
+import { RecruitingCard } from './recruiting-card';
 import { NLPCard } from './nlp';
 import { DataAnalyticCard } from './data-analytics';
 import { SpeechProcessCard } from './speech-process';
@@ -10,7 +10,7 @@ import { RemainRequestCard } from './remain-request';
 
 export {
   HighLightProductCard,
-  ComputerVisionCard,
+  RecruitingCard,
   NLPCard,
   DataAnalyticCard,
   SpeechProcessCard,

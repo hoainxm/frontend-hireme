@@ -55,8 +55,10 @@
     }
 
     &.primary {
-      background: $blue-3;
-      border: 1px solid $blue-3;
+      // background: $blue-3;
+      // border: 1px solid $blue-3
+      background: #032170;
+      border: 1px solid $white;
 
       &.loading {
         pointer-events: none;

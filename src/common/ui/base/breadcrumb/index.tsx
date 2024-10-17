@@ -17,7 +17,7 @@ export const Breadcrumb: FC<Props> = (props) => {
 
   const BREADCRUMBS_MAPPING: { [key: string]: string } = {
     'license-management': 'user.license.management',
-  }; 
+  };
 
   const updateBreadcrumbs = () => {
     const path = window.location.pathname;

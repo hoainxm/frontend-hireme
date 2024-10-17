@@ -80,8 +80,13 @@ export const NORMAL_CHAR_PATTERN: RegExp = /^[A-Za-z0-9\s\p{Letter}']+$/iu;
 
 export const USERNAME_PATTERN = /^[A-Za-z][A-Za-z0-9]+$/;
 
+// export const PASS_PATTERN: RegExp =
+//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+// export const PASS_PATTERN: RegExp =
+// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+
 export const PASS_PATTERN: RegExp =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
 
 export const PASSWORD_MAX_LENGTH: RegExp = /.{8,}/;
 
@@ -89,7 +94,9 @@ export const UPPERCASE_ONLY_PATTERN: RegExp = /[A-Z]/;
 
 export const LOWERCASE_ONLY_PATTERN: RegExp = /[a-z]/;
 
-export const SPECIAL_ONLY_PATTERN: RegExp = /^(?:[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]|^\S*$)$/;
+// export const SPECIAL_ONLY_PATTERN: RegExp = /^(?:[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]|^\S*$)$/;
+
+export const SPECIAL_ONLY_PATTERN: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 
 export const NUMERIC_ONLY_PATTERN: RegExp = /\d/;
 
@@ -157,7 +164,7 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 
 export const COUNT_DOWN = {
   // Count per second
-  RESEND_EMAIL: 60,
+  RESEND_EMAIL: 10,
   TOAST_DURATION: 5000,
 };
 
@@ -167,6 +174,12 @@ export const NAV_ITEMS = [
     url: PageURL.HOME,
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
+  },
+  {
+    name: PageName.JOBS,
+    url: PageURL.JOBS,
+    sectionId: SectionID.HOME_BANNER,
+    isActive: true,
   },
   {
     name: PageName.PRODUCT,
@@ -180,12 +193,12 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
-  {
-    name: PageName.NEWS,
-    url: PageURL.NEWS,
-    sectionId: SectionID.HOME_BANNER,
-    isActive: false,
-  },
+  // {
+  //   name: PageName.NEWS,
+  //   url: PageURL.NEWS,
+  //   sectionId: SectionID.HOME_BANNER,
+  //   isActive: false,
+  // },
 ];
 
 export const SOCIAL_LINKS = [
@@ -208,14 +221,14 @@ export const PROFILE_ITEMS = [
     name: PageName.PROFILE_MANAGEMENT,
     url: PageURL.PROFILE_MANAGEMENT,
     icon: 'ManageAccount',
-    isActive: false,
+    isActive: true,
   },
-  {
-    name: PageName.LICENSE_MANAGEMENT,
-    url: PageURL.LICENSE_MANAGEMENT,
-    icon: 'License',
-    isActive: false,
-  },
+  // {
+  //   name: PageName.LICENSE_MANAGEMENT,
+  //   url: PageURL.LICENSE_MANAGEMENT,
+  //   icon: 'License',
+  //   isActive: false,
+  // },
 ];
 
 export const CONTACT_INFORMATION = [
@@ -345,7 +358,7 @@ export const PRODUCT_ITEMS: { [key: string]: MegaMenuItem } = {
       },
       [ProductLabel.OD]: {
         isActive: false,
-        isDisabled: true,
+        isDisabled: false,
         isTitle: true,
         url: PageURL.PRODUCT_OD,
         subName: {
@@ -389,18 +402,18 @@ export const PRODUCT_ITEMS: { [key: string]: MegaMenuItem } = {
     },
   },
   [ProductLabel.NATURAL_LANGUAGE]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
   [ProductLabel.DATA_ANALYTICS]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
   [ProductLabel.AUDIO_SPEECH]: {
-    isActive: false,
-    isDisabled: true,
+    isActive: true,
+    isDisabled: false,
     isTitle: true,
   },
 };

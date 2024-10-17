@@ -93,6 +93,7 @@
 
   .form {
     transition: width 0.2s ease-in-out;
+    padding-bottom: 20px;
 
     .promptContent {
       @extend .body-text;
@@ -185,8 +186,9 @@
         padding-bottom: 8px;
         // background: $white;
         background: #032170;
-        color: $gray-4;
-        border: 1px solid $blue-3;
+        // color: $gray-4;
+        color: white;
+        border: 1px solid #032170;
 
         &:disabled {
           cursor: not-allowed;
@@ -311,4 +313,8 @@
   @media (min-width: 1200px) {
     min-width: 448px;
   }
+}
+
+.errorMessage {
+  color: red;
 }

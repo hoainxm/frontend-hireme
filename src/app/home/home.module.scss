@@ -16,7 +16,7 @@
     width: 100%;
     height: inherit;
     // background: $blue-3 url('../../common/ui/assets/images/BackgroundBanner.png') no-repeat center center/cover;
-    background: #00113f;
+    background: #032170;
     // background: $white;
 
     @media (max-width: 1280px) {
@@ -87,7 +87,7 @@
         .brainContainer {
           height: 100%;
           width: 100%;
-          background: url('../../common/ui/assets/images/BrainObject.png') no-repeat left center/contain;
+          // background: url('../../common/ui/assets/images/BrainObject.png') no-repeat left center/contain;
 
           @media (min-width: 1280px) {
             height: 88%;
@@ -292,10 +292,11 @@
   // }
 }
 
-.computerVision {
+.recruitingRole {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;
@@ -329,6 +330,14 @@
       @extend .heading4;
       font-weight: 800;
       white-space: nowrap;
+
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .title:hover {
+      cursor: pointer;
+      transform: translate(-50%, 8%) scale(1.05);
+      opacity: 0.9;
     }
 
     .gridLayout {
@@ -364,11 +373,149 @@
   }
 }
 
-.partners {
+.partners-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 20px 0;
+
+  .partners {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 24px;
+    animation: slide 30s linear infinite;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.updateSection {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin: 0px -2px;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  font-family: SVN-Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 140%;
+  padding: 40px 0;
+
+  .plan {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0px 20px;
+    flex: 1;
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 500px;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+
+    .features {
+      list-style-type: none;
+      padding: 0;
+      margin: 15px 0;
+      text-align: left;
+      li {
+        margin: 10px 0;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .icon {
+          margin-right: 10px;
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    button {
+      border: none;
+      padding: 10px 0;
+      border-radius: 25px;
+      width: 100%;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .headerBasic,
+    .headerStandard,
+    .headerPremium {
+      padding: 15px;
+      border-radius: 15px 15px 0 0;
+      font-size: 1.6rem;
+      h3 {
+        color: white;
+        font-size: 1.8rem;
+      }
+      p {
+        color: white;
+        font-size: 1.5rem;
+      }
+    }
+
+    .headerBasic {
+      background-color: #e74c3c;
+    }
+
+    .headerStandard {
+      background-color: #3498db;
+    }
+
+    .headerPremium {
+      background-color: #2ecc71;
+    }
+
+    .basicButton {
+      background-color: #e74c3c;
+      &:hover {
+        background-color: #c0392b;
+      }
+    }
+
+    .standardButton {
+      background-color: #3498db;
+      &:hover {
+        background-color: #2980b9;
+      }
+    }
+
+    .premiumButton {
+      background-color: #2ecc71;
+      &:hover {
+        background-color: #27ae60;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+
+    .plan {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+
+    .premiumPlan {
+      width: 100%;
+    }
+  }
 }

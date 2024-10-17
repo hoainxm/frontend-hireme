@@ -3,7 +3,6 @@
 import React, { FC } from 'react';
 import { Container, Image, Navbar } from 'react-bootstrap';
 
-// import LogoDefault from '@images/LogoDefault.png';
 import LogoDefault from '@images/LogoWhite.png';
 
 import { useSelector } from 'react-redux';

@@ -3,7 +3,7 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 
 import { Image } from 'react-bootstrap';
-import LogoWhite from '@images/LogoWhiteWithLine.png';
+import LogoWhite from '@images/LogoWhite.png';
 import { PageURL } from '../../../../models/enum';
 import { configViewSetMeta } from '../../../../common/utils/common';
 import style from './authLayout.module.scss';
