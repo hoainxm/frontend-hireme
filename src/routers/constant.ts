@@ -117,3 +117,4 @@ export const ADMIN_ROUTE = [
   },
   { path: PageURL.ADMIN_AI_PACKAGE_INFO, component: AIPackageWriter },
 ];
+
