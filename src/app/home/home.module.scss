@@ -436,6 +436,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        padding-left: 20px;
 
         .icon {
           margin-right: 10px;
@@ -512,10 +513,6 @@
     .plan {
       width: 90%;
       margin-bottom: 20px;
-    }
-
-    .premiumPlan {
-      width: 100%;
     }
   }
 }

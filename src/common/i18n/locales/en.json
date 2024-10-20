@@ -117,9 +117,6 @@
   "field.male": "Male",
   "field.female": "Female",
   "field.other": "Other",
-
-<<<<<<< HEAD
-=======
   "field.selectProvince": "Province/City",
   "field.selectDistrict": "District",
   "field.selectWard": "Ward",
@@ -144,6 +141,7 @@
   "level.junior": "Junior",
   "level.senior": "Senior",
   "level.intern": "Intern",
+
   "basic.title": "Basic Plan",
   "basic.advantage1": "Free job postings",
   "basic.advantage2": "Job listing displayed on search page",
@@ -151,17 +149,34 @@
   "basic.disadvantage2": "No job matching suggestions",
   "basic.button": "TRY NOW",
   "standard.title": "Standard Plan",
-  "standard.advantage1": "Job matching suggestions",
+  "standard.advantage1": "Job matching suggestions for candidates",
   "standard.advantage2": "More job postings (10 jobs/month)",
   "standard.advantage3": "Priority display on search page",
   "standard.disadvantage1": "Limited job posting count",
   "standard.button": "BUY NOW",
   "premium.title": "Premium Plan",
   "premium.advantage1": "Unlimited job postings",
-  "premium.advantage2": "Increased priority display",
-  "premium.advantage3": "Detailed jobs suggestions",
+  "premium.advantage2": "Increased priority display on search page",
+  "premium.advantage3": "Detailed and personalized job suggestions",
   "premium.advantage4": "Premium customer support",
   "premium.button": "BUY NOW",
+
+  "jobDetail.jobTitle": "Salary",
+  "jobDetail.descriptionTitle": "Job Description",
+  "jobDetail.companyInfo": "Company Information",
+  "jobDetail.commonInfo": "General Information",
+  "jobDetail.categories": "Categories",
+  "jobDetail.region": "Region",
+  "jobDetail.applyNow": "Apply Now",
+  "jobDetail.jobDescription": "Job Posting Details",
+  "jobDetail.experience": "Experience",
+  "jobDetail.quantity": "Quantity",
+  "jobDetail.employmentType": "Employment Type",
+  "jobDetail.genderRequirement": "Gender Requirement",
+  "jobDetail.companyName": "Company Name",
+  "jobDetail.companySize": "Size",
+  "jobDetail.companyIndustry": "Industry",
+  "jobDetail.companyAddress": "Address",
 
   "selectStatus": "Status",
   "status.active": "Active",
@@ -169,8 +184,6 @@
   "status.deleted": "Deleted",
 
   "timeRemaining": "days remaining to apply.",
-
->>>>>>> f0fc39b340ad0631ec04694330f68e18cf28c5ee
   "title.welcome": "Welcome to",
   "error.adminLoginInvalid": "Username or password is incorrect",
   "error.userLoginInvalid": "Wrong email or password.",
@@ -210,11 +223,7 @@
   "field.cfmPassword": "Confirm password",
   "field.hint.birthday": "Chooose your birthday",
   "field.hint.gender": "Choose your gender",
-<<<<<<< HEAD
-  "field.hint.address": "Enter your address",
-=======
-  "field.hint.address": "Enter address",
->>>>>>> f0fc39b340ad0631ec04694330f68e18cf28c5ee
+
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",
   "error.tenantAliasExists": "Tenant alias already exists",
