@@ -192,54 +192,6 @@ const Register: FC<Props> = (props: Props) => {
           {errorState.confirm_password && <CInputHint>{t('error.cfmPass')}</CInputHint>}
         </Form.Group>
 
-<<<<<<< HEAD
-        <Form.Group className={style.inputGroup}>
-          <Form.Label>{t('field.birthday')}</Form.Label>
-          <CInput
-            id='birthday'
-            type='date'
-            name='birthday'
-            iref={register({
-              required: 'field.error.required',
-            })}
-            placeholder={t('field.hint.birthday')}
-          />
-        </Form.Group>
-
-        <Form.Group className={style.inputGroup}>
-          <Form.Label>{t('field.gender')}</Form.Label>
-          <Form.Control
-            as='select'
-            name='gender'
-            ref={register({
-              required: 'field.error.required',
-            })}
-            isValid={!errors.gender}
-            isInvalid={!!errors.gender}
-          >
-            <option value='male'>{t('field.male')}</option>
-            <option value='female'>{t('field.female')}</option>
-            <option value='other'>{t('field.other')}</option>
-          </Form.Control>
-        </Form.Group>
-
-        <Form.Group className={style.inputGroup}>
-          <Form.Label>{t('field.address')}</Form.Label>
-          <CInput
-            id='address'
-            autoComplete='off'
-            type='text'
-            name='address'
-            iref={register({
-              required: 'field.error.required',
-            })}
-            placeholder={t('field.hint.address')}
-            maxLength={200}
-          />
-        </Form.Group>
-
-=======
->>>>>>> e7ce729 (push code verify email)
         <Form.Group></Form.Group>
         <p className={style.promptContent}>
           <Trans i18nKey='auth.promptContent' components={{ strong: <Link to={PageURL.PRIVACY_POLICY} /> }} />
