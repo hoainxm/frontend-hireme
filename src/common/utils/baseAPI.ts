@@ -5,7 +5,6 @@ import axios, { AxiosError, AxiosPromise, AxiosRequestConfig } from 'axios';
 import { decodeBase64, makeClientToUnauthorize } from './common';
 
 import { BASE_URL } from './constants';
-console.log('BASE_URL', BASE_URL);
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
