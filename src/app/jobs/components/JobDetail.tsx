@@ -8,7 +8,7 @@ import { PageName } from '@models/enum';
 import styles from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-
+import { FieldTimeOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -22,23 +22,23 @@ const JobDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchJobDetail = async () => {
-      try {
-        const response = await fetchJobById(jobId);
-        if (response.data.statusCode === 200) {
-          setJob(response.data.data);
-        } else {
-          setError(response.data.message || 'Failed to fetch job details.');
-        }
-      } catch (err) {
-        setError('An error occurred while fetching job details.');
-        console.error(err);
-      } finally {
-        setLoading(false);
+  const fetchJobDetail = async () => {
+    try {
+      const response = await fetchJobById(jobId);
+      if (response.data.statusCode === 200) {
+        setJob(response.data.data);
+      } else {
+        setError(response.data.message || 'Failed to fetch job details.');
       }
-    };
+    } catch (err) {
+      setError('An error occurred while fetching job details.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchJobDetail();
   }, [jobId]);
 
@@ -63,26 +63,34 @@ const JobDetail: React.FC = () => {
   if (!job) {
     return <div className={styles.noData}>{t('noData')}</div>;
   }
-
+  console.log();
   return (
     <MainLayout active={PageName.JOBS}>
       <div className={styles.pageContainer}>
         <div className={styles.leftColumn}>
           <div className={styles.section}>
             <div className={styles.name}>{job.name}</div>
-            <div>
-              <img src='../../../common/ui/assets/icon/time-svgrepo-com.svg' alt='' />
-              {dayjs(job.updatedAt).fromNow()}
+
+            <div className={styles.head}>
+              <MenuOutlined />
+              {job.skills && job.skills.length > 0 && job.skills.map((item) => <p className={styles.borderSkills}>{item}</p>)}
+            </div>
+            <div className={styles.head}>
+              <MoneyCollectOutlined />
+              <p>{job.salary.toLocaleString()}</p>
+            </div>
+            <div className={styles.head}>
+              <FieldTimeOutlined />
+              <p>{dayjs(job.updatedAt).fromNow()}</p>
             </div>
           </div>
-
+          <hr style={{ borderTop: '2px solid #ccc' }} />
+          <div className={styles.applyBtn}>{t('jobDetail.applyNow')}</div>
           <div className={styles.section}>
             <div className={styles.longDescription}>
               <div className={styles.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
           </div>
-
-          <div className={styles.applyBtn}>{t('jobDetail.applyNow')}</div>
         </div>
 
         <div className={styles.rightColumn}>
@@ -103,10 +111,7 @@ const JobDetail: React.FC = () => {
               <div className={styles.label}>{t('jobDetail.companySize')}:</div>
               <div className={styles.value}>{job.company.size}</div>
             </div>
-            <div className={styles.infoItem}>
-              <div className={styles.label}>{t('jobDetail.companyIndustry')}:</div>
-              <div className={styles.value}>{job.company.industry}</div>
-            </div>
+
             <div className={styles.infoItem}>
               <div className={styles.label}>{t('jobDetail.companyAddress')}:</div>
               <div className={styles.value}>{job.location}</div>
@@ -130,10 +135,6 @@ const JobDetail: React.FC = () => {
             <div className={styles.infoItem}>
               <div className={styles.label}>{t('jobDetail.employmentType')}:</div>
               <div className={styles.value}>{job.employmentType}</div>
-            </div>
-            <div className={styles.infoItem}>
-              <div className={styles.label}>{t('jobDetail.genderRequirement')}:</div>
-              <div className={styles.value}>{job.genderRequirement}</div>
             </div>
           </div>
         </div>

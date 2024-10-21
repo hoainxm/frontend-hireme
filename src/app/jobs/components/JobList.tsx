@@ -13,7 +13,6 @@ interface JobListProps {
 const JobList: React.FC<JobListProps> = ({ listJobs }) => {
   const { t } = useTranslation();
   const history = useHistory();
-  console.log('check: ', listJobs);
   const [currentPage, setCurrentPage] = useState(1);
 
   const jobsPerPage = 10;
@@ -43,11 +42,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
   return (
     <div className={style.jobListContainer}>
       <div className={style.jobList}>
-        {listJobs && listJobs.length > 0 && (
-          <div className={style.jobCount}>
-            Tìm thấy {listJobs.length} việc làm phù hợp với yêu cầu của bạn.
-          </div>
-        )}
+        {listJobs && listJobs.length > 0 && <div className={style.jobCount}>Tìm thấy {listJobs.length} việc làm phù hợp với yêu cầu của bạn.</div>}
         {listJobs &&
           listJobs.length > 0 &&
           currentJobs.map((job) => (
@@ -75,9 +70,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                 <div className={style.bottom}>
                   <div className={style.location}>{job.location}</div>
                   <div className={style.skills}>{job.skills.join(', ')}</div>
-                  <div className={style.timeRemaining}>
-                    {`${getRemainingDays(job.endDate)} ${t('timeRemaining')}`}
-                  </div>
+                  <div className={style.timeRemaining}>{`${getRemainingDays(job.endDate)} ${t('timeRemaining')}`}</div>
                   <button className={style.btnApply}>Apply Now</button>
                 </div>
               </div>
