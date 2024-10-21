@@ -27,10 +27,6 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// export const doLogin = (loginData: LoginFormInputs): AxiosPromise<any> => {
-//   return doPost(`${authAPIUrl}/web-token/`, loginData);
-// };
-
 export const doRegister = (registerData: RegisterFormInputs): AxiosPromise<any> => {
   return doPost(`${authAPIUrl}/register`, registerData);
 };
@@ -53,7 +49,6 @@ export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any
 
 export const doLogin = (data: LoginFormInputs): AxiosPromise<any> => {
   return doPost(`${authAPIUrl}/login`, data);
-  // return axios.post('http://localhost:8000/api/v1/auth/login', loginData);
 };
 
 export const doReSendVerifyEmail = (data: EmailVerifyFormInputs): AxiosPromise<any> => {

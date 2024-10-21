@@ -8,11 +8,13 @@ import { useTranslation } from 'react-i18next';
 import style from './jobs.module.scss';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
-import JobDetail from './components/JobDetail';
+import JobDetail from './components/JobDetailNam';
 import { mockJobs } from '../../app/jobs/jobData';
 import { PartnerSection } from '../../app/home/PartnerSection';
 import { UpdateSection } from '../../app/home/UpdateSection';
 import { Job } from '../jobs/model';
+import { getAllJobs } from './api';
+import JobDetailNam from './components/JobDetailNam';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -30,6 +32,19 @@ export const Jobs: FC<Props> = (props) => {
 
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+
+  const fetchAllJobs = async () => {
+    try {
+      const result = await getAllJobs();
+      setJobs(result.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
 
   const handleFilter = (filters: any) => {
     let filtered = jobs;
@@ -142,9 +157,9 @@ export const Jobs: FC<Props> = (props) => {
         </div>
       </section>
       <JobFilter onFilter={handleFilter} />
-      {/* <JobList jobs={filteredJobs.length > 0 ? filteredJobs : jobs} /> */}
-      <JobList jobs={mockJobs} />
-      <JobDetail job={mockJobData} />
+
+      <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
+      <JobDetailNam job={mockJobData} />
       <BackToTop resetScrollNavigation={scrollToTop} />
       <PartnerSection sectionId={sectionId} />
       <UpdateSection sectionId={sectionId} />

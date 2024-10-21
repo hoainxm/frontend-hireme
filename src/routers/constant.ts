@@ -26,6 +26,7 @@ import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateD
 import Jobs from '../app/jobs';
 import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
 import { VerifyEmail } from '../app/auth/verify-email';
+import JobDetail from '../app/jobs/components/JobDetail';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -68,10 +69,7 @@ export const PUBLIC_ROUTE = [
     path: PageURL.RESET_PASSWORD,
     component: ResetPassword,
   },
-  {
-    path: PageURL.JOBS,
-    component: Jobs,
-  },
+
   {
     path: PageURL.RESEND_VERIFY_EMAIL,
     component: ResendVerifyEmail,
@@ -79,6 +77,14 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.VERIFY_EMAIL,
     component: VerifyEmail,
+  },
+  {
+    path: PageURL.JOBS,
+    component: Jobs,
+  },
+  {
+    path: PageURL.JOB_DETAIL,
+    component: JobDetail,
   },
 ];
 
@@ -101,4 +107,3 @@ export const ADMIN_ROUTE = [
   },
   { path: PageURL.ADMIN_AI_PACKAGE_INFO, component: AIPackageWriter },
 ];
-
