@@ -45,6 +45,10 @@ const Login: FC<Props> = (props: Props) => {
     window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/auth/google`;
   };
 
+  const redirectToHome = () => {
+    history.push(PageURL.HOME);
+  };
+
   const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
     const requestData = {
       email: data.email || '',
@@ -56,8 +60,8 @@ const Login: FC<Props> = (props: Props) => {
     try {
       const res = await doLogin(requestData);
       if (res && res?.data) {
-        alert(res?.data.message);
         setOnLoad(false);
+        redirectToHome();
         const { access_token } = res.data.data;
         localStorage.setItem('access_token', access_token);
       }
