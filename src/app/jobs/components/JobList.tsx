@@ -1,7 +1,6 @@
+import React, { useState } from 'react';
 import style from '../jobs.module.scss';
 import { useTranslation } from 'react-i18next';
-import React, { useEffect, useState } from 'react';
-
 import { BackToTop } from '@base/button/BackToTop';
 import { Job } from '../../jobs/model';
 import { useHistory } from 'react-router-dom';
@@ -17,10 +16,10 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [favoriteJobs, setFavoriteJobs] = useState<string[]>([]);
+
   const jobsPerPage = 10;
-
   const totalPages = Math.ceil(listJobs?.length / jobsPerPage);
-
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = listJobs.slice(indexOfFirstJob, indexOfLastJob);
@@ -37,6 +36,10 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
     return dayjs(endDate).isBefore(dayjs());
   };
 
+  const handleButtonHeart = (jobId: string) => {
+    setFavoriteJobs((prev) => (prev.includes(jobId) ? prev.filter((id) => id !== jobId) : [...prev, jobId]));
+  };
+
   const getRemainingDays = (endDate: string) => {
     const end = new Date(endDate);
     const now = new Date();
@@ -44,6 +47,8 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
     const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return daysRemaining > 0 ? daysRemaining : 0;
   };
+
+  console.log('favoriteJobs:', favoriteJobs);
 
   return (
     <div className={style.jobListContainer}>
@@ -80,12 +85,21 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                 <div className={style.bottom}>
                   <div className={style.location}>{job.location}</div>
                   <div className={style.skills}>{job.skills.join(', ')}</div>
-                  <div className={style.timeRemaining}>{`${getRemainingDays(job.endDate)} ${t('timeRemaining')}`}</div>
-                  <div>
-                    <button className={style.btnApply} disabled={isJobExpired(job.endDate)}>
-                      Apply Now
+                  <div className={style.timeRemaining}>
+                    <strong>{getRemainingDays(job.endDate)}</strong> {t('timeRemaining')}
+                  </div>
+                  <div className={style.groupBtnAct}>
+                    <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
+                      {t('jobDetail.applyNow')}
                     </button>
-                    <button>
+                    <button
+                      className={`${style.btn} ${style.btnHeart} ${favoriteJobs.includes(job._id) ? style.active : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleButtonHeart(job._id);
+                      }}
+                      disabled={isJobExpired(job.endDate)}
+                    >
                       <HeartOutlined />
                     </button>
                   </div>

@@ -8,12 +8,10 @@ import { useTranslation } from 'react-i18next';
 import style from './jobs.module.scss';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
-import JobDetail from './components/JobDetailNam';
 import { PartnerSection } from '../../app/home/PartnerSection';
 import { UpdateSection } from '../../app/home/UpdateSection';
 import { Job } from '../jobs/model';
 import { getAllJobs } from './api';
-import JobDetailNam from './components/JobDetailNam';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;

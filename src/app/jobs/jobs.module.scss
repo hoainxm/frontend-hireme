@@ -319,36 +319,73 @@ $subtext-color: #666;
           padding: 5px 10px;
           border-radius: 15px;
           font-size: 1rem;
-          // flex-basis: 400px;
-          // max-width: 400px;
-          // min-width: 400px;
-          // text-align: left;
         }
 
         .timeRemaining {
+          font-size: 20px;
         }
 
-        .btnApply {
-          background-color: #032170;
-          color: white;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s;
+        .groupBtnAct {
+          display: flex;
+          gap: 10px;
 
-          &:hover {
+          .btn {
+            padding: 10px 15px;
             cursor: pointer;
-            background-color: #0a4e99;
+            border-radius: 4px;
+            border: none;
           }
-        }
 
-        .btnApply:disabled {
-          background-color: #ccc;
-          color: #666;
-          cursor: not-allowed;
-          box-shadow: none;
-          transition: background-color 0.3s ease;
+          .btnApply {
+            background-color: #032170;
+            color: white;
+            transition: background-color 0.3s;
+
+            &:hover {
+              cursor: pointer;
+              background-color: #0a4e99;
+            }
+          }
+
+          .btnApply:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+            transition: background-color 0.3s ease;
+          }
+
+          .btnHeart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+            color: #ff4d4f;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease;
+
+            &:hover {
+              background-color: #ff4d4f;
+              color: #fff;
+              box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+              cursor: pointer;
+            }
+
+            &.active {
+              background-color: #ff4d4f;
+              color: #fff;
+              box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+              border-color: #ff4d4f;
+            }
+          }
+
+          .btnHeart:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+            transition: background-color 0.3s ease;
+          }
         }
 
         .updatedInfo {
@@ -504,31 +541,76 @@ $subtext-color: #666;
   line-height: 1.6;
 }
 
-.applyBtn {
-  background-color: #00b14f;
-  color: white;
-  padding: 14px 22px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  text-transform: uppercase;
-  text-align: center;
-  width: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-}
+.groupBtnActJobDetail {
+  display: flex;
+  gap: 20px;
 
-.applyBtn:hover {
-  background-color: #009e42;
-}
+  .btn {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+  }
 
-.applyBtn:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-  box-shadow: none;
-  transition: background-color 0.3s ease;
+  .applyBtn {
+    background-color: #00b14f;
+    color: white;
+    padding: 14px 22px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .applyBtn:hover {
+    background-color: #009e42;
+  }
+
+  .applyBtn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btnHeart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    color: #ff4d4f;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease;
+
+    &:hover {
+      background-color: #ff4d4f;
+      color: #fff;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    &.active {
+      background-color: #ff4d4f;
+      color: #fff;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      border-color: #ff4d4f;
+    }
+  }
+
+  .btnHeart:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+  }
 }
 
 .sectionTitle {
