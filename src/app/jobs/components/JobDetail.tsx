@@ -8,7 +8,8 @@ import { PageName } from '@models/enum';
 import style from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { ClockCircleOutlined, HeartOutlined, HistoryOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import FavoriteButton from '../components/FavoriteButton';
+import { ClockCircleOutlined, HeartOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -74,10 +75,6 @@ const JobDetail: React.FC = () => {
               <MoneyCollectOutlined />
               <p>{job.salary.toLocaleString()}</p>
             </div>
-            <div className={style.head}>
-              <HistoryOutlined />
-              <p>{dayjs(job.updatedAt).fromNow()}</p>
-            </div>
             <div className={`${style.head} ${style.deadline}`}>
               <ClockCircleOutlined />
               <p>
@@ -91,9 +88,15 @@ const JobDetail: React.FC = () => {
             <button className={style.applyBtn} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
             </button>
-            <button className={`${style.btn} ${style.btnHeart} `} disabled={isJobExpired(job.endDate)}>
+            {/* <button
+              type='button'
+              aria-label='Save job to favorites'
+              className={`${style.btn} ${style.btnHeart} `}
+              disabled={isJobExpired(job.endDate)}
+            >
               <HeartOutlined />
-            </button>
+            </button> */}
+            <FavoriteButton job={job} />
           </div>
 
           <div className={style.section}>

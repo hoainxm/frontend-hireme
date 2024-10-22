@@ -80,11 +80,6 @@ export const NORMAL_CHAR_PATTERN: RegExp = /^[A-Za-z0-9\s\p{Letter}']+$/iu;
 
 export const USERNAME_PATTERN = /^[A-Za-z][A-Za-z0-9]+$/;
 
-// export const PASS_PATTERN: RegExp =
-//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
-// export const PASS_PATTERN: RegExp =
-// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
-
 export const PASS_PATTERN: RegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
 
@@ -182,6 +177,12 @@ export const NAV_ITEMS = [
     isActive: true,
   },
   {
+    name: PageName.SAVE_JOBS,
+    url: PageURL.SAVE_JOBS,
+    sectionId: SectionID.HOME_BANNER,
+    isActive: true,
+  },
+  {
     name: PageName.PRODUCT,
     url: PageURL.PRODUCT,
     sectionId: SectionID.HOME_BANNER,
@@ -193,12 +194,12 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
-  // {
-  //   name: PageName.NEWS,
-  //   url: PageURL.NEWS,
-  //   sectionId: SectionID.HOME_BANNER,
-  //   isActive: false,
-  // },
+  {
+    name: PageName.NEWS,
+    url: PageURL.NEWS,
+    sectionId: SectionID.HOME_BANNER,
+    isActive: false,
+  },
 ];
 
 export const SOCIAL_LINKS = [
