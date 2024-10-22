@@ -29,8 +29,7 @@
       display: flex;
       justify-content: flex-start;
       margin: 0px auto;
-      color: $white;
-      // color: #0b3299 !important;
+      color: $white !important;
 
       .columnLeftFirstBanner {
         flex: 0 0 100%;
@@ -547,7 +546,6 @@ h4 {
   font-size: 2rem;
   font-weight: bold;
   padding-bottom: 15px;
-  color: #333;
 }
 
 .description {
