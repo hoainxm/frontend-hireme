@@ -42,7 +42,11 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
   return (
     <div className={style.jobListContainer}>
       <div className={style.jobList}>
-        {listJobs && listJobs.length > 0 && <div className={style.jobCount}>Tìm thấy {listJobs.length} việc làm phù hợp với yêu cầu của bạn.</div>}
+        {listJobs && listJobs.length > 0 && (
+          <div className={style.jobCount}>
+            {t('found')} {listJobs.length} {t('job.match')}
+          </div>
+        )}
         {listJobs &&
           listJobs.length > 0 &&
           currentJobs.map((job) => (

@@ -135,6 +135,14 @@
   "field.active": "Active",
   "field.expired": "Expired",
   "field.filter": "Filter",
+  "field.position": "Job position you desire",
+  "field.experiencePlaceholder": "Level",
+  "field.positionPlaceholder": "Job position you desire",
+  "field.skillsPlaceholder": "Skills",
+  "field.provincePlaceholder": "Province/City",
+
+  "found": "Found",
+  "job.match": "jobs that match your criteria",
 
   "selectLevel": "Level",
   "level.fresher": "Fresher",
