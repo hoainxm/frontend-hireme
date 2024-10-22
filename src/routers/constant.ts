@@ -27,6 +27,7 @@ import Jobs from '../app/jobs';
 import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
 import { VerifyEmail } from '../app/auth/verify-email';
 import JobDetail from '../app/jobs/components/JobDetail';
+import JobSaved from '../app/jobs/components/JobSaved';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -85,6 +86,10 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.JOB_DETAIL,
     component: JobDetail,
+  },
+  {
+    path: PageURL.SAVE_JOBS,
+    component: JobSaved,
   },
 ];
 

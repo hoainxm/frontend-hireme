@@ -8,12 +8,11 @@ import { useTranslation } from 'react-i18next';
 import style from './jobs.module.scss';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
-import JobDetail from './components/JobDetailNam';
 import { PartnerSection } from '../../app/home/PartnerSection';
 import { UpdateSection } from '../../app/home/UpdateSection';
 import { Job } from '../jobs/model';
 import { getAllJobs } from './api';
-import JobDetailNam from './components/JobDetailNam';
+import JobSaved from './components/JobSaved';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -85,6 +84,7 @@ export const Jobs: FC<Props> = (props) => {
       <JobFilter onFilter={handleFilter} />
 
       <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
+      <JobSaved />
       <BackToTop resetScrollNavigation={scrollToTop} />
       <PartnerSection sectionId={sectionId} />
       <UpdateSection sectionId={sectionId} />
