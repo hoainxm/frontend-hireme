@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { BackToTop } from '@base/button/BackToTop';
 import { Job } from '../../jobs/model';
 import { useHistory } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { HeartOutlined } from '@ant-design/icons';
 
 interface JobListProps {
   listJobs: Job[];
@@ -29,6 +31,10 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
 
   const handleJobClick = (jobId: string) => {
     history.push(`/jobs/${jobId}`);
+  };
+
+  const isJobExpired = (endDate: string): boolean => {
+    return dayjs(endDate).isBefore(dayjs());
   };
 
   const getRemainingDays = (endDate: string) => {
@@ -75,7 +81,14 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                   <div className={style.location}>{job.location}</div>
                   <div className={style.skills}>{job.skills.join(', ')}</div>
                   <div className={style.timeRemaining}>{`${getRemainingDays(job.endDate)} ${t('timeRemaining')}`}</div>
-                  <button className={style.btnApply}>Apply Now</button>
+                  <div>
+                    <button className={style.btnApply} disabled={isJobExpired(job.endDate)}>
+                      Apply Now
+                    </button>
+                    <button>
+                      <HeartOutlined />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
