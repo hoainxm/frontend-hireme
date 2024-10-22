@@ -73,11 +73,19 @@ const JobDetail: React.FC = () => {
               <MoneyCollectOutlined />
               <p>{job.salary.toLocaleString()}</p>
             </div>
+<<<<<<< HEAD
             <div className={style.head}>
               <HistoryOutlined />
               <p>{dayjs(job.updatedAt).fromNow()}</p>
             </div>
             <div className={`${style.head} ${style.deadline}`}>
+=======
+            <div className={styles.head}>
+              <HistoryOutlined />
+              <p>{dayjs(job.updatedAt).fromNow()}</p>
+            </div>
+            <div className={`${styles.head} ${styles.deadline}`}>
+>>>>>>> dd7346832989148b2c5a17e95ab7d945c197ecc0
               <ClockCircleOutlined />
               <p>
                 {t('timeApplicationJob')} : {dayjs(job.endDate).format('DD/MM/YYYY')}
@@ -86,6 +94,7 @@ const JobDetail: React.FC = () => {
           </div>
           <hr style={{ borderTop: '2px solid #ccc' }} />
 
+<<<<<<< HEAD
           <button className={style.applyBtn} disabled={isJobExpired(job.endDate)}>
             {t('jobDetail.applyNow')}
           </button>
@@ -93,6 +102,15 @@ const JobDetail: React.FC = () => {
           <div className={style.section}>
             <div className={style.longDescription}>
               <div className={style.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
+=======
+          <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
+            {t('jobDetail.applyNow')}
+          </button>
+
+          <div className={styles.section}>
+            <div className={styles.longDescription}>
+              <div className={styles.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
+>>>>>>> dd7346832989148b2c5a17e95ab7d945c197ecc0
             </div>
           </div>
         </div>
