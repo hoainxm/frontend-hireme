@@ -59,12 +59,14 @@ export interface Job {
   updatedAt: string;
   __v: number;
   updatedBy?: UpdatedBy;
+  employmentType: string;
 }
 
 export interface Company {
   _id: string;
   name: string;
   logo: string;
+  size: string;
 }
 
 export interface CreatedBy {
