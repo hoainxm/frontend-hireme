@@ -14,6 +14,7 @@ import { Job } from '../jobs/model';
 import { getAllJobs } from './api';
 import JobSaved from './components/JobSaved';
 
+
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
   currentPage: number;
