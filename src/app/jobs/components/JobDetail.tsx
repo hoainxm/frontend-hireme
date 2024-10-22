@@ -8,7 +8,7 @@ import { PageName } from '@models/enum';
 import styles from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { ClockCircleOutlined, HistoryOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, HeartOutlined, HistoryOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -86,9 +86,14 @@ const JobDetail: React.FC = () => {
           </div>
           <hr style={{ borderTop: '2px solid #ccc' }} />
 
-          <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
-            {t('jobDetail.applyNow')}
-          </button>
+          <div className={styles.groupBtnActJobDetail}>
+            <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
+              {t('jobDetail.applyNow')}
+            </button>
+            <button className={`${styles.btn} ${styles.btnHeart} `} disabled={isJobExpired(job.endDate)}>
+              <HeartOutlined />
+            </button>
+          </div>
 
           <div className={styles.section}>
             <div className={styles.longDescription}>
