@@ -23,6 +23,7 @@ const JobDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  console.log(job);
   const fetchJobDetail = async () => {
     try {
       const response = await fetchJobById(jobId);
@@ -120,8 +121,8 @@ const JobDetail: React.FC = () => {
               <div className={style.value}>{job.company.name}</div>
             </div>
             <div className={style.infoItem}>
-              <div className={style.label}>{t('jobDetail.companySize')}:</div>
-              <div className={style.value}>{job.company.size}</div>
+              <div className={style.label}>{t('jobDetail.companyScale')}:</div>
+              <div className={style.value}>{job.company.scale} nhân viên</div>
             </div>
 
             <div className={style.infoItem}>
@@ -146,7 +147,12 @@ const JobDetail: React.FC = () => {
             </div>
             <div className={style.infoItem}>
               <div className={style.label}>{t('jobDetail.employmentType')}:</div>
-              <div className={style.value}>{job.employmentType}</div>
+              <div className={style.value}>{job.workForm.join(', ')}</div>
+            </div>
+
+            <div className={style.infoItem}>
+              <div className={style.label}>{t('jobDetail.gender')}:</div>
+              <div className={style.value}>{job.gender === '' ? <span>Không bắt buộc</span> : job.gender}</div>
             </div>
           </div>
         </div>

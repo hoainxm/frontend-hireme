@@ -190,11 +190,11 @@
   "jobDetail.experience": "Experience",
   "jobDetail.quantity": "Quantity",
   "jobDetail.employmentType": "Employment Type",
-  "jobDetail.genderRequirement": "Gender Requirement",
   "jobDetail.companyName": "Company Name",
-  "jobDetail.companySize": "Size",
+  "jobDetail.companyScale": "Size",
   "jobDetail.companyIndustry": "Industry",
   "jobDetail.companyAddress": "Address",
+  "jobDetail.gender": "Gender",
 
   "selectStatus": "Status",
   "status.active": "Active",
