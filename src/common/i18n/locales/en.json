@@ -134,7 +134,7 @@
   "field.senior": "Senior",
   "field.active": "Active",
   "field.expired": "Expired",
-  "field.filter": "Filter",
+  "field.search": "Search",
   "field.position": "Job position you desire",
   "field.experiencePlaceholder": "Level",
   "field.positionPlaceholder": "Job position you desire",
@@ -143,6 +143,7 @@
 
   "found": "Found",
   "job.match": "jobs that match your criteria",
+  "field.updated": "Updated",
 
   "selectLevel": "Level",
   "level.fresher": "Fresher",
@@ -290,6 +291,7 @@
 
   "popup.confirmBtn": "Confirm",
   "popup.comingSoon": "This feature is under development. Please try again once we are done.",
+  "popup.loginRequired": "You need to log in to use this feature.",
   "sucess.title": "Success",
 
   "cfm.deletedPackage.title": "Delete feature pack",

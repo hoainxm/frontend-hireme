@@ -28,6 +28,8 @@ export enum PageURL {
   NEWS = '/news',
   JOBS = '/jobs',
   JOB_DETAIL = '/jobs/:jobId',
+  SAVE_JOBS = '/saveJobs/',
+
   CATEGORY = '/news/categories',
   PROFILE_MANAGEMENT = '/profile',
   LICENSE_MANAGEMENT = '/license-management',
@@ -84,6 +86,8 @@ export enum PageName {
   // User
   HOME = 'user.home',
   JOBS = 'user.jobs',
+  SAVE_JOBS = 'user.save-jobs',
+
   PRODUCT = 'user.product',
   ABOUT_US = 'user.aboutUs',
   NEWS = 'user.news',
@@ -275,6 +279,7 @@ export enum PopupLevel {
   RESET_PASSWORD,
   COMING_SOON,
   LOADING,
+  AUTHENTICATE,
 }
 
 export enum APICloudFeatureTabs {

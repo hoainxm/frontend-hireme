@@ -8,7 +8,8 @@ import { PageName } from '@models/enum';
 import style from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { ClockCircleOutlined, HeartOutlined, HistoryOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import FavoriteButton from '../components/FavoriteButton';
+import { ClockCircleOutlined, HeartOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -73,11 +74,7 @@ const JobDetail: React.FC = () => {
               <MoneyCollectOutlined />
               <p>{job.salary.toLocaleString()}</p>
             </div>
-            <div className={styles.head}>
-              <HistoryOutlined />
-              <p>{dayjs(job.updatedAt).fromNow()}</p>
-            </div>
-            <div className={`${styles.head} ${styles.deadline}`}>
+            <div className={`${style.head} ${style.deadline}`}>
               <ClockCircleOutlined />
               <p>
                 {t('timeApplicationJob')} : {dayjs(job.endDate).format('DD/MM/YYYY')}
@@ -86,18 +83,24 @@ const JobDetail: React.FC = () => {
           </div>
           <hr style={{ borderTop: '2px solid #ccc' }} />
 
-          <div className={styles.groupBtnActJobDetail}>
-            <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
+          <div className={style.groupBtnActJobDetail}>
+            <button className={style.applyBtn} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
             </button>
-            <button className={`${styles.btn} ${styles.btnHeart} `} disabled={isJobExpired(job.endDate)}>
+            {/* <button
+              type='button'
+              aria-label='Save job to favorites'
+              className={`${style.btn} ${style.btnHeart} `}
+              disabled={isJobExpired(job.endDate)}
+            >
               <HeartOutlined />
-            </button>
+            </button> */}
+            <FavoriteButton job={job} />
           </div>
 
-          <div className={styles.section}>
-            <div className={styles.longDescription}>
-              <div className={styles.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
+          <div className={style.section}>
+            <div className={style.longDescription}>
+              <div className={style.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
           </div>
         </div>

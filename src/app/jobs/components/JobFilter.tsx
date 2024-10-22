@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import locationData from './location.json';
 import { SkillsOptions, experienceOptions } from '../constant';
 import style from '../jobs.module.scss';
+import { SearchOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -44,7 +45,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   return (
     <Form layout='vertical' onFinish={handleFilter} className={style.jobfilter}>
       <Row gutter={16}>
-        <Col span={6}>
+        <Col span={8}>
           <Form.Item>
             <Input
               placeholder={t('field.positionPlaceholder')}
@@ -55,7 +56,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
-        <Col span={6}>
+        <Col span={4}>
           <Form.Item>
             <Select
               placeholder={t('field.experiencePlaceholder')}
@@ -73,7 +74,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
-        <Col span={6}>
+        <Col span={4}>
           <Form.Item className={style.skillsFilter}>
             <Select
               mode='multiple'
@@ -92,7 +93,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
-        <Col span={6}>
+        <Col span={4}>
           <Form.Item className={style.provinceFilter}>
             <AutoComplete
               placeholder={t('field.provincePlaceholder')}
@@ -105,9 +106,12 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
-        <Button type='primary' htmlType='submit' className={style.button}>
-          {t('field.filter')}
-        </Button>
+        <Col span={4}>
+          <Button type='primary' htmlType='submit' className={style.button}>
+            <SearchOutlined />
+            {t('field.search')}
+          </Button>
+        </Col>
       </Row>
     </Form>
   );

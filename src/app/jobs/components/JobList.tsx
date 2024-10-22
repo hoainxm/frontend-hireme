@@ -5,7 +5,8 @@ import { BackToTop } from '@base/button/BackToTop';
 import { Job } from '../../jobs/model';
 import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { HeartOutlined } from '@ant-design/icons';
+import { HeartOutlined, HistoryOutlined } from '@ant-design/icons';
+import FavoriteButton from '../components/FavoriteButton';
 
 interface JobListProps {
   listJobs: Job[];
@@ -78,6 +79,10 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                   <div className={style.jobTitle}>
                     {job.name}
                     <div className={style.companyName}>{job.company.name}</div>
+                    <div className={style.head}>
+                      <HistoryOutlined />
+                      <p>{dayjs(job.updatedAt).fromNow()}</p>
+                    </div>
                   </div>
 
                   <div className={style.salary}>{job.salary.toLocaleString()} VND</div>
@@ -92,7 +97,9 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                     <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
                       {t('jobDetail.applyNow')}
                     </button>
-                    <button
+                    {/* <button
+                      type='button'
+                      aria-label='Save job to favorites'
                       className={`${style.btn} ${style.btnHeart} ${favoriteJobs.includes(job._id) ? style.active : ''}`}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -101,7 +108,8 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                       disabled={isJobExpired(job.endDate)}
                     >
                       <HeartOutlined />
-                    </button>
+                    </button> */}
+                    <FavoriteButton job={job} />
                   </div>
                 </div>
               </div>

@@ -131,7 +131,7 @@
   "field.senior": "Senior",
   "field.active": "Đang hoạt động",
   "field.expired": "Đã hết hạn",
-  "field.filter": "Lọc",
+  "field.search": "Tìm kiếm",
   "field.position": "Vị trí công việc bạn mong muốn",
   "field.experiencePlaceholder": "Cấp bậc",
   "field.positionPlaceholder": "Tên công việc bạn muốn ứng tuyển",
@@ -140,6 +140,7 @@
 
   "found": "Tìm thấy",
   "job.match": "công việc phù hợp với yêu cầu của bạn",
+  "field.updated": "Cập nhật",
 
   "skills": "Kỹ năng",
   "company": "Công ty",
@@ -290,8 +291,10 @@
   "btn.continueEditTemplate": "Tiếp tục chỉnh sửa mẫu",
 
   "btn.confirm": "Xác nhận",
+  "loginToContinue": "Đăng nhập để tiếp tục",
   "popup.confirmBtn": "Đồng ý",
   "popup.comingSoon": "Tính năng này đang được phát triển. Vui lòng thử lại sau khi chúng tôi đã hoàn tất bạn nhé.",
+  "popup.loginRequired": "Bạn cần đăng nhập để sử dụng tính năng này.",
   "sucess.title": "Thành công",
 
   "cfm.deletedPackage.title": "Xóa gói tính năng",

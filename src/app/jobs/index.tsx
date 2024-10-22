@@ -12,6 +12,8 @@ import { PartnerSection } from '../../app/home/PartnerSection';
 import { UpdateSection } from '../../app/home/UpdateSection';
 import { Job } from '../jobs/model';
 import { getAllJobs } from './api';
+import JobSaved from './components/JobSaved';
+
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -83,6 +85,7 @@ export const Jobs: FC<Props> = (props) => {
       <JobFilter onFilter={handleFilter} />
 
       <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
+      <JobSaved />
       <BackToTop resetScrollNavigation={scrollToTop} />
       <PartnerSection sectionId={sectionId} />
       <UpdateSection sectionId={sectionId} />
