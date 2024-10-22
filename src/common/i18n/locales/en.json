@@ -704,5 +704,6 @@
   "toast.error.imageFormat": "Image format must be .png, .jpg, .jpeg",
 
   "fail.title": "Failed",
-  "error.existEmail": "Email already exists. Please try another email."
+  "error.existEmail": "Email already exists. Please try another email.",
+  "timeApplicationJob": "Application deadline"
 }

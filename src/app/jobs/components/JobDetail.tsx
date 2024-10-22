@@ -8,7 +8,7 @@ import { PageName } from '@models/enum';
 import styles from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { FieldTimeOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, HistoryOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -42,14 +42,8 @@ const JobDetail: React.FC = () => {
     fetchJobDetail();
   }, [jobId]);
 
-  console.log(job);
-
-  const getRemainingDays = (endDate: string): number => {
-    const end = new Date(endDate);
-    const now = new Date();
-    const timeDiff = end.getTime() - now.getTime();
-    const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return daysRemaining > 0 ? daysRemaining : 0;
+  const isJobExpired = (endDate: string): boolean => {
+    return dayjs(endDate).isBefore(dayjs());
   };
 
   if (loading) {
@@ -63,7 +57,7 @@ const JobDetail: React.FC = () => {
   if (!job) {
     return <div className={styles.noData}>{t('noData')}</div>;
   }
-  console.log();
+
   return (
     <MainLayout active={PageName.JOBS}>
       <div className={styles.pageContainer}>
@@ -80,12 +74,22 @@ const JobDetail: React.FC = () => {
               <p>{job.salary.toLocaleString()}</p>
             </div>
             <div className={styles.head}>
-              <FieldTimeOutlined />
+              <HistoryOutlined />
               <p>{dayjs(job.updatedAt).fromNow()}</p>
+            </div>
+            <div className={`${styles.head} ${styles.deadline}`}>
+              <ClockCircleOutlined />
+              <p>
+                {t('timeApplicationJob')} : {dayjs(job.endDate).format('DD/MM/YYYY')}
+              </p>
             </div>
           </div>
           <hr style={{ borderTop: '2px solid #ccc' }} />
-          <div className={styles.applyBtn}>{t('jobDetail.applyNow')}</div>
+
+          <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
+            {t('jobDetail.applyNow')}
+          </button>
+
           <div className={styles.section}>
             <div className={styles.longDescription}>
               <div className={styles.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
