@@ -22,6 +22,7 @@ const JobDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  console.log(job);
   const fetchJobDetail = async () => {
     try {
       const response = await fetchJobById(jobId);
@@ -73,11 +74,11 @@ const JobDetail: React.FC = () => {
               <MoneyCollectOutlined />
               <p>{job.salary.toLocaleString()}</p>
             </div>
-            <div className={styles.head}>
+            <div className={style.head}>
               <HistoryOutlined />
               <p>{dayjs(job.updatedAt).fromNow()}</p>
             </div>
-            <div className={`${styles.head} ${styles.deadline}`}>
+            <div className={`${style.head} ${style.deadline}`}>
               <ClockCircleOutlined />
               <p>
                 {t('timeApplicationJob')} : {dayjs(job.endDate).format('DD/MM/YYYY')}
@@ -86,18 +87,18 @@ const JobDetail: React.FC = () => {
           </div>
           <hr style={{ borderTop: '2px solid #ccc' }} />
 
-          <div className={styles.groupBtnActJobDetail}>
-            <button className={styles.applyBtn} disabled={isJobExpired(job.endDate)}>
+          <div className={style.groupBtnActJobDetail}>
+            <button className={style.applyBtn} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
             </button>
-            <button className={`${styles.btn} ${styles.btnHeart} `} disabled={isJobExpired(job.endDate)}>
+            <button className={`${style.btn} ${style.btnHeart} `} disabled={isJobExpired(job.endDate)}>
               <HeartOutlined />
             </button>
           </div>
 
-          <div className={styles.section}>
-            <div className={styles.longDescription}>
-              <div className={styles.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
+          <div className={style.section}>
+            <div className={style.longDescription}>
+              <div className={style.shortDescription} dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
           </div>
         </div>
@@ -117,8 +118,8 @@ const JobDetail: React.FC = () => {
               <div className={style.value}>{job.company.name}</div>
             </div>
             <div className={style.infoItem}>
-              <div className={style.label}>{t('jobDetail.companySize')}:</div>
-              <div className={style.value}>{job.company.size}</div>
+              <div className={style.label}>{t('jobDetail.companyScale')}:</div>
+              <div className={style.value}>{job.company.scale} nhân viên</div>
             </div>
 
             <div className={style.infoItem}>
@@ -143,7 +144,12 @@ const JobDetail: React.FC = () => {
             </div>
             <div className={style.infoItem}>
               <div className={style.label}>{t('jobDetail.employmentType')}:</div>
-              <div className={style.value}>{job.employmentType}</div>
+              <div className={style.value}>{job.workForm.join(', ')}</div>
+            </div>
+
+            <div className={style.infoItem}>
+              <div className={style.label}>{t('jobDetail.gender')}:</div>
+              <div className={style.value}>{job.gender === '' ? <span>Không bắt buộc</span> : job.gender}</div>
             </div>
           </div>
         </div>

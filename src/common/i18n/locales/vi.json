@@ -190,11 +190,11 @@
   "jobDetail.experience": "Kinh nghiệm",
   "jobDetail.quantity": "Số lượng tuyển",
   "jobDetail.employmentType": "Hình thức làm việc",
-  "jobDetail.genderRequirement": "Giới tính",
   "jobDetail.companyName": "Tên công ty",
-  "jobDetail.companySize": "Quy mô",
+  "jobDetail.companyScale": "Quy mô",
   "jobDetail.companyIndustry": "Lĩnh vực",
   "jobDetail.companyAddress": "Địa chỉ",
+  "jobDetail.gender": "Giới tính",
 
   "selectStatus": "Trạng thái",
   "status.active": "Đang hoạt động",
