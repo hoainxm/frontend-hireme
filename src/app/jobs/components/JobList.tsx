@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../jobs.module.scss';
 import { useTranslation } from 'react-i18next';
 import { BackToTop } from '@base/button/BackToTop';
@@ -7,23 +7,33 @@ import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { HeartOutlined, HistoryOutlined } from '@ant-design/icons';
 import FavoriteButton from '../components/FavoriteButton';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface JobListProps {
-  listJobs: Job[];
+  listJobs?: Job[];
+  isSavedJobs?: boolean;
 }
 
-const JobList: React.FC<JobListProps> = ({ listJobs }) => {
+const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
-
   const [favoriteJobs, setFavoriteJobs] = useState<string[]>([]);
-
   const jobsPerPage = 10;
   const totalPages = Math.ceil(listJobs?.length / jobsPerPage);
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = listJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const [jobsToShow, setJobsToShow] = useState<Job[]>([]);
+
+  useEffect(() => {
+    if (isSavedJobs) {
+      const savedJobsFromStorage = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+      setJobsToShow(savedJobsFromStorage);
+    } else {
+      setJobsToShow(listJobs);
+    }
+  }, [isSavedJobs, listJobs]);
 
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -97,19 +107,8 @@ const JobList: React.FC<JobListProps> = ({ listJobs }) => {
                     <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
                       {t('jobDetail.applyNow')}
                     </button>
-                    {/* <button
-                      type='button'
-                      aria-label='Save job to favorites'
-                      className={`${style.btn} ${style.btnHeart} ${favoriteJobs.includes(job._id) ? style.active : ''}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleButtonHeart(job._id);
-                      }}
-                      disabled={isJobExpired(job.endDate)}
-                    >
-                      <HeartOutlined />
-                    </button> */}
                     <FavoriteButton job={job} />
+                    <ToastContainer autoClose={1000} />
                   </div>
                 </div>
               </div>

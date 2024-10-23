@@ -3,6 +3,7 @@
 import { ReactComponent as AISpeed } from './AISpeed.svg';
 import { ReactComponent as API } from './API.svg';
 import { ReactComponent as Account } from './Account.svg';
+import { ReactComponent as AccountSetting } from './AccountSetting.svg';
 import { ReactComponent as ActionRecognition } from './ActionRecognition.svg';
 import { ReactComponent as Address } from './Address.svg';
 import { ReactComponent as AgeGender } from './AgeGender.svg';
@@ -83,9 +84,11 @@ import { ReactComponent as Text } from './TextInput.svg';
 import { ReactComponent as Up } from './Up.svg';
 import { ReactComponent as VoiceRecognition } from './VoiceRecognition.svg';
 import { ReactComponent as Youtube } from './Youtube.svg';
+import { ReactComponent as Save } from './Save.svg';
 
 export {
   Account,
+  AccountSetting,
   ActionRecognition,
   Address,
   AgeGender,
@@ -154,6 +157,7 @@ export {
   ProductIcon,
   Project,
   QA,
+  Save,
   Sentiment,
   ShowPass,
   Solution,

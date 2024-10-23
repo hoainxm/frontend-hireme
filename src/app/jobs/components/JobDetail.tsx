@@ -9,6 +9,7 @@ import style from '../jobs.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import FavoriteButton from '../components/FavoriteButton';
+import { toast, ToastContainer } from 'react-toastify';
 import { ClockCircleOutlined, HeartOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 dayjs.extend(relativeTime);
 
@@ -62,6 +63,7 @@ const JobDetail: React.FC = () => {
 
   return (
     <MainLayout active={PageName.JOBS}>
+      <ToastContainer />
       <div className={style.pageContainer}>
         <div className={style.leftColumn}>
           <div className={style.section}>
@@ -88,14 +90,6 @@ const JobDetail: React.FC = () => {
             <button className={style.applyBtn} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
             </button>
-            {/* <button
-              type='button'
-              aria-label='Save job to favorites'
-              className={`${style.btn} ${style.btnHeart} `}
-              disabled={isJobExpired(job.endDate)}
-            >
-              <HeartOutlined />
-            </button> */}
             <FavoriteButton job={job} />
           </div>
 
