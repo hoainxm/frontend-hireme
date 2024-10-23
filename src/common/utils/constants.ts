@@ -176,15 +176,15 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: true,
   },
+  // {
+  //   name: PageName.PRODUCT,
+  //   url: PageURL.PRODUCT,
+  //   sectionId: SectionID.HOME_BANNER,
+  //   isActive: false,
+  // },
   {
-    name: PageName.SAVE_JOBS,
-    url: PageURL.SAVE_JOBS,
-    sectionId: SectionID.HOME_BANNER,
-    isActive: true,
-  },
-  {
-    name: PageName.PRODUCT,
-    url: PageURL.PRODUCT,
+    name: PageName.COMPANY,
+    url: PageURL.COMPANY,
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
@@ -194,12 +194,12 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
-  {
-    name: PageName.NEWS,
-    url: PageURL.NEWS,
-    sectionId: SectionID.HOME_BANNER,
-    isActive: false,
-  },
+  // {
+  //   name: PageName.NEWS,
+  //   url: PageURL.NEWS,
+  //   sectionId: SectionID.HOME_BANNER,
+  //   isActive: false,
+  // },
 ];
 
 export const SOCIAL_LINKS = [
@@ -222,6 +222,12 @@ export const PROFILE_ITEMS = [
     name: PageName.PROFILE_MANAGEMENT,
     url: PageURL.PROFILE_MANAGEMENT,
     icon: 'ManageAccount',
+    isActive: true,
+  },
+  {
+    name: PageName.SAVE_JOBS,
+    url: PageURL.SAVE_JOBS,
+    icon: 'Save',
     isActive: true,
   },
   // {

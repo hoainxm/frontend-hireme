@@ -139,8 +139,13 @@
   "field.provincePlaceholder": "Tỉnh/thành phố",
 
   "found": "Tìm thấy",
-  "job.match": "công việc phù hợp với yêu cầu của bạn",
+  "list": "Danh sách",
+  "user.savedJobs": "Việc làm đã lưu",
+  "savedJobs.title": "Kiểm tra các việc làm bạn đã lưu",
+  "job.match": "việc làm phù hợp với yêu cầu của bạn",
   "field.updated": "Cập nhật",
+
+  "user.company": "Công ty",
 
   "skills": "Kỹ năng",
   "company": "Công ty",
