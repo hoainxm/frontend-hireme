@@ -61,6 +61,9 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </button>
       </div>
 
+      <div className={style['job-card__description-header-wrapper']}>
+        <h4 className={style['job-card__description-header']}>Chi tiết tin tuyển dụng</h4>
+      </div>
       <div dangerouslySetInnerHTML={{ __html: job.description }} />
     </div>
   );
