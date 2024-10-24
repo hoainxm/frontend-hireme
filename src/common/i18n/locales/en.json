@@ -142,7 +142,10 @@
   "field.provincePlaceholder": "Province/City",
 
   "found": "Found",
+  "savedJobs": "Saved Jobs",
+  "savedJobs.title": "Review the jobs you have saved",
   "job.match": "jobs that match your criteria",
+  "list": "List of",
   "field.updated": "Updated",
 
   "selectLevel": "Level",
@@ -322,6 +325,7 @@
   "user.aboutUs": "About us",
   "user.news": "News",
   "user.jobs": "Jobs",
+  "user.company": "Company",
   "user.profile.management": "Profile management",
   "user.license.management": "License management",
   "user.trial": "Get started for free",

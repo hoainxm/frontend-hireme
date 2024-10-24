@@ -1,14 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faDollarSign,
-  faMapMarkerAlt,
-  faHourglass,
-  faCalendarAlt,
-  faPaperPlane,
-  faHeart,
-  faExclamationCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign, faMapMarkerAlt, faHourglass, faCalendarAlt, faPaperPlane, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import style from './JobCard.module.scss';
 import { useTranslation } from 'react-i18next';
 import FavoriteButton from '../components/FavoriteButton';
@@ -27,45 +19,44 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.header}>
-        <h2 className={style.title}>{job.name}</h2>
+    <div className={style['job-card']}>
+      <div className={style['job-card__header']}>
+        <h2 className={style['job-card__title']}>{job.name}</h2>
       </div>
 
-      <div className={style.detailsContainer}>
-        <div className={style.detailItem}>
-          <FontAwesomeIcon icon={faDollarSign} className={style.icon} />
-          <span className={style.detailText}>{job.salary.toLocaleString()} VND</span>
+      <div className={style['job-card__details-container']}>
+        <div className={style['job-card__details-container-item']}>
+          <FontAwesomeIcon icon={faDollarSign} className={style['job-card__details-container-icon']} />
+          <span className={style['job-card__details-container-text']}>{job.salary.toLocaleString()} VND</span>
         </div>
-        <div className={style.detailItem}>
-          <FontAwesomeIcon icon={faMapMarkerAlt} className={style.icon} />
-          <span className={style.detailText}>{job.location}</span>
+        <div className={style['job-card__details-container-item']}>
+          <FontAwesomeIcon icon={faMapMarkerAlt} className={style['job-card__details-container-icon']} />
+          <span className={style['job-card__details-container-text']}>{job.location}</span>
         </div>
-        <div className={style.detailItem}>
-          <FontAwesomeIcon icon={faHourglass} className={style.icon} />
-          <span className={style.detailText}>{job.level}</span>
+        <div className={style['job-card__details-container-item']}>
+          <FontAwesomeIcon icon={faHourglass} className={style['job-card__details-container-icon']} />
+          <span className={style['job-card__details-container-text']}>{job.level}</span>
         </div>
       </div>
 
-      <div className={style.subDetails}>
-        <span className={style.subDetailTitle}>
-          {' '}
-          <FontAwesomeIcon icon={faCalendarAlt} className={style.subIcon} />
+      <div className={style['job-card__sub-details']}>
+        <span className={style['job-card__sub-details-title']}>
+          <FontAwesomeIcon icon={faCalendarAlt} className={style['job-card__sub-details-icon']} />
           Hạn nộp hồ sơ: {dayjs(job.endDate).format('DD/MM/YYYY')}
         </span>
       </div>
 
-      <div className={style.actionButtons} style={{ marginBottom: '30px' }}>
+      <div className={style['job-card__action-buttons']}>
         {isJobExpired(job.endDate) ? (
-          <button className={style.expiredButton}>
+          <button className={style['job-card__action-buttons-expired-button']}>
             <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
           </button>
         ) : (
-          <button className={style.applyButton}>
+          <button className={style['job-card__action-buttons-apply-button']}>
             <FontAwesomeIcon icon={faPaperPlane} /> {t('jobDetail.applyNow')}
           </button>
         )}
-        <button className={style.saveButton}>
+        <button className={style['job-card__action-buttons-save-button']}>
           <FavoriteButton job={job} />
         </button>
       </div>

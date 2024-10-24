@@ -11,6 +11,10 @@ import InfoCompany from '../../company/components/InfoCompany';
 import JobCard from './JobCard';
 import GeneralInfo from './GeneralInfo';
 import style from './JobDetail.module.scss';
+import { ToastContainer } from 'react-toastify';
+import { ClockCircleOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import FavoriteButton from './FavoriteButton';
+
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -59,13 +63,16 @@ const JobDetail: React.FC = () => {
     return <div className={style['job-detail__no-data']}>{t('noData')}</div>;
   }
 
+  const isJobExpired = (endDate: string): boolean => {
+    return dayjs(endDate).isBefore(dayjs());
+  };
+
   return (
     <MainLayout active={PageName.JOBS}>
       <div className={style['job-detail']}>
         <div className={style['job-detail__left-column']}>
           <JobCard job={job} />
         </div>
-
         <div className={style['job-detail__right-column']}>
           <div className={style['job-detail__company-info']}>
             <InfoCompany idCompany={idCompany} />
