@@ -1,0 +1,121 @@
+$green-color: #43a047;
+$gray-color: #7a8288;
+$black-color: #2c3e50;
+$white-color: #ffffff;
+$border-color: #e0e0e0;
+$warning-color: #d9534f;
+$warning-background: #f8d7da;
+
+.container {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: $white-color;
+  max-width: 650px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: $black-color;
+}
+
+.detailsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 16px;
+
+  .detailItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon {
+    color: $green-color;
+    font-size: 18px;
+  }
+
+  .detailText {
+    font-size: 13px;
+    font-weight: 500;
+    color: $black-color;
+  }
+}
+
+.subDetails {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: $gray-color;
+  margin-bottom: 12px;
+
+  .subIcon {
+    margin-right: 6px;
+    color: $gray-color;
+  }
+
+  .subDetailTitle {
+    background-color: #f9fafb;
+    padding: 6px 10px;
+    border-radius: 5px;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+
+  .applyButton,
+  .expiredButton,
+  .saveButton {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .applyButton {
+    background-color: $green-color;
+    color: $white-color;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+
+    &:hover {
+      background-color: darken($green-color, 10%);
+    }
+  }
+
+  .expiredButton {
+    background-color: $warning-background;
+    color: $warning-color;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid lighten($warning-color, 20%);
+  }
+
+  .saveButton {
+    background-color: transparent;
+    color: $gray-color;
+    padding: 8px 16px;
+    border: 1px solid $gray-color;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      color: $green-color;
+      border-color: $green-color;
+    }
+  }
+}

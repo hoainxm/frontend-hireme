@@ -1,0 +1,89 @@
+$gray-color: #7f878f;
+$black-color: #212f3f;
+$green-color: #43a047;
+$border-color: #e0e0e0;
+$background-color: #fff;
+
+.info-company {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 350px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    &-logo-container {
+      margin-right: 12px;
+
+      &-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    }
+
+    &-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: $black-color;
+    }
+  }
+
+  &__info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+
+    &-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 4px;
+      align-items: center;
+      font-size: 14px;
+
+      &-icon {
+        margin-right: 8px;
+        color: $gray-color;
+      }
+
+      &-title {
+        color: $gray-color;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      &-value {
+        color: $black-color;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  &__link {
+    color: $green-color;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    transition: color 0.2s;
+    gap: 8px;
+
+    &:hover {
+      color: darken($green-color, 10%);
+    }
+  }
+}

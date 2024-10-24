@@ -20,6 +20,7 @@ export interface Job {
   updatedBy?: UpdatedBy;
   workForm: string[];
   gender: string;
+  experience: string;
 }
 
 export interface Company {
