@@ -26,6 +26,28 @@ $warning-background: #f8d7da;
     color: $black-color;
   }
 
+  .job-card__description-header-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .job-card__description-header {
+    font-weight: bold;
+    color: $black-color;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 30px;
+      background-color: $green-color;
+      margin-right: 10px;
+    }
+  }
+
   &__details-container {
     display: flex;
     justify-content: space-between;

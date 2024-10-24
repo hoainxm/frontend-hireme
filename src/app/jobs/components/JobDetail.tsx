@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Job } from '../model';
 import { useTranslation } from 'react-i18next';
 import { fetchJobById } from '../api';
 import MainLayout from '@layout/main-layout';
-import { PageName } from '@models/enum';
+import { PageName, PageURL } from '@models/enum';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import InfoCompany from '../../company/components/InfoCompany';
 import JobCard from './JobCard';
 import GeneralInfo from './GeneralInfo';
 import style from './JobDetail.module.scss';
-import { ToastContainer } from 'react-toastify';
-import { ClockCircleOutlined, MenuOutlined, MoneyCollectOutlined } from '@ant-design/icons';
-import FavoriteButton from './FavoriteButton';
-
+import { Breadcrumb } from 'antd';
 dayjs.extend(relativeTime);
 
 interface RouteParams {
@@ -28,6 +25,7 @@ const JobDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [idCompany, setIdCompany] = useState<string>('');
+  const history = useHistory();
 
   const fetchJobDetail = async () => {
     try {
@@ -51,6 +49,14 @@ const JobDetail: React.FC = () => {
     fetchJobDetail();
   }, [jobId]);
 
+  const redirectToHome = () => {
+    history.push(PageURL.HOME);
+  };
+
+  const redirectToCompany = () => {
+    history.push(PageURL.COMPANY);
+  };
+
   if (loading) {
     return <div className={style['job-detail__loading']}>{t('loading')}</div>;
   }
@@ -63,22 +69,44 @@ const JobDetail: React.FC = () => {
     return <div className={style['job-detail__no-data']}>{t('noData')}</div>;
   }
 
-  const isJobExpired = (endDate: string): boolean => {
-    return dayjs(endDate).isBefore(dayjs());
-  };
-
   return (
     <MainLayout active={PageName.JOBS}>
-      <div className={style['job-detail']}>
-        <div className={style['job-detail__left-column']}>
-          <JobCard job={job} />
+      <div className={style['job-detail__container']}>
+        <div className={style['breadcrumb-wrapper']}>
+          <Breadcrumb
+            separator={<span className={style['breadcrumb-separator']}>{'->'}</span>}
+            items={[
+              {
+                title: (
+                  <span className={style['breadcrumb']} onClick={redirectToHome}>
+                    {t('user.home')}
+                  </span>
+                ),
+              },
+              {
+                title: (
+                  <span className={style['breadcrumb']} onClick={redirectToCompany}>
+                    {t('company')}
+                  </span>
+                ),
+              },
+              {
+                title: <span className={style['breadcrumb breadcrumb__job-name']}>{job.name}</span>,
+              },
+            ]}
+          />
         </div>
-        <div className={style['job-detail__right-column']}>
-          <div className={style['job-detail__company-info']}>
-            <InfoCompany idCompany={idCompany} />
+        <div className={style['job-detail']}>
+          <div className={style['job-detail__left-column']}>
+            <JobCard job={job} />
           </div>
-          <div className={style['job-detail__general-info']}>
-            <GeneralInfo job={job} />
+          <div className={style['job-detail__right-column']}>
+            <div className={style['job-detail__company-info']}>
+              <InfoCompany idCompany={idCompany} />
+            </div>
+            <div className={style['job-detail__general-info']}>
+              <GeneralInfo job={job} />
+            </div>
           </div>
         </div>
       </div>

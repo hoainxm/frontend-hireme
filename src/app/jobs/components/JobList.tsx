@@ -59,8 +59,6 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
     return daysRemaining > 0 ? daysRemaining : 0;
   };
 
-  console.log('favoriteJobs:', favoriteJobs);
-
   return (
     <div className={style.jobListContainer}>
       <div className={style.jobList}>

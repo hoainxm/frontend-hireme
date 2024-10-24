@@ -1,31 +1,27 @@
-// Block: job-detail
+.job-detail__container {
+  max-width: 1200px;
+  margin: 0 auto; /* Căn giữa container */
+  padding: 20px; /* Tạo khoảng cách giữa nội dung và cạnh bên */
+}
+
 .job-detail {
   display: grid;
-  grid-template-columns: 2fr 1fr; // Chia layout thành 2 cột, cột chính (2 phần) và cột phụ (1 phần)
-  gap: 20px; // Tạo khoảng cách giữa các cột
-  padding: 20px;
-  max-width: 1200px; // Giới hạn chiều rộng của container chính
-  margin: 0 auto; // Căn giữa container chính
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
 
   &__left-column {
     display: flex;
     flex-direction: column;
-    gap: 20px; // Khoảng cách giữa các phần trong cột chính
+    gap: 20px;
   }
 
   &__right-column {
     display: flex;
     flex-direction: column;
-    gap: 20px; // Khoảng cách giữa các phần trong cột phụ
+    gap: 20px;
   }
 
-  &__job-content {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-
+  &__job-content,
   &__company-info,
   &__general-info {
     background-color: #fff;
@@ -122,4 +118,35 @@
       padding-left: 20px;
     }
   }
+}
+
+.breadcrumb-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.breadcrumb {
+  color: #43a047;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #2e7d32;
+  }
+}
+
+.breadcrumb__job-name {
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #bdbdbd;
 }
