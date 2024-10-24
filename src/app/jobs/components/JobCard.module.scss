@@ -1,0 +1,128 @@
+$green-color: #43a047;
+$gray-color: #7a8288;
+$black-color: #2c3e50;
+$white-color: #ffffff;
+$border-color: #e0e0e0;
+$warning-color: #d9534f;
+$warning-background: #f8d7da;
+
+.job-card {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: $white-color;
+  max-width: 650px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: $black-color;
+  }
+
+  &__details-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 16px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-icon {
+      color: $green-color;
+      font-size: 18px;
+    }
+
+    &-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: $black-color;
+    }
+  }
+
+  &__sub-details {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: $gray-color;
+    margin-bottom: 12px;
+
+    &-icon {
+      margin-right: 6px;
+      color: $gray-color;
+    }
+
+    &-title {
+      background-color: #f9fafb;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #000;
+      font-weight: 600;
+    }
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    &-apply-button,
+    &-expired-button,
+    &-save-button {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    &-apply-button {
+      background-color: $green-color;
+      color: $white-color;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      border: none;
+      width: 100%;
+
+      &:hover {
+        background-color: darken($green-color, 10%);
+      }
+    }
+
+    &-expired-button {
+      background-color: $warning-background;
+      color: $warning-color;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      border: 1px solid lighten($warning-color, 20%);
+    }
+
+    &-save-button {
+      background-color: transparent;
+      color: $gray-color;
+      padding: 8px 16px;
+      border: 1px solid $gray-color;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        color: $green-color;
+        border-color: $green-color;
+      }
+    }
+  }
+}

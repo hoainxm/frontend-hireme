@@ -192,6 +192,7 @@
   "jobDetail.categories": "Ngành nghề",
   "jobDetail.region": "Khu vực",
   "jobDetail.applyNow": "Ứng tuyển ngay",
+  "jobDetail.expiredDeadline": "Hết hạn ứng tuyển",
   "jobDetail.jobDescription": "Chi tiết tin tuyển dụng",
   "jobDetail.experience": "Kinh nghiệm",
   "jobDetail.quantity": "Số lượng tuyển",
@@ -200,6 +201,8 @@
   "jobDetail.companyScale": "Quy mô",
   "jobDetail.companyIndustry": "Lĩnh vực",
   "jobDetail.companyAddress": "Địa chỉ",
+  "jobDetail.companyStaff": "nhân viên",
+  "jobDetail.goToCompanyPage": "Xem trang công ty",
   "jobDetail.gender": "Giới tính",
 
   "selectStatus": "Trạng thái",

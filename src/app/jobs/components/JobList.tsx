@@ -108,7 +108,6 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
                       {t('jobDetail.applyNow')}
                     </button>
                     <FavoriteButton job={job} />
-                    <ToastContainer autoClose={1000} />
                   </div>
                 </div>
               </div>

@@ -1,0 +1,125 @@
+// Block: job-detail
+.job-detail {
+  display: grid;
+  grid-template-columns: 2fr 1fr; // Chia layout thành 2 cột, cột chính (2 phần) và cột phụ (1 phần)
+  gap: 20px; // Tạo khoảng cách giữa các cột
+  padding: 20px;
+  max-width: 1200px; // Giới hạn chiều rộng của container chính
+  margin: 0 auto; // Căn giữa container chính
+
+  &__left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Khoảng cách giữa các phần trong cột chính
+  }
+
+  &__right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Khoảng cách giữa các phần trong cột phụ
+  }
+
+  &__job-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  &__company-info,
+  &__general-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #212f3f;
+    margin-bottom: 16px;
+  }
+
+  &__section {
+    margin-bottom: 24px;
+
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #212f3f;
+      margin-bottom: 8px;
+    }
+
+    p,
+    ul {
+      font-size: 14px;
+      color: #212f3f;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  &__button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__apply-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken(#4caf50, 10%);
+    }
+  }
+
+  &__save-button {
+    background-color: transparent;
+    color: #7f878f;
+    padding: 10px 20px;
+    border: 1px solid #7f878f;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #4caf50;
+      border-color: #4caf50;
+    }
+  }
+
+  &__company-info,
+  &__general-info {
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  }
+}
