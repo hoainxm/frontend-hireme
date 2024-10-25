@@ -1,4 +1,4 @@
-import { doGet } from '../../common/utils/baseAPI';
+import { doGet, doPost } from '../../common/utils/baseAPI';
 import { BASE_URL } from './../../common/utils/constants';
 /** @format */
 
@@ -10,6 +10,10 @@ export const getAllJobs = (): AxiosPromise<any> => {
   return doGet(`${jobsAPIUrl}/getAllJobs`);
 };
 
-export const fetchJobById = (jobId: string) => {
+export const fetchJobById = (jobId: string): AxiosPromise<any> => {
   return doGet(`${jobsAPIUrl}/${jobId}`);
+};
+
+export const fetchJobBySkill = (skills: string[]): AxiosPromise<any> => {
+  return doPost(`${jobsAPIUrl}/searchBySkills`, { skills });
 };

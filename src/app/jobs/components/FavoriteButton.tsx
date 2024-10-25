@@ -29,18 +29,18 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ job }) => {
     }
   };
 
-  const unsaveJob = (e: React.MouseEvent) => {
+  const unSaveJob = (e: React.MouseEvent) => {
     e.stopPropagation();
     let savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
     savedJobs = savedJobs.filter((savedJob: Job) => savedJob._id !== job._id);
     localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
     setIsSaved(false);
-    toast.success(`You have unsaved the job: ${job.name}`);
+    toast.done(`You have unsaved the job: ${job.name}`);
   };
 
   return (
     <>
-      <div className={style.btnHeart} aria-label={isSaved ? 'Unsave job' : 'Save job'} onClick={isSaved ? unsaveJob : saveJob}>
+      <div className={style.btnHeart} aria-label={isSaved ? 'Unsave job' : 'Save job'} onClick={isSaved ? unSaveJob  : saveJob}>
         {isSaved ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />}
       </div>
     </>
