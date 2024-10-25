@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { HeartOutlined, HistoryOutlined } from '@ant-design/icons';
 import FavoriteButton from '../components/FavoriteButton';
-import { toast, ToastContainer } from 'react-toastify';
 
 interface JobListProps {
   listJobs?: Job[];
@@ -20,10 +19,14 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
   const [currentPage, setCurrentPage] = useState(1);
   const [favoriteJobs, setFavoriteJobs] = useState<string[]>([]);
   const jobsPerPage = 10;
-  const totalPages = Math.ceil(listJobs?.length / jobsPerPage);
+
+  const totalJobs = listJobs ? listJobs.length : 0;
+
+  const totalPages = Math.max(Math.ceil(totalJobs / jobsPerPage), 1);
+
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = listJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const currentJobs = listJobs?.slice(indexOfFirstJob, indexOfLastJob) || [];
   const [jobsToShow, setJobsToShow] = useState<Job[]>([]);
 
   useEffect(() => {
@@ -62,13 +65,13 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
   return (
     <div className={style.jobListContainer}>
       <div className={style.jobList}>
-        {listJobs && listJobs.length > 0 && (
+        {listJobs && totalJobs > 0 && (
           <div className={style.jobCount}>
-            {t('found')} {listJobs.length} {t('job.match')}
+            {t('found')} {totalJobs} {t('job.match')}
           </div>
         )}
         {listJobs &&
-          listJobs.length > 0 &&
+          totalJobs > 0 &&
           currentJobs.map((job) => (
             <div
               key={job._id}
@@ -114,15 +117,17 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
       </div>
 
       <div className={style.pagination}>
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageClick(index + 1)}
-            className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        {Number.isFinite(totalPages) &&
+          totalPages > 0 &&
+          [...Array(totalPages)].map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageClick(index + 1)}
+              className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
       </div>
       <BackToTop />
     </div>

@@ -13,7 +13,7 @@ interface JobCardProps {
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
   const { t } = useTranslation();
-
+  console.log('check job:', job);
   const isJobExpired = (endDate: string): boolean => {
     return dayjs(endDate).isBefore(dayjs(), 'day');
   };
@@ -56,9 +56,8 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
             <FontAwesomeIcon icon={faPaperPlane} /> {t('jobDetail.applyNow')}
           </button>
         )}
-        <button className={style['job-card__action-buttons-save-button']}>
-          <FavoriteButton job={job} />
-        </button>
+
+        <FavoriteButton job={job} />
       </div>
 
       <div className={style['job-card__description-header-wrapper']}>

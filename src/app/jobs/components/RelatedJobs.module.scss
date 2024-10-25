@@ -1,0 +1,111 @@
+.related-jobs-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-top: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Thêm shadow để tạo chiều sâu */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.related-jobs {
+  margin-top: 20px;
+  cursor: pointer;
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 30px;
+      background-color: #43a047;
+      margin-right: 10px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 20px;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__item-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  &__details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  &__item-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a73e8;
+    margin-bottom: 4px;
+  }
+
+  &__item-company {
+    font-size: 14px;
+    color: #ff3b30;
+  }
+
+  &__item-location {
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__group-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__group-btn-apply {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    &:hover:enabled {
+      background-color: #0059c9;
+    }
+  }
+}
