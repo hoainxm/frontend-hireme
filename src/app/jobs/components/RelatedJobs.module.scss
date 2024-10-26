@@ -108,4 +108,31 @@
       background-color: #0059c9;
     }
   }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .pagination-button {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #1a73e8;
+      color: white;
+    }
+
+    &.active {
+      background-color: #1a73e8;
+      color: white;
+      cursor: default;
+    }
+  }
 }
