@@ -55,19 +55,24 @@ const Login: FC<Props> = (props: Props) => {
       email: data.email,
       password: data.password,
     };
+
     setOnLoad(true);
 
     try {
       const response = await doLogin(requestData);
-      if (response && response.data) {
+      console.log('Check response: ', response.statusCode);
+
+      if (response && response.statusCode === 201) {
         setOnLoad(true);
-        const { access_token } = response.data.data;
+        console.log(response.data);
+        const { access_token } = response.data;
         localStorage.setItem('access_token', access_token);
         dispatch(getUserProfile());
         redirectToHome();
       }
     } catch (error) {
       setOnLoad(false);
+      console.error('Login fail: ', error);
     }
   };
 

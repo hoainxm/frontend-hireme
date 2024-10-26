@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { ButtonSize, ButtonVariant, PageName, PageURL, Palette, ScopeKey, SectionID } from '../../../../../../models/enum';
-import { RootState } from '../../../../../../models/rootReducer';
+import { RootState } from '../../../../../../store/rootReducer';
 import { NAV_ITEMS } from '../../../../../utils/constants';
 import { SVGIcon } from '../../../../assets/icon';
 import { CButton } from '../../../../base';

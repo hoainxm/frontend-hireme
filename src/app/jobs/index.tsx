@@ -35,8 +35,7 @@ export const Jobs: FC<Props> = (props) => {
   const fetchAllJobs = async () => {
     try {
       const result = await getAllJobs();
-      console.log('result get all jobs', result);
-      setJobs(result.data.data);
+      setJobs(result.data);
     } catch (error) {
       console.log(error);
     }

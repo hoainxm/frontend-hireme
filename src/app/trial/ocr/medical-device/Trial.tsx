@@ -8,7 +8,7 @@ import RadioChecked from '@images/RadioChecked.png';
 import RadioDefault from '@images/RadioDefault.png';
 import Upload from '@images/Upload.svg';
 import { AIFeature, HTTPStatusCode, MedicalDeviceMeasureFunctions, MedicalDeviceStatusCode, Palette, ToastPosition, ToastType } from '@models/enum';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { AxiosResponse } from 'axios';
 import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Image as ImageRB } from 'react-bootstrap';

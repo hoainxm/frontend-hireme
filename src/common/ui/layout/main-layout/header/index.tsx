@@ -8,7 +8,7 @@ import LogoDefault from '@images/LogoWhite.png';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { PageName, PageURL, ScopeKey, SectionID } from '../../../../../models/enum';
-import { RootState } from '../../../../../models/rootReducer';
+import { RootState } from '../../../../../store/rootReducer';
 import style from './header.module.scss';
 
 import useLocalStorage from '@hooks/useLocalStorage';

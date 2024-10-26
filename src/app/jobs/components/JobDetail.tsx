@@ -35,13 +35,13 @@ const JobDetail: React.FC = () => {
   const fetchJobDetail = async () => {
     try {
       const response = await fetchJobById(jobId);
-      if (response.data.statusCode === 200) {
-        setJob(response.data.data);
-        setIdCompany(response.data.data.company._id);
-        setSkills(response.data.data.skills);
-        fetchJobSkills(response.data.data.skills);
+      if (response.statusCode === 200) {
+        setJob(response.data);
+        setIdCompany(response.data.company._id);
+        setSkills(response.data.skills);
+        fetchJobSkills(response.data.skills);
       } else {
-        setError(response.data.message || 'Failed to fetch job details.');
+        setError('Failed to fetch job details.');
       }
     } catch (err) {
       setError('An error occurred while fetching job details.');
@@ -55,11 +55,12 @@ const JobDetail: React.FC = () => {
     if (skills && skills.length > 0) {
       try {
         const res = await fetchJobBySkill(skills);
-        if (res.data.statusCode === 201) {
-          setJobBySkills(res.data.data);
-          console.log('Jobs by skills: ', res.data.data);
+        console.log('check res: ', res);
+        if (res.statusCode === 201) {
+          setJobBySkills(res.data);
+          console.log('Jobs by skills: ', res.data);
         } else {
-          console.error('Failed to fetch job by skills:', res.data.message);
+          console.error('Failed to fetch job by skills:', res.data);
         }
       } catch (error) {
         console.error('Error fetching job by skills:', error);

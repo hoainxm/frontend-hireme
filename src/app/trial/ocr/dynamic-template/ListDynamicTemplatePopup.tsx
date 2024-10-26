@@ -13,7 +13,7 @@ import Edit from '@icon/EditBlue.svg';
 import { ITemplate } from 'app/trial/model';
 import { useHistory } from 'react-router-dom';
 import { Alert } from '../../../../common/utils/popup';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { useSelector } from 'react-redux';
 import { getDynamicTemplateListAPI } from '../../api';
 import { APIResponse } from 'common/utils/baseAPI';
@@ -101,16 +101,16 @@ export const ListDynamicTemplatePopup: FC<Props> = (props: Props) => {
     handleReset();
     selected && props.handleChooseTemplate(selected);
   };
-  
+
   const handleReset = () => {
     setSelected(undefined);
     documentType.current = '';
     searchValue.current = '';
-  }
+  };
 
   useEffect(() => {
     if (tenantId && isOpen) getDynamicTemplates(1, tenantId);
-    if (!isOpen) handleReset()
+    if (!isOpen) handleReset();
   }, [tenantId, isOpen]);
 
   return (

@@ -13,7 +13,7 @@ import { ImageTemplateBehavior } from './ImageTemplateBehavior';
 import style from './dynamicTemplate.module.scss';
 import { useGetRemainTurn } from '@hooks/useGetRemainTurn';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { getDetailDynamicTemplateAPI, noticeFromAI, requestCreateDynamicTemplate } from '../../api';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { Alert, Confirm } from '../../../../common/utils/popup';

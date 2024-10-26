@@ -8,7 +8,7 @@ import { ROAD_MAP_OCR_PRODUCT } from './constant';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 
 interface Props {
   sectionId: string;

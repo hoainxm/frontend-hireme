@@ -12,7 +12,7 @@ import { FORMAT_IMAGE_TYPE } from '../../../../common/utils/constants';
 import style from './dynamicTemplate.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { noticeFromAI, requestCreateDynamicTemplate, uploadPresignedUrl } from '../../api';
 import { Alert } from '../../../../common/utils/popup';
 import { AINoticeDisplayDynamicImage } from '../../model';

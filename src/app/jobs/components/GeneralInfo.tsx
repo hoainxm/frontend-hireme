@@ -9,6 +9,7 @@ interface GeneralInfoProps {
 }
 
 const GeneralInfo: React.FC<GeneralInfoProps> = ({ job }) => {
+
   return (
     <div className={style['general-info']}>
       <h4 className={style['general-info__title']}>Thông tin chung</h4>

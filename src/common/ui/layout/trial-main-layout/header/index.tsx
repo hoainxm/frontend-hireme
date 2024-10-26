@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { ButtonSize, ButtonVariant, PageURL, Palette, ScopeKey, SectionID } from '@models/enum';
 import { HeaderProfile } from '@base/profile/HeaderProfile';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import CButton from '@base/button';
 import { LanguageDropDown } from '@base/dropdown/LanguageDropDown';
 import { useTranslation } from 'react-i18next';

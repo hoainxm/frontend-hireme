@@ -10,7 +10,7 @@ import i18n from '../../i18n';
 import { ToastItem } from './model';
 import { UserProfile } from './../../../app/auth/models';
 interface MainSliceInitial {
-  userInfo: User | null;
+  userInfo: UserProfile | null;
 }
 
 interface SideBarSliceInitial {
@@ -94,14 +94,22 @@ const toastInitial: ToastsInterface = {
   toasts: [],
 };
 
-type User = UserProfile['data']['user'];
+// type User = UserProfile['data']['user'];
 
-export const getUserProfile = createAsyncThunk<User | undefined>('main/getUserProfile', async () => {
-  const res = await getProfile();
-  if (res && res.data && res.data.data.user) {
-    return res.data.data.user;
+export const getUserProfile = createAsyncThunk<UserProfile, void, { rejectValue: string }>('main/getUserProfile', async (_, { rejectWithValue }) => {
+  try {
+    const res = await getProfile();
+    // console.log('check res: ', res);
+
+    if (res && res.data) {
+      return res.data;
+    } else {
+      return rejectWithValue('No user profile data available');
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    return rejectWithValue('Failed to fetch user profile');
   }
-  return undefined;
 });
 
 // export const getUserProfile = createAsyncThunk('main/getUserProfile', async () => {
@@ -135,14 +143,14 @@ export const mainSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUserProfile.fulfilled, (state, action: PayloadAction<User | undefined>) => {
-      if (action.payload) {
+    builder
+      .addCase(getUserProfile.fulfilled, (state, action: PayloadAction<UserProfile>) => {
         console.log('Fulfilled action payload:', action.payload);
         state.userInfo = action.payload;
-      } else {
-        console.warn('No user data found in payload');
-      }
-    });
+      })
+      .addCase(getUserProfile.rejected, (state, action) => {
+        console.warn('Failed to fetch user profile:', action.payload);
+      });
   },
 });
 

@@ -14,6 +14,8 @@ interface RelatedJobsProps {
 const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
   const [relatedJobs, setRelatedJobs] = useState<Job[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 5;
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -21,8 +23,8 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
     const fetchRelatedJobs = async () => {
       try {
         const res = await fetchJobBySkill(skills);
-        if (res.data.statusCode === 201) {
-          setRelatedJobs(res.data.data);
+        if (res.statusCode === 201) {
+          setRelatedJobs(res.data);
         }
       } catch (error) {
         console.error('Error fetching related jobs:', error);
@@ -46,18 +48,20 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
     return dayjs(endDate).isBefore(dayjs(), 'day');
   };
 
+  const totalPages = Math.ceil(relatedJobs.length / jobsPerPage);
+
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = relatedJobs.slice(indexOfFirstJob, indexOfLastJob);
+
   const handleJobClick = (jobId: string) => {
     history.push(`/jobs/${jobId}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(1);
+  };
 
-    const scrollToTop = () => {
-      const c = document.documentElement.scrollTop || document.body.scrollTop;
-      if (c > 0) {
-        window.requestAnimationFrame(scrollToTop);
-        window.scrollTo(0, c - c / 8);
-      }
-    };
-
-    scrollToTop();
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -65,7 +69,7 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
       <div className={style['related-jobs']}>
         <h3 className={style['related-jobs__title']}>Việc làm liên quan</h3>
         <div className={style['related-jobs__list']}>
-          {relatedJobs.map((job) => (
+          {currentJobs.map((job) => (
             <div
               key={job._id}
               className={style['related-jobs__item']}
@@ -90,6 +94,19 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
                 <FavoriteButton job={job} />
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Phân trang */}
+        <div className={style['related-jobs__pagination']}>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={`${style['pagination-button']} ${currentPage === index + 1 ? style['active'] : ''}`}
+            >
+              {index + 1}
+            </button>
           ))}
         </div>
       </div>

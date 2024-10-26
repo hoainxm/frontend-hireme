@@ -16,7 +16,7 @@ import InbodyInfo from '@images/InbodyInfo.png';
 import { INBODY_CHARACTER_RECOGNITION, INBODY_FIELDS_EXTRACTION, YOUTUBE_VIDEO_ID } from '../../../common/utils/constants';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { PageURL, ScopeKey, ScopeValue } from '@models/enum';
 
 interface Props {
@@ -82,11 +82,8 @@ export const InBodySection: FC<Props> = (props) => {
   const isAuthenticated = localStorage.getItem(ScopeKey.IS_AUTHENTICATED);
 
   const checkAuthenticatedNavigate = () => {
-    history.push(
-      isAuthenticated === ScopeValue.TRUE && userInfo ? PageURL.OCR_IN_BODY : PageURL.LOGIN,
-      { path: PageURL.OCR_IN_BODY }
-    )
-  }
+    history.push(isAuthenticated === ScopeValue.TRUE && userInfo ? PageURL.OCR_IN_BODY : PageURL.LOGIN, { path: PageURL.OCR_IN_BODY });
+  };
 
   return (
     <SectionLayout id={sectionId}>

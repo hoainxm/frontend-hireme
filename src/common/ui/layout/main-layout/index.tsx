@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import Footer from './footer';
 import Header from './header';
-import { RootState } from '../../../../models/rootReducer';
+import { RootState } from '../../../../store/rootReducer';
 import { configViewSetMeta } from '../../../../common/utils/common';
 import { getUserProfile } from '../slice';
 import style from './main.module.scss';

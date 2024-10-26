@@ -2,7 +2,7 @@
 
 import React, { FC, HTMLAttributes } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../models/rootReducer';
+import { RootState } from '../../../../store/rootReducer';
 import CAlert from './component/Alert';
 import CConfirm from './component/Confirm';
 

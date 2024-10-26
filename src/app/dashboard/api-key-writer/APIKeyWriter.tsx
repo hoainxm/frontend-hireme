@@ -15,7 +15,7 @@ import { Alert } from '../../../common/utils/popup';
 import { AxiosError } from 'axios';
 import { CSSelect } from '../../../common/ui/base/select';
 import { Form } from 'react-bootstrap';
-import { RootState } from '../../../models/rootReducer';
+import { RootState } from '../../../store/rootReducer';
 import { handleErrorNoPermission } from '../../../common/utils/common';
 import style from '../cloudFeature.module.scss';
 import { useSelector } from 'react-redux';
