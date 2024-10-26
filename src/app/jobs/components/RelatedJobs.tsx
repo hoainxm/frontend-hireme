@@ -23,8 +23,8 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
     const fetchRelatedJobs = async () => {
       try {
         const res = await fetchJobBySkill(skills);
-        if (res.data.statusCode === 201) {
-          setRelatedJobs(res.data.data);
+        if (res.statusCode === 201) {
+          setRelatedJobs(res.data);
         }
       } catch (error) {
         console.error('Error fetching related jobs:', error);

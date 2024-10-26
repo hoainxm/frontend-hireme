@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetRemainTurn } from '@hooks/useGetRemainTurn';
 import { Form, Image } from 'react-bootstrap';
 import CButton from '@base/button';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { useSelector } from 'react-redux';
 import { noticeFromAI, requestTTS } from '../api';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -32,7 +32,10 @@ export const TextToSpeech: FC<Props> = (props: Props) => {
   const { remaining, trialAPIKey, getTrialTurn } = useGetRemainTurn();
   const [audio, setAudio] = useState<string>();
   const tenantId = useSelector((state: RootState) => state.main.userInfo?.tenant);
-  const { register, handleSubmit, errors, watch, setError, reset, clearErrors, getValues, setValue, control } = useForm<{ text: string; file: FileList }>({
+  const { register, handleSubmit, errors, watch, setError, reset, clearErrors, getValues, setValue, control } = useForm<{
+    text: string;
+    file: FileList;
+  }>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     shouldUnregister: false,
@@ -103,7 +106,7 @@ export const TextToSpeech: FC<Props> = (props: Props) => {
           });
       }
     } catch (error: any) {
-      const message: string = error.response?.data?.file?.[0] || error.response?.data?.text?.[0] ||'';
+      const message: string = error.response?.data?.file?.[0] || error.response?.data?.text?.[0] || '';
       const MAP_MESSAGE_ERROR: Record<string, string> = {
         'Ensure this file has no more than 500 characters.': 'maximumChar',
         'Ensure this file has no contain image.': 'insertImage',
@@ -123,13 +126,13 @@ export const TextToSpeech: FC<Props> = (props: Props) => {
     else return FileText;
   };
 
-  const handleChangeInputType =(isTextFileInput: boolean) => {
+  const handleChangeInputType = (isTextFileInput: boolean) => {
     clearErrors();
     setImage('');
     reset();
-    setIsUseTextFile(isTextFileInput)
+    setIsUseTextFile(isTextFileInput);
     setAudio(undefined);
-  }
+  };
 
   return (
     <TrialContentLayout
@@ -233,7 +236,9 @@ export const TextToSpeech: FC<Props> = (props: Props) => {
           </Form.Group>
         </div>
         <div className={style.wrapTTSBtn}>
-          <CButton type='submit' className={style.convertTTSBtn}>{t('btn.tts')}</CButton>
+          <CButton type='submit' className={style.convertTTSBtn}>
+            {t('btn.tts')}
+          </CButton>
         </div>
         <div className={`${!audio && 'd-none'} ${style.groupTTS}`}>
           <h6 className={style.titleTTS}>{t('convertResult')}</h6>

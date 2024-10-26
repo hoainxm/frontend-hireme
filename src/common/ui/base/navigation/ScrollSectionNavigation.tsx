@@ -1,21 +1,21 @@
 import React, { FC, useEffect, useState } from 'react';
-import style from './navigation.module.scss'
-import { TextTooltip } from '@base/tool-tip/TextTooltip'
-import { SectionID } from '../../../../models/enum'
+import style from './navigation.module.scss';
+import { TextTooltip } from '@base/tool-tip/TextTooltip';
+import { SectionID } from '../../../../models/enum';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { updateSectionDot } from '@layout/slice';
 import { findActiveSection } from '../../../utils/common';
 
 interface Props {
-  sections: Array<{ sectionId: SectionID, text: string }>
+  sections: Array<{ sectionId: SectionID; text: string }>;
   defaultSection: SectionID;
 }
 
 export const ScrollSectionNavigation: FC<Props> = (props) => {
   const { sections, defaultSection } = props;
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState<boolean>(false)
+  const [isActive, setIsActive] = useState<boolean>(false);
   const { sectionId } = useSelector((state: RootState) => state.sectionDot);
   const [selectedSessionId, setSelectedSessionId] = useState<SectionID>(defaultSection);
 
@@ -31,8 +31,8 @@ export const ScrollSectionNavigation: FC<Props> = (props) => {
     const activeSection = findActiveSection(sections);
     if (activeSection) {
       setSelectedSessionId(activeSection.sectionId);
-      
-      if (sectionId !== activeSection.sectionId){
+
+      if (sectionId !== activeSection.sectionId) {
         dispatch(updateSectionDot());
       }
     }
@@ -46,7 +46,7 @@ export const ScrollSectionNavigation: FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    const sectionElement = document.getElementById(sectionId || "");
+    const sectionElement = document.getElementById(sectionId || '');
     if (sectionElement) {
       sectionElement.id === defaultSection
         ? window.scrollTo({
@@ -60,12 +60,7 @@ export const ScrollSectionNavigation: FC<Props> = (props) => {
   return (
     <nav className={style.scrollNavigation}>
       {sections.map((s, index) => (
-        <TextTooltip
-          id={s.sectionId}
-          visible={isActive}
-          tooltipContent={s.text}
-          placement="left"
-        >
+        <TextTooltip id={s.sectionId} visible={isActive} tooltipContent={s.text} placement='left'>
           <button
             key={index}
             className={`${style.dot} ${s.sectionId === selectedSessionId && style.isSelected}`}
@@ -76,5 +71,5 @@ export const ScrollSectionNavigation: FC<Props> = (props) => {
         </TextTooltip>
       ))}
     </nav>
-  )
-}
+  );
+};

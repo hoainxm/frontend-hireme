@@ -1,23 +1,23 @@
 /** @format */
 
-import { Image, Nav, Overlay, Tooltip } from "react-bootstrap";
-import { PageName, PageURL } from "../../../../../models/enum";
-import React, { FC, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Image, Nav, Overlay, Tooltip } from 'react-bootstrap';
+import { PageName, PageURL } from '../../../../../models/enum';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import ArrowDisable from "../../../assets/ic/16px/arrow/drop-dark.svg";
-import ArrowDisableBlue from "../../../assets/ic/16px/arrow/enable.svg";
-import ArrowEnable from "../../../assets/ic/16px/arrow/collapse/enable.svg";
-import ArrowEnableDark from "../../../assets/ic/16px/arrow/enable-dark.svg";
-import Home from "../../../assets/ic/24px/dashboard/home.svg";
-import HomeBlue from "../../../assets/ic/24px/dashboard/home-blue.svg";
-import { Link } from "react-router-dom";
-import { RootState } from "../../../../../models/rootReducer";
-import { Shortcut } from "../../model";
-import style from "./sidebar.module.scss";
-import { updateSideBar } from "../../slice";
-import useOnClickOutside from "../../../../utils/hooks/useClickOutside";
-import { useTranslation } from "react-i18next";
+import ArrowDisable from '../../../assets/ic/16px/arrow/drop-dark.svg';
+import ArrowDisableBlue from '../../../assets/ic/16px/arrow/enable.svg';
+import ArrowEnable from '../../../assets/ic/16px/arrow/collapse/enable.svg';
+import ArrowEnableDark from '../../../assets/ic/16px/arrow/enable-dark.svg';
+import Home from '../../../assets/ic/24px/dashboard/home.svg';
+import HomeBlue from '../../../assets/ic/24px/dashboard/home-blue.svg';
+import { Link } from 'react-router-dom';
+import { RootState } from '../../../../../store/rootReducer';
+import { Shortcut } from '../../model';
+import style from './sidebar.module.scss';
+import { updateSideBar } from '../../slice';
+import useOnClickOutside from '../../../../utils/hooks/useClickOutside';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   active: PageName;
@@ -29,7 +29,7 @@ const SideBar: FC<Props> = (props: Props) => {
   const { active, rightContainerRef } = props;
   const dispatch = useDispatch();
   const isExpand = useSelector((state: RootState) => state.sideBar.isExpand);
-  const [showToolTip, setShowTooltip] = useState<string>("");
+  const [showToolTip, setShowTooltip] = useState<string>('');
   const navRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   const showSidebar = (isNotUpdateExpand = false) => {
@@ -84,11 +84,7 @@ const SideBar: FC<Props> = (props: Props) => {
   };
 
   const updatePaddingLeft = (padding: number) => {
-    rightContainerRef.current &&
-      rightContainerRef.current.setAttribute(
-        "style",
-        `padding-left: ${padding}px`
-      );
+    rightContainerRef.current && rightContainerRef.current.setAttribute('style', `padding-left: ${padding}px`);
   };
 
   const forceCloseSideBar = () => {
@@ -114,7 +110,7 @@ const SideBar: FC<Props> = (props: Props) => {
 
   const getPathName = () => {
     let pathName = window.location.pathname;
-    if (pathName) pathName = `/${pathName.split("/")[1]}`;
+    if (pathName) pathName = `/${pathName.split('/')[1]}`;
     return pathName;
   };
 
@@ -127,14 +123,11 @@ const SideBar: FC<Props> = (props: Props) => {
 
   return (
     <>
-      <Nav
-        className={`${style.sideBar} ${isExpand && style.sideBarExpand}`}
-        ref={navRef}
-      >
+      <Nav className={`${style.sideBar} ${isExpand && style.sideBarExpand}`} ref={navRef}>
         <ul
           className={style.menuItem}
           onMouseLeave={() => {
-            setShowTooltip("");
+            setShowTooltip('');
           }}
         >
           {pageShortcuts.map((item, index) =>
@@ -145,36 +138,18 @@ const SideBar: FC<Props> = (props: Props) => {
                   onClick={() => showSidebar()}
                   ref={item.target}
                   onMouseEnter={(e: any) => {
-                    const target =
-                      e.target.parentElement.getAttribute("itemId") ||
-                      e.target.getAttribute("itemId");
+                    const target = e.target.parentElement.getAttribute('itemId') || e.target.getAttribute('itemId');
                     setShowTooltip(target);
                   }}
                 >
-                  <Link
-                    to={item.url}
-                    className={
-                      item.isActive
-                        ? `${style.eachName} ${style.isActive}`
-                        : style.eachName
-                    }
-                    itemID={item.name}
-                  >
-                    <Image
-                      width={24}
-                      height={24}
-                      src={item.isActive ? item.iconSelected : item.icon}
-                    />
+                  <Link to={item.url} className={item.isActive ? `${style.eachName} ${style.isActive}` : style.eachName} itemID={item.name}>
+                    <Image width={24} height={24} src={item.isActive ? item.iconSelected : item.icon} />
                     {isExpand && <span>{t(item.name)}</span>}
                   </Link>
                 </Nav.Item>
                 {item.target && showToolTip === item.name && !isExpand && (
-                  <Overlay
-                    target={item.target.current}
-                    show={true}
-                    placement="right"
-                  >
-                    <Tooltip id="shortcut-tooltip">{t(item.name)}</Tooltip>
+                  <Overlay target={item.target.current} show={true} placement='right'>
+                    <Tooltip id='shortcut-tooltip'>{t(item.name)}</Tooltip>
                   </Overlay>
                 )}
               </div>
@@ -183,19 +158,12 @@ const SideBar: FC<Props> = (props: Props) => {
                 key={index + 10}
                 ref={item.target}
                 onMouseEnter={(e: any) => {
-                  const target =
-                    e.target.parentElement.parentElement.getAttribute(
-                      "itemId"
-                    ) || e.target.getAttribute("itemId");
+                  const target = e.target.parentElement.parentElement.getAttribute('itemId') || e.target.getAttribute('itemId');
                   setShowTooltip(target);
                 }}
               >
                 <div
-                  className={
-                    item.isActive
-                      ? `${style.timeAttendance} ${style.isActive}`
-                      : style.timeAttendance
-                  }
+                  className={item.isActive ? `${style.timeAttendance} ${style.isActive}` : style.timeAttendance}
                   onClick={() => {
                     showSidebar(true);
                     checkShowSubItem(item.name);
@@ -203,25 +171,15 @@ const SideBar: FC<Props> = (props: Props) => {
                   }}
                   itemID={item.name}
                 >
-                  <div className="d-flex">
-                    <Image
-                      width={24}
-                      height={24}
-                      src={item.isActive ? item.iconSelected : item.icon}
-                    />
+                  <div className='d-flex'>
+                    <Image width={24} height={24} src={item.isActive ? item.iconSelected : item.icon} />
                     {isExpand && <span>{t(item.name)}</span>}
                   </div>
                   {isExpand && (
                     <Image
                       className={style.arrowIcon}
                       src={
-                        item.isActive
-                          ? item.isSubItemShow
-                            ? ArrowEnable
-                            : ArrowDisableBlue
-                          : item.isSubItemShow
-                          ? ArrowEnableDark
-                          : ArrowDisable
+                        item.isActive ? (item.isSubItemShow ? ArrowEnable : ArrowDisableBlue) : item.isSubItemShow ? ArrowEnableDark : ArrowDisable
                       }
                     />
                   )}
@@ -232,45 +190,21 @@ const SideBar: FC<Props> = (props: Props) => {
                     return (
                       <Link
                         to={sub.url}
-                        className={
-                          item.isActive
-                            ? `${style.dropDown} ${style.isActive}`
-                            : `${style.dropDown} `
-                        }
+                        className={item.isActive ? `${style.dropDown} ${style.isActive}` : `${style.dropDown} `}
                         onClick={() => {
                           setItemActive(sub.url);
                         }}
                       >
                         <>
-                          <span
-                            className={
-                              sub.isActive
-                                ? `${style.circle} ${style.isActiveCircle}`
-                                : style.circle
-                            }
-                          >
-                            {"• "}
-                          </span>
-                          <span
-                            className={
-                              sub.isActive
-                                ? `${style.subItem} ${style.isActiveSubItem}`
-                                : style.subItem
-                            }
-                          >
-                            {t(sub.name)}
-                          </span>
+                          <span className={sub.isActive ? `${style.circle} ${style.isActiveCircle}` : style.circle}>{'• '}</span>
+                          <span className={sub.isActive ? `${style.subItem} ${style.isActiveSubItem}` : style.subItem}>{t(sub.name)}</span>
                         </>
                       </Link>
                     );
                   })}
                 {item.target && showToolTip === item.name && !isExpand && (
-                  <Overlay
-                    target={item.target.current}
-                    show={true}
-                    placement="right"
-                  >
-                    <Tooltip id="shortcut-tooltip">{t(item.name)}</Tooltip>
+                  <Overlay target={item.target.current} show={true} placement='right'>
+                    <Tooltip id='shortcut-tooltip'>{t(item.name)}</Tooltip>
                   </Overlay>
                 )}
               </Nav.Item>

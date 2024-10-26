@@ -18,7 +18,7 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
   const getInfo = async () => {
     try {
       const res = await getInfoCompany(idCompany);
-      setInfoCompany(res.data.data);
+      setInfoCompany(res.data);
     } catch (error) {
       console.error(error);
     }

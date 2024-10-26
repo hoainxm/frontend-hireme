@@ -12,7 +12,7 @@ import Setting from '../../../../assets/ic/16px/settings_dark.svg';
 import Help from '../../../../assets/ic/16px/help.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { UserProfile } from '../../../../../../app/auth/models';
-import { RootState } from '../../../../../../models/rootReducer';
+import { RootState } from '../../../../../../store/rootReducer';
 import { PageURL, ScopeKey } from '../../../../../../models/enum';
 import { resetUserInfo } from '../../../slice';
 import { makeClientToUnauthorize } from '../../../../../utils/common';

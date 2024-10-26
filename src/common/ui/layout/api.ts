@@ -3,7 +3,7 @@ import { HeaderProfile } from '@base/profile/HeaderProfile';
 
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import { doGet, doPost, doPut } from '../../utils/baseAPI';
-import { UserProfile, GetUserProfileResponse } from 'app/auth/models';
+import { UserProfile } from 'app/auth/models';
 
 const authAPIUrl = 'api/v1/auth';
 

@@ -15,7 +15,7 @@ import { Palette, ScopeKey, SectionID } from '../../../../models/enum';
 import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 
 interface Props {
   userInfo: UserProfile | null;
@@ -47,6 +47,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     setIsOpen((prev) => !prev);
   };
 
+  // console.log('userInfo: ', userInfo?.name);
   const renderTitle = () => {
     return (
       <div className={style.profile}>

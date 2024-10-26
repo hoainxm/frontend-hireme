@@ -24,7 +24,7 @@ import { Alert, Confirm } from '../../../../common/utils/popup';
 import { useToast } from '@hooks/useToast';
 import { FORMAT_IMAGE_TYPE } from '../../../../common/utils/constants';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { PopupLoading } from '@base/loading/PopupLoading';
 import BlankFrame from '@base/blank-frame';
 import Trash from '@icon/Empty.svg';
@@ -92,7 +92,7 @@ export const DynamicTemplate: FC<Props> = (props) => {
     if (!tenantId || !trialAPIKey) return;
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const resDeleteTemplate = await requestCreateDynamicTemplate(
         tenantId,
         trialAPIKey.id,
@@ -217,13 +217,15 @@ export const DynamicTemplate: FC<Props> = (props) => {
 
   const getDynamicTemplate = (tenantId: string) => {
     setIsLoading(true);
-    getDynamicTemplateAPI(tenantId).then((res) => {
-      setTemplates(res.data);
-    }).finally(() => setIsLoading(false));
+    getDynamicTemplateAPI(tenantId)
+      .then((res) => {
+        setTemplates(res.data);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleAddTemplate = (template: ITemplate) => {
-    const positionExist = templates.findIndex(tem => tem.template_name === template.template_name)
+    const positionExist = templates.findIndex((tem) => tem.template_name === template.template_name);
     if (positionExist !== -1) {
       setPositionChecked(positionExist);
       return;
@@ -235,8 +237,8 @@ export const DynamicTemplate: FC<Props> = (props) => {
       templates.push(template);
       setPositionChecked(templates.length - 1);
     }
-    
-    setTemplates(Array.from(templates))
+
+    setTemplates(Array.from(templates));
   };
 
   useEffect(() => {
@@ -291,8 +293,17 @@ export const DynamicTemplate: FC<Props> = (props) => {
                 </div>
 
                 <label className={style.radioBtn} htmlFor={`radio-${index}`}>
-                  <Form.Check onChange={(e) => setPositionChecked(index)} checked={positionChecked === index} custom type='radio' name='template' id={`radio-${index}`} />
-                  <TruncatedTextTooltip placement='bottom' tooltipContent={item.template_name}>{item.template_name}</TruncatedTextTooltip>
+                  <Form.Check
+                    onChange={(e) => setPositionChecked(index)}
+                    checked={positionChecked === index}
+                    custom
+                    type='radio'
+                    name='template'
+                    id={`radio-${index}`}
+                  />
+                  <TruncatedTextTooltip placement='bottom' tooltipContent={item.template_name}>
+                    {item.template_name}
+                  </TruncatedTextTooltip>
                 </label>
                 <div className={style.type}>{t('product.ocr.template', { name: MAP_TITLE_DOCUMENT_TYPE[item.document_type] })}</div>
                 <div className={style.date}>{t('product.ocr.created', { date: item.created_time })}</div>

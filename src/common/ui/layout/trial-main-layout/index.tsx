@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Container } from 'react-bootstrap';
 import Loading from '@base/loading';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { TrialHeader } from './header';
 import { TrialSidebar } from './sidebar';
 import { configViewSetMeta } from '../../../../common/utils/common';

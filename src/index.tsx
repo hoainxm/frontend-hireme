@@ -13,7 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Routers from './routers';
 import reportWebVitals from './reportWebVitals';
-import { store } from './models/store';
+import { store } from './store/store';
 import { ReactToastifyProvider } from './app/contexts/ReactToastifyProvider';
 
 const rootElement = document.getElementById('root');

@@ -14,7 +14,7 @@ import { ProductSpecs } from './components/ProductSpecs';
 import style from './productOcr.module.scss';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import PrescriptionInfo from '@images/PrescriptionInfo.png';
 
 interface Props {
