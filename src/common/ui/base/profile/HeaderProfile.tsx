@@ -14,6 +14,8 @@ import { Confirm } from '../../../../common/utils/popup';
 import { Palette, ScopeKey, SectionID } from '../../../../models/enum';
 import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { useSelector } from 'react-redux';
+import { RootState } from '@models/rootReducer';
 
 interface Props {
   userInfo: UserProfile | null;
@@ -21,6 +23,7 @@ interface Props {
 
 export const HeaderProfile: FC<Props> = (props: Props) => {
   const { userInfo } = props;
+
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -48,7 +51,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     return (
       <div className={style.profile}>
         <Image src={userInfo?.avatar ? userInfo.avatar : Account} className={style.avt} />
-        <p>{userInfo?.first_name || NOT_SET}</p>
+        <p>{userInfo?.name || NOT_SET}</p>
         <SVGIcon icon={isOpen ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
       </div>
     );

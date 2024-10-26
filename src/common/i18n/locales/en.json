@@ -255,6 +255,7 @@
   "error.usrExists": "Username already exists",
   "field.error.character": "This field requires character format",
   "field.error.email": "Please input the right format of email.",
+  "field.error.password": "Please input the right format of password.",
   "error.emailExists": "This account has already existed. Please click \"Login\" below or enter another account. ",
   "field.error.password.title": "Password must include at least",
   "field.error.password.maxLength": "8 characters",
