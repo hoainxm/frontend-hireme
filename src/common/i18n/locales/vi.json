@@ -259,6 +259,7 @@
   "error.usrExists": "Tên tài khoản đã tồn tại",
   "field.error.character": "Trường này yêu cầu định dạng là ký tự",
   "field.error.email": "Vui lòng nhập đúng định dạng email.",
+  "field.error.password": "Vui lòng nhập đúng định dạng mật khẩu.",
   "error.emailExists": "Tài khoản đã tồn tại. Vui lòng chọn “Đăng nhập” bên dưới hoặc nhập một email khác.",
   "field.error.password.title": "Mật khẩu phải bao gồm ít nhất",
   "field.error.password.maxLength": "8 ký tự",

@@ -1,7 +1,7 @@
 /** @format */
 
 import { CInput, CInputHint } from '../../../common/ui/base/input/index';
-import { EMAIL_PATTERN } from '../../../common/utils/constants';
+import { EMAIL_PATTERN, PASS_PATTERN } from '../../../common/utils/constants';
 import { ButtonSize, PageURL, ScopeKey, ScopeValue } from '../../../models/enum';
 import React, { FC, useEffect, useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
@@ -19,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
+import { getUserProfile } from '@layout/slice';
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -51,26 +52,48 @@ const Login: FC<Props> = (props: Props) => {
 
   const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
     const requestData = {
-      email: data.email || '',
+      email: data.email,
       password: data.password,
     };
-
     setOnLoad(true);
 
     try {
-      const res = await doLogin(requestData);
-      if (res && res?.data) {
-        setOnLoad(false);
-        redirectToHome();
-        const { access_token } = res.data.data;
+      const response = await doLogin(requestData);
+      if (response && response.data) {
+        setOnLoad(true);
+        const { access_token } = response.data.data;
         localStorage.setItem('access_token', access_token);
+        dispatch(getUserProfile());
+        redirectToHome();
       }
     } catch (error) {
-      console.log(error);
-    } finally {
       setOnLoad(false);
     }
   };
+
+  // const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
+  //   const requestData = {
+  //     email: data.email,
+  //     password: data.password,
+  //   };
+  //   setOnLoad(true);
+
+  //   try {
+  //     const res = await doLogin(requestData);
+  //     if (res && res.data) {
+  //       setOnLoad(false);
+  //       const { access_token } = res.data.data;
+  //       localStorage.setItem('access_token', access_token);
+  //       dispatch(getUserProfile());
+  //       redirectToHome();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoginError(t('error.loginFailed'));
+  //   } finally {
+  //     setOnLoad(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (Object.keys(formState.errors).length > 0) {
@@ -104,11 +127,12 @@ const Login: FC<Props> = (props: Props) => {
             autoComplete='off'
             type='password'
             name='password'
-            iref={register({ required: 'field.error.required' })}
+            iref={register({ required: 'field.error.required', pattern: PASS_PATTERN })}
             placeholder={t('field.hint.password')}
             valid={!errors.password}
           />
-          {errors.password && <CInputHint>{t(`${errors.password.message}`)}</CInputHint>}
+          {errors.password?.type === 'required' && <CInputHint>{t(`${errors.password.message}`)}</CInputHint>}
+          {errors.password?.type === 'pattern' && <CInputHint>{t('field.error.password')}</CInputHint>}
         </Form.Group>
 
         <CButton type='submit' label={t('auth.login')} loading={onLoad} disabled={onLoad} size={ButtonSize.LARGE} className={style.btn} />
