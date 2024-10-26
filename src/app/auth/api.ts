@@ -3,7 +3,7 @@ import { BASE_URL } from './../../common/utils/constants';
 
 import axios, { AxiosPromise } from 'axios';
 import { doGet, doPost } from '../../common/utils/baseAPI';
-import { Tenant } from './models';
+// import { Tenant } from './models';
 import { LoginFormInputs, RegisterFormInputs, ForgotPasswordFormInputs, ResetPasswordFormInputs, EmailVerifyFormInputs } from './forms';
 
 const authAPIUrl = 'api/v1/auth';
@@ -11,9 +11,9 @@ const authAPIUrl = 'api/v1/auth';
 
 const getToken = () => localStorage.getItem('access_token');
 
-export const getTenantByIdAPI = (id: string): AxiosPromise<Tenant> => {
-  return doGet(`api/tenant/${id}/`);
-};
+// export const getTenantByIdAPI = (id: string): AxiosPromise<Tenant> => {
+//   return doGet(`api/tenant/${id}/`);
+// };
 
 // Cấu hình axios để thêm Authorization header nếu có token
 axios.interceptors.request.use(

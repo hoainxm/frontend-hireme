@@ -31,6 +31,7 @@
     "css-modules-typescript-loader": "^4.0.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.0.3",
+    "hire-me": "file:",
     "html-webpack-plugin": "^5.5.1",
     "i18next": "^19.8.4",
     "image-minimizer-webpack-plugin": "^3.8.3",

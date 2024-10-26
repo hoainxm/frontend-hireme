@@ -31,7 +31,6 @@ const MainLayout: FC<Props> = (props: Props) => {
       !userInfo && dispatch(getUserProfile());
     }
     configViewSetMeta('1.0', '0.3');
-    // eslint-disable-next-line
   }, []);
 
   return (
