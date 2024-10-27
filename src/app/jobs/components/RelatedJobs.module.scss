@@ -1,15 +1,13 @@
 .related-jobs-container {
   padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
+  background-color: white;
+  border: 1px solid white;
   border-radius: 8px;
-  margin-top: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Thêm shadow để tạo chiều sâu */
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .related-jobs {
-  margin-top: 20px;
+  // margin-top: 20px;
   cursor: pointer;
 
   &__title {
@@ -25,7 +23,7 @@
       display: inline-block;
       width: 6px;
       height: 30px;
-      background-color: #43a047;
+      background-color: #0d4c8c;
       margin-right: 10px;
     }
   }
@@ -53,11 +51,18 @@
   }
 
   &__item-logo {
-    width: 80px;
-    height: 80px;
+    display: flex;
+    align-items: center;
+    width: 88px;
+    height: 88px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 8px;
     margin-right: 20px;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--gray-10, #e9eaec);
+    justify-content: center;
+    padding: 7.04px;
   }
 
   &__details {

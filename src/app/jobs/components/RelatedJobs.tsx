@@ -67,7 +67,7 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
   return (
     <div className={style['related-jobs-container']}>
       <div className={style['related-jobs']}>
-        <h3 className={style['related-jobs__title']}>Việc làm liên quan</h3>
+        <h3 className={style['related-jobs__title']}>{t('jobDetail.relatedJob')}</h3>
         <div className={style['related-jobs__list']}>
           {currentJobs.map((job) => (
             <div
@@ -97,7 +97,6 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
           ))}
         </div>
 
-        {/* Phân trang */}
         <div className={style['related-jobs__pagination']}>
           {Array.from({ length: totalPages }, (_, index) => (
             <button

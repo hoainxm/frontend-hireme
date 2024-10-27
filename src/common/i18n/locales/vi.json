@@ -204,6 +204,11 @@
   "jobDetail.companyStaff": "nhân viên",
   "jobDetail.goToCompanyPage": "Xem trang công ty",
   "jobDetail.gender": "Giới tính",
+  "jobDetail.level": "",
+  "jobDetail.years": "năm",
+  "jobDetail.people": "người",
+  "jobDetail.noRequirement": "Không yêu cầu",
+  "jobDetail.relatedJob": "Việc làm liên quan",
 
   "selectStatus": "Trạng thái",
   "status.active": "Đang hoạt động",

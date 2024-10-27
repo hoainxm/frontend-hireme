@@ -1,24 +1,30 @@
 .job-detail__container {
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 200px;
 }
 
 .job-detail {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  // display: grid;
+  // grid-template-columns: 2fr 1fr;
+  // gap: 20px;
+  display: flex;
+  gap: 24px;
+  margin-right: auto;
+  margin-left: auto;
 
   &__left-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 67%;
   }
 
   &__right-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: calc(33% - 24px);
   }
 
   &__job-content,
@@ -26,7 +32,7 @@
   &__general-info {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
   }
 
@@ -127,7 +133,7 @@
 }
 
 .breadcrumb {
-  color: #43a047;
+  color: #3c7eb4;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
@@ -135,7 +141,7 @@
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: #2e7d32;
+    color: dark(#3c7eb4);
   }
 }
 
