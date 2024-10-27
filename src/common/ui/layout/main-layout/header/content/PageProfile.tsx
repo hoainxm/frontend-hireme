@@ -12,12 +12,13 @@ import Setting from '../../../../assets/ic/16px/settings_dark.svg';
 import Help from '../../../../assets/ic/16px/help.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { UserProfile } from '../../../../../../app/auth/models';
-import { RootState } from '../../../../../../store/rootReducer';
+
 import { PageURL, ScopeKey } from '../../../../../../models/enum';
 import { resetUserInfo } from '../../../slice';
 import { makeClientToUnauthorize } from '../../../../../utils/common';
 import { Confirm } from '../../../../../utils/popup';
 import { resetPopup } from '../../../popup-layout/slice';
+import { useAppSelector, RootState } from '../../../../../../store/store';
 
 interface Props {
   isSysAdmin?: boolean;
@@ -27,7 +28,9 @@ const PageProfile: FC<Props> = (props: Props) => {
   const { isSysAdmin = false } = props;
   const history = useHistory();
   const dispatch = useDispatch();
-  const userInfo: UserProfile | null = useSelector((state: RootState) => state.main.userInfo);
+  // const userInfo: UserProfile | null = useSelector((state: RootState) => state.main.userInfo);
+  const userInfo: UserProfile | null = useAppSelector((state: RootState) => state.user.userProfile);
+
   const { t } = useTranslation();
 
   const logout = (): void => {
@@ -36,7 +39,7 @@ const PageProfile: FC<Props> = (props: Props) => {
       content: t('auth.logout.question'),
       onConfirm: () =>
         doLogout().then(() => {
-          dispatch(resetUserInfo());
+          // dispatch(resetUserInfo());
           dispatch(resetPopup());
           makeClientToUnauthorize({ isSysAdmin });
           localStorage.removeItem(ScopeKey.USER);
@@ -55,8 +58,10 @@ const PageProfile: FC<Props> = (props: Props) => {
         <>
           <NavDropdown.Item onClick={() => history.push(PageURL.HOME)} className={style.itemUser}>
             <div className={style.wrapperUserProfile}>
-              <h2 className={style.fullName}>{userInfo?.full_name}</h2>
-              <div className={style.userId}>ID: @{userInfo?.user_id}</div>
+              {/* <h2 className={style.fullName}>{userInfo?.full_name}</h2>
+              <div className={style.userId}>ID: @{userInfo?.user_id}</div> */}
+              <h2 className={style.fullName}>{userInfo?.name}</h2>
+              <div className={style.userId}>ID: @{userInfo?._id}</div>
             </div>
           </NavDropdown.Item>
           <NavDropdown.Item onClick={() => history.push(PageURL.HOME)} className={style.itemSetting}>

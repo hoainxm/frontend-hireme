@@ -16,6 +16,8 @@ import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
+import { useAppDispatch } from '../../../../store/store';
+import { logoutThunk } from '../../../../store/reducer/userSlice/userThunk';
 
 interface Props {
   userInfo: UserProfile | null;
@@ -26,7 +28,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
 
   const history = useHistory();
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.OCR_BANNER);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -34,12 +36,15 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     Confirm.logout({
       title: t('auth.logout'),
       content: t('auth.logout.question'),
-      onConfirm: () =>
-        doLogout().then(() => {
-          setStoredValue(SectionID.HOME_BANNER);
-          makeClientToUnauthorize({ isSysAdmin: false });
-          localStorage.removeItem(ScopeKey.USER);
-        }),
+      onConfirm: async () =>
+        // doLogout().then(async () => {
+        //   setStoredValue(SectionID.HOME_BANNER);
+        //   makeClientToUnauthorize({ isSysAdmin: false });
+        //   localStorage.removeItem(ScopeKey.USER);
+        // }),
+        {
+          await dispatch(logoutThunk());
+        },
     });
   };
 
@@ -47,7 +52,6 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     setIsOpen((prev) => !prev);
   };
 
-  // console.log('userInfo: ', userInfo?.name);
   const renderTitle = () => {
     return (
       <div className={style.profile}>

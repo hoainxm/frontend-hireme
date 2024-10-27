@@ -8,17 +8,13 @@ import { AuthWelcomeInfo } from '../../../app/auth/forms';
 // import { getTenantByIdAPI } from '../../../app/auth/api';
 import i18n from '../../i18n';
 import { ToastItem } from './model';
-import { UserProfile } from './../../../app/auth/models';
-interface MainSliceInitial {
-  userInfo: UserProfile | null;
-}
 
 interface SideBarSliceInitial {
   isExpand: boolean;
 }
 
-const initialState: MainSliceInitial = {
-  userInfo: null,
+const initialState = {
+  userInfooooo: null,
   // {
   //   id: 1,
   //   username: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c_namm0704@gmail.com',
@@ -94,30 +90,6 @@ const toastInitial: ToastsInterface = {
   toasts: [],
 };
 
-// type User = UserProfile['data']['user'];
-
-export const getUserProfile = createAsyncThunk<UserProfile, void, { rejectValue: string }>('main/getUserProfile', async (_, { rejectWithValue }) => {
-  try {
-    const res = await getProfile();
-    // console.log('check res: ', res);
-
-    if (res && res.data) {
-      return res.data;
-    } else {
-      return rejectWithValue('No user profile data available');
-    }
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    return rejectWithValue('Failed to fetch user profile');
-  }
-});
-
-// export const getUserProfile = createAsyncThunk('main/getUserProfile', async () => {
-//   const res = await getProfile();
-//   const tenantData = await getTenantByIdAPI(res.data?.tenant);
-//   return { ...res.data, tenant_logo: tenantData.data.logo };
-// });
-
 export const getWelcomeInfo = createAsyncThunk('backgroundData/getWelcomeInfo', async () => {
   const res = await doGetWelcomeInfo();
   return res.data[0];
@@ -136,41 +108,9 @@ export const sideBarSlice = createSlice({
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
-  reducers: {
-    resetUserInfo: (state) => {
-      state.userInfo = null;
-      localStorage.removeItem('access_token');
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getUserProfile.fulfilled, (state, action: PayloadAction<UserProfile>) => {
-        console.log('Fulfilled action payload:', action.payload);
-        state.userInfo = action.payload;
-      })
-      .addCase(getUserProfile.rejected, (state, action) => {
-        console.warn('Failed to fetch user profile:', action.payload);
-      });
-  },
+  reducers: {},
+  extraReducers: (builder) => {},
 });
-
-// export const mainSlice = createSlice({
-//   name: 'main',
-//   initialState,
-//   reducers: {
-//     updateUserInfo: (state, action: PayloadAction<UserProfile>) => {
-//       state.userInfo = action.payload;
-//     },
-//     resetUserInfo: (state) => initialState,
-//   },
-//   extraReducers: (builder) => {
-//     builder.addCase(getUserProfile.fulfilled, (state, { payload }) => {
-//       state.userInfo = payload;
-//       localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.TRUE);
-//       // localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, state.userInfo?.is_superuser ? ScopeValue.TRUE : ScopeValue.FALSE);
-//     });
-//   },
-// });
 
 export const langSlice = createSlice({
   name: 'lang',
@@ -234,7 +174,7 @@ export const toastsSlice = createSlice({
   },
 });
 
-export const { resetUserInfo } = mainSlice.actions;
+export const {} = mainSlice.actions;
 export default mainSlice.reducer;
 
 // export const { updateUserInfo, resetUserInfo } = mainSlice.actions;
