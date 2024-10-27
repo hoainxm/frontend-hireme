@@ -201,6 +201,11 @@
   "jobDetail.goToCompanyPage": "Go to company page",
   "jobDetail.companyAddress": "Address",
   "jobDetail.gender": "Gender",
+  "jobDetail.level": "",
+  "jobDetail.years": "years",
+  "jobDetail.people": "people",
+  "jobDetail.noRequirement": "Not required",
+  "jobDetail.relatedJob": "Related Jobs",
 
   "selectStatus": "Status",
   "status.active": "Active",

@@ -1,17 +1,46 @@
-$green-color: #43a047;
 $gray-color: #7a8288;
 $black-color: #2c3e50;
 $white-color: #ffffff;
 $border-color: #e0e0e0;
 $warning-color: #d9534f;
 $warning-background: #f8d7da;
+$background-icon: #0d4c8c;
+$background-button: #3c7eb4;
 
 .job-card {
-  border: 1px solid $border-color;
+  border: 1px solid #f4f5f5;
   border-radius: 8px;
-  padding: 16px;
-  background-color: $white-color;
-  max-width: 850px;
+  background-color: #f4f5f5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: fit-content;
+
+  &__upper-block {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: fit-content;
+    position: relative;
+    border-radius: 8px;
+    padding: 20px 24px;
+    width: 100%;
+    background-color: white;
+  }
+
+  &__lower-block {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: fit-content;
+    position: relative;
+    border-radius: 8px;
+    padding: 20px 24px;
+    width: 100%;
+    background-color: white;
+  }
 
   &__header {
     display: flex;
@@ -43,7 +72,7 @@ $warning-background: #f8d7da;
       display: inline-block;
       width: 6px;
       height: 30px;
-      background-color: $green-color;
+      background-color: $background-icon;
       margin-right: 10px;
     }
   }
@@ -61,7 +90,7 @@ $warning-background: #f8d7da;
     }
 
     &-icon {
-      color: $green-color;
+      color: #0d4c8c;
       font-size: 18px;
     }
 
@@ -85,7 +114,7 @@ $warning-background: #f8d7da;
     }
 
     &-title {
-      background-color: #f9fafb;
+      background-color: #f4f5f5;
       padding: 6px 10px;
       border-radius: 5px;
       font-size: 14px;
@@ -106,7 +135,7 @@ $warning-background: #f8d7da;
     }
 
     &-apply-button {
-      background-color: $green-color;
+      background-color: $background-button;
       color: $white-color;
       padding: 8px 16px;
       border-radius: 4px;
@@ -120,7 +149,7 @@ $warning-background: #f8d7da;
       width: 100%;
 
       &:hover {
-        background-color: darken($green-color, 10%);
+        background-color: darken($background-button, 10%);
       }
     }
 
@@ -143,8 +172,8 @@ $warning-background: #f8d7da;
       cursor: pointer;
 
       &:hover {
-        color: $green-color;
-        border-color: $green-color;
+        color: $background-button;
+        border-color: $background-button;
       }
     }
   }
