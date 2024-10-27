@@ -15,26 +15,22 @@ import { LoginFormInputs } from '../forms';
 import { RouteComponentProps, useHistory } from 'react-router';
 import { SVGIcon } from '../../../common/ui/assets/icon';
 import style from '../auth.module.scss';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import queryString from 'query-string';
-import { getUserProfile } from '@layout/slice';
+import { RootState, useAppDispatch, useAppSelector } from '../../../store/store';
+import { getUserProfileThunk, loginThunk } from '../../../store/reducer/userSlice/userThunk';
+import { Alert } from '../../../common/utils/popup';
 
 interface Props extends RouteComponentProps<any> {}
 
 const Login: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
   const { state } = useLocation<{ path: string }>();
-  const dispatch = useDispatch();
   const history = useHistory();
   const { register, errors, handleSubmit, formState } = useForm<LoginFormInputs>();
 
-  const [onLoad, setOnLoad] = useState<boolean>(false);
   const [otherError, setOtherError] = useState<string>();
   const [loginError, setLoginError] = useState<string>();
-
-  const [isLogin, setIsLogin] = useState<Boolean>(false);
 
   const isSysAdminLogin = window.location.pathname.includes('admin');
 
@@ -50,55 +46,29 @@ const Login: FC<Props> = (props: Props) => {
     history.push(PageURL.HOME);
   };
 
+  const dispatch = useAppDispatch();
+  const { isFetchingLogin, userLogin } = useAppSelector((state: RootState) => state.user);
+
+  if (userLogin) {
+    redirectToHome();
+  }
+
   const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
     const requestData = {
       email: data.email,
       password: data.password,
     };
 
-    setOnLoad(true);
-
     try {
-      const response = await doLogin(requestData);
-      console.log('Check response: ', response.statusCode);
-
-      if (response && response.statusCode === 201) {
-        setOnLoad(true);
-        console.log(response.data);
-        const { access_token } = response.data;
-        localStorage.setItem('access_token', access_token);
-        dispatch(getUserProfile());
-        redirectToHome();
-      }
+      await Promise.all([dispatch(loginThunk(requestData)).unwrap(), dispatch(getUserProfileThunk()).unwrap()]);
+      redirectToHome();
     } catch (error) {
-      setOnLoad(false);
-      console.error('Login fail: ', error);
+      Alert.error({
+        title: 'Oops!',
+        content: 'email/password không chính xác, vui lòng thử lại.',
+      });
     }
   };
-
-  // const onLoginValid: SubmitHandler<LoginFormInputs> = async (data: LoginFormInputs, event) => {
-  //   const requestData = {
-  //     email: data.email,
-  //     password: data.password,
-  //   };
-  //   setOnLoad(true);
-
-  //   try {
-  //     const res = await doLogin(requestData);
-  //     if (res && res.data) {
-  //       setOnLoad(false);
-  //       const { access_token } = res.data.data;
-  //       localStorage.setItem('access_token', access_token);
-  //       dispatch(getUserProfile());
-  //       redirectToHome();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLoginError(t('error.loginFailed'));
-  //   } finally {
-  //     setOnLoad(false);
-  //   }
-  // };
 
   useEffect(() => {
     if (Object.keys(formState.errors).length > 0) {
@@ -140,7 +110,14 @@ const Login: FC<Props> = (props: Props) => {
           {errors.password?.type === 'pattern' && <CInputHint>{t('field.error.password')}</CInputHint>}
         </Form.Group>
 
-        <CButton type='submit' label={t('auth.login')} loading={onLoad} disabled={onLoad} size={ButtonSize.LARGE} className={style.btn} />
+        <CButton
+          type='submit'
+          label={t('auth.login')}
+          loading={isFetchingLogin}
+          disabled={isFetchingLogin}
+          size={ButtonSize.LARGE}
+          className={style.btn}
+        />
         {!isSysAdminLogin && (
           <>
             <div className={style.alternative}>

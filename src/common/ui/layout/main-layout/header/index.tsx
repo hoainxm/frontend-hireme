@@ -22,7 +22,7 @@ interface Props {
 
 const Header: FC<Props> = (props: Props) => {
   const { active } = props;
-  const userInfo: UserProfile | null = useSelector((state: RootState) => state.main.userInfo);
+  const userInfo: UserProfile | null = useSelector((state: RootState) => state.user.userProfile);
 
   const history = useHistory();
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.HOME_BANNER);
@@ -43,7 +43,7 @@ const Header: FC<Props> = (props: Props) => {
     <Navbar sticky='top' className={style.header}>
       <Container className={style.container}>
         <Navbar.Brand className={style.brand}>
-          <Image src={userInfo?.tenant_logo ? userInfo?.tenant_logo : LogoDefault} className={style.logo} onClick={onClickLogo} />
+          <Image src={userInfo?.avatar ? userInfo?.avatar : LogoDefault} className={style.logo} onClick={onClickLogo} />
         </Navbar.Brand>
         {/* <Navbar.Toggle
           className="border-0"

@@ -13,6 +13,7 @@ import GeneralInfo from './GeneralInfo';
 import style from './JobDetail.module.scss';
 import { Breadcrumb } from 'antd';
 import RelatedJobs from './RelatedJobs';
+import { RootState, useAppSelector } from '../../../store/store';
 
 dayjs.extend(relativeTime);
 
@@ -31,6 +32,7 @@ const JobDetail: React.FC = () => {
   const [jobBySkills, setJobBySkills] = useState<Job[] | null>(null);
 
   const history = useHistory();
+  const userLogin = useAppSelector((state: RootState) => state.user);
 
   const fetchJobDetail = async () => {
     try {

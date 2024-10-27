@@ -725,5 +725,6 @@
   "error.existEmail": "Email already exists. Please try another email.",
   "timeApplicationJob": "Application deadline",
 
-  "user.savedJobs": "Bookmarks job"
+  "user.savedJobs": "Bookmarks job",
+  "error.login": "Email/password is incorrect, please try again."
 }

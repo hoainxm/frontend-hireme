@@ -1,21 +1,20 @@
-import { HeaderProfile } from '@base/profile/HeaderProfile';
 /** @format */
 
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
-import { doGet, doPost, doPut } from '../../utils/baseAPI';
+import { ApiResponse, doGet, doPost, doPut } from '../../utils/baseAPI';
 import { UserProfile } from 'app/auth/models';
 
 const authAPIUrl = 'api/v1/auth';
 
-export const getProfile = (): AxiosPromise<UserProfile> => {
+export const getProfile = (): Promise<ApiResponse<UserProfile>> => {
   const token = localStorage.getItem('access_token');
   return doGet(`${authAPIUrl}/account`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
-export const doLogout = (): AxiosPromise<any> => {
-  return doGet(`${authAPIUrl}/logout`);
+export const doLogout = (): Promise<ApiResponse<any>> => {
+  return doPost(`${authAPIUrl}/logout`);
 };
 
 export const doGetWelcomeInfo = (): AxiosPromise<any> => {

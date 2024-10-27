@@ -10,7 +10,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { AuthFormLayout } from '../shared/AuthFormLayout';
 import { AxiosError } from 'axios';
-import { Confirm } from '../../../common/utils/popup';
+import { Alert, Confirm } from '../../../common/utils/popup';
 import { FormatPasswordRule } from './FormatPasswordRule';
 import { ButtonSize, PageURL } from '../../../models/enum';
 import { RegisterFormInputs } from '../forms';
@@ -52,7 +52,7 @@ const Register: FC<Props> = (props: Props) => {
     setOnLoad(true);
     doRegister(filteredData)
       .then((res) => {
-        Confirm.success({
+        Alert.success({
           title: t('sucess.title'),
           content: t('auth.signupSuccess'),
           onConfirm: () => history.push(PageURL.LOGIN),

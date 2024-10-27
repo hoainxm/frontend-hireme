@@ -721,5 +721,6 @@
   "fail.title": "Thất bại",
   "error.existEmail": "Email đã tồn tại. Vui lòng thử email khác.",
 
-  "timeApplicationJob": "Thời hạn nộp hồ sơ"
+  "timeApplicationJob": "Thời hạn nộp hồ sơ",
+  "error.login": "email/password không chính xác, vui lòng thử lại."
 }
