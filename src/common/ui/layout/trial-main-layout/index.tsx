@@ -7,7 +7,7 @@ import { RootState } from 'store/rootReducer';
 import { TrialHeader } from './header';
 import { TrialSidebar } from './sidebar';
 import { configViewSetMeta } from '../../../../common/utils/common';
-import { getUserProfile } from '@layout/slice';
+import { getUserProfileThunk } from '../../../../store/reducer/userSlice/userThunk';
 
 interface Props {
   children: ReactNode;
@@ -17,6 +17,7 @@ export const TrialMainLayout: FC<Props> = (props) => {
   const { children } = props;
 
   const userInfo = useSelector((state: RootState) => state.main.userInfo);
+  console.log('check userInfo trialmainlayout: ', userInfo);
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,7 +25,7 @@ export const TrialMainLayout: FC<Props> = (props) => {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      if (!userInfo) dispatch(getUserProfile());
+      if (!userInfo) dispatch(getUserProfileThunk());
       setLoading(false);
     }, 200);
     // eslint-disable-next-line

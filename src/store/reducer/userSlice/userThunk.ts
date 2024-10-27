@@ -1,0 +1,33 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { doLogin } from '../../../app/auth/api';
+import { LoginFormInputs } from 'app/auth/forms';
+import { sleep } from '../../../common/utils/common';
+import { doLogout, getProfile } from '@layout/api';
+
+export const loginThunk = createAsyncThunk('user/login', async (payload: LoginFormInputs, { rejectWithValue }) => {
+  try {
+    await sleep();
+    const res = await doLogin(payload);
+    return res;
+  } catch (error: any) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const getUserProfileThunk = createAsyncThunk('user/getUserProfile', async (_, { rejectWithValue }) => {
+  try {
+    const res = await getProfile();
+    return res;
+  } catch (error) {
+    return rejectWithValue('Failed to fetch user profile');
+  }
+});
+
+export const logoutThunk = createAsyncThunk('user/logout', async (_, { rejectWithValue }) => {
+  try {
+    const res = await doLogout();
+    return res;
+  } catch (error) {
+    return rejectWithValue('Logout failed.');
+  }
+});
