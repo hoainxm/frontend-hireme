@@ -63,10 +63,7 @@ const Login: FC<Props> = (props: Props) => {
       await Promise.all([dispatch(loginThunk(requestData)).unwrap(), dispatch(getUserProfileThunk()).unwrap()]);
       redirectToHome();
     } catch (error) {
-      Alert.error({
-        title: 'Oops!',
-        content: 'email/password không chính xác, vui lòng thử lại.',
-      });
+      console.error('Login fail: ', error);
     }
   };
 
