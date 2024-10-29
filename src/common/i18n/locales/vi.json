@@ -140,12 +140,9 @@
 
   "found": "Tìm thấy",
   "list": "Danh sách",
-  "user.savedJobs": "Việc làm đã lưu",
   "savedJobs.title": "Kiểm tra các việc làm bạn đã lưu",
   "job.match": "việc làm phù hợp với yêu cầu của bạn",
   "field.updated": "Cập nhật",
-
-  "user.company": "Công ty",
 
   "skills": "Kỹ năng",
   "company": "Công ty",
@@ -280,6 +277,7 @@
   "btn.add": "Thêm",
   "btn.new": "Thêm mới",
   "btn.save": "Lưu",
+  "btn.unsave": "Huỷ lưu",
   "btn.savePassword": "Lưu mật khẩu mới",
   "btn.apply": "Áp dụng",
   "btn.reset": "Đặt lại",
@@ -336,6 +334,11 @@
   "user.aboutUs": "Về chúng tôi",
   "user.news": "Tin tức",
   "user.jobs": "Việc làm",
+  "user.company": "Công ty",
+  "user.upgrade": "Gói nâng cấp",
+  "user.savedJobs": "Việc làm đã lưu",
+  "user.changePassword": "Đổi mật khẩu",
+
   "user.profile.management": "Quản lý hồ sơ",
   "user.license.management": "Quản lý license",
   "user.trial": "Trải nghiệm miễn phí",

@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { HistoryOutlined } from '@ant-design/icons';
 import FavoriteButton from '../components/FavoriteButton';
 import { useTranslation } from 'react-i18next';
+import { Tooltip } from 'antd';
 
 interface JobProps {
   job: JobType;
@@ -27,7 +28,7 @@ const Job: React.FC<JobProps> = ({ job, isJobExpired, getRemainingDays }) => {
       <div className={style.jobDetails}>
         <div className={style.top}>
           <div className={style.jobTitle}>
-            {job.name}
+            <Tooltip title={job.name}>{job.name}</Tooltip>
             <div className={style.companyName}>{job.company.name}</div>
             <div className={style.head}>
               <HistoryOutlined />

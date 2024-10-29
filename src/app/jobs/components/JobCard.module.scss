@@ -80,17 +80,28 @@ $background-button: #3c7eb4;
   &__details-container {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 16px;
     margin-bottom: 16px;
 
     &-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
+      border-radius: 8px;
     }
 
     &-icon {
-      color: #0d4c8c;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 20px;
+      justify-content: center;
+      padding: 10px;
+      width: 20px;
+      background-color: $background-icon;
+      color: white;
+      border-radius: 50%;
       font-size: 18px;
     }
 

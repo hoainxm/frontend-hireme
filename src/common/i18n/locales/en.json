@@ -276,6 +276,7 @@
   "btn.add": "Add",
   "btn.new": "Add new",
   "btn.save": "Save",
+  "btn.unsave": "Unsave",
   "btn.savePassword": "Save new password",
   "btn.apply": "Apply",
   "btn.reset": "Reset",
@@ -332,6 +333,10 @@
   "user.news": "News",
   "user.jobs": "Jobs",
   "user.company": "Company",
+  "user.savedJobs": "Bookmarks job",
+  "user.upgrade": "Upgrade Package",
+  "user.changePassword": "Change Password",
+
   "user.profile.management": "Profile management",
   "user.license.management": "License management",
   "user.trial": "Get started for free",
@@ -730,6 +735,5 @@
   "error.existEmail": "Email already exists. Please try another email.",
   "timeApplicationJob": "Application deadline",
 
-  "user.savedJobs": "Bookmarks job",
   "error.login": "Email/password is incorrect, please try again."
 }
