@@ -29,6 +29,7 @@ export enum PageURL {
   JOBS = '/jobs',
   JOB_DETAIL = '/jobs/:jobId',
   SAVE_JOBS = '/saveJobs/',
+  UPGRADE = '/upgrade/',
 
   COMPANY = '/company/',
 
@@ -90,6 +91,9 @@ export enum PageName {
   JOBS = 'user.jobs',
   SAVE_JOBS = 'user.savedJobs',
   COMPANY = 'user.company',
+
+  UPGRADE = 'user.upgrade',
+  CHANGE_PASSWORD = 'user.changePassword',
 
   PRODUCT = 'user.product',
   ABOUT_US = 'user.aboutUs',

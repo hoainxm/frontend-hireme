@@ -225,9 +225,21 @@ export const PROFILE_ITEMS = [
     isActive: true,
   },
   {
+    name: PageName.UPGRADE,
+    url: PageURL.UPGRADE,
+    icon: 'Upgrade',
+    isActive: true,
+  },
+  {
     name: PageName.SAVE_JOBS,
     url: PageURL.SAVE_JOBS,
     icon: 'Save',
+    isActive: true,
+  },
+  {
+    name: PageName.CHANGE_PASSWORD,
+    url: PageURL.SAVE_JOBS,
+    icon: 'ChangePassword',
     isActive: true,
   },
   // {
