@@ -72,6 +72,7 @@ import { ReactComponent as ProductIcon } from './ProductIcon.svg';
 import { ReactComponent as Project } from './Project.svg';
 import { ReactComponent as QA } from './QA.svg';
 import { ReactComponent as Sentiment } from './Sentiment.svg';
+import { ReactComponent as Skills } from './/Skills.svg';
 import { ReactComponent as ShowPass } from './ShowPass.svg';
 import { ReactComponent as Solution } from './Solution.svg';
 import { ReactComponent as Speech } from './Speech.svg';
@@ -162,6 +163,7 @@ export {
   QA,
   Save,
   Sentiment,
+  Skills,
   ShowPass,
   Solution,
   Speech,

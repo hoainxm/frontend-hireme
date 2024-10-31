@@ -1,3 +1,4 @@
+import { UserProfile } from './../app/auth/models';
 /** @format */
 
 import AICloudFeatureManagement from '../app/admin/dashboard';
@@ -28,7 +29,9 @@ import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
 import { VerifyEmail } from '../app/auth/verify-email';
 import JobDetail from '../app/jobs/components/JobDetail';
 import SavedJobs from '../app/jobs/savedJobs/index';
-import ListCompany from '../app/company/components/ListCompany';
+import CompanyList from '../app/company/components/CompanyList';
+import InfoCompany from '../app/company/components/InfoCompany';
+import ProfileUser from '../app/auth/profile/index';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -94,7 +97,15 @@ export const PUBLIC_ROUTE = [
   },
   {
     path: PageURL.COMPANY,
-    component: ListCompany,
+    component: CompanyList,
+  },
+  {
+    path: PageURL.COMPANY_DETAIL,
+    component: InfoCompany,
+  },
+  {
+    path: PageURL.PROFILE_MANAGEMENT,
+    component: ProfileUser,
   },
 ];
 

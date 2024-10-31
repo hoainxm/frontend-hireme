@@ -77,6 +77,7 @@
   "auth.forgotPass.subTitle": "Enter your registered email and you will receive a link to create a new password via email.",
   "auth.resetPass": "Create new password",
   "auth.login": "Log in",
+  "auth.loginError": "Invalid email or password",
   "auth.getLink": "Get the link",
   "auth.alternative": "Or login with",
   "auth.noAccount": "You don't have an account?",
@@ -201,7 +202,7 @@
   "jobDetail.goToCompanyPage": "Go to company page",
   "jobDetail.companyAddress": "Address",
   "jobDetail.gender": "Gender",
-  "jobDetail.level": "",
+  "jobDetail.level": "Level",
   "jobDetail.years": "years",
   "jobDetail.people": "people",
   "jobDetail.noRequirement": "Not required",
@@ -337,7 +338,10 @@
   "user.upgrade": "Upgrade Package",
   "user.changePassword": "Change Password",
 
-  "user.profile.management": "Profile management",
+  "noSavedJobs": "No saved jobs",
+
+  "user.profile.management": "Personal Profile",
+  "user.profile.title": "Manage Your Profile - Edit and Save Changes",
   "user.license.management": "License management",
   "user.trial": "Get started for free",
 

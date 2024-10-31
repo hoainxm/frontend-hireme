@@ -3,7 +3,7 @@
 import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import HTTP404 from '../app/404';
+// import HTTP404 from '../app/404';
 import { PageURL, ScopeKey, ScopeValue } from '../models/enum';
 import { ADMIN_ROUTE, PRIVATE_ROUTE, PUBLIC_ROUTE } from './constant';
 import PublicRoute from './route-manage/PublicRoute';
@@ -40,7 +40,7 @@ const AppRouter: FC = () => {
             : ADMIN_ROUTE.map((route, index) => <AdminRoute key={index} {...route} exact />)}
           <Redirect path='/admin' to={PageURL.ADMIN_LOGIN} />
           <Redirect path='/' to={PageURL.HOME} />
-          <Route component={HTTP404} />
+          {/* <Route component={HTTP404} /> */}
         </Switch>
       </Router>
       {toasts.map((toast, index) => (
