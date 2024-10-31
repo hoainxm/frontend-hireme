@@ -56,7 +56,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     return (
       <div className={style.profile}>
         <Image src={userInfo?.avatar ? userInfo.avatar : Account} className={style.avt} />
-        <p>{userInfo?.name || NOT_SET}</p>
+        {/* <p>{userInfo?.name || NOT_SET}</p> */}
         <SVGIcon icon={isOpen ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
       </div>
     );

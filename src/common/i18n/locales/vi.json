@@ -77,6 +77,7 @@
   "auth.forgotPass.subTitle": "Nhập email đã đăng ký và bạn sẽ nhận được một liên kết để tạo mật khẩu mới qua email.",
   "auth.resetPass": "Tạo mật khẩu mới",
   "auth.login": "Đăng nhập",
+  "auth.loginError": "Email hoặc mật khẩu không hợp lệ",
   "auth.getLink": "Nhận liên kết",
   "auth.alternative": "Hoặc đăng nhập với",
   "auth.noAccount": "Bạn chưa có tài khoản?",
@@ -201,7 +202,7 @@
   "jobDetail.companyStaff": "nhân viên",
   "jobDetail.goToCompanyPage": "Xem trang công ty",
   "jobDetail.gender": "Giới tính",
-  "jobDetail.level": "",
+  "jobDetail.level": "Cấp bậc",
   "jobDetail.years": "năm",
   "jobDetail.people": "người",
   "jobDetail.noRequirement": "Không yêu cầu",
@@ -339,7 +340,10 @@
   "user.savedJobs": "Việc làm đã lưu",
   "user.changePassword": "Đổi mật khẩu",
 
-  "user.profile.management": "Quản lý hồ sơ",
+  "noSavedJobs": "Không có việc làm đã lưu",
+
+  "user.profile.management": "Hồ sơ cá nhân",
+  "user.profile.title": "Quản lý hồ sơ của bạn - Chỉnh sửa và lưu thay đổi",
   "user.license.management": "Quản lý license",
   "user.trial": "Trải nghiệm miễn phí",
 

@@ -190,7 +190,7 @@ $subtext-color: #666;
 
     .jobDetails {
       display: inline-grid;
-      gap: 12px;
+      gap: 16px;
       width: 100%;
 
       .top {
@@ -207,7 +207,7 @@ $subtext-color: #666;
           transition: color 0.3s;
 
           .companyName {
-            font-size: 1rem;
+            font-size: 1.5rem;
             color: red;
           }
         }
@@ -537,7 +537,7 @@ $subtext-color: #666;
 
   .companyName {
     color: #666;
-    font-size: 1.2em;
+    font-size: 1.5em;
   }
 }
 
@@ -685,6 +685,7 @@ $subtext-color: #666;
 .btnHeart {
   background-color: #fff;
   align-self: center;
+  height: fit-content;
   cursor: pointer;
   border: 1px solid #ccc;
   padding: 8px 10px;

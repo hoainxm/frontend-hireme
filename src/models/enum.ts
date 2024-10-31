@@ -31,7 +31,8 @@ export enum PageURL {
   SAVE_JOBS = '/saveJobs/',
   UPGRADE = '/upgrade/',
 
-  COMPANY = '/company/',
+  COMPANY = '/companies/',
+  COMPANY_DETAIL = '/company/:companyId',
 
   CATEGORY = '/news/categories',
   PROFILE_MANAGEMENT = '/profile',
