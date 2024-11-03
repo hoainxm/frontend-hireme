@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Job } from '../model';
 import { useTranslation } from 'react-i18next';
-import { fetchJobById, fetchJobBySkill } from '../api';
+import { fetchJobById } from '../api';
 import MainLayout from '@layout/main-layout';
 import { PageName, PageURL } from '@models/enum';
 import dayjs from 'dayjs';
@@ -29,7 +29,6 @@ const JobDetail: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [idCompany, setIdCompany] = useState<string>('');
   const [skills, setSkills] = useState<string[]>([]);
-  const [jobBySkills, setJobBySkills] = useState<Job[] | null>(null);
 
   const history = useHistory();
   const userLogin = useAppSelector((state: RootState) => state.user);
@@ -37,11 +36,12 @@ const JobDetail: React.FC = () => {
   const fetchJobDetail = async () => {
     try {
       const response = await fetchJobById(jobId);
+      console.log('response', response.data);
       if (response.statusCode === 200) {
         setJob(response.data);
         setIdCompany(response.data.company._id);
         setSkills(response.data.skills);
-        fetchJobSkills(response.data.skills);
+        console.log('response.data.skills', response.data.skills);
       } else {
         setError('Failed to fetch job details.');
       }
@@ -53,24 +53,7 @@ const JobDetail: React.FC = () => {
     }
   };
 
-  const fetchJobSkills = async (skills: string[]) => {
-    if (skills && skills.length > 0) {
-      try {
-        const res = await fetchJobBySkill(skills);
-        console.log('check res: ', res);
-        if (res.statusCode === 201) {
-          setJobBySkills(res.data);
-          console.log('Jobs by skills: ', res.data);
-        } else {
-          console.error('Failed to fetch job by skills:', res.data);
-        }
-      } catch (error) {
-        console.error('Error fetching job by skills:', error);
-      }
-    } else {
-      console.log('No skills available for this job');
-    }
-  };
+  
 
   useEffect(() => {
     fetchJobDetail();

@@ -13,35 +13,33 @@ interface RelatedJobsProps {
   idCompany?: string;
 }
 
-const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany }) => {
+const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
   const [relatedJobs, setRelatedJobs] = useState<Job[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 5;
   const { t } = useTranslation();
   const history = useHistory();
-
-  useEffect(() => {
-    const fetchRelatedJobs = async () => {
-      if (!idCompany) return;
+  console.log('relatedJobs', relatedJobs);
+  const fetchRelatedJobs = async () => {
+    if (skills && skills.length > 0) {
       try {
-        const res = await getJobsByCompany(idCompany);
-        if (res.statusCode === 201) {
+        const res = await fetchJobBySkill(skills);
+        if (res && res.data) {
           setRelatedJobs(res.data);
+        } else {
+          console.error('Failed to fetch job by skills:', res.data);
         }
       } catch (error) {
-        console.error('Error fetching related jobs:', error);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching job by skills:', error);
       }
-    };
+    } else {
+      console.log('No skills available for this job');
+    }
+  };
 
+  useEffect(() => {
     fetchRelatedJobs();
-  }, [idCompany]);
-
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
+  }, []);
 
   if (!relatedJobs || relatedJobs.length === 0) {
     return <div>{t('noData')}</div>;
