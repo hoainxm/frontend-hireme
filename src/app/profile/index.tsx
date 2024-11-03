@@ -1,12 +1,12 @@
 import React, { useState, useEffect, HTMLAttributes, FC } from 'react';
 import { Input, Button, Form, message, Spin, Avatar } from 'antd';
 import { UserOutlined, MailOutlined } from '@ant-design/icons';
-import { UserProfile } from '../models';
-import { getUserProfile, updateUserProfile } from '../api';
-import style from '../auth.module.scss';
+import { UserProfile } from '../auth/models';
+import { getUserProfile, updateUserProfile } from './api';
+import style from '../profile/profile.module.scss';
 import MainLayout from '@layout/main-layout';
-import { PageName } from '../../../models/enum';
 import { useTranslation } from 'react-i18next';
+import { PageName } from '@models/enum';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;

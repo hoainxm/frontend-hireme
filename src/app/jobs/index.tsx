@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import MainLayout from '../../common/ui/layout/main-layout';
 import { PageName, SectionID } from '../../models/enum';
 import { useDispatch } from 'react-redux';
-import { updateSectionDot } from '@layout/slice';
 import style from './jobs.module.scss';
 import { useTranslation } from 'react-i18next';
 import JobFilter from './components/JobFilter';

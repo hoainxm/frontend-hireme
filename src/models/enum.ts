@@ -32,7 +32,7 @@ export enum PageURL {
   UPGRADE = '/upgrade/',
 
   COMPANY = '/companies/',
-  COMPANY_DETAIL = '/company/:companyId',
+  COMPANY_DETAIL = '/companies/:companyId',
 
   CATEGORY = '/news/categories',
   PROFILE_MANAGEMENT = '/profile',

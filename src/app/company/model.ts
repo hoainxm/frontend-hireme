@@ -1,5 +1,5 @@
 export interface Company {
-  _id: Id;
+  _id: string;
   name: string;
   address: string;
   description: string;
@@ -11,10 +11,6 @@ export interface Company {
   updatedAt: UpdatedAt;
   __v: number;
   scale: string;
-}
-
-export interface Id {
-  $oid: string;
 }
 
 export interface CreatedBy {

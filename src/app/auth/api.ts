@@ -65,11 +65,3 @@ export const doReSendVerifyEmail = (data: EmailVerifyFormInputs): AxiosPromise<a
 export const doVerifyEmailToken = (tokenCheckVerify: string): AxiosPromise<any> => {
   return doGet(`${authAPIUrl}/verify-email?tokenCheckVerify=${tokenCheckVerify}`);
 };
-
-export const getUserProfile = async (): Promise<{ data: UserProfile }> => {
-  return doGet(`${authAPIUrl}/users/profile`);
-};
-
-export const updateUserProfile = (userId: string, values: Partial<UserProfile>): Promise<ApiResponse<UserProfile>> => {
-  return doPost(`${authAPIUrl}/${userId}`, values);
-};
