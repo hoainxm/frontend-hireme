@@ -22,7 +22,7 @@ export const ResetPassword = (props: Props): ReactElement => {
   const { errors, handleSubmit, getValues, register, watch } = useForm<ResetPasswordFormInputs>({
     reValidateMode: 'onChange',
   });
-  const { id } = useParams<{ id: string }>();
+  const { token } = useParams<{ token: string }>();
   const { resetCountdown } = useCountDown();
 
   const history = useHistory();
@@ -59,7 +59,7 @@ export const ResetPassword = (props: Props): ReactElement => {
   const onValid: SubmitHandler<ResetPasswordFormInputs> = async (data, event) => {
     if (tokenStatus) {
       // data['token'] = id;
-      const resetData = { newPassword: data.newPassword, token: id };
+      const resetData = { newPassword: data.newPassword, token };
       setIsLoading(true);
       doResetPassword(data)
         .then(() => {
@@ -88,15 +88,7 @@ export const ResetPassword = (props: Props): ReactElement => {
     event?.target.classList.add('wasvalidated');
   };
 
-  useEffect(() => {
-    doCheckResetPassword(id)
-      .then((res) => {
-        setTokenStatus(res.data.msg);
-      })
-      .catch(() => {
-        setTokenStatus(false);
-      });
-  }, []);
+  useEffect(() => {}, []);
 
   if (isResetSuccessfully) {
     return (
