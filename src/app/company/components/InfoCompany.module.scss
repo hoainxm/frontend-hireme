@@ -104,29 +104,32 @@ $background-color: #fff;
   }
 }
 
-.company-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  justify-content: space-between;
-  background-color: #f5f5f5;
+.list-container {
+  padding: 20px 400px;
 
-  &__item {
-    flex: 1 1 calc(33.333% - 20px);
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .company-list {
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: auto auto;
+    column-gap: 20px;
+    row-gap: 25px;
+    // grid-template-columns: repeat(3, 1fr ());
+    padding: 20px;
+    background-color: #f5f5f5;
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    &__item {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+      }
     }
   }
 }

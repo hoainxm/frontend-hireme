@@ -4,8 +4,8 @@ import { Job } from '../model';
 import style from '../jobs.module.scss';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useLoginAlert from '../../../common/utils/hooks/useLoginAlert';
 import { Tooltip } from 'antd';
+import useLoginAlert from '../../../common/utils/hooks/useLoginAlert';
 import { useTranslation } from 'react-i18next';
 
 interface FavoriteButtonProps {

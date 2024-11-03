@@ -12,7 +12,6 @@ interface InfoCompanyProps {
 
 const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
   const { t } = useTranslation();
-
   const [infoCompany, setInfoCompany] = useState<Company | null>(null);
 
   const getInfo = async () => {

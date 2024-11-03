@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Job } from '../../jobs/model';
 import { fetchJobBySkill } from '../api';
+import { getJobsByCompany } from '../../company/api';
 import style from './RelatedJobs.module.scss';
 import FavoriteButton from './FavoriteButton';
 import { useTranslation } from 'react-i18next';
@@ -8,10 +9,11 @@ import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
 
 interface RelatedJobsProps {
-  skills: string[];
+  skills?: string[];
+  idCompany?: string;
 }
 
-const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
+const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany }) => {
   const [relatedJobs, setRelatedJobs] = useState<Job[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,8 +23,9 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
 
   useEffect(() => {
     const fetchRelatedJobs = async () => {
+      if (!idCompany) return;
       try {
-        const res = await fetchJobBySkill(skills);
+        const res = await getJobsByCompany(idCompany);
         if (res.statusCode === 201) {
           setRelatedJobs(res.data);
         }
@@ -34,7 +37,7 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ skills }) => {
     };
 
     fetchRelatedJobs();
-  }, [skills]);
+  }, [idCompany]);
 
   if (loading) {
     return <div>{t('loading')}</div>;

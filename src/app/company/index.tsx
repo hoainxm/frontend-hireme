@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import MainLayout from '../../common/ui/layout/main-layout';
 import { PageName, SectionID } from '../../models/enum';
 import { useDispatch } from 'react-redux';
-import { updateSectionDot } from '@layout/slice';
 import style from './company.module.scss';
 import { useTranslation } from 'react-i18next';
 import CompanyList from './components/CompanyList';
@@ -20,6 +19,7 @@ export const Companies: FC<Props> = ({ sectionId }) => {
   const { t } = useTranslation();
 
   const [companies, setCompanies] = useState<CompanyType[]>([]);
+  const [filteredCompanies, setFilteredCompanies] = useState<CompanyType[]>([]);
 
   const fetchAllCompanies = async () => {
     try {

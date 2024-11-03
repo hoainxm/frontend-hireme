@@ -1,0 +1,116 @@
+//bannerSectionStyleOnly
+.bannerSection {
+  color: white;
+  position: inherit;
+  // padding: 0px 200px;
+
+  .bannerContainer {
+    max-width: 100%;
+    margin: 0px auto;
+    padding: 56px 0px;
+    background: #032170;
+    // background-color: #0a4e99;
+
+    .top {
+      max-width: 68%;
+      padding-top: 0px;
+      margin: 0px auto;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      font-size: 40px;
+
+      .topTitle {
+        @extend .heading1 !optional;
+        margin-bottom: 16px;
+      }
+
+      .topSubTitle {
+        @extend .heading4 !optional;
+        margin-bottom: 24px;
+      }
+
+      .btnGroup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > button {
+          flex: 1;
+          min-width: 252px;
+        }
+
+        .contactBtn {
+          margin-right: 24px;
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+}
+
+.profile-container {
+  padding: 20px 400px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  &__title {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 16px;
+  }
+
+  &__avatar-container {
+    margin: 16px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  &__form-item {
+    .ant-form-item-label > label {
+      font-weight: 500;
+      font-size: 0.95em;
+      color: #666;
+    }
+  }
+
+  &__input {
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  &__textarea {
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1em;
+    resize: none;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+
+    .ant-btn {
+      width: 100px;
+      height: 36px;
+      font-size: 1em;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+  }
+}
