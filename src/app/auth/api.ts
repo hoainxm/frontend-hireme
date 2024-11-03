@@ -51,12 +51,8 @@ export const forgotPassword = (data: ForgotPasswordFormInputs): Promise<ApiRespo
   return doPost(`${userAPIUrl}/forgot-password`, data);
 };
 
-export const doCheckResetPassword = (token: string): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/reset-password/token/verify`, { token });
-};
-
-export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/resetPassword`, data);
+export const resetPassword = (data: { token: string; newPassword: string }): Promise<ApiResponse<{ token: string; newPassword: string }>> => {
+  return doPost(`${userAPIUrl}/reset-password`, data);
 };
 
 export const doLogin = (data: LoginFormInputs): Promise<ApiResponse<IUserResponse>> => {
