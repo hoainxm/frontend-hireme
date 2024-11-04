@@ -8,28 +8,33 @@ import style from '../auth.module.scss';
 import { CButton, CInput, CInputHint } from '../../../common/ui/base';
 import { PASS_PATTERN } from '../../../common/utils/constants';
 import { FormatPasswordRule } from '../register/FormatPasswordRule';
-import { RouteComponentProps, useHistory, useParams } from 'react-router-dom';
-import { doCheckResetPassword, doResetPassword } from '../api';
-import { AxiosError } from 'axios';
+import { RouteComponentProps, useHistory, useLocation } from 'react-router-dom';
+import { resetPassword } from '../api';
 import { PageURL } from '../../../models/enum';
-import useCountDown from '../../../common/utils/hooks/useCountDown';
 import Success from '../../../common/ui/assets/images/Success.svg';
+import { useAppDispatch } from '../../../store/store';
+import { logoutThunk } from '../../../store/reducer/userSlice/userThunk';
 
 interface Props extends RouteComponentProps {}
 
 export const ResetPassword = (props: Props): ReactElement => {
   const { t } = useTranslation();
-  const { errors, handleSubmit, getValues, register, watch } = useForm<ResetPasswordFormInputs>({
+  const {
+    handleSubmit,
+    getValues,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<ResetPasswordFormInputs>({
     reValidateMode: 'onChange',
   });
-  const { id } = useParams<{ id: string }>();
-  const { resetCountdown } = useCountDown();
+  const location = useLocation();
+  const token = new URLSearchParams(location.search).get('token');
 
   const history = useHistory();
   const refPassword = useRef(null);
 
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [tokenStatus, setTokenStatus] = useState<boolean>(true);
   const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isResetSuccessfully, setIsResetSuccessfully] = useState<boolean>(false);
@@ -50,37 +55,32 @@ export const ResetPassword = (props: Props): ReactElement => {
     history.push(PageURL.LOGIN);
   };
 
+  const dispatch = useAppDispatch();
+
   const checkShowPasswordRule = (): boolean => {
     const passwordValue = watch('newPassword');
     if (!passwordValue) return false;
     return isPasswordFocused || errors.newPassword?.type === 'pattern';
   };
 
-  const onValid: SubmitHandler<ResetPasswordFormInputs> = async (data, event) => {
-    if (tokenStatus) {
-      // data['token'] = id;
-      const resetData = { newPassword: data.newPassword, token: id };
-      setIsLoading(true);
-      doResetPassword(data)
-        .then(() => {
-          event?.target.reset();
-          resetCountdown();
-          setIsLoading(false);
-          setIsResetSuccessfully(true);
-        })
-        .catch((error: AxiosError) => {
-          if (error.response?.status === 400) {
-            const dataResponse = error.response.data;
-            if (dataResponse.msg === 'Reset token invalid') {
-              setErrorMessage('error.tokenInvalid');
-            } else {
-              setErrorMessage('error.stWrong');
-            }
-          }
-        })
-        .finally(() => setIsLoading(false));
-    } else {
-      setErrorMessage('error.tokenInvalid');
+  const onValid: SubmitHandler<ResetPasswordFormInputs> = async (data) => {
+    const { newPassword } = data;
+    if (!token) {
+      console.error('Token is null or undefined');
+      return;
+    }
+
+    const dataSubmit = { token, newPassword };
+    setIsLoading(true);
+    try {
+      await resetPassword(dataSubmit);
+      setIsResetSuccessfully(true);
+
+      await dispatch(logoutThunk());
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,15 +88,7 @@ export const ResetPassword = (props: Props): ReactElement => {
     event?.target.classList.add('wasvalidated');
   };
 
-  useEffect(() => {
-    doCheckResetPassword(id)
-      .then((res) => {
-        setTokenStatus(res.data.msg);
-      })
-      .catch(() => {
-        setTokenStatus(false);
-      });
-  }, []);
+  useEffect(() => {}, []);
 
   if (isResetSuccessfully) {
     return (
