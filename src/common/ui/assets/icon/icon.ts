@@ -3,6 +3,7 @@
 import { ReactComponent as AISpeed } from './AISpeed.svg';
 import { ReactComponent as API } from './API.svg';
 import { ReactComponent as Account } from './Account.svg';
+import { ReactComponent as AccountSetting } from './AccountSetting.svg';
 import { ReactComponent as ActionRecognition } from './ActionRecognition.svg';
 import { ReactComponent as Address } from './Address.svg';
 import { ReactComponent as AgeGender } from './AgeGender.svg';
@@ -16,6 +17,7 @@ import { ReactComponent as BP } from './BP.svg';
 import { ReactComponent as Calendar } from './Calendar.svg';
 import { ReactComponent as Camera } from './Camera.svg';
 import { ReactComponent as Chatbot } from './Chatbot.svg';
+import { ReactComponent as ChangePassword } from './ChangePassword.svg';
 import { ReactComponent as ClearText } from './ClearText.svg';
 import { ReactComponent as Client } from './Client.svg';
 import { ReactComponent as Close } from './Close.svg';
@@ -70,6 +72,7 @@ import { ReactComponent as ProductIcon } from './ProductIcon.svg';
 import { ReactComponent as Project } from './Project.svg';
 import { ReactComponent as QA } from './QA.svg';
 import { ReactComponent as Sentiment } from './Sentiment.svg';
+import { ReactComponent as Skills } from './/Skills.svg';
 import { ReactComponent as ShowPass } from './ShowPass.svg';
 import { ReactComponent as Solution } from './Solution.svg';
 import { ReactComponent as Speech } from './Speech.svg';
@@ -81,11 +84,14 @@ import { ReactComponent as TextToSpeech } from './TextToSpeech.svg';
 import { ReactComponent as Time } from './Time.svg';
 import { ReactComponent as Text } from './TextInput.svg';
 import { ReactComponent as Up } from './Up.svg';
+import { ReactComponent as Upgrade } from './Upgrade.svg';
 import { ReactComponent as VoiceRecognition } from './VoiceRecognition.svg';
 import { ReactComponent as Youtube } from './Youtube.svg';
+import { ReactComponent as Save } from './Save.svg';
 
 export {
   Account,
+  AccountSetting,
   ActionRecognition,
   Address,
   AgeGender,
@@ -101,6 +107,7 @@ export {
   Calendar,
   Camera,
   Chatbot,
+  ChangePassword,
   ClearText,
   Client,
   Close,
@@ -154,7 +161,9 @@ export {
   ProductIcon,
   Project,
   QA,
+  Save,
   Sentiment,
+  Skills,
   ShowPass,
   Solution,
   Speech,
@@ -166,6 +175,7 @@ export {
   Time,
   Text,
   Up,
+  Upgrade,
   VoiceRecognition,
   Youtube,
 };

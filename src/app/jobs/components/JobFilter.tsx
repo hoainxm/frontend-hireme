@@ -1,157 +1,118 @@
-import React, { FC, HTMLAttributes, useEffect, useState, useTransition } from 'react';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { updateSectionDot } from '@layout/slice';
-import { BackToTop } from '@base/button/BackToTop';
+import React, { FC, useState } from 'react';
+import { Form, Input, Select, Button, AutoComplete, Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
-import style from '../jobs.module.scss';
-import Back from '@icon/Back.svg';
 import locationData from './location.json';
-import { Form } from 'react-bootstrap';
-import { Job } from '../model';
+import { SkillsOptions, experienceOptions } from '../constant';
+import style from '../jobs.module.scss';
+import { SearchOutlined } from '@ant-design/icons';
 
-// import { Province, District, Ward } from '../model';
-
-interface Ward {
-  Id: string;
-  Name: string;
-  Level?: string;
-}
-
-interface District {
-  Id: string;
-  Name: string;
-  Wards: Ward[];
-}
-
-interface Province {
-  Id: string;
-  Name: string;
-  Districts: District[];
-}
+const { Option } = Select;
 
 interface JobFilterProps {
   onFilter: (filters: any) => void;
 }
 
-const JobFilter: React.FC<JobFilterProps> = ({ onFilter }) => {
+const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   const { t } = useTranslation();
-  const [selectedProvince, setSelectedProvince] = useState<string>('');
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('');
-  const [selectedWard, setSelectedWard] = useState<string>('');
-  const [districts, setDistricts] = useState<District[]>([]);
-  const [wards, setWards] = useState<Ward[]>([]);
+  const [position, setPosition] = useState<string>('');
+  const [selectedExperience, setSelectedExperience] = useState<string | undefined>('');
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-  const [selectedCompany, setSelectedCompany] = useState<string>('');
-  const [salaryRange, setSalaryRange] = useState<{ min: number; max: number }>({ min: 0, max: 10000000 });
-  const [level, setLevel] = useState<string>('');
-  const [isActive, setIsActive] = useState<boolean | ''>('');
+  const [selectedProvince, setSelectedProvince] = useState<string>('');
 
-  const locationData: Province[] = [];
+  const [provinceSuggestions, setProvinceSuggestions] = useState<string[]>(locationData.map((prov) => prov.Name));
 
-  // Ensure `find` works correctly with the typed locationData
-  useEffect(() => {
-    const province = locationData.find((p: Province) => p.Id === selectedProvince);
-    if (province) {
-      setDistricts(province.Districts);
-      setSelectedDistrict(''); // Reset district when province changes
-      setWards([]); // Reset wards when province changes
+  const handleProvinceChange = (input: string | undefined) => {
+    if (input) {
+      setSelectedProvince(input);
+      const suggestions = locationData.filter((province) => province.Name.toLowerCase().includes(input.toLowerCase())).map((prov) => prov.Name);
+      setProvinceSuggestions(suggestions);
     } else {
-      setDistricts([]);
-      setWards([]);
+      setSelectedProvince('');
+      setProvinceSuggestions(locationData.map((prov) => prov.Name));
     }
-  }, [selectedProvince]);
+  };
 
-  // Update wards based on selected district
-  useEffect(() => {
-    const district = districts.find((d: District) => d.Id === selectedDistrict);
-    if (district) {
-      setWards(district.Wards);
-      setSelectedWard(''); // Reset ward when district changes
-    } else {
-      setWards([]);
-    }
-  }, [selectedDistrict, districts]);
-
-  const handleFilter = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent form submission
+  const handleFilter = () => {
     const filters = {
-      location: { province: selectedProvince, district: selectedDistrict, ward: selectedWard },
+      position,
+      experience: selectedExperience,
       skills: selectedSkills,
-      company: selectedCompany,
-      salaryRange,
-      level,
-      isActive,
+      province: selectedProvince,
     };
     onFilter(filters);
   };
 
   return (
-    <Form className={style.jobfilter} onSubmit={handleFilter}>
-      <div className={style.location}>
-        <div className={style.filterGroup}>
-          <label htmlFor='province'>{t('field.selectProvince')}</label>
-          <select id='province' value={selectedProvince} onChange={(e) => setSelectedProvince(e.target.value)}>
-            <option value=''>{t('field.selectProvince')}</option>
-            {locationData.map((province: Province) => (
-              <option key={province.Id} value={province.Id}>
-                {province.Name}
-              </option>
-            ))}
-          </select>
-        </div>
+    <Form layout='vertical' onFinish={handleFilter} className={style.jobfilter}>
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form.Item>
+            <Input
+              placeholder={t('field.positionPlaceholder')}
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              className={style.input}
+            />
+          </Form.Item>
+        </Col>
 
-        <div className={style.filterGroup}>
-          <label htmlFor='district'>{t('field.selectDistrict')}</label>
-          <select id='district' value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
-            <option value=''>{t('field.selectDistrict')}</option>
-            {districts.map((district: District) => (
-              <option key={district.Id} value={district.Id}>
-                {district.Name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Col span={4}>
+          <Form.Item>
+            <Select
+              placeholder={t('field.experiencePlaceholder')}
+              value={selectedExperience && selectedExperience.length > 0 ? selectedExperience : undefined}
+              onChange={(value) => setSelectedExperience(value)}
+              allowClear
+              className={style.select}
+            >
+              {experienceOptions.map((exp) => (
+                <Option key={exp} value={exp}>
+                  {exp}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Col>
 
-        <div className={style.filterGroup}>
-          <label htmlFor='ward'>{t('field.selectWard')}</label>
-          <select id='ward' value={selectedWard} onChange={(e) => setSelectedWard(e.target.value)} disabled={!selectedDistrict}>
-            <option value=''>{t('field.selectWard')}</option>
-            {wards.map((ward: Ward) => (
-              <option key={ward.Id} value={ward.Id}>
-                {ward.Name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+        <Col span={4}>
+          <Form.Item className={style.skillsFilter}>
+            <Select
+              mode='multiple'
+              placeholder={t('field.skillsPlaceholder')}
+              value={selectedSkills}
+              onChange={(value) => setSelectedSkills(value)}
+              allowClear
+              className={style.select}
+            >
+              {SkillsOptions.map((skill) => (
+                <Option key={skill} value={skill}>
+                  {skill}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Col>
 
-      <div className={style.group}>
-        <div className={style.filterGroup}>
-          <label>{t('field.skills')}</label>
-          <input placeholder={t('skills')} type='text' onChange={(e) => setSelectedSkills(e.target.value.split(','))} />
-        </div>
+        <Col span={4}>
+          <Form.Item className={style.provinceFilter}>
+            <AutoComplete
+              placeholder={t('field.provincePlaceholder')}
+              value={selectedProvince}
+              onChange={handleProvinceChange}
+              options={provinceSuggestions.map((prov) => ({ value: prov }))}
+              allowClear
+              className={style.input}
+            />
+          </Form.Item>
+        </Col>
 
-        <div className={style.filterGroup}>
-          <label>{t('field.company')}</label>
-          <input placeholder={t('company')} type='text' value={selectedCompany} onChange={(e) => setSelectedCompany(e.target.value)} />
-        </div>
-
-        <div className={style.filterGroup}>
-          <label htmlFor='level'>{t('field.level')}</label>
-          <select id='level' value={level} onChange={(e) => setLevel(e.target.value)}>
-            <option value=''>{t('selectLevel')}</option>
-            <option value='INTERN'>{t('level.intern')}</option>
-            <option value='FRESHER'>{t('level.fresher')}</option>
-            <option value='JUNIOR'>{t('level.junior')}</option>
-            <option value='SENIOR'>{t('level.senior')}</option>
-          </select>
-        </div>
-      </div>
-
-      <button type='submit' className={style.filterButton}>
-        {t('field.filter')}
-      </button>
+        <Col span={4}>
+          <Button type='primary' htmlType='submit' className={style.button}>
+            <SearchOutlined />
+            {t('field.search')}
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 };

@@ -5,6 +5,7 @@ import { backgroundDataSlice, mainSlice, sectionDotSlice, sideBarSlice, toastsSl
 import { combineReducers } from '@reduxjs/toolkit';
 import { popupSlice } from '../common/ui/layout/popup-layout/slice';
 import { sysSlice } from '../routers/slice';
+import { userSlice } from './reducer/userSlice/userSlice';
 
 export const rootReducer = combineReducers({
   sys: sysSlice.reducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   welcomeInfo: backgroundDataSlice.reducer,
   sectionDot: sectionDotSlice.reducer,
   toasts: toastsSlice.reducer,
+  user: userSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

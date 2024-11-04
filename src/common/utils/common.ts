@@ -148,6 +148,10 @@ export const formatDurationDisplay = (duration: number) => {
     min++;
     sec = 0;
   }
-  const formatted = [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':'); 
+  const formatted = [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':');
   return formatted;
+};
+
+export const sleep = (time = 2000) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
 };

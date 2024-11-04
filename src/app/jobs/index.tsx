@@ -1,42 +1,31 @@
-import React, { FC, HTMLAttributes, useEffect, useState, useTransition } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import MainLayout from '../../common/ui/layout/main-layout';
 import { PageName, SectionID } from '../../models/enum';
 import { useDispatch } from 'react-redux';
-import { updateSectionDot } from '@layout/slice';
-import { BackToTop } from '@base/button/BackToTop';
-import { useTranslation } from 'react-i18next';
 import style from './jobs.module.scss';
+import { useTranslation } from 'react-i18next';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
-import JobDetail from './components/JobDetailNam';
 import { PartnerSection } from '../../app/home/PartnerSection';
 import { UpdateSection } from '../../app/home/UpdateSection';
-import { Job } from '../jobs/model';
+import { Job as JobType } from '../jobs/model';
 import { getAllJobs } from './api';
-import JobDetailNam from './components/JobDetailNam';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
-  currentPage: number;
 }
 
-export const Jobs: FC<Props> = (props) => {
+export const Jobs: FC<Props> = ({ sectionId }) => {
   const dispatch = useDispatch();
-  const { sectionId } = props;
   const { t } = useTranslation();
 
-  const scrollToTop = () => {
-    dispatch(updateSectionDot(SectionID.HOME_BANNER));
-  };
-
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<JobType[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<JobType[]>([]);
 
   const fetchAllJobs = async () => {
     try {
       const result = await getAllJobs();
-      console.log('result get all jobs', result);
-      setJobs(result.data.data);
+      setJobs(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -45,8 +34,6 @@ export const Jobs: FC<Props> = (props) => {
   useEffect(() => {
     fetchAllJobs();
   }, []);
-
-  console.log('check jobs: ', jobs);
 
   const handleFilter = (filters: any) => {
     let filtered = jobs;
@@ -83,9 +70,7 @@ export const Jobs: FC<Props> = (props) => {
         </div>
       </section>
       <JobFilter onFilter={handleFilter} />
-
       <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
-      <BackToTop resetScrollNavigation={scrollToTop} />
       <PartnerSection sectionId={sectionId} />
       <UpdateSection sectionId={sectionId} />
     </MainLayout>

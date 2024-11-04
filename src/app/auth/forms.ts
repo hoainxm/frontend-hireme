@@ -24,6 +24,24 @@ export interface LoginFormInputs {
   password: string;
 }
 
+export interface IUserResponse {
+  access_token: string;
+  user: User;
+}
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  role: Role;
+  permissions: any[];
+}
+
+export interface Role {
+  _id: string;
+  name: string;
+}
+
 export interface RegisterFormInputs {
   name: string;
   email: string;

@@ -14,6 +14,10 @@ import { Confirm } from '../../../../common/utils/popup';
 import { Palette, ScopeKey, SectionID } from '../../../../models/enum';
 import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/rootReducer';
+import { useAppDispatch } from '../../../../store/store';
+import { logoutThunk } from '../../../../store/reducer/userSlice/userThunk';
 
 interface Props {
   userInfo: UserProfile | null;
@@ -21,9 +25,10 @@ interface Props {
 
 export const HeaderProfile: FC<Props> = (props: Props) => {
   const { userInfo } = props;
+
   const history = useHistory();
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.OCR_BANNER);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -31,12 +36,15 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     Confirm.logout({
       title: t('auth.logout'),
       content: t('auth.logout.question'),
-      onConfirm: () =>
-        doLogout().then(() => {
-          setStoredValue(SectionID.HOME_BANNER);
-          makeClientToUnauthorize({ isSysAdmin: false });
-          localStorage.removeItem(ScopeKey.USER);
-        }),
+      onConfirm: async () =>
+        // doLogout().then(async () => {
+        //   setStoredValue(SectionID.HOME_BANNER);
+        //   makeClientToUnauthorize({ isSysAdmin: false });
+        //   localStorage.removeItem(ScopeKey.USER);
+        // }),
+        {
+          await dispatch(logoutThunk());
+        },
     });
   };
 
@@ -48,7 +56,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
     return (
       <div className={style.profile}>
         <Image src={userInfo?.avatar ? userInfo.avatar : Account} className={style.avt} />
-        <p>{userInfo?.first_name || NOT_SET}</p>
+        {/* <p>{userInfo?.name || NOT_SET}</p> */}
         <SVGIcon icon={isOpen ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
       </div>
     );

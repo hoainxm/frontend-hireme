@@ -5,21 +5,17 @@ import { ScopeKey, ScopeValue, SectionID } from '../../../models/enum';
 import { doGetWelcomeInfo, getProfile } from './api';
 
 import { AuthWelcomeInfo } from '../../../app/auth/forms';
-import { UserProfile } from '../../../app/auth/models';
-import { getTenantByIdAPI } from '../../../app/auth/api';
+// import { getTenantByIdAPI } from '../../../app/auth/api';
 import i18n from '../../i18n';
 import { ToastItem } from './model';
-
-interface MainSliceInitial {
-  userInfo: UserProfile | null;
-}
 
 interface SideBarSliceInitial {
   isExpand: boolean;
 }
 
-const initialState: MainSliceInitial = {
-  // userInfo: {
+const initialState = {
+  userInfooooo: null,
+  // {
   //   id: 1,
   //   username: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c_namm0704@gmail.com',
   //   tenant: '6b6b50f9-b2a3-4b40-8f79-2880aee0245c',
@@ -94,12 +90,6 @@ const toastInitial: ToastsInterface = {
   toasts: [],
 };
 
-export const getUserProfile = createAsyncThunk('main/getUserProfile', async () => {
-  const res = await getProfile();
-  const tenantData = await getTenantByIdAPI(res.data?.tenant);
-  return { ...res.data, tenant_logo: tenantData.data.logo };
-});
-
 export const getWelcomeInfo = createAsyncThunk('backgroundData/getWelcomeInfo', async () => {
   const res = await doGetWelcomeInfo();
   return res.data[0];
@@ -118,19 +108,8 @@ export const sideBarSlice = createSlice({
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
-  reducers: {
-    updateUserInfo: (state, action: PayloadAction<UserProfile>) => {
-      state.userInfo = action.payload;
-    },
-    resetUserInfo: (state) => initialState,
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getUserProfile.fulfilled, (state, { payload }) => {
-      state.userInfo = payload;
-      localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.TRUE);
-      localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, state.userInfo?.is_superuser ? ScopeValue.TRUE : ScopeValue.FALSE);
-    });
-  },
+  reducers: {},
+  extraReducers: (builder) => {},
 });
 
 export const langSlice = createSlice({
@@ -195,7 +174,10 @@ export const toastsSlice = createSlice({
   },
 });
 
-export const { updateUserInfo, resetUserInfo } = mainSlice.actions;
+export const {} = mainSlice.actions;
+export default mainSlice.reducer;
+
+// export const { updateUserInfo, resetUserInfo } = mainSlice.actions;
 export const { updateSideBar } = sideBarSlice.actions;
 export const { updateLang } = langSlice.actions;
 export const { updateBackgroundData, resetBackgroundData } = backgroundDataSlice.actions;

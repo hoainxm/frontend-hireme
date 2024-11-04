@@ -1,11 +1,10 @@
 import { HeaderProfile } from '@base/profile/HeaderProfile';
 import React, { FC, useEffect, useState } from 'react';
-import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { Nav, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ButtonSize, ButtonVariant, PageName, PageURL, Palette, ScopeKey, SectionID } from '../../../../../../models/enum';
-import { RootState } from '../../../../../../models/rootReducer';
 import { NAV_ITEMS } from '../../../../../utils/constants';
 import { SVGIcon } from '../../../../assets/icon';
 import { CButton } from '../../../../base';
@@ -16,6 +15,7 @@ import { MegaMenu } from './MegaMenu';
 import { updateSectionDot } from '@layout/slice';
 import useLocalStorage from '@hooks/useLocalStorage';
 import { Alert } from '../../../../../utils/popup';
+import { useAppSelector, RootState } from '../../../../../../store/store';
 
 interface Props {
   active: PageName;
@@ -28,7 +28,9 @@ export const TopNavigation: FC<Props> = (props) => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const userInfo = useSelector((state: RootState) => state.main.userInfo);
+  const isFetchingProfile = useAppSelector((state: RootState) => state.user.isFetchingProfile);
+
+  const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
 
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.HOME_BANNER);
   const [navItems, setNavItems] = useState<Array<NavItem>>(NAV_ITEMS);
@@ -97,7 +99,9 @@ export const TopNavigation: FC<Props> = (props) => {
         );
       })}
       <div className={style.profileContainer}>
-        {userInfo ? (
+        {isFetchingProfile ? (
+          <div>Loading...</div>
+        ) : userInfo ? (
           <HeaderProfile userInfo={userInfo} />
         ) : (
           <CButton

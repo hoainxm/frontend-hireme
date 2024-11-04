@@ -29,8 +29,7 @@
       display: flex;
       justify-content: flex-start;
       margin: 0px auto;
-      color: $white;
-      // color: #0b3299 !important;
+      color: $white !important;
 
       .columnLeftFirstBanner {
         flex: 0 0 100%;
@@ -396,123 +395,301 @@
   }
 }
 
-.updateSection {
+// .updateSection {
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 20px;
+//   align-items: flex-start;
+//   font-family: SVN-Gilroy, sans-serif;
+//   font-weight: 500;
+//   font-size: 20px;
+//   font-style: normal;
+//   line-height: 140%;
+//   padding: 40px 0;
+
+//   .plan {
+//     background-color: white;
+//     border-radius: 15px;
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+//     padding: 0px 20px;
+//     flex: 1;
+//     text-align: center;
+//     transition: transform 0.3s ease;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     min-height: 500px;
+
+//     &:hover {
+//       transform: translateY(-10px);
+//     }
+
+//     .features {
+//       list-style-type: none;
+//       padding: 0;
+//       margin: 15px 0;
+//       text-align: left;
+//       li {
+//         margin: 10px 0;
+//         font-size: 1.3rem;
+//         display: flex;
+//         align-items: center;
+//         justify-content: flex-start;
+//         padding-left: 20px;
+
+//         .icon {
+//           margin-right: 10px;
+//           font-size: 1.5rem;
+//         }
+//       }
+//     }
+
+//     button {
+//       border: none;
+//       padding: 10px 0;
+//       border-radius: 25px;
+//       width: 100%;
+//       color: white;
+//       cursor: pointer;
+//       font-size: 1rem;
+//       transition: background-color 0.3s ease;
+//     }
+
+//     .headerBasic,
+//     .headerStandard,
+//     .headerPremium {
+//       padding: 15px;
+//       border-radius: 15px 15px 0 0;
+//       font-size: 1.6rem;
+//       h3 {
+//         color: white;
+//         font-size: 1.8rem;
+//       }
+//       p {
+//         color: white;
+//         font-size: 1.5rem;
+//       }
+//     }
+
+//     .headerBasic {
+//       background-color: #e74c3c;
+//     }
+
+//     .headerStandard {
+//       background-color: #3498db;
+//     }
+
+//     .headerPremium {
+//       background-color: #2ecc71;
+//     }
+
+//     .basicButton {
+//       background-color: #e74c3c;
+//       &:hover {
+//         background-color: #c0392b;
+//       }
+//     }
+
+//     .standardButton {
+//       background-color: #3498db;
+//       &:hover {
+//         background-color: #2980b9;
+//       }
+//     }
+
+//     .premiumButton {
+//       background-color: #2ecc71;
+//       &:hover {
+//         background-color: #27ae60;
+//       }
+//     }
+//   }
+
+//   @media (max-width: 768px) {
+//     flex-direction: column;
+//     align-items: center;
+
+//     .plan {
+//       width: 90%;
+//       margin-bottom: 20px;
+//     }
+//   }
+// }
+
+.updateSectionContainer {
   display: flex;
+  gap: 30px;
   justify-content: space-between;
-  gap: 20px;
-  align-items: flex-start;
-  font-family: SVN-Gilroy, sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  font-style: normal;
-  line-height: 140%;
-  padding: 40px 0;
+  padding: 50px;
+  background-color: #f0f4f8;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
 
-  .plan {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 0px 20px;
-    flex: 1;
-    text-align: center;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    min-height: 500px;
+.leftSection,
+.rightSection {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
 
-    &:hover {
-      transform: translateY(-10px);
-    }
+.leftSection {
+  width: 60%;
+}
 
-    .features {
-      list-style-type: none;
-      padding: 0;
-      margin: 15px 0;
-      text-align: left;
-      li {
-        margin: 10px 0;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        padding-left: 20px;
+.rightSection {
+  width: 40%;
+}
 
-        .icon {
-          margin-right: 10px;
-          font-size: 1.5rem;
-        }
-      }
-    }
+h4 {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
 
-    button {
-      border: none;
-      padding: 10px 0;
-      border-radius: 25px;
-      width: 100%;
-      color: white;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
+.description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 35px;
+}
 
-    .headerBasic,
-    .headerStandard,
-    .headerPremium {
-      padding: 15px;
-      border-radius: 15px 15px 0 0;
-      font-size: 1.6rem;
-      h3 {
-        color: white;
-        font-size: 1.8rem;
-      }
-      p {
-        color: white;
-        font-size: 1.5rem;
-      }
-    }
+.comparisonWrapper {
+  overflow-x: auto;
+}
 
-    .headerBasic {
-      background-color: #e74c3c;
-    }
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: center;
+  color: #333;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
 
-    .headerStandard {
-      background-color: #3498db;
-    }
+.comparisonTable th {
+  background-color: #e8f0fe;
+  padding: 18px;
+  font-weight: 700;
+  color: #444;
+}
 
-    .headerPremium {
-      background-color: #2ecc71;
-    }
+.comparisonTable td {
+  padding: 18px;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-    .basicButton {
-      background-color: #e74c3c;
-      &:hover {
-        background-color: #c0392b;
-      }
-    }
+.comparisonTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-    .standardButton {
-      background-color: #3498db;
-      &:hover {
-        background-color: #2980b9;
-      }
-    }
+.pricingOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 
-    .premiumButton {
-      background-color: #2ecc71;
-      &:hover {
-        background-color: #27ae60;
-      }
-    }
+  .pricingCard:nth-child(1) {
+    border: 3px solid #00c853;
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
+  .pricingCard:nth-child(2) {
+    border: 3px solid #ffb300;
+  }
 
-    .plan {
-      width: 90%;
-      margin-bottom: 20px;
-    }
+  .pricingCard:nth-child(3) {
+    border: 3px solid #2979ff;
+  }
+}
+
+.pricingCard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+
+  h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.planDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa tên gói theo chiều dọc */
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00b894;
+  margin-bottom: 15px;
+}
+
+.selectButton1 {
+  padding: 12px 24px;
+  background-color: #00c853;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #00a046;
+    transform: scale(1.05);
+  }
+}
+
+.selectButton2 {
+  padding: 12px 24px;
+  background-color: #ffb300;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #ffa000;
+    transform: scale(1.05);
+  }
+}
+
+.selectButton3 {
+  padding: 12px 24px;
+  background-color: #2979ff;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #1c54b2;
+    transform: scale(1.05);
   }
 }

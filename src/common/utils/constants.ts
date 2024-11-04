@@ -80,11 +80,6 @@ export const NORMAL_CHAR_PATTERN: RegExp = /^[A-Za-z0-9\s\p{Letter}']+$/iu;
 
 export const USERNAME_PATTERN = /^[A-Za-z][A-Za-z0-9]+$/;
 
-// export const PASS_PATTERN: RegExp =
-//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
-// export const PASS_PATTERN: RegExp =
-// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]{8,}$/;
-
 export const PASS_PATTERN: RegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
 
@@ -164,7 +159,8 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 
 export const COUNT_DOWN = {
   // Count per second
-  RESEND_EMAIL: 10,
+  RESEND_EMAIL: 30,
+  FORGOT_PASSWORD: 30,
   TOAST_DURATION: 5000,
 };
 
@@ -181,9 +177,15 @@ export const NAV_ITEMS = [
     sectionId: SectionID.HOME_BANNER,
     isActive: true,
   },
+  // {
+  //   name: PageName.PRODUCT,
+  //   url: PageURL.PRODUCT,
+  //   sectionId: SectionID.HOME_BANNER,
+  //   isActive: false,
+  // },
   {
-    name: PageName.PRODUCT,
-    url: PageURL.PRODUCT,
+    name: PageName.COMPANY,
+    url: PageURL.COMPANY,
     sectionId: SectionID.HOME_BANNER,
     isActive: false,
   },
@@ -221,6 +223,24 @@ export const PROFILE_ITEMS = [
     name: PageName.PROFILE_MANAGEMENT,
     url: PageURL.PROFILE_MANAGEMENT,
     icon: 'ManageAccount',
+    isActive: true,
+  },
+  {
+    name: PageName.UPGRADE,
+    url: PageURL.UPGRADE,
+    icon: 'Upgrade',
+    isActive: true,
+  },
+  {
+    name: PageName.SAVE_JOBS,
+    url: PageURL.SAVE_JOBS,
+    icon: 'Save',
+    isActive: true,
+  },
+  {
+    name: PageName.CHANGE_PASSWORD,
+    url: PageURL.SAVE_JOBS,
+    icon: 'ChangePassword',
     isActive: true,
   },
   // {

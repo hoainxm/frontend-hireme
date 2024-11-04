@@ -1,28 +1,23 @@
 /** @format */
 
-import React, { FC, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from "react-router-dom";
-import HTTP404 from "../app/404";
-import { PageURL, ScopeKey, ScopeValue } from "../models/enum";
-import { ADMIN_ROUTE, PRIVATE_ROUTE, PUBLIC_ROUTE } from "./constant";
-import PublicRoute from "./route-manage/PublicRoute";
-import AdminRoute from "./route-manage/AdminRoute";
-import PrivateRoute from "./route-manage/PrivateRoute";
-import PopupLayout from "../common/ui/layout/popup-layout";
+import React, { FC, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+// import HTTP404 from '../app/404';
+import { PageURL, ScopeKey, ScopeValue } from '../models/enum';
+import { ADMIN_ROUTE, PRIVATE_ROUTE, PUBLIC_ROUTE } from './constant';
+import PublicRoute from './route-manage/PublicRoute';
+import AdminRoute from './route-manage/AdminRoute';
+import PrivateRoute from './route-manage/PrivateRoute';
+import PopupLayout from '../common/ui/layout/popup-layout';
 
-import { useSelector } from "react-redux";
-import { RootState } from "@models/rootReducer";
-import { CToast } from "@base/toast";
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/rootReducer';
+import { CToast } from '@base/toast';
 
 const AppRouter: FC = () => {
   const { t } = useTranslation();
-  const { toasts } = useSelector((state: RootState) => state.toasts)
+  const { toasts } = useSelector((state: RootState) => state.toasts);
 
   const checkAdmin = (): boolean => {
     const checkAdmin = localStorage.getItem(ScopeKey.IS_SYSTEM_ADMIN);
@@ -30,7 +25,7 @@ const AppRouter: FC = () => {
   };
 
   useEffect(() => {
-    document.title = t("title.name");
+    document.title = t('title.name');
   }, [t]);
 
   return (
@@ -45,7 +40,7 @@ const AppRouter: FC = () => {
             : ADMIN_ROUTE.map((route, index) => <AdminRoute key={index} {...route} exact />)}
           <Redirect path='/admin' to={PageURL.ADMIN_LOGIN} />
           <Redirect path='/' to={PageURL.HOME} />
-          <Route component={HTTP404} />
+          {/* <Route component={HTTP404} /> */}
         </Switch>
       </Router>
       {toasts.map((toast, index) => (

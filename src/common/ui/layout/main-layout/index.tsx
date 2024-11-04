@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import Footer from './footer';
 import Header from './header';
-import { RootState } from '../../../../models/rootReducer';
+
 import { configViewSetMeta } from '../../../../common/utils/common';
-import { getUserProfile } from '../slice';
+
 import style from './main.module.scss';
 import { useHistory } from 'react-router-dom';
+import { useAppSelector, RootState } from '../../../../store/store';
+import { getUserProfileThunk } from '../../../../store/reducer/userSlice/userThunk';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
@@ -22,17 +24,23 @@ const MainLayout: FC<Props> = (props: Props) => {
   const { children, active } = props;
   const dispatch = useDispatch();
   const history = useHistory();
-  const userInfo = useSelector((state: RootState) => state.main.userInfo);
+  const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
 
+  
   useEffect(() => {
-    if (localStorage.getItem(ScopeKey.IS_SYSTEM_ADMIN) === ScopeValue.TRUE) {
-      history.push(PageURL.ADMIN);
-    } else {
-      !userInfo && dispatch(getUserProfile());
-    }
+    const fetchUserProfile = async () => {
+      if (localStorage.getItem(ScopeKey.IS_SYSTEM_ADMIN) === ScopeValue.TRUE) {
+        history.push(PageURL.ADMIN);
+      } else {
+        if (!userInfo) {
+          await dispatch(getUserProfileThunk());
+        }
+      }
+    };
+
+    fetchUserProfile();
     configViewSetMeta('1.0', '0.3');
-    // eslint-disable-next-line
-  }, []);
+  }, [history, userInfo]);
 
   return (
     <Suspense fallback={'Loading...'}>

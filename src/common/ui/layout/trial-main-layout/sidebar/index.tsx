@@ -4,7 +4,7 @@ import { Nav, Overlay } from 'react-bootstrap';
 import { IconMapName, SVGIcon } from '../../../assets/icon';
 import { PageName, PageURL, Palette } from '@models/enum';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { updateSideBar } from '@layout/slice';
 import { useTranslation } from 'react-i18next';
 import { Shortcut } from '@layout/model';
@@ -125,7 +125,7 @@ export const TrialSidebar: FC<Props> = (props) => {
         },
         {
           name: PageName.SPEECH_TO_TEXT,
-          url: "",
+          url: '',
           isActive: false,
           target: useRef(null),
         },

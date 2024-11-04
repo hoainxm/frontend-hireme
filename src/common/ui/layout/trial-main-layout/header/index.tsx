@@ -5,19 +5,21 @@ import LogoWhite from '@images/LogoWhite.png';
 import { useHistory } from 'react-router-dom';
 import { ButtonSize, ButtonVariant, PageURL, Palette, ScopeKey, SectionID } from '@models/enum';
 import { HeaderProfile } from '@base/profile/HeaderProfile';
-import { useSelector } from 'react-redux';
-import { RootState } from '@models/rootReducer';
+
+import { RootState } from 'store/rootReducer';
 import CButton from '@base/button';
 import { LanguageDropDown } from '@base/dropdown/LanguageDropDown';
 import { useTranslation } from 'react-i18next';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { useAppSelector } from '../../../../../store/store';
 
 interface Props {}
 
 export const TrialHeader: FC<Props> = (props) => {
   const { t } = useTranslation();
 
-  const userInfo = useSelector((state: RootState) => state.main.userInfo);
+  const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
+
   const history = useHistory();
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.HOME_BANNER);
 

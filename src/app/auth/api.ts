@@ -2,18 +2,26 @@ import { BASE_URL } from './../../common/utils/constants';
 /** @format */
 
 import axios, { AxiosPromise } from 'axios';
-import { doGet, doPost } from '../../common/utils/baseAPI';
-import { Tenant } from './models';
-import { LoginFormInputs, RegisterFormInputs, ForgotPasswordFormInputs, ResetPasswordFormInputs, EmailVerifyFormInputs } from './forms';
+import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
+
+import {
+  LoginFormInputs,
+  RegisterFormInputs,
+  ForgotPasswordFormInputs,
+  ResetPasswordFormInputs,
+  EmailVerifyFormInputs,
+  IUserResponse,
+} from './forms';
 
 const authAPIUrl = 'api/v1/auth';
+const userAPIUrl = 'api/v1/users';
 // const authAPIUrl = `${BASE_URL}/api/auth`;
 
 const getToken = () => localStorage.getItem('access_token');
 
-export const getTenantByIdAPI = (id: string): AxiosPromise<Tenant> => {
-  return doGet(`api/tenant/${id}/`);
-};
+// export const getTenantByIdAPI = (id: string): AxiosPromise<Tenant> => {
+//   return doGet(`api/tenant/${id}/`);
+// };
 
 // Cấu hình axios để thêm Authorization header nếu có token
 axios.interceptors.request.use(
@@ -39,15 +47,15 @@ export const generateTokenResetPassword = (data: ForgotPasswordFormInputs): Axio
   return doPost(`${authAPIUrl}/reset-password/token/generate`, data);
 };
 
-export const doCheckResetPassword = (token: string): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/reset-password/token/verify`, { token });
+export const forgotPassword = (data: ForgotPasswordFormInputs): Promise<ApiResponse<ForgotPasswordFormInputs>> => {
+  return doPost(`${userAPIUrl}/forgot-password`, data);
 };
 
-export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/resetPassword`, data);
+export const resetPassword = (data: { token: string; newPassword: string }): Promise<ApiResponse<{ token: string; newPassword: string }>> => {
+  return doPost(`${userAPIUrl}/reset-password`, data);
 };
 
-export const doLogin = (data: LoginFormInputs): AxiosPromise<any> => {
+export const doLogin = (data: LoginFormInputs): Promise<ApiResponse<IUserResponse>> => {
   return doPost(`${authAPIUrl}/login`, data);
 };
 

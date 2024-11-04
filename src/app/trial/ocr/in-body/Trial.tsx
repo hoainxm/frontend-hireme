@@ -7,7 +7,7 @@ import CTable from '@base/table';
 import { useToast } from '@hooks/useToast';
 import Upload from '@images/Upload.svg';
 import { AIFeature, HTTPStatusCode, InbodyStatusCode, Palette, ToastPosition, ToastType } from '@models/enum';
-import { RootState } from '@models/rootReducer';
+import { RootState } from 'store/rootReducer';
 import { AxiosResponse } from 'axios';
 import React, { FC, HTMLAttributes, useRef, useState } from 'react';
 import { Image } from 'react-bootstrap';

@@ -1,35 +1,38 @@
 /** @format */
 
-import { AxiosPromise } from "axios";
-import { doGet, doPost, doPut } from "../../utils/baseAPI";
+import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import { ApiResponse, doGet, doPost, doPut } from '../../utils/baseAPI';
+import { UserProfile } from 'app/auth/models';
 
-export const getProfile = (): AxiosPromise<any> => {
-  return doGet("api/user/info");
+const authAPIUrl = 'api/v1/auth';
+
+export const getProfile = (): Promise<ApiResponse<UserProfile>> => {
+  const token = localStorage.getItem('access_token');
+  return doGet(`${authAPIUrl}/account`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
 
-export const doLogout = (): AxiosPromise<any> => {
-  return doGet("api/auth/logout");
+export const doLogout = (): Promise<ApiResponse<any>> => {
+  return doPost(`${authAPIUrl}/logout`);
 };
 
 export const doGetWelcomeInfo = (): AxiosPromise<any> => {
-  return doGet("api/welcome-info/");
+  return doGet('api/welcome-info/');
 };
 
 export const doCreateWelcomeInfo = (data: FormData): AxiosPromise<any> => {
-  return doPost("api/welcome-info/", data);
+  return doPost('api/welcome-info/', data);
 };
 
-export const doUpdateWelcomeInfo = (
-  id: number,
-  data: FormData
-): AxiosPromise<any> => {
+export const doUpdateWelcomeInfo = (id: number, data: FormData): AxiosPromise<any> => {
   return doPut(`api/welcome-info/${id}/`, data);
 };
 
 export const createTrialAPIKey = (ai_feature_id: number) => {
-  return doPost("api/license/user/trial", { ai_feature_id })
-}
+  return doPost('api/license/user/trial', { ai_feature_id });
+};
 
 export const getListTrialAPIKey = () => {
-  return doGet("api/license/user/api-key/")
-}
+  return doGet('api/license/user/api-key/');
+};

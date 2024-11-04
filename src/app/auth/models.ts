@@ -1,37 +1,23 @@
 /** @format */
 
-export interface Tenant {
-  id: string;
-  name: string;
-  logo: string | null;
-  alias: string;
-  default_pool: string;
-}
-
 export interface UserProfile {
-  avatar: string | null;
+  _id: string;
+  name: string;
   email: string;
-  first_name: string;
-  full_name: string;
-  id: number;
-  is_superuser: boolean;
-  user_id: string;
-  last_name: string;
-  birthday: string;
-  gender: string;
-  address: string;
-  // tenant_logo: string;
-  social_token: string;
-  username: string;
-  last_login: string;
-  default_pool: string;
-  is_blacklist: boolean;
-  // tenant: string;
-  is_reset_password: string;
-  user_roles: Array<UserRole>;
+  role: Role;
+  permissions: Permission[];
+  avatar?: string;
 }
 
-export interface UserRole {
-  role: string;
-  department: string;
+export interface Role {
+  _id: string;
+  name: string;
+}
+
+export interface Permission {
+  _id: string;
+  name: string;
+  apiPath: string;
+  method: string;
+  module: string;
 }

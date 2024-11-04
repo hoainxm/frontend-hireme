@@ -17,7 +17,7 @@ import { Alert } from '../../../../../common/utils/popup';
 import { AxiosError } from 'axios';
 import CButton from '@base/button';
 import { CSSelect } from '@base/select';
-import { RootState } from '../../../../../models/rootReducer';
+import { RootState } from '../../../../../store/rootReducer';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
 import style from './license.module.scss';
 import { useHistory } from 'react-router-dom';
