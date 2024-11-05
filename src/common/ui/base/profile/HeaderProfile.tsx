@@ -1,6 +1,7 @@
 /** @format */
 
 import Account from '@images/Account.svg';
+import AccountBlack from '@images/AccountBlack.svg';
 import React, { FC, useState } from 'react';
 import { Image, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -60,6 +61,14 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
 
   return (
     <NavDropdown id='nav-profile' className={style.profileContainer} onToggle={toggleOpenDropDown} title={renderTitle()}>
+      <div className={style.userBox}>
+        <Image src={userInfo?.avatar ? userInfo.avatar : AccountBlack} className={style.avt} />
+        <div className={style.userInfoBox}>
+          <div className={style.userName}>{userInfo?.name || 'Not Available'}</div>
+          <div className={style.userEmail}>{userInfo?.email || 'Not Available'}</div>
+        </div>
+      </div>
+      <NavDropdown.Divider className={style.divider} />
       {PROFILE_ITEMS.map((product, index) => (
         <NavDropdown.Item key={index} className={style.profileItem} onClick={() => history.push(product.url)}>
           <SVGIcon icon={product.icon as keyof typeof IconMapName} color={Palette.BLUE} size={24} />

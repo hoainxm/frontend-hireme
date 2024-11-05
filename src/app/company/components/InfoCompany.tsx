@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Company } from '../model';
+import { Link, useHistory } from 'react-router-dom';
 import { getInfoCompany } from '../api';
 import style from './InfoCompany.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faMapMarkerAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { Redirect } from 'react-router-dom';
+import { PageURL } from '@models/enum';
 
 interface InfoCompanyProps {
   idCompany: string;
@@ -12,6 +15,7 @@ interface InfoCompanyProps {
 
 const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [infoCompany, setInfoCompany] = useState<Company | null>(null);
 
   const getInfo = async () => {
@@ -50,7 +54,8 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
             <span className={style['info-company__info-container-item-title']}>{t('jobDetail.companyScale')}:</span>
           </div>
           <span className={style['info-company__info-container-item-value']}>
-            {infoCompany.scale} {t('jobDetail.companyStaff')}
+            {infoCompany.scale}
+            {'+'} {t('jobDetail.companyStaff')}
           </span>
         </div>
         <div className={style['info-company__info-container-item']}>
