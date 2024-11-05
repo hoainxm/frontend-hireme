@@ -7,15 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { UserProfile } from '../../../../app/auth/models';
 import { IconMapName, SVGIcon } from '../../../../common/ui/assets/icon';
-import { doLogout } from '../../../../common/ui/layout/api';
-import { makeClientToUnauthorize } from '../../../../common/utils/common';
 import { NOT_SET, PROFILE_ITEMS } from '../../../../common/utils/constants';
 import { Confirm } from '../../../../common/utils/popup';
 import { Palette, ScopeKey, SectionID } from '../../../../models/enum';
 import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/rootReducer';
 import { useAppDispatch } from '../../../../store/store';
 import { logoutThunk } from '../../../../store/reducer/userSlice/userThunk';
 

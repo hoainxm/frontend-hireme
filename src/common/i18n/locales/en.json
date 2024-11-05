@@ -106,7 +106,9 @@
   "field.username": "Username",
   "field.hint.username": "Enter username",
   "field.password": "Password",
+  "field.password.current": "Password current",
   "field.hint.password": "Enter password",
+  "field.hint.password.current": "Enter password current",
   "field.newPassword": "New password",
   "field.hint.newPassword": "Enter new password",
   "field.newCfmPassword": "Confirm new password",
@@ -254,6 +256,7 @@
   "field.email": "Email",
   "field.hint.email": "Enter email",
   "field.cfmPassword": "Confirm password",
+  "field.cfmNewPassword": "Confirm password new",
   "field.hint.birthday": "Chooose your birthday",
   "field.hint.gender": "Choose your gender",
 
@@ -743,5 +746,7 @@
   "timeApplicationJob": "Application deadline",
 
   "error.login": "Email/password is incorrect, please try again.",
-  "forgotPassword.send.success": "Password reset request sent successfully"
+  "forgotPassword.send.success": "Password reset request sent successfully",
+  "user.update-password": "Update Password",
+  "user.update-password.title": "Manage your profile - Edit password"
 }
