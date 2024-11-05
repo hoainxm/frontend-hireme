@@ -52,6 +52,12 @@ export interface RegisterFormInputs {
   address: string;
 }
 
+export interface UpdatePasswordFormInput {
+  email: string;
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}
 export interface ForgotPasswordFormInputs {
   email: string;
 }

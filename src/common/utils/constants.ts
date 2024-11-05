@@ -239,7 +239,7 @@ export const PROFILE_ITEMS = [
   },
   {
     name: PageName.CHANGE_PASSWORD,
-    url: PageURL.SAVE_JOBS,
+    url: PageURL.UPDATE_PASSWORD,
     icon: 'ChangePassword',
     isActive: true,
   },
