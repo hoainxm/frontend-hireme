@@ -8,35 +8,33 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { ForgotPasswordFormInputs } from '../forms';
 import { COUNT_DOWN, EMAIL_PATTERN } from '../../../common/utils/constants';
 import { PageURL } from '../../../models/enum';
-import { generateTokenResetPassword } from '../api';
-import { Alert } from '../../../common/utils/popup';
+import { forgotPassword, generateTokenResetPassword } from '../api';
 import { AxiosError } from 'axios';
 import useCountDown from '../../../common/utils/hooks/useCountDown';
 
 export const ForgotPassword = (): ReactElement => {
   const { t } = useTranslation();
-  const { handleSubmit, register, formState, errors } = useForm<ForgotPasswordFormInputs>();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<ForgotPasswordFormInputs>();
   const { count, startCountdown } = useCountDown();
 
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  const onValid: SubmitHandler<ForgotPasswordFormInputs> = (data, event) => {
-    setIsLoading(true);
-    generateTokenResetPassword(data)
-      .then(() => {
-        setErrorMessage('');
-        setIsLoading(false);
-        startCountdown(COUNT_DOWN.RESEND_EMAIL);
-      })
-      .catch((e: AxiosError) => {
-        event?.target.classList.add('wasvalidated');
-        if (e.response?.status === 400) {
-          setErrorMessage('error.emailNoRegistered');
-        }
-      })
-      .finally(() => setIsLoading(false));
+  const onValid: SubmitHandler<ForgotPasswordFormInputs> = async (data, event) => {
+    try {
+      await forgotPassword(data);
+      startCountdown(COUNT_DOWN.FORGOT_PASSWORD);
+    } catch (error: AxiosError | any) {
+      if (error.response?.status === 400 && error.response.data.message === 'User not found.') {
+        setErrorMessage(t('emailVerify.user.error'));
+      } else {
+        setErrorMessage(t('emailVerify.resend.error'));
+      }
+    }
   };
 
   const onInvalid: SubmitErrorHandler<ForgotPasswordFormInputs> = (_, event) => {
@@ -46,13 +44,6 @@ export const ForgotPassword = (): ReactElement => {
   const checkCountDown = (): string => {
     return count > 0 ? `${t('auth.getLink')} (${t('count.afterCount', { value: count })})` : t('auth.getLink');
   };
-
-  useEffect(() => {
-    if (Object.keys(formState.errors).length > 0) {
-      formRef.current?.classList.add('wasvalidated');
-      setErrorMessage(undefined);
-    }
-  }, [formState, formRef.current]);
 
   return (
     <AuthFormLayout title='auth.forgotPass' subTitle='auth.forgotPass.subTitle' backTo={PageURL.LOGIN} hasLanguageDropDown>
@@ -73,7 +64,7 @@ export const ForgotPassword = (): ReactElement => {
           {errors.email?.type === 'pattern' && <CInputHint>{t('field.error.email')}</CInputHint>}
           {errorMessage && <CInputHint>{t(errorMessage)}</CInputHint>}
         </Form.Group>
-        <CButton type='submit' label={checkCountDown()} className={`${style.btn} mb-0`} disabled={isLoading || count > 0} loading={isLoading} />
+        <CButton type='submit' label={checkCountDown()} className={`${style.btn} mb-0`} disabled={isSubmitting || count > 0} loading={isSubmitting} />
       </Form>
     </AuthFormLayout>
   );

@@ -106,7 +106,9 @@
   "field.username": "Tên đăng nhập",
   "field.hint.username": "Nhập tên đăng nhập",
   "field.password": "Mật khẩu",
+  "field.password.current": "Mật khẩu hiện tại",
   "field.hint.password": "Nhập mật khẩu",
+  "field.hint.password.current": "Nhập mật khẩu hiện tại",
   "field.newPassword": "Mật khẩu mới",
   "field.hint.newPassword": "Nhập mật khẩu mới",
   "field.newCfmPassword": "Xác nhận mật khẩu mới",
@@ -255,6 +257,7 @@
   "field.email": "Email",
   "field.hint.email": "Nhập email",
   "field.cfmPassword": "Nhập lại mật khẩu",
+  "field.cfmNewPassword": "Nhập lại mật khẩu mới",
   "field.hint.birthday": "Chọn ngày sinh",
   "field.hint.gender": "Chọn giới tính",
   "field.hint.address": "Nhập địa chỉ",
@@ -737,5 +740,8 @@
   "error.existEmail": "Email đã tồn tại. Vui lòng thử email khác.",
 
   "timeApplicationJob": "Thời hạn nộp hồ sơ",
-  "error.login": "email/password không chính xác, vui lòng thử lại."
+  "error.login": "email/password không chính xác, vui lòng thử lại.",
+  "forgotPassword.send.success": "Gửi yêu cầu đặt lại mật khẩu thành công",
+  "user.update-password": "Chỉnh sửa mật khẩu",
+  "user.update-password.title": "Quản lý hồ sơ của bạn - Chỉnh sửa mật khẩu"
 }

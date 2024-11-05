@@ -34,6 +34,7 @@ import CompanyList from '../app/company/components/CompanyList';
 import InfoCompany from '../app/company/components/InfoCompany';
 import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
+import { UpdatePassword } from '../app/users/update-password';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -108,6 +109,10 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.PROFILE_MANAGEMENT,
     component: ProfileUser,
+  },
+  {
+    path: PageURL.UPDATE_PASSWORD,
+    component: UpdatePassword,
   },
 ];
 

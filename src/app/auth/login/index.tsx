@@ -83,7 +83,9 @@ const Login: FC = () => {
         </Form.Group>
 
         {loginError && <div className={style.errorMessage}>{loginError}</div>}
-
+        <div className={style.forgotPassword}>
+          <Link to={PageURL.FORGOT_PASSWORD}>{t('auth.forgotPass')}?</Link>
+        </div>
         <CButton
           type='submit'
           label={t('auth.login')}

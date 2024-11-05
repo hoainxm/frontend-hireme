@@ -159,7 +159,8 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 
 export const COUNT_DOWN = {
   // Count per second
-  RESEND_EMAIL: 10,
+  RESEND_EMAIL: 30,
+  FORGOT_PASSWORD: 30,
   TOAST_DURATION: 5000,
 };
 
@@ -238,7 +239,7 @@ export const PROFILE_ITEMS = [
   },
   {
     name: PageName.CHANGE_PASSWORD,
-    url: PageURL.SAVE_JOBS,
+    url: PageURL.UPDATE_PASSWORD,
     icon: 'ChangePassword',
     isActive: true,
   },

@@ -30,6 +30,7 @@ export enum PageURL {
   JOB_DETAIL = '/jobs/:jobId',
   SAVE_JOBS = '/saveJobs/',
   UPGRADE = '/upgrade/',
+  UPDATE_PASSWORD = '/update-password',
 
   COMPANY = '/companies/',
   COMPANY_DETAIL = '/companies/:companyId',
@@ -49,7 +50,7 @@ export enum PageURL {
   LOGIN = '/login',
   REGISTER = '/register',
   FORGOT_PASSWORD = '/forgot-password',
-  RESET_PASSWORD = '/reset-password/:id',
+  RESET_PASSWORD = '/reset-password',
   RESEND_VERIFY_EMAIL = '/resend-verify-email',
   VERIFY_EMAIL = '/verify-email',
   PRIVACY_POLICY = '/privacy-policy',
@@ -99,6 +100,7 @@ export enum PageName {
   PRODUCT = 'user.product',
   ABOUT_US = 'user.aboutUs',
   NEWS = 'user.news',
+  UPDATE_PASSWORD = 'user.updatePassword',
 
   PROFILE_MANAGEMENT = 'user.profile.management',
   LICENSE_MANAGEMENT = 'user.license.management',

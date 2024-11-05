@@ -3,7 +3,7 @@ import { BASE_URL } from './../../common/utils/constants';
 
 import axios, { AxiosPromise } from 'axios';
 import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
-import { UserProfile } from './models';
+
 import {
   LoginFormInputs,
   RegisterFormInputs,
@@ -14,6 +14,7 @@ import {
 } from './forms';
 
 const authAPIUrl = 'api/v1/auth';
+const userAPIUrl = 'api/v1/users';
 // const authAPIUrl = `${BASE_URL}/api/auth`;
 
 const getToken = () => localStorage.getItem('access_token');
@@ -46,12 +47,12 @@ export const generateTokenResetPassword = (data: ForgotPasswordFormInputs): Axio
   return doPost(`${authAPIUrl}/reset-password/token/generate`, data);
 };
 
-export const doCheckResetPassword = (token: string): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/reset-password/token/verify`, { token });
+export const forgotPassword = (data: ForgotPasswordFormInputs): Promise<ApiResponse<ForgotPasswordFormInputs>> => {
+  return doPost(`${userAPIUrl}/forgot-password`, data);
 };
 
-export const doResetPassword = (data: ResetPasswordFormInputs): AxiosPromise<any> => {
-  return doPost(`${authAPIUrl}/resetPassword`, data);
+export const resetPassword = (data: { token: string; newPassword: string }): Promise<ApiResponse<{ token: string; newPassword: string }>> => {
+  return doPost(`${userAPIUrl}/reset-password`, data);
 };
 
 export const doLogin = (data: LoginFormInputs): Promise<ApiResponse<IUserResponse>> => {

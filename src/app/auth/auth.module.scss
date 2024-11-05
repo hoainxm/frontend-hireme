@@ -107,9 +107,9 @@
       margin-bottom: 16px;
     }
 
-    .remember {
+    .forgotPassword {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       @extend .body-text;
 
