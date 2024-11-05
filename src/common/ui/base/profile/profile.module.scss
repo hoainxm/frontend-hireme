@@ -10,6 +10,40 @@
     }
   }
 
+  .userBox {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    align-items: center;
+
+    .avt {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      align-items: center;
+    }
+
+    .userInfoBox {
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+      padding-right: 10px;
+      width: 100%;
+      background-color: white;
+
+      .userName {
+        color: #2a7ef9;
+        font-weight: 600;
+        user-select: none;
+      }
+
+      .userEmail {
+        color: black;
+        font-size: small;
+      }
+    }
+  }
+
   .profile {
     display: flex;
     align-items: center;

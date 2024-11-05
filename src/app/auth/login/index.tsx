@@ -50,7 +50,7 @@ const Login: FC = () => {
   }, [formState]);
 
   return (
-    <AuthFormLayout title='auth.login' loginError={loginError} hasLanguageDropDown>
+    <AuthFormLayout title='auth.login' hasLanguageDropDown>
       <Form onSubmit={handleSubmit(onLoginValid, onLoginInvalid)} noValidate className={style.form}>
         <Form.Group className={style.inputGroup}>
           <Form.Label>{t('field.email')}</Form.Label>
@@ -93,9 +93,7 @@ const Login: FC = () => {
           className={style.btn}
         />
         <div className={style.alternative}>
-          <div></div>
-          <p>{t('auth.alternative')}</p>
-          <div></div>
+          <div></div>`<p>{t('auth.alternative')}</p>`<div></div>
         </div>
         <div className={style.btnSocialGroup}>
           <button type='button' onClick={() => (window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/auth/google`)}>
