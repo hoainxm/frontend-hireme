@@ -4,6 +4,12 @@ export interface UserProfile {
   _id: string;
   name: string;
   email: string;
+  address: string;
+  gender: string;
+  phone: string;
+  dateOfBirth: string;
+  isVerify: string;
+  isPremium: string;
   role: Role;
   permissions: Permission[];
   avatar?: string;

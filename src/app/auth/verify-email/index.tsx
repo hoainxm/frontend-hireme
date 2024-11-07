@@ -17,7 +17,7 @@ export const VerifyEmail = (): ReactElement => {
   const history = useHistory();
 
   const query = useQuery();
-  const tokenCheckVerify = query.get('tokenCheckVerify');
+  const tokenCheckVerify = query.get('token');
   const [isCheckVerifyEmail, setIsCheckVerifyEmail] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -33,7 +33,8 @@ export const VerifyEmail = (): ReactElement => {
     if (tokenCheckVerify) {
       try {
         const res = await doVerifyEmailToken(tokenCheckVerify);
-        if (res && res.data.statusCode === 200) {
+        console.log(res);
+        if (res && res.statusCode === 200) {
           setIsCheckVerifyEmail(true);
         }
       } catch (error: AxiosError | any) {

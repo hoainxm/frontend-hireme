@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { UserProfile } from '../../../../../../app/auth/models';
 
 import { PageURL, ScopeKey } from '../../../../../../models/enum';
-import { resetUserInfo } from '../../../slice';
 import { makeClientToUnauthorize } from '../../../../../utils/common';
 import { Confirm } from '../../../../../utils/popup';
 import { resetPopup } from '../../../popup-layout/slice';

@@ -21,6 +21,7 @@
       height: 40px;
       object-fit: cover;
       align-items: center;
+      border-radius: 999px;
     }
 
     .userInfoBox {
@@ -62,6 +63,7 @@
       @media (min-width: 1366px) {
         width: 48px;
         height: 48px;
+        border-radius: 999px;
       }
     }
 

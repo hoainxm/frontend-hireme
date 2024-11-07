@@ -2,7 +2,7 @@ import React, { useState, useEffect, HTMLAttributes, FC } from 'react';
 import { Input, Button, Form, message, Spin, Avatar } from 'antd';
 import { UserOutlined, MailOutlined } from '@ant-design/icons';
 import { UserProfile } from '../auth/models';
-import { getUserProfile, updateUserProfile } from './api';
+import { getUserProfile } from './api';
 import style from '../profile/profile.module.scss';
 import MainLayout from '@layout/main-layout';
 import { useTranslation } from 'react-i18next';
@@ -19,42 +19,25 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
+  const fetchUserProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await getUserProfile();
+      console.log(response);
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+      message.error('Failed to load user data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      setLoading(true);
-      try {
-        const response = await getUserProfile();
-        setUser(response.data);
-        form.setFieldsValue(response.data);
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
-        message.error('Failed to load user data');
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchUserProfile();
   }, [form]);
 
   const handleEdit = () => {
     setIsEditing(true);
-  };
-
-  const handleSave = async () => {
-    try {
-      const values = form.getFieldsValue();
-      if (user?._id) {
-        await updateUserProfile(user._id, values);
-        setUser(values);
-        setIsEditing(false);
-        message.success('Profile updated successfully!');
-      } else {
-        message.error('User ID is missing.');
-      }
-    } catch (error) {
-      console.error('Failed to update profile:', error);
-      message.error('Failed to save changes');
-    }
   };
 
   if (loading) {
@@ -96,13 +79,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           </Form.Item>
 
           <div className={style['profile-container__button-container']}>
-            {isEditing ? (
-              <Button type='primary' onClick={handleSave}>
-                Lưu
-              </Button>
-            ) : (
-              <Button onClick={handleEdit}>Chỉnh sửa</Button>
-            )}
+            {isEditing ? <Button type='primary'>Lưu</Button> : <Button onClick={handleEdit}>Chỉnh sửa</Button>}
           </div>
         </Form>
       </div>

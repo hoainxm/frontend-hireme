@@ -50,7 +50,7 @@ const Login: FC = () => {
   }, [formState]);
 
   return (
-    <AuthFormLayout title='auth.login' loginError={loginError} hasLanguageDropDown>
+    <AuthFormLayout title='auth.login' hasLanguageDropDown>
       <Form onSubmit={handleSubmit(onLoginValid, onLoginInvalid)} noValidate className={style.form}>
         <Form.Group className={style.inputGroup}>
           <Form.Label>{t('field.email')}</Form.Label>

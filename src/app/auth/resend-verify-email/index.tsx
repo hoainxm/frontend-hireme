@@ -42,7 +42,8 @@ export const ResendVerifyEmail = (): ReactElement => {
       if (error.response?.status === 400 && error.response.data.message === 'User not found.') {
         setErrorMessage(t('emailVerify.user.error'));
       } else {
-        setErrorMessage(t('emailVerify.resend.error'));
+        // setErrorMessage(t('emailVerify.resend.error'));
+        setErrorMessage(error.response.data.message);
       }
     }
   };

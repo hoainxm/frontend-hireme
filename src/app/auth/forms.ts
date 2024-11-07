@@ -35,6 +35,10 @@ export interface User {
   email: string;
   role: Role;
   permissions: any[];
+  address: string;
+  avatar: string;
+  phone: string;
+  dateOfBirth: string;
 }
 
 export interface Role {

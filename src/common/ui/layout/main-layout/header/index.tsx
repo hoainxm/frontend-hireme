@@ -43,7 +43,7 @@ const Header: FC<Props> = (props: Props) => {
     <Navbar sticky='top' className={style.header}>
       <Container className={style.container}>
         <Navbar.Brand className={style.brand}>
-          <Image src={userInfo?.avatar ? userInfo?.avatar : LogoDefault} className={style.logo} onClick={onClickLogo} />
+          <Image src={LogoDefault} className={style.logo} onClick={onClickLogo} />
         </Navbar.Brand>
         {/* <Navbar.Toggle
           className="border-0"
