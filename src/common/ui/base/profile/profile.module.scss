@@ -31,11 +31,11 @@
       padding-right: 10px;
       width: 100%;
       background-color: white;
+      user-select: none;
 
       .userName {
         color: #2a7ef9;
         font-weight: 600;
-        user-select: none;
       }
 
       .userEmail {

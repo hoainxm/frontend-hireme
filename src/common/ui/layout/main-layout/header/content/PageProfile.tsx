@@ -10,7 +10,7 @@ import style from '../header.module.scss';
 import Logout from '../../../../assets/ic/16px/log_out.svg';
 import Setting from '../../../../assets/ic/16px/settings_dark.svg';
 import Help from '../../../../assets/ic/16px/help.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { UserProfile } from '../../../../../../app/auth/models';
 
 import { PageURL, ScopeKey } from '../../../../../../models/enum';

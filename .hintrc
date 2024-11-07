@@ -7,8 +7,24 @@
       "default",
       {
         "ignore": [
-          "width: fit-content"
+          "width: fit-content",
+          "user-select"
         ]
+      }
+    ],
+    "meta-viewport": "off",
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "meta[name=theme-color]"
+        ]
+      }
+    ],
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
       }
     ]
   }

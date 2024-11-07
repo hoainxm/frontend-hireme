@@ -691,3 +691,36 @@ $subtext-color: #666;
   padding: 8px 10px;
   border-radius: 4px;
 }
+
+.no-saved-jobs {
+  text-align: center;
+  padding: 20px;
+
+  &__image {
+    width: 150px; // Kích thước hình ảnh có thể điều chỉnh
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__message {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    padding: 10px 20px;
+    background-color: #032170; // Màu nền nút
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3; // Màu nền khi hover
+    }
+  }
+}
