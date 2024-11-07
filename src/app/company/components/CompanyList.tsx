@@ -4,7 +4,7 @@ import { PageName } from '@models/enum';
 import { getAllCompanies } from '../api';
 import { Company } from '../components/Company';
 import InfoCompany from './InfoCompany';
-import style from './InfoCompany.module.scss';
+import style from './CompanyList.module.scss';
 import { Company as CompanyType } from '../model';
 import CompanyCard from './CompanyCard';
 

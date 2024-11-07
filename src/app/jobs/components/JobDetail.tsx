@@ -53,8 +53,6 @@ const JobDetail: React.FC = () => {
     }
   };
 
-  
-
   useEffect(() => {
     fetchJobDetail();
   }, [jobId]);
@@ -112,6 +110,7 @@ const JobDetail: React.FC = () => {
               <JobCard job={job} />
               <RelatedJobs skills={skills} />
             </div>
+
             <div className={style['job-detail__right-column']}>
               <div className={style['job-detail__company-info']}>
                 <InfoCompany idCompany={idCompany} />

@@ -31,6 +31,10 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
     getInfo();
   }, [idCompany]);
 
+  const handleCompanyClick = () => {
+    history.push(`/companies/${idCompany}`);
+  };
+
   if (!infoCompany) {
     return <p>Loading...</p>;
   }
@@ -65,7 +69,7 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
           </div>
           <span className={style['info-company__info-container-item-value']}>{infoCompany.address}</span>
         </div>
-        <a href='#!' className={style['info-company__link']} target='_blank' rel='noopener noreferrer'>
+        <a onClick={handleCompanyClick} className={style['info-company__link']} target='_blank' rel='noopener noreferrer'>
           {t('jobDetail.goToCompanyPage')} <FontAwesomeIcon icon={faExternalLinkAlt} className='link-icon' />
         </a>
       </div>

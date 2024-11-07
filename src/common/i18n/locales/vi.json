@@ -187,6 +187,7 @@
 
   "companyList": "Danh sách công ty",
   "companyList.title": "Khám phá các công ty hàng đầu và tìm kiếm cơ hội nghề nghiệp phù hợp",
+  "companyDetail.description": "Giới thiệu công ty",
 
   "jobDetail.jobTitle": "Mức lương",
   "jobDetail.descriptionTitle": "Mô tả công việc",
@@ -284,6 +285,7 @@
   "btn.add": "Thêm",
   "btn.new": "Thêm mới",
   "btn.save": "Lưu",
+  "follow.Btn": "Theo dõi công ty",
   "btn.unsave": "Huỷ lưu",
   "btn.savePassword": "Lưu mật khẩu mới",
   "btn.apply": "Áp dụng",
@@ -346,7 +348,9 @@
   "user.savedJobs": "Việc làm đã lưu",
   "user.changePassword": "Đổi mật khẩu",
 
-  "noSavedJobs": "Không có việc làm đã lưu",
+  "noSavedJobs": "Bạn hiện tại không có việc làm đã lưu",
+  "checkJobsPage": "Hãy kiểm tra trang việc làm ngay nhé",
+  "browseJobs": "Đến trang việc làm",
 
   "user.profile.management": "Hồ sơ cá nhân",
   "user.profile.title": "Quản lý hồ sơ của bạn - Chỉnh sửa và lưu thay đổi",
