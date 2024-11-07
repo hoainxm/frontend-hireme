@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 import MainLayout from '@layout/main-layout';
 import { PageName, SectionID } from '@models/enum';
 import JobList from '../components/JobList';
-import { sectionDotSlice } from '@layout/slice';
 
 const SaveJobList: React.FC = () => {
   const { t } = useTranslation();
@@ -37,8 +36,20 @@ const SaveJobList: React.FC = () => {
     setSavedJobs(updatedSavedJobs);
   };
 
+  // if (savedJobs.length === 0) {
+  //   return <div>{t('noSavedJobs')}</div>;
+  // }
+
   if (savedJobs.length === 0) {
-    return <div>{t('noSavedJobs')}</div>;
+    return (
+      <div className={style['no-saved-jobs']}>
+        <h2 className={style['no-saved-jobs__title']}>{t('noSavedJobs')}</h2>
+        <p className={style['no-saved-jobs__message']}>{t('checkJobsPage')}</p>
+        <button className={style['no-saved-jobs__button']} onClick={() => history.push('/jobs')}>
+          {t('browseJobs')}
+        </button>
+      </div>
+    );
   }
 
   return (

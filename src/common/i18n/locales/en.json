@@ -283,6 +283,7 @@
   "btn.add": "Add",
   "btn.new": "Add new",
   "btn.save": "Save",
+  "follow.Btn": "Follow company",
   "btn.unsave": "Unsave",
   "btn.savePassword": "Save new password",
   "btn.apply": "Apply",
@@ -344,7 +345,9 @@
   "user.upgrade": "Upgrade Package",
   "user.changePassword": "Change Password",
 
-  "noSavedJobs": "No saved jobs",
+  "noSavedJobs": "You currently have no saved jobs",
+  "checkJobsPage": "Please check the job page now",
+  "browseJobs": "Go to the job page",
 
   "user.profile.management": "Personal Profile",
   "user.profile.title": "Manage Your Profile - Edit and Save Changes",

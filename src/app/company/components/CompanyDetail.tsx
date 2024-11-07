@@ -11,6 +11,9 @@ import style from '../components/CompanyDetail.module.scss';
 import { Breadcrumb } from 'antd';
 import { RootState, useAppSelector } from '../../../store/store';
 import RelatedJobs from '../../jobs/components/RelatedJobs';
+import CompanyBanner from '@images/AuthBackground1.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMap, faUsers, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface RouteParams {
   companyId: string;
@@ -109,18 +112,45 @@ const CompanyDetail: React.FC = () => {
               ]}
             />
           </div>
+
+          <div className={style['banner']}>
+            <div className={style['cover-wrapper']}>
+              <img draggable='false' src={CompanyBanner} width='100%' alt='' />
+            </div>
+
+            <div className={style['company-logo']}>
+              <img src={`${process.env.REACT_APP_API_URL}/images/company/${company.logo}`} alt='' className={style['logo']} />
+            </div>
+
+            <div className={style['company-infoview']}>
+              <div className={style['detail']}>
+                <h4>{company.name}</h4>
+                <div className={style['box-detail']}>
+                  <div className={style['in-detail']}>
+                    <FontAwesomeIcon icon={faUsers} />
+                    {company.scale}
+                    {'+'} {t('jobDetail.companyStaff')}
+                  </div>
+                  <div className={style['in-detail']}>
+                    <FontAwesomeIcon icon={faMap} />
+                    {company.address}
+                  </div>
+                </div>
+              </div>
+              <div className={style['followBtn']}>
+                <FontAwesomeIcon icon={faPlus} /> {t('follow.Btn')}
+              </div>
+            </div>
+          </div>
+
           <div className={style['company-detail']}>
             <div className={style['company-detail__left-column']}>
               <div className={style['company-detail__description']}>
-                <InfoCompany idCompany={company._id} />
-              </div>
-              <div className={style['company-detail__description']}>
-                <h3>{t('companyDetail.description')}</h3>
+                <h4>{t('companyDetail.description')}</h4>
                 <div dangerouslySetInnerHTML={{ __html: company.description }} />
               </div>
             </div>
             <div className={style['company-detail__right-column']}>
-              <h3>{t('companyDetail.jobs')}</h3>
               <RelatedJobs idCompany={company._id} />
             </div>
           </div>

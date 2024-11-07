@@ -19,27 +19,38 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
   const jobsPerPage = 5;
   const { t } = useTranslation();
   const history = useHistory();
-  console.log('relatedJobs', relatedJobs);
+
   const fetchRelatedJobs = async () => {
-    if (skills && skills.length > 0) {
-      try {
-        const res = await fetchJobBySkill(skills);
-        if (res && res.data) {
-          setRelatedJobs(res.data);
-        } else {
-          console.error('Failed to fetch job by skills:', res.data);
+    try {
+      let jobs: Job[] = [];
+
+      if (idCompany) {
+        const companyJobs = await getJobsByCompany(idCompany);
+        if (companyJobs && companyJobs.data) {
+          jobs = jobs.concat(companyJobs.data);
         }
-      } catch (error) {
-        console.error('Error fetching job by skills:', error);
       }
-    } else {
-      console.log('No skills available for this job');
+
+      if (skills && skills.length > 0) {
+        const skillJobs = await fetchJobBySkill(skills);
+        if (skillJobs && skillJobs.data) {
+          jobs = jobs.concat(skillJobs.data);
+        }
+      }
+
+      const uniqueJobs = Array.from(new Set(jobs.map((job) => job._id)))
+        .map((id) => jobs.find((job) => job._id === id))
+        .filter((job): job is Job => job !== undefined);
+
+      setRelatedJobs(uniqueJobs);
+    } catch (error) {
+      console.error('Error fetching related jobs:', error);
     }
   };
 
   useEffect(() => {
     fetchRelatedJobs();
-  }, []);
+  }, [idCompany, skills]); // Thêm idCompany và skills vào dependency array
 
   if (!relatedJobs || relatedJobs.length === 0) {
     return <div>{t('noData')}</div>;
