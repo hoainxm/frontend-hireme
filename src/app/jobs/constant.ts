@@ -9,7 +9,7 @@ export const SkillsOptions = [
   'SASS',
   'LESS',
   'TailwindCSS',
-  'Bootstrap', // Front-end
+  'Bootstrap', 
   'NodeJS',
   'ExpressJS',
   'NestJS',
@@ -18,13 +18,13 @@ export const SkillsOptions = [
   'Ruby on Rails',
   'Django',
   'Spring Boot',
-  'ASP.NET', // Back-end
+  'ASP.NET',
   'React Native',
   'Flutter',
   'Swift',
   'Kotlin',
   'Java (Android)',
-  'Objective-C', // Mobile
+  'Objective-C',
   'AWS',
   'Azure',
   'Google Cloud Platform',
@@ -32,36 +32,36 @@ export const SkillsOptions = [
   'Kubernetes',
   'CI/CD',
   'Jenkins',
-  'GitLab CI', // DevOps
+  'GitLab CI', 
   'MySQL',
   'PostgreSQL',
   'MongoDB',
   'Redis',
   'Oracle',
   'SQL Server',
-  'SQLite', // Database
+  'SQLite', 
   'Cybersecurity',
   'Penetration Testing',
   'Ethical Hacking',
-  'OWASP', // Security
+  'OWASP', 
   'Python',
   'R',
   'TensorFlow',
   'PyTorch',
   'Scikit-learn',
   'Data Science',
-  'Machine Learning', // AI/ML & Data Science
+  'Machine Learning', 
   'Solidity',
   'Web3.js',
   'Ethereum',
-  'Smart Contracts', // Blockchain & Web3
+  'Smart Contracts', 
   'Selenium',
   'JUnit',
   'TestNG',
   'Mocha',
   'Chai',
   'Jest',
-  'Cypress', // Testing
+  'Cypress', 
 ];
 
 export const experienceOptions = ['Intern', 'Fresher', 'Junior', 'Mid-level', 'Senior', 'Lead'];
