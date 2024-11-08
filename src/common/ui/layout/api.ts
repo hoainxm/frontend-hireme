@@ -6,13 +6,6 @@ import { UserProfile } from 'app/auth/models';
 
 const authAPIUrl = 'api/v1/auth';
 
-export const getProfile = (): Promise<ApiResponse<UserProfile>> => {
-  const token = localStorage.getItem('access_token');
-  return doGet(`${authAPIUrl}/account`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-};
-
 export const doLogout = (): Promise<ApiResponse<any>> => {
   return doPost(`${authAPIUrl}/logout`);
 };

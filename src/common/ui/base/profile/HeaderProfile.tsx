@@ -50,10 +50,16 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
   };
 
   const renderTitle = () => {
+    const avatarSrc =
+      userInfo && userInfo.avatar?.startsWith('http')
+        ? userInfo.avatar
+        : userInfo
+        ? `${process.env.REACT_APP_API_URL}/images/avatar/${userInfo.avatar || ''}`
+        : Account;
+
     return (
       <div className={style.profile}>
-        <Image src={userInfo?.avatar ? userInfo.avatar : Account} className={style.avt} />
-        {/* <p>{userInfo?.name || NOT_SET}</p> */}
+        <Image src={avatarSrc} className={style.avt} />
         <SVGIcon icon={isOpen ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
       </div>
     );
@@ -61,13 +67,22 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
 
   return (
     <NavDropdown id='nav-profile' className={style.profileContainer} onToggle={toggleOpenDropDown} title={renderTitle()}>
-      <div className={style.userBox}>
-        <Image src={userInfo?.avatar ? userInfo.avatar : AccountBlack} className={style.avt} />
-        <div className={style.userInfoBox}>
-          <div className={style.userName}>{userInfo?.name || 'Not Available'}</div>
-          <div className={style.userEmail}>{userInfo?.email || 'Not Available'}</div>
+      {userInfo !== null && (
+        <div className={style.userBox}>
+          <Image
+            src={
+              userInfo.avatar?.startsWith('http')
+                ? userInfo.avatar
+                : `${process.env.REACT_APP_API_URL}/images/avatar/${userInfo.avatar || ''}` || AccountBlack
+            }
+            className={style.avt}
+          />
+          <div className={style.userInfoBox}>
+            <div className={style.userName}>{userInfo?.name || 'Not Available'}</div>
+            <div className={style.userEmail}>{userInfo?.email || 'Not Available'}</div>
+          </div>
         </div>
-      </div>
+      )}
       <NavDropdown.Divider className={style.divider} />
       {PROFILE_ITEMS.map((product, index) => (
         <NavDropdown.Item key={index} className={style.profileItem} onClick={() => history.push(product.url)}>
