@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import FavoriteButton from '../components/FavoriteButton';
 import dayjs from 'dayjs';
 import { Job } from '../model';
-import ApplyButton from './ApplyButton';
+import ApplyButton from '../applyButton/ApplyButton';
 
 interface JobCardProps {
   job: Job;
