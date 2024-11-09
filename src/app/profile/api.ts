@@ -1,11 +1,10 @@
-import { BASE_URL } from '../../common/utils/constants';
+import { BASE_URL, fileAPIUrl, resumeAPIUrl, userAPIUrl } from '../../common/utils/constants';
 /** @format */
 
 import axios, { AxiosPromise } from 'axios';
-import { doGet } from '../../common/utils/baseAPI';
-import { UserProfile } from 'app/auth/models';
-
-const userAPIUrl = 'api/v1/users';
+import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
+import { UserProfile } from '../../app/auth/models';
+import { Resume } from './model';
 
 const getToken = () => localStorage.getItem('access_token');
 
@@ -20,6 +19,21 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const getUserProfile = async (): Promise<{ data: UserProfile }> => {
+export const getUserProfile = async (): Promise<ApiResponse<UserProfile>> => {
   return doGet(`${userAPIUrl}/profile`);
+};
+
+export const getResumeByUser = async (): Promise<ApiResponse<Resume[]>> => {
+  return doPost(`${resumeAPIUrl}/by-user`);
+};
+
+export const uploadAvatar = async (file: File): Promise<any> => {
+  const formData = new FormData();
+  formData.append('fileUpload', file);
+  return doPost(`${fileAPIUrl}/upload-avatar`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      folder_type: 'avatar',
+    },
+  });
 };

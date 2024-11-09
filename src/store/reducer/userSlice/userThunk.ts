@@ -19,7 +19,6 @@ export const loginThunk = createAsyncThunk('user/login', async (payload: LoginFo
 export const getUserProfileThunk = createAsyncThunk('user/getUserProfile', async (_, { rejectWithValue }) => {
   try {
     const res = await getUserProfile();
-
     return res;
   } catch (error) {
     return rejectWithValue('Failed to fetch user profile');

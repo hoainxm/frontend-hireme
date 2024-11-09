@@ -13,6 +13,7 @@ export interface UserProfile {
   role: Role;
   permissions: Permission[];
   avatar?: string;
+  skills: string[];
 }
 
 export interface Role {
