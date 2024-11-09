@@ -7,6 +7,7 @@ import InfoCompany from './InfoCompany';
 import style from './CompanyList.module.scss';
 import { Company as CompanyType } from '../model';
 import CompanyCard from './CompanyCard';
+import ApplyButton from '../../../app/jobs/components/ApplyButton';
 
 interface CompanyListProps {
   listCompanies?: CompanyType[];

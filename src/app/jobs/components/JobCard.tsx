@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import FavoriteButton from '../components/FavoriteButton';
 import dayjs from 'dayjs';
 import { Job } from '../model';
+import ApplyButton from './ApplyButton';
 
 interface JobCardProps {
   job: Job;
@@ -43,11 +44,11 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         <div className={style['job-card__sub-details']}>
           <span className={style['job-card__sub-details-title']}>
             <FontAwesomeIcon icon={faCalendarAlt} className={style['job-card__sub-details-icon']} />
-            Hạn nộp hồ sơ: {dayjs(job.endDate).format('DD/MM/YYYY')}
+            {t('timeApplicationJob')} {dayjs(job.endDate).format('DD/MM/YYYY')}
           </span>
         </div>
 
-        <div className={style['job-card__action-buttons']}>
+        {/* <div className={style['job-card__action-buttons']}>
           {isJobExpired(job.endDate) ? (
             <button className={style['job-card__action-buttons-expired-button']}>
               <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
@@ -57,7 +58,17 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
               <FontAwesomeIcon icon={faPaperPlane} /> {t('jobDetail.applyNow')}
             </button>
           )}
+          <FavoriteButton job={job} />
+        </div> */}
 
+        <div className={style['job-card__action-buttons']}>
+          {isJobExpired(job.endDate) ? (
+            <button className={`${style.button} ${style['button--expired']}`}>
+              <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
+            </button>
+          ) : (
+            <ApplyButton jobname={job.name} />
+          )}
           <FavoriteButton job={job} />
         </div>
       </div>
