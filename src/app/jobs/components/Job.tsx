@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../jobs.module.scss';
 import { Job as JobType } from '../../jobs/model';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from 'antd';
 import { Skills } from '@icon/icon';
+import ApplyButton from './ApplyButton';
 
 interface JobProps {
   job: JobType;
@@ -18,9 +19,17 @@ interface JobProps {
 const Job: React.FC<JobProps> = ({ job, isJobExpired, getRemainingDays }) => {
   const history = useHistory();
   const { t } = useTranslation();
+  const [showApplyPopup, setShowApplyPopup] = useState(false);
 
   const handleJobClick = () => {
     history.push(`/jobs/${job._id}`);
+  };
+
+  const handleApplyClick = () => {
+    history.push({
+      pathname: `/jobs/${job._id}`,
+      state: { openApplyPopup: true },
+    });
   };
 
   return (
@@ -49,9 +58,10 @@ const Job: React.FC<JobProps> = ({ job, isJobExpired, getRemainingDays }) => {
             <strong>{getRemainingDays(job.endDate)}</strong> {t('timeRemaining')}
           </div>
           <div className={style.groupBtnAct}>
-            <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
+            {/* <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
-            </button>
+            </button> */}
+            <ApplyButton jobname={job.name} disabled={isJobExpired(job.endDate)} onClick={handleApplyClick} />
             <FavoriteButton job={job} />
           </div>
         </div>

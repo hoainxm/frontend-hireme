@@ -746,7 +746,7 @@
 
   "fail.title": "Failed",
   "error.existEmail": "Email already exists. Please try another email.",
-  "timeApplicationJob": "Application deadline",
+  "timeApplicationJob": "Application deadline: ",
 
   "error.login": "Email/password is incorrect, please try again.",
   "forgotPassword.send.success": "Password reset request sent successfully",
