@@ -3,7 +3,6 @@ import style from './applyButton.module.scss';
 import { Form } from 'react-bootstrap';
 import { CCollapse, CPanel } from '@base/collapse';
 import { useTranslation } from 'react-i18next';
-import Job from './Job';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   jobname: string;

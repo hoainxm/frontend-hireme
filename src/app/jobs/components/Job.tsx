@@ -8,7 +8,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from 'antd';
 import { Skills } from '@icon/icon';
-import ApplyButton from './ApplyButton';
+import ApplyButton from '../applyButton/ApplyButton';
 
 interface JobProps {
   job: JobType;
