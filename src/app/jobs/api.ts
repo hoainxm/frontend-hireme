@@ -1,8 +1,7 @@
+import { jobsAPIUrl } from '../../common/utils/constants';
 import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
 import { Job } from './model';
 /** @format */
-
-const jobsAPIUrl = 'api/v1/jobs';
 
 export const getAllJobs = (): Promise<ApiResponse<Job[]>> => {
   return doGet(`${jobsAPIUrl}/getAllJobs`);

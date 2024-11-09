@@ -1,0 +1,97 @@
+$color-background: #f7f9fc;
+$color-card-background: #ffffff;
+$color-shadow: rgba(0, 0, 0, 0.12);
+$color-divider: #eaeaea;
+$color-primary: #1890ff;
+$color-secondary: #6c757d;
+$color-text: #3a3a3a;
+
+.history-apply {
+  padding: 30px;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: $color-background;
+  border-radius: 10px;
+
+  &__title {
+    text-align: center;
+    color: $color-text;
+    margin-bottom: 30px;
+  }
+
+  &__list-item {
+    margin-bottom: 20px;
+  }
+
+  &__card {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px $color-shadow;
+    padding: 20px;
+    background-color: $color-card-background;
+    position: relative;
+
+    &__body {
+      padding: 16px 24px;
+    }
+
+    &--status-pending {
+      border-left: 5px solid $color-primary;
+    }
+
+    &--status-rejected {
+      border-left: 5px solid #f5222d;
+    }
+
+    &--status-approved {
+      border-left: 5px solid #52c41a;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__job-title {
+      margin: 0;
+      color: $color-text;
+    }
+
+    &__company {
+      color: $color-secondary;
+    }
+
+    &__status {
+      padding-left: 10px;
+      font-size: 14px;
+      color: darken($color-secondary, 20%);
+    }
+  }
+
+  &__btn-view-cv {
+    font-weight: bold;
+    border-radius: 20px;
+  }
+
+  &__collapse {
+    margin-top: 15px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 12px;
+
+    &-header {
+      font-weight: bold;
+      color: $color-text;
+    }
+  }
+
+  &__timeline {
+    padding-left: 10px;
+
+    &-item-time {
+      font-size: 13px;
+      color: $color-secondary;
+    }
+  }
+}

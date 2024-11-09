@@ -36,12 +36,10 @@ const JobDetail: React.FC = () => {
   const fetchJobDetail = async () => {
     try {
       const response = await fetchJobById(jobId);
-      console.log('response', response.data);
       if (response.statusCode === 200) {
         setJob(response.data);
         setIdCompany(response.data.company._id);
         setSkills(response.data.skills);
-        console.log('response.data.skills', response.data.skills);
       } else {
         setError('Failed to fetch job details.');
       }

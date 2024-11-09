@@ -1,4 +1,4 @@
-import { BASE_URL } from './../../common/utils/constants';
+import { authAPIUrl, BASE_URL, userAPIUrl } from './../../common/utils/constants';
 /** @format */
 
 import axios, { AxiosPromise } from 'axios';
@@ -13,8 +13,6 @@ import {
   IUserResponse,
 } from './forms';
 
-const authAPIUrl = 'api/v1/auth';
-const userAPIUrl = 'api/v1/users';
 // const authAPIUrl = `${BASE_URL}/api/auth`;
 
 const getToken = () => localStorage.getItem('access_token');
