@@ -22,14 +22,18 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
 
+  // useEffect(() => {
+  //   if (isSavedJobs) {
+  //     const savedJobsFromStorage = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+  //     setCurrentJobs(savedJobsFromStorage);
+  //   } else {
+  //     setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
+  //   }
+  // }, [isSavedJobs, listJobs, currentPage, indexOfFirstJob, indexOfLastJob]);
+
   useEffect(() => {
-    if (isSavedJobs) {
-      const savedJobsFromStorage = JSON.parse(localStorage.getItem('savedJobs') || '[]');
-      setCurrentJobs(savedJobsFromStorage);
-    } else {
-      setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
-    }
-  }, [isSavedJobs, listJobs, currentPage, indexOfFirstJob, indexOfLastJob]);
+    setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
+  }, [listJobs, currentPage, indexOfFirstJob, indexOfLastJob]);
 
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -49,16 +53,22 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
 
   return (
     <div className={style.jobListContainer}>
-      <div className={style.jobList}>
-        {listJobs && totalJobs > 0 && (
-          <div className={style.jobCount}>
-            {t('found')} {totalJobs} {t('job.match')}
-          </div>
-        )}
-        {currentJobs.map((job) => (
-          <Job key={job._id} job={job} isJobExpired={isJobExpired} getRemainingDays={getRemainingDays} />
-        ))}
-      </div>
+      {listJobs.length === 0 ? (
+        <div className={style.noResults}>
+          {t('noJobsFound')} {/* Hiển thị thông báo không có công việc phù hợp */}
+        </div>
+      ) : (
+        <div className={style.jobList}>
+          {listJobs && totalJobs > 0 && (
+            <div className={style.jobCount}>
+              {t('found')} {totalJobs} {t('job.match')}
+            </div>
+          )}
+          {currentJobs.map((job) => (
+            <Job key={job._id} job={job} isJobExpired={isJobExpired} getRemainingDays={getRemainingDays} />
+          ))}
+        </div>
+      )}
 
       <div className={style.pagination}>
         {Number.isFinite(totalPages) &&

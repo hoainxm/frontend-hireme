@@ -1,6 +1,6 @@
 import React, { FC, useState, HTMLAttributes, ChangeEvent } from 'react';
 import style from './applyButton.module.scss';
-import { Form } from 'react-bootstrap';
+import { Form, NavDropdown } from 'react-bootstrap';
 import { CCollapse, CPanel } from '@base/collapse';
 import { useTranslation } from 'react-i18next';
 
@@ -34,7 +34,7 @@ export const ApplyButton: FC<Props> = ({ jobname }) => {
 
   return (
     <>
-      <button className={style.applyButton} onClick={togglePopup}>
+      <button className={`${style.button} ${style['button--apply']}`} onClick={togglePopup}>
         {t('jobDetail.applyNow')}
       </button>
 
@@ -42,7 +42,7 @@ export const ApplyButton: FC<Props> = ({ jobname }) => {
         <div className={style.modalOverlay}>
           <div className={style.modal}>
             <div className={style.modalHeader}>
-              <h4>{`${t('applyJobTitle')} ${' '} ${jobname}`}</h4>
+              <h4>{`${t('applyJobTitle')} ${jobname}`}</h4>
               <button className={style.closeButton} onClick={togglePopup}>
                 &times;
               </button>
@@ -73,7 +73,7 @@ export const ApplyButton: FC<Props> = ({ jobname }) => {
                       type='file'
                       id='cvFile'
                       className={style.fileInput}
-                      accept='.doc, .docx, .pdf'
+                      accept='.pdf'
                       title={t('uploadCVTitle')}
                       onChange={handleFileUpload}
                     />
@@ -90,6 +90,7 @@ export const ApplyButton: FC<Props> = ({ jobname }) => {
               </CCollapse>
 
               <div className={style.textAreaContainer}>
+                <NavDropdown.Divider className={style.divider} />
                 <label htmlFor='coverLetter' className={style.label}>
                   {t('coverLetterLabel')}
                 </label>
@@ -104,14 +105,14 @@ export const ApplyButton: FC<Props> = ({ jobname }) => {
               </div>
 
               <div className={style.submitContainer}>
-                <button className={style.submitButton} onClick={handleSubmit}>
-                  {t('submitApplication')}
-                </button>
-                <button className={style.cancelButton} onClick={togglePopup}>
+                <button className={`${style.button} ${style['button--cancel']}`} onClick={togglePopup}>
                   {t('cancel')}
                 </button>
-                {isSubmitted && <p className={style.successMessage}>{t('applicationSubmitted')}</p>}
+                <button className={`${style.button} ${style['button--submit']}`} onClick={handleSubmit}>
+                  {t('submitApplication')}
+                </button>
               </div>
+              {isSubmitted && <p className={style.successMessage}>{t('applicationSubmitted')}</p>}
             </div>
           </div>
         </div>

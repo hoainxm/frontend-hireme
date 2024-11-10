@@ -7,6 +7,7 @@ import FavoriteButton from './FavoriteButton';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
+import { Tooltip } from 'antd';
 
 interface RelatedJobsProps {
   skills?: string[];
@@ -94,17 +95,23 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
                 alt={`${job.company.name} logo`}
                 className={style['related-jobs__item-logo']}
               />
+
               <div className={style['related-jobs__details']}>
-                <div className={style['related-jobs__item-title']}>{job.name}</div>
+                {/* <div className={style['related-jobs__item-title']}>{job.name}</div> */}
+                <Tooltip title={job.name}>
+                  <div className={`${style['related-jobs__item-title']} ${style.truncated}`}>{job.name}</div>
+                </Tooltip>
                 <p className={style['related-jobs__item-company']}>{job.company.name}</p>
                 <p className={style['related-jobs__item-location']}>{job.location}</p>
               </div>
-              <div className={style['related-jobs__group-btn']}>
-                <button className={style['related-jobs__group-btn-apply']} disabled={isJobExpired(job.endDate)}>
-                  {t('jobDetail.applyNow')}
-                </button>
+
+              <button className={style['related-jobs__group-btn-apply']} disabled={isJobExpired(job.endDate)}>
+                {t('jobDetail.applyNow')}
+              </button>
+
+              {/* <div className={style['related-jobs__group-btn']}>
                 <FavoriteButton job={job} />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

@@ -26,6 +26,7 @@ export const Jobs: FC<Props> = ({ sectionId }) => {
     try {
       const result = await getAllJobs();
       setJobs(result.data);
+      setFilteredJobs(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -38,23 +39,23 @@ export const Jobs: FC<Props> = ({ sectionId }) => {
   const handleFilter = (filters: any) => {
     let filtered = jobs;
 
-    if (filters.location) {
-      filtered = filtered.filter((job) => job.location.includes(filters.location));
+    if (filters.position) {
+      filtered = filtered.filter((job) => job.name.includes(filters.position));
     }
 
-    if (filters.level) {
-      filtered = filtered.filter((job) => job.level === filters.level);
-    }
-
-    if (filters.minSalary) {
-      filtered = filtered.filter((job) => job.salary >= filters.minSalary);
+    if (filters.experience) {
+      filtered = filtered.filter((job) => job.experience === filters.experience);
     }
 
     if (filters.skills && filters.skills.length > 0) {
-      filtered = filtered.filter((job) => filters.skills.every((skill: string) => job.skills.includes(skill)));
+      filtered = filtered.filter((job) => filters.skills.some((skill: string) => job.skills.includes(skill)));
     }
 
-    setFilteredJobs(filtered);
+    if (filters.province) {
+      filtered = filtered.filter((job) => job.location === filters.province);
+    }
+
+    setFilteredJobs(filtered.length > 0 ? filtered : []);
   };
 
   return (

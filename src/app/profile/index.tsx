@@ -1,8 +1,8 @@
 import React, { useState, useEffect, HTMLAttributes, FC, useRef } from 'react';
-import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message } from 'antd';
-import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
+import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message, List } from 'antd';
+import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined, FilePdfOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { UserProfile } from '../auth/models';
-import { getUserProfile, uploadAvatar } from './api';
+import { getUserProfile, uploadAvatar, uploadCV, getResumeByUser } from './api';
 import style from '../profile/profile.module.scss';
 import modalStyle from './UploadAvatarModal.module.scss';
 import MainLayout from '@layout/main-layout';
@@ -11,6 +11,7 @@ import { PageName } from '@models/enum';
 import { Account } from '@icon/icon';
 import { SkillsOptions } from '../../app/jobs/constant';
 import HistoryApply from './HistoryApply';
+import { Resume } from '../profile/model';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -29,6 +30,10 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const fileInputRefCv = useRef<HTMLInputElement>(null);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [uploadedCVs, setUploadedCVs] = useState<any[]>([]);
+
   const fetchInfo = async () => {
     try {
       const res = await getUserProfile();
@@ -44,12 +49,31 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     }
   };
 
+  const fetchUploadedCVs = async () => {
+    try {
+      const response = await getResumeByUser();
+      console.log('Data from getResumeByUser:', response.data);
+      setUploadedCVs(response.data || []);
+    } catch (error) {
+      console.error('Không thể tải danh sách CV:', error);
+    }
+  };
+
   useEffect(() => {
     fetchInfo();
+    fetchUploadedCVs();
   }, []);
+
+  useEffect(() => {
+    console.log('Uploaded CVs:', uploadedCVs);
+  }, [uploadedCVs]);
 
   const handleAvatarClick = () => {
     setIsModalVisible(true);
+  };
+
+  const handleCvUploadClick = () => {
+    fileInputRefCv.current?.click();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +84,29 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCvFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === 'application/pdf') {
+      setCvFile(file);
+    } else {
+      message.error('Vui lòng tải lên một file PDF.');
+    }
+  };
+
+  const handleConfirmUploadCv = async () => {
+    if (cvFile) {
+      try {
+        await uploadCV(cvFile);
+        message.success('CV đã được tải lên thành công.');
+        setCvFile(null);
+        await fetchUploadedCVs();
+      } catch (error) {
+        message.error('Không thể tải lên CV. Vui lòng thử lại.');
+        console.error(error);
+      }
     }
   };
 
@@ -106,15 +153,70 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     setIsImagePreviewVisible(false);
   };
 
+  const handleDeleteCV = (cvId: string) => {
+    setUploadedCVs((prevCVs) => prevCVs.filter((cv) => cv.id !== cvId));
+    message.success('CV đã được xóa khỏi danh sách.');
+  };
+
   const renderContent = () => {
     switch (selectedMenu) {
       case 'history':
         return <HistoryApply />;
       case 'cv':
         return (
+          // <Card>
+          //   <Title level={4}>CV của tôi</Title>
+          //   <p>Nội dung CV sẽ được hiển thị tại đây</p>
+          //   <Button icon={<UploadOutlined />} onClick={handleCvUploadClick} className={style['upload-cv-button']} type='primary'>
+          //     Tải lên CV
+          //   </Button>
+          //   <input type='file' ref={fileInputRefCv} style={{ display: 'none' }} accept='application/pdf' onChange={handleCvFileChange} />
+          //   {cvFile && (
+          //     <div style={{ marginTop: '8px' }}>
+          //       <p>{cvFile.name}</p>
+          //       <Button type='primary' onClick={handleConfirmUploadCv} icon={<FilePdfOutlined />} style={{ marginTop: '8px' }}>
+          //         Xác nhận tải lên
+          //       </Button>
+          //     </div>
+          //   )}
+          // </Card>
           <Card>
             <Title level={4}>CV của tôi</Title>
-            <p>Nội dung CV sẽ được hiển thị tại đây</p>
+            <Button icon={<UploadOutlined />} onClick={handleCvUploadClick} type='primary'>
+              Tải lên CV
+            </Button>
+            <input type='file' ref={fileInputRefCv} style={{ display: 'none' }} accept='application/pdf' onChange={handleCvFileChange} />
+            {cvFile && (
+              <div style={{ marginTop: '8px' }}>
+                <p>{cvFile.name}</p>
+                <Button type='primary' onClick={handleConfirmUploadCv} icon={<FilePdfOutlined />} style={{ marginTop: '8px' }}>
+                  Xác nhận tải lên
+                </Button>
+              </div>
+            )}
+            <Divider />
+            <Title level={5}>Danh sách CV đã tải lên</Title>
+            <List
+              dataSource={uploadedCVs}
+              renderItem={(cv) => (
+                <List.Item
+                  actions={[
+                    <Button type='link' icon={<DownloadOutlined />} href={cv.url} target='_blank' download>
+                      Tải xuống
+                    </Button>,
+                    <Button type='link' icon={<DeleteOutlined />} onClick={() => handleDeleteCV(cv._id)}>
+                      Xóa khỏi danh sách
+                    </Button>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    avatar={<FilePdfOutlined style={{ fontSize: '24px', color: '#1890ff' }} />}
+                    title={`Vị trí: ${cv.jobId?.name || 'Không rõ'}`}
+                    description={`Ngày tải lên: ${new Date(cv.createdAt).toLocaleDateString()}`}
+                  />
+                </List.Item>
+              )}
+            />
           </Card>
         );
       default:

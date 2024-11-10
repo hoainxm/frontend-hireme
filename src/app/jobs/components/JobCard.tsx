@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faMapMarkerAlt, faHourglass, faCalendarAlt, faPaperPlane, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import style from './JobCard.module.scss';
