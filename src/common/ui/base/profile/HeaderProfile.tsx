@@ -59,7 +59,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
 
     return (
       <div className={style.profile}>
-        <Image src={avatarSrc} className={style.avt} />
+        <Image key={avatarSrc} src={avatarSrc} className={style.avt} />
         <SVGIcon icon={isOpen ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
       </div>
     );

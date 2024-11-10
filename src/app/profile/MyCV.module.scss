@@ -1,0 +1,68 @@
+.my-cv {
+  &__container {
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  &__upload-button {
+    margin-bottom: 16px;
+  }
+
+  &__list {
+    margin-top: 16px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__icon {
+    font-size: 24px;
+    color: #1890ff;
+  }
+
+  &__details {
+    flex-grow: 1;
+    padding: 0 16px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__modal-content {
+    text-align: center;
+  }
+
+  &__file-name {
+    font-weight: bold;
+    margin-top: 8px;
+    color: #333;
+  }
+
+  &__upload-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  &__confirm-button {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    color: white;
+
+    &:hover {
+      background-color: #73d13d;
+      border-color: #73d13d;
+    }
+  }
+}

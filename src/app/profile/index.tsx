@@ -11,7 +11,9 @@ import { PageName } from '@models/enum';
 import { Account } from '@icon/icon';
 import { SkillsOptions } from '../../app/jobs/constant';
 import HistoryApply from './HistoryApply';
-import { Resume } from '../profile/model';
+import { useAppDispatch } from '../../store/store';
+import { getUserProfileThunk } from '../../store/reducer/userSlice/userThunk';
+import MyCV from './MyCV';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -30,9 +32,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fileInputRefCv = useRef<HTMLInputElement>(null);
-  const [cvFile, setCvFile] = useState<File | null>(null);
-  const [uploadedCVs, setUploadedCVs] = useState<any[]>([]);
+  const dispatch = useAppDispatch();
 
   const fetchInfo = async () => {
     try {
@@ -49,31 +49,12 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     }
   };
 
-  const fetchUploadedCVs = async () => {
-    try {
-      const response = await getResumeByUser();
-      console.log('Data from getResumeByUser:', response.data);
-      setUploadedCVs(response.data || []);
-    } catch (error) {
-      console.error('Không thể tải danh sách CV:', error);
-    }
-  };
-
   useEffect(() => {
     fetchInfo();
-    fetchUploadedCVs();
   }, []);
-
-  useEffect(() => {
-    console.log('Uploaded CVs:', uploadedCVs);
-  }, [uploadedCVs]);
 
   const handleAvatarClick = () => {
     setIsModalVisible(true);
-  };
-
-  const handleCvUploadClick = () => {
-    fileInputRefCv.current?.click();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,29 +65,6 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
-    }
-  };
-
-  const handleCvFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && file.type === 'application/pdf') {
-      setCvFile(file);
-    } else {
-      message.error('Vui lòng tải lên một file PDF.');
-    }
-  };
-
-  const handleConfirmUploadCv = async () => {
-    if (cvFile) {
-      try {
-        await uploadCV(cvFile);
-        message.success('CV đã được tải lên thành công.');
-        setCvFile(null);
-        await fetchUploadedCVs();
-      } catch (error) {
-        message.error('Không thể tải lên CV. Vui lòng thử lại.');
-        console.error(error);
-      }
     }
   };
 
@@ -121,7 +79,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
 
   const handleConfirmUpload = async () => {
     if (fileInputRef.current?.files) {
-      const file = fileInputRef.current.files[0];
+      const file = fileInputRef.current.files[0]; 
       try {
         const response = await uploadAvatar(file);
         message.success('Avatar uploaded successfully');
@@ -132,6 +90,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
         setIsModalVisible(false);
         setPreviewImage(null);
         await fetchInfo();
+        await dispatch(getUserProfileThunk()).unwrap();
       } catch (error) {
         message.error('Failed to upload avatar');
         console.error(error);
@@ -153,72 +112,12 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     setIsImagePreviewVisible(false);
   };
 
-  const handleDeleteCV = (cvId: string) => {
-    setUploadedCVs((prevCVs) => prevCVs.filter((cv) => cv.id !== cvId));
-    message.success('CV đã được xóa khỏi danh sách.');
-  };
-
   const renderContent = () => {
     switch (selectedMenu) {
       case 'history':
         return <HistoryApply />;
       case 'cv':
-        return (
-          // <Card>
-          //   <Title level={4}>CV của tôi</Title>
-          //   <p>Nội dung CV sẽ được hiển thị tại đây</p>
-          //   <Button icon={<UploadOutlined />} onClick={handleCvUploadClick} className={style['upload-cv-button']} type='primary'>
-          //     Tải lên CV
-          //   </Button>
-          //   <input type='file' ref={fileInputRefCv} style={{ display: 'none' }} accept='application/pdf' onChange={handleCvFileChange} />
-          //   {cvFile && (
-          //     <div style={{ marginTop: '8px' }}>
-          //       <p>{cvFile.name}</p>
-          //       <Button type='primary' onClick={handleConfirmUploadCv} icon={<FilePdfOutlined />} style={{ marginTop: '8px' }}>
-          //         Xác nhận tải lên
-          //       </Button>
-          //     </div>
-          //   )}
-          // </Card>
-          <Card>
-            <Title level={4}>CV của tôi</Title>
-            <Button icon={<UploadOutlined />} onClick={handleCvUploadClick} type='primary'>
-              Tải lên CV
-            </Button>
-            <input type='file' ref={fileInputRefCv} style={{ display: 'none' }} accept='application/pdf' onChange={handleCvFileChange} />
-            {cvFile && (
-              <div style={{ marginTop: '8px' }}>
-                <p>{cvFile.name}</p>
-                <Button type='primary' onClick={handleConfirmUploadCv} icon={<FilePdfOutlined />} style={{ marginTop: '8px' }}>
-                  Xác nhận tải lên
-                </Button>
-              </div>
-            )}
-            <Divider />
-            <Title level={5}>Danh sách CV đã tải lên</Title>
-            <List
-              dataSource={uploadedCVs}
-              renderItem={(cv) => (
-                <List.Item
-                  actions={[
-                    <Button type='link' icon={<DownloadOutlined />} href={cv.url} target='_blank' download>
-                      Tải xuống
-                    </Button>,
-                    <Button type='link' icon={<DeleteOutlined />} onClick={() => handleDeleteCV(cv._id)}>
-                      Xóa khỏi danh sách
-                    </Button>,
-                  ]}
-                >
-                  <List.Item.Meta
-                    avatar={<FilePdfOutlined style={{ fontSize: '24px', color: '#1890ff' }} />}
-                    title={`Vị trí: ${cv.jobId?.name || 'Không rõ'}`}
-                    description={`Ngày tải lên: ${new Date(cv.createdAt).toLocaleDateString()}`}
-                  />
-                </List.Item>
-              )}
-            />
-          </Card>
-        );
+        return <MyCV />;
       default:
         return (
           <Card>
