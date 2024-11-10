@@ -6,8 +6,7 @@ import style from './InfoCompany.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faMapMarkerAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
-import { PageURL } from '@models/enum';
+import { Tooltip } from 'antd';
 
 interface InfoCompanyProps {
   idCompany: string;
@@ -59,7 +58,7 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
           </div>
           <span className={style['info-company__info-container-item-value']}>
             {infoCompany.scale}
-            {'+'} {t('jobDetail.companyStaff')}
+            {'⁺'} {t('jobDetail.companyStaff')}
           </span>
         </div>
         <div className={style['info-company__info-container-item']}>
@@ -67,7 +66,9 @@ const InfoCompany: React.FC<InfoCompanyProps> = ({ idCompany }) => {
             <FontAwesomeIcon icon={faMapMarkerAlt} className={style['info-company__info-container-item-icon']} />
             <span className={style['info-company__info-container-item-title']}>{t('jobDetail.companyAddress')}:</span>
           </div>
-          <span className={style['info-company__info-container-item-value']}>{infoCompany.address}</span>
+          <Tooltip title={infoCompany.address}>
+            <span className={style['info-company__info-container-item-value']}>{infoCompany.address}</span>
+          </Tooltip>
         </div>
         <a onClick={handleCompanyClick} className={style['info-company__link']} target='_blank' rel='noopener noreferrer'>
           {t('jobDetail.goToCompanyPage')} <FontAwesomeIcon icon={faExternalLinkAlt} className='link-icon' />

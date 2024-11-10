@@ -37,3 +37,17 @@ export const uploadAvatar = async (file: File): Promise<any> => {
     },
   });
 };
+
+export const uploadCV = async (file: File): Promise<any> => {
+  if (file.type !== 'application/pdf') {
+    throw new Error('Vui lòng chỉ tải lên file PDF.');
+  }
+  const formData = new FormData();
+  formData.append('fileUpload', file);
+  return doPost(`${fileAPIUrl}/upload`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      folder_type: 'resume',
+    },
+  });
+};
