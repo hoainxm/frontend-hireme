@@ -67,7 +67,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
               <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
             </button>
           ) : (
-            <ApplyButton jobname={job.name} />
+            <ApplyButton jobName={job.name} companyId={job.company._id} jobId={job._id} />
           )}
           <FavoriteButton job={job} />
         </div>

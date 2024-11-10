@@ -14,6 +14,7 @@ export interface UserProfile {
   permissions: Permission[];
   avatar?: string;
   skills: string[];
+  myCV: string[];
 }
 
 export interface Role {

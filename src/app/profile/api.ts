@@ -44,7 +44,7 @@ export const uploadCV = async (file: File): Promise<any> => {
   }
   const formData = new FormData();
   formData.append('fileUpload', file);
-  return doPost(`${fileAPIUrl}/upload`, formData, {
+  return doPost(`${fileAPIUrl}/upload-resume`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       folder_type: 'resume',
