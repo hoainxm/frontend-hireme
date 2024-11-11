@@ -1,3 +1,37 @@
+$gray-color: #7a8288;
+$black-color: #2c3e50;
+$white-color: #ffffff;
+$border-color: #e0e0e0;
+$warning-color: #d9534f;
+$warning-background: #f8d7da;
+$background-icon: #0d4c8c;
+$background-button: #3c7eb4;
+
+.apply-button {
+  width: 100%;
+  background: $background-button;
+  border: none;
+  color: white;
+  border-radius: 5px;
+
+  &:hover {
+    background: $background-icon;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    background-color: $background-icon;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
 .apply-job-modal__content {
   padding: 24px;
   font-size: 16px;
@@ -12,15 +46,15 @@
 }
 
 .apply-job-modal__upload-dragger {
-  border: 2px dashed #d9d9d9;
-  background-color: #f0f5ff;
+  // border: 2px dashed #d9d9d9;
+  // background-color: #f0f5ff;
   border-radius: 12px;
   margin-bottom: 20px;
   padding: 32px;
   transition: background-color 0.3s;
-  &:hover {
-    background-color: #e6f7ff;
-  }
+  // &:hover {
+  //   background-color: #e6f7ff;
+  // }
 }
 
 .apply-job-modal__radio-group {

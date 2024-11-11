@@ -8,7 +8,7 @@ interface Props {
   sectionId: string;
 }
 
-export const UpdateSection: FC<Props> = (props) => {
+export const UpgradeSection: FC<Props> = (props) => {
   const { sectionId } = props;
   const { t } = useTranslation();
 
@@ -131,4 +131,4 @@ export const UpdateSection: FC<Props> = (props) => {
   );
 };
 
-export default UpdateSection;
+export default UpgradeSection;

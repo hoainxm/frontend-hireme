@@ -185,6 +185,16 @@
   "save.max": "Save 20%",
   "button.getNow": "Get Now",
 
+  "upgradeAccount": "Upgrade Account",
+  "upgradeAccount.title": "Unlock more features",
+  "upgrade.feature": "Feature Package",
+  "upgrade.current": "Currently Using",
+  "upgrade.upgrade": "Upgrade",
+  "upgrade.note.label": "Note:",
+  "upgrade.note.description": "After the subscription period ends, you need to make a payment to continue using advanced services.",
+  "upgrade.support": "For issues regarding payment and account upgrade, please contact: ",
+  "upgrade.support.hours": "Business Hours",
+
   "companyList": "Company List",
   "companyList.title": "Explore Top Companies and Find Your Ideal Career Opportunities",
 
@@ -212,6 +222,9 @@
   "jobDetail.people": "people",
   "jobDetail.noRequirement": "Not required",
   "jobDetail.relatedJob": "Related Jobs",
+
+  "btn.applyNow": "Apply Now",
+  "applyForPosition": "Apply for",
 
   "selectStatus": "Status",
   "status.active": "Active",

@@ -50,20 +50,18 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
         {/* <div className={style['job-card__action-buttons']}>
           {isJobExpired(job.endDate) ? (
-            <button className={style['job-card__action-buttons-expired-button']}>
+            <button className={`${style.button} ${style['button--expired']}`}>
               <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
             </button>
           ) : (
-            <button className={style['job-card__action-buttons-apply-button']}>
-              <FontAwesomeIcon icon={faPaperPlane} /> {t('jobDetail.applyNow')}
-            </button>
+            <ApplyButton jobName={job.name} companyId={job.company._id} jobId={job._id} />
           )}
           <FavoriteButton job={job} />
         </div> */}
 
         <div className={style['job-card__action-buttons']}>
           {isJobExpired(job.endDate) ? (
-            <button className={`${style.button} ${style['button--expired']}`}>
+            <button className={style['job-card__action-buttons__expired-button']}>
               <FontAwesomeIcon icon={faExclamationCircle} /> {t('jobDetail.expiredDeadline')}
             </button>
           ) : (

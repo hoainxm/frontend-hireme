@@ -6,7 +6,6 @@ import style from './company.module.scss';
 import { useTranslation } from 'react-i18next';
 import CompanyList from './components/CompanyList';
 import { PartnerSection } from '../../app/home/PartnerSection';
-import { UpdateSection } from '../../app/home/UpdateSection';
 import { Company as CompanyType } from './model';
 import { getAllCompanies } from './api';
 
@@ -48,7 +47,6 @@ export const Companies: FC<Props> = ({ sectionId }) => {
       </section>
       <CompanyList />
       <PartnerSection sectionId={sectionId} />
-      <UpdateSection sectionId={sectionId} />
     </MainLayout>
   );
 };

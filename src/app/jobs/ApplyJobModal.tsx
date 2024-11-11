@@ -3,6 +3,7 @@ import { Button, Modal, Typography, Radio, Input, Collapse, Upload, Divider, mes
 import React, { FC, useRef, useState, HTMLAttributes } from 'react';
 import style from './ApplyJobModal.module.scss';
 import { applyFile, createResume } from './api';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -18,6 +19,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
+  const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
@@ -73,14 +75,14 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
     <Modal
       title={
         <Title level={4} className={style['apply-job-modal__title']}>
-          Applying for position: {jobName}
+          {t('applyForPosition')} {jobName}
         </Title>
       }
       visible={true}
       onCancel={onClose}
       footer={null}
       centered
-      width={920} 
+      width={920}
     >
       <div className={style['apply-job-modal__content']}>
         <Radio.Group onChange={(e) => setCvSource(e.target.value)} value={cvSource} style={{ width: '100%' }}>
