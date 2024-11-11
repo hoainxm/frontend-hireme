@@ -1,4 +1,3 @@
-
 import { UserProfile } from './../app/auth/models';
 /** @format */
 
@@ -36,6 +35,7 @@ import InfoCompany from '../app/company/components/InfoCompany';
 import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
+import UpgradeAccount from '../app/upgrade/index';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -114,6 +114,10 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.UPDATE_PASSWORD,
     component: UpdatePassword,
+  },
+  {
+    path: PageURL.UPGRADE,
+    component: UpgradeAccount,
   },
 ];
 

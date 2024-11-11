@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import style from '../jobs.module.scss';
 import { PartnerSection } from '../../../app/home/PartnerSection';
-import { UpdateSection } from '../../../app/home/UpdateSection';
 import JobSaved from '../savedJobs/JobSaved';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -32,7 +31,6 @@ export const SavedJobs: FC<Props> = (props) => {
       </div>
       <JobSaved />
       <PartnerSection sectionId={sectionId} />
-      <UpdateSection sectionId={sectionId} />
     </MainLayout>
   );
 };

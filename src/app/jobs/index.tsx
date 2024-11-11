@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import JobFilter from './components/JobFilter';
 import JobList from './components/JobList';
 import { PartnerSection } from '../../app/home/PartnerSection';
-import { UpdateSection } from '../../app/home/UpdateSection';
 import { Job as JobType } from '../jobs/model';
 import { getAllJobs } from './api';
 
@@ -73,7 +72,6 @@ export const Jobs: FC<Props> = ({ sectionId }) => {
       <JobFilter onFilter={handleFilter} />
       <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
       <PartnerSection sectionId={sectionId} />
-      <UpdateSection sectionId={sectionId} />
     </MainLayout>
   );
 };
