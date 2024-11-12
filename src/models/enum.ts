@@ -36,6 +36,7 @@ export enum PageURL {
   COMPANY_DETAIL = '/companies/:companyId',
 
   CATEGORY = '/news/categories',
+
   PROFILE_MANAGEMENT = '/profile',
   LICENSE_MANAGEMENT = '/license-management',
 
