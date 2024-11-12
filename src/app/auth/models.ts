@@ -8,7 +8,7 @@ export interface UserProfile {
   gender: string;
   phone: string;
   dateOfBirth: string;
-  isVerify: string;
+  isVerify: boolean;
   isPremium: string;
   role: Role;
   permissions: Permission[];

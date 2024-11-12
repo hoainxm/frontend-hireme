@@ -186,6 +186,10 @@
   "save.max": "Save 20%",
   "button.getNow": "Mua ngay",
 
+  "verificationRequired": "Yêu cầu xác minh tài khoản",
+  "popup.verificationRequiredMessage": "Vui lòng xác minh tài khoản của bạn để có thể sử dụng chức năng này.",
+  "auth.verifyAccount": "Xác minh tài khoản",
+
   "upgradeAccount": "Nâng cấp tài khoản",
   "upgradeAccount.title": "Mở khóa thêm nhiều chức năng khác",
   "upgrade.feature": "Gói chức năng",
