@@ -53,7 +53,7 @@ import { WhyHireMeSection } from './WhyHireMeSection';
 import { CDP } from './components/projects/CDP';
 import { YOUTUBE_VIDEO_ID } from '../../common/utils/constants';
 import { SectionID } from '../../models/enum';
-import UpgradeSection from '../home/UpgradeSection';
+import UpgradeAccount from '../upgrade/components/upgradeAccount';
 
 interface Item {
   icon: keyof typeof IconMapName;
@@ -307,9 +307,9 @@ export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; sec
     text: 'title.whyHireMe',
     section: WhyHireMeSection,
   },
-  {
-    sectionId: SectionID.HOME_UPDATE,
-    text: 'product.updateSection',
-    section: UpgradeSection,
-  },
+  // {
+  //   sectionId: SectionID.HOME_UPDATE,
+  //   text: 'product.upgradeSection',
+  //   section: UpgradeAccount,
+  // },
 ];

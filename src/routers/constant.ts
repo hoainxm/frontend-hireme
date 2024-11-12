@@ -35,7 +35,7 @@ import InfoCompany from '../app/company/components/InfoCompany';
 import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
-import UpgradeAccount from '../app/upgrade/index';
+import Upgrade from '../app/upgrade';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -96,7 +96,7 @@ export const PUBLIC_ROUTE = [
     component: JobDetail,
   },
   {
-    path: PageURL.SAVE_JOBS,
+    path: PageURL.SAVED_JOBS,
     component: SavedJobs,
   },
   {
@@ -107,23 +107,27 @@ export const PUBLIC_ROUTE = [
     path: PageURL.COMPANY_DETAIL,
     component: CompanyDetail,
   },
-  {
-    path: PageURL.PROFILE_MANAGEMENT,
-    component: ProfileUser,
-  },
+  // {
+  //   path: PageURL.PROFILE_MANAGEMENT,
+  //   component: ProfileUser,
+  // },
   {
     path: PageURL.UPDATE_PASSWORD,
     component: UpdatePassword,
   },
   {
     path: PageURL.UPGRADE,
-    component: UpgradeAccount,
+    component: Upgrade,
   },
 ];
 
 export const PRIVATE_ROUTE = [
   { path: PageURL.PRODUCT_OVERVIEW, component: ProductLayout },
   { path: PageURL.LICENSE_MANAGEMENT, component: LicenseManagement },
+  {
+    path: PageURL.PROFILE_MANAGEMENT,
+    component: ProfileUser,
+  },
 ];
 
 export const ADMIN_ROUTE = [

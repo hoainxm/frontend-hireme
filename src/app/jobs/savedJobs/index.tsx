@@ -18,7 +18,7 @@ export const SavedJobs: FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <MainLayout active={PageName.SAVE_JOBS}>
+    <MainLayout active={PageName.SAVED_JOBS}>
       <div className={style.bannerSection}>
         <div className={style.bannerContainer}>
           <div className={style.top}>

@@ -28,8 +28,8 @@ export enum PageURL {
   NEWS = '/news',
   JOBS = '/jobs',
   JOB_DETAIL = '/jobs/:jobId',
-  SAVE_JOBS = '/saveJobs/',
-  UPGRADE = '/upgrade/',
+  SAVED_JOBS = '/savedJobs',
+  UPGRADE = '/upgrade',
   UPDATE_PASSWORD = '/update-password',
 
   COMPANY = '/companies/',
@@ -91,7 +91,7 @@ export enum PageName {
   // User
   HOME = 'user.home',
   JOBS = 'user.jobs',
-  SAVE_JOBS = 'user.savedJobs',
+  SAVED_JOBS = 'user.savedJobs',
   COMPANY = 'user.company',
 
   UPGRADE = 'user.upgrade',
