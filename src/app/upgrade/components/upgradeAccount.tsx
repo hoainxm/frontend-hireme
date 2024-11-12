@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
-import { Palette } from '../../models/enum';
+import { Palette } from '../../../models/enum';
 import { useTranslation } from 'react-i18next';
-import { SectionLayout } from '../../common/ui/layout/section-layout';
-import style from './home.module.scss';
+import { SectionLayout } from '../../../common/ui/layout/section-layout';
+import style from '../upgrade.module.scss';
 
 interface Props {
   sectionId: string;
 }
 
-export const UpgradeSection: FC<Props> = (props) => {
+export const UpgradeAccount: FC<Props> = (props) => {
   const { sectionId } = props;
   const { t } = useTranslation();
 
   return (
-    <SectionLayout id={sectionId} title={t('title.update')}>
+    <div id={sectionId} title={t('title.update')}>
       <div className={style.updateSectionContainer}>
         <div className={style.leftSection}>
           <div className={style.comparisonWrapper}>
@@ -83,7 +83,8 @@ export const UpgradeSection: FC<Props> = (props) => {
                 </p>
                 <p>
                   {' '}
-                  {t('billed')} {t('discount.lite')} {t('yearly')}
+                  {/* {t('billed')} {t('discount.lite')} {t('yearly')} */}
+                  {t('litelite')}
                 </p>
               </div>
               <button className={style.selectButton1}>{t('button.getNow')}</button>
@@ -127,8 +128,8 @@ export const UpgradeSection: FC<Props> = (props) => {
           </div>
         </div>
       </div>
-    </SectionLayout>
+    </div>
   );
 };
 
-export default UpgradeSection;
+export default UpgradeAccount;

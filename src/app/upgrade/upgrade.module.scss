@@ -7,27 +7,22 @@ main > .container {
 }
 
 .bannerSection {
-  color: white;
+  color: $white;
   position: inherit;
-  // padding: 0px 200px;
 
   .bannerContainer {
     max-width: 100%;
-    margin: 0px auto;
-    padding: 56px 0px;
+    margin: 0 auto;
+    padding: 56px 0;
     background: #032170;
-    // background-color: #0a4e99;
 
     .top {
       max-width: 68%;
-      padding-top: 0px;
-      margin: 0px auto;
+      margin: 0 auto;
       display: flex;
-      flex-flow: column nowrap;
-      justify-content: flex-start;
+      flex-direction: column;
       align-items: center;
       text-align: center;
-      font-size: 40px;
 
       .topTitle {
         @extend .heading1;
@@ -42,7 +37,6 @@ main > .container {
       .btnGroup {
         display: flex;
         justify-content: center;
-        align-items: center;
 
         & > button {
           flex: 1;
@@ -51,74 +45,195 @@ main > .container {
 
         .contactBtn {
           margin-right: 24px;
-          border: 1px solid white;
+          border: 1px solid $white;
         }
       }
     }
   }
 }
 
-.upgradeTableContainer {
-  padding: 20px 400px;
+.updateSectionContainer {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  padding: 20px 200px;
+  background-color: #f0f4f8;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.upgradeTable {
+.leftSection,
+.rightSection {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.leftSection {
+  width: 60%;
+}
+
+.rightSection {
+  width: 40%;
+}
+
+h4 {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+.comparisonWrapper {
+  overflow-x: auto;
+}
+
+.comparisonTable {
   width: 100%;
   border-collapse: collapse;
+  font-size: 1rem;
   text-align: center;
-  font-size: 16px;
-  padding: 20px;
-  background-color: #0d4c8c;
-  user-select: none;
-}
-
-.upgradeTable th,
-.upgradeTable td {
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-}
-
-.upgradeTable th {
-  background-color: #e8f4ff;
-  font-weight: bold;
   color: #333;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.upgradeTable td {
-  background-color: #ffffff;
+.comparisonTable th {
+  background-color: #e8f0fe;
+  padding: 18px;
+  font-weight: 700;
+  color: #444;
 }
 
-.upgradeTable td:first-child {
-  text-align: left;
+.comparisonTable td {
+  padding: 18px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.upgradeButton {
-  background-color: #e0f7e8;
-  color: #28a745;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.comparisonTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-  &:hover {
-    background-color: #d2f2db;
+.pricingOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  .pricingCard:nth-child(1) {
+    border: 3px solid #00c853;
+  }
+
+  .pricingCard:nth-child(2) {
+    border: 3px solid #ffb300;
+  }
+
+  .pricingCard:nth-child(3) {
+    border: 3px solid #2979ff;
   }
 }
 
-.activeButton {
-  background-color: #f1f1f1;
-  color: #999;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+.pricingCard {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+
+  h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.planDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa tên gói theo chiều dọc */
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.price {
+  font-size: 1.5rem;
   font-weight: bold;
-  cursor: default;
+  color: #00b894;
+  margin-bottom: 15px;
+}
+
+.selectButton1 {
+  padding: 12px 24px;
+  background-color: #00c853;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #00a046;
+    transform: scale(1.05);
+  }
+}
+
+.selectButton2 {
+  padding: 12px 24px;
+  background-color: #ffb300;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #ffa000;
+    transform: scale(1.05);
+  }
+}
+
+.selectButton3 {
+  padding: 12px 24px;
+  background-color: #2979ff;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #1c54b2;
+    transform: scale(1.05);
+  }
 }
 
 .note {
-  margin-top: 20px;
+  background: #f0f4f8;
+  padding: 0px 200px 20px 200px;
   text-align: center;
   font-size: 14px;
   color: #333;

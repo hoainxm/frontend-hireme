@@ -160,8 +160,8 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 export const authAPIUrl = 'api/v1/auth';
 export const userAPIUrl = 'api/v1/users';
 export const jobsAPIUrl = 'api/v1/jobs';
-export const resumeAPIUrl = 'api/v1/resumes'
-export const fileAPIUrl = 'api/v1/files'
+export const resumeAPIUrl = 'api/v1/resumes';
+export const fileAPIUrl = 'api/v1/files';
 export const COUNT_DOWN = {
   // Count per second
   RESEND_EMAIL: 30,
@@ -237,8 +237,8 @@ export const PROFILE_ITEMS = [
     isActive: true,
   },
   {
-    name: PageName.SAVE_JOBS,
-    url: PageURL.SAVE_JOBS,
+    name: PageName.SAVED_JOBS,
+    url: PageURL.SAVED_JOBS,
     icon: 'Save',
     isActive: true,
   },
