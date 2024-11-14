@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes } from 'react';
 import { PageName, Palette } from '../../models/enum';
 import { useTranslation } from 'react-i18next';
-import { SectionLayout } from '../../common/ui/layout/section-layout';
 import style from './upgrade.module.scss';
 import MainLayout from '../../common/ui/layout/main-layout';
 import UpgradeAccount from './components/upgradeAccount';

@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next';
 import style from '../ApplyJobModal.module.scss';
 import useLoginAlert from '@hooks/useLoginAlert';
 import useVerificationAlert from '@hooks/useVerificationAlert';
-import { UserProfile } from 'app/auth/models';
-import { getUserProfile } from 'app/profile/api';
-import { userInfo } from 'os';
 import { RootState, useAppSelector } from '../../../store/store';
 
 interface ApplyButtonProps {
