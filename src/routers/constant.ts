@@ -54,10 +54,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.HOME,
     component: Home,
   },
-  {
-    path: PageURL.PRODUCT_OCR,
-    component: ProductOCR,
-  },
+  // {
+  //   path: PageURL.PRODUCT_OCR,
+  //   component: ProductOCR,
+  // },
   {
     path: PageURL.LOGIN,
     component: Login,
@@ -70,15 +70,14 @@ export const PUBLIC_ROUTE = [
     path: PageURL.REGISTER,
     component: Register,
   },
-  {
-    path: PageURL.FORGOT_PASSWORD,
-    component: ForgotPassword,
-  },
-  {
-    path: PageURL.RESET_PASSWORD,
-    component: ResetPassword,
-  },
-
+  // {
+  //   path: PageURL.FORGOT_PASSWORD,
+  //   component: ForgotPassword,
+  // },
+  // {
+  //   path: PageURL.RESET_PASSWORD,
+  //   component: ResetPassword,
+  // },
   {
     path: PageURL.RESEND_VERIFY_EMAIL,
     component: ResendVerifyEmail,
@@ -111,10 +110,10 @@ export const PUBLIC_ROUTE = [
   //   path: PageURL.PROFILE_MANAGEMENT,
   //   component: ProfileUser,
   // },
-  {
-    path: PageURL.UPDATE_PASSWORD,
-    component: UpdatePassword,
-  },
+  // {
+  //   path: PageURL.UPDATE_PASSWORD,
+  //   component: UpdatePassword,
+  // },
   {
     path: PageURL.UPGRADE,
     component: Upgrade,
@@ -127,6 +126,18 @@ export const PRIVATE_ROUTE = [
   {
     path: PageURL.PROFILE_MANAGEMENT,
     component: ProfileUser,
+  },
+  {
+    path: PageURL.UPDATE_PASSWORD,
+    component: UpdatePassword,
+  },
+  {
+    path: PageURL.FORGOT_PASSWORD,
+    component: ForgotPassword,
+  },
+  {
+    path: PageURL.RESET_PASSWORD,
+    component: ResetPassword,
   },
 ];
 

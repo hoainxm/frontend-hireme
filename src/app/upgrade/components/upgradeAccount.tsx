@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-import { Palette } from '../../../models/enum';
 import { useTranslation } from 'react-i18next';
-import { SectionLayout } from '../../../common/ui/layout/section-layout';
 import style from '../upgrade.module.scss';
 
 interface Props {
