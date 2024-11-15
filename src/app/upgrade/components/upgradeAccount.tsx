@@ -1,6 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from '../upgrade.module.scss';
+import { doGetCreatePayment } from '../api';
+import { useHistory, useLocation } from 'react-router-dom';
+import { PageURL } from '@models/enum';
 
 interface Props {
   sectionId: string;
@@ -9,6 +12,43 @@ interface Props {
 export const UpgradeAccount: FC<Props> = (props) => {
   const { sectionId } = props;
   const { t } = useTranslation();
+  const location = useLocation();
+  const history = useHistory();
+  const [activePlan, setActivePlan] = useState<string>(localStorage.getItem('userPlan') || 'lite');
+
+  const redirectToUpgradePage = () => {
+    history.push(PageURL.UPGRADE);
+  };
+  const getQueryParams = (query: string) => {
+    return new URLSearchParams(query);
+  };
+
+  const handlePurchase = async (amount: number, plan: string) => {
+    try {
+      const ipAddr = '127.0.0.1';
+      const response = await doGetCreatePayment({ amount, ipAddr });
+
+      if (response?.data?.url) {
+        window.location.href = response.data.url;
+      }
+      console.log('Payment response:', response);
+    } catch (error) {
+      console.error('Payment failed:', error);
+    }
+  };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const responseCode = queryParams.get('vnp_ResponseCode');
+    const transactionStatus = queryParams.get('vnp_TransactionStatus');
+
+    if (responseCode === '00' && transactionStatus === '00') {
+      const newPlan = 'plus';
+      setActivePlan(newPlan);
+      localStorage.setItem('userPlan', newPlan);
+      history.replace(PageURL.UPGRADE);
+    }
+  }, [location.search, history]);
 
   return (
     <div id={sectionId} title={t('title.update')}>
@@ -82,10 +122,12 @@ export const UpgradeAccount: FC<Props> = (props) => {
                 <p>
                   {' '}
                   {/* {t('billed')} {t('discount.lite')} {t('yearly')} */}
-                  {t('litelite')}
+                  {/* {t('litelite')} */}
                 </p>
               </div>
-              <button className={style.selectButton1}>{t('button.getNow')}</button>
+              <button disabled={activePlan === 'lite'} className={style.selectButton1}>
+                {activePlan === 'lite' ? t('button.actived') : t('button.getNow')}
+              </button>
             </div>
 
             <div className={style.pricingCard}>
@@ -94,16 +136,16 @@ export const UpgradeAccount: FC<Props> = (props) => {
                 <h6>{t('save.plus')}</h6>
               </div>
               <div className={style.block}>
-                <p className={style.price}>
-                  {t('price.plus')}
-                  {t('month')}
-                </p>
+                <p className={style.price}>{t('price.plus')}</p>
                 <p>
                   {' '}
-                  {t('billed')} {t('discount.plus')} {t('yearly')}
+                  {t('billed')}
+                  {t('monthly')}
                 </p>
               </div>
-              <button className={style.selectButton2}>{t('button.getNow')}</button>
+              <button onClick={() => handlePurchase(100000, 'plus')} disabled={activePlan === 'plus'} className={style.selectButton2}>
+                {activePlan === 'plus' ? t('button.actived') : t('button.getNow')}
+              </button>
             </div>
 
             <div className={style.pricingCard}>
@@ -112,16 +154,15 @@ export const UpgradeAccount: FC<Props> = (props) => {
                 <h6>{t('save.max')}</h6>
               </div>
               <div className={style.block}>
-                <p className={style.price}>
-                  {t('price.max')}
-                  {t('month')}
-                </p>
+                <p className={style.price}>{t('price.max')}</p>
                 <p>
                   {' '}
-                  {t('billed')} {t('discount.max')} {t('yearly')}
+                  {t('billed')} {t('monthly')}
                 </p>
               </div>
-              <button className={style.selectButton3}>{t('button.getNow')}</button>
+              <button onClick={() => handlePurchase(200000, 'max')} disabled={activePlan === 'max'} className={style.selectButton3}>
+                {activePlan === 'max' ? t('button.actived') : t('button.getNow')}
+              </button>
             </div>
           </div>
         </div>
