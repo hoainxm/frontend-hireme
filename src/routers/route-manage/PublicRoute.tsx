@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { FC } from "react";
-import { Route, RouteProps } from "react-router-dom";
-import { PageURL } from "../../models/enum";
+import React, { FC } from 'react';
+import { Route, RouteProps } from 'react-router-dom';
+import { PageURL } from '../../models/enum';
 
 interface Props extends RouteProps {
   path: PageURL;

@@ -54,10 +54,6 @@ export const PUBLIC_ROUTE = [
     path: PageURL.HOME,
     component: Home,
   },
-  // {
-  //   path: PageURL.PRODUCT_OCR,
-  //   component: ProductOCR,
-  // },
   {
     path: PageURL.LOGIN,
     component: Login,
@@ -70,22 +66,6 @@ export const PUBLIC_ROUTE = [
     path: PageURL.REGISTER,
     component: Register,
   },
-  // {
-  //   path: PageURL.FORGOT_PASSWORD,
-  //   component: ForgotPassword,
-  // },
-  // {
-  //   path: PageURL.RESET_PASSWORD,
-  //   component: ResetPassword,
-  // },
-  {
-    path: PageURL.RESEND_VERIFY_EMAIL,
-    component: ResendVerifyEmail,
-  },
-  {
-    path: PageURL.VERIFY_EMAIL,
-    component: VerifyEmail,
-  },
   {
     path: PageURL.JOBS,
     component: Jobs,
@@ -95,10 +75,6 @@ export const PUBLIC_ROUTE = [
     component: JobDetail,
   },
   {
-    path: PageURL.SAVED_JOBS,
-    component: SavedJobs,
-  },
-  {
     path: PageURL.COMPANY,
     component: Companies,
   },
@@ -106,26 +82,22 @@ export const PUBLIC_ROUTE = [
     path: PageURL.COMPANY_DETAIL,
     component: CompanyDetail,
   },
-  // {
-  //   path: PageURL.PROFILE_MANAGEMENT,
-  //   component: ProfileUser,
-  // },
-  // {
-  //   path: PageURL.UPDATE_PASSWORD,
-  //   component: UpdatePassword,
-  // },
-  {
-    path: PageURL.UPGRADE,
-    component: Upgrade,
-  },
 ];
 
 export const PRIVATE_ROUTE = [
-  { path: PageURL.PRODUCT_OVERVIEW, component: ProductLayout },
-  { path: PageURL.LICENSE_MANAGEMENT, component: LicenseManagement },
+  // { path: PageURL.PRODUCT_OVERVIEW, component: ProductLayout },
+  // { path: PageURL.LICENSE_MANAGEMENT, component: LicenseManagement },
   {
     path: PageURL.PROFILE_MANAGEMENT,
     component: ProfileUser,
+  },
+  {
+    path: PageURL.VERIFY_EMAIL,
+    component: VerifyEmail,
+  },
+  {
+    path: PageURL.RESEND_VERIFY_EMAIL,
+    component: ResendVerifyEmail,
   },
   {
     path: PageURL.UPDATE_PASSWORD,
@@ -139,19 +111,27 @@ export const PRIVATE_ROUTE = [
     path: PageURL.RESET_PASSWORD,
     component: ResetPassword,
   },
+  {
+    path: PageURL.UPGRADE,
+    component: Upgrade,
+  },
+  {
+    path: PageURL.SAVED_JOBS,
+    component: SavedJobs,
+  },
 ];
 
 export const ADMIN_ROUTE = [
-  { path: PageURL.ADMIN, component: AICloudFeatureManagement },
-  { path: PageURL.ADMIN_WELCOME_INFORM, component: WelcomeInformation },
-  { path: PageURL.ADMIN_TENANT, component: Tenant },
-  {
-    path: PageURL.ADMIN_AI_PACKAGE_WRITER,
-    component: AIPackageWriter,
-  },
-  {
-    path: PageURL.ADMIN_AI_API_KEY_WRITER,
-    component: AILicenseWriter,
-  },
-  { path: PageURL.ADMIN_AI_PACKAGE_INFO, component: AIPackageWriter },
+  // { path: PageURL.ADMIN, component: AICloudFeatureManagement },
+  // { path: PageURL.ADMIN_WELCOME_INFORM, component: WelcomeInformation },
+  // { path: PageURL.ADMIN_TENANT, component: Tenant },
+  // {
+  //   path: PageURL.ADMIN_AI_PACKAGE_WRITER,
+  //   component: AIPackageWriter,
+  // },
+  // {
+  //   path: PageURL.ADMIN_AI_API_KEY_WRITER,
+  //   component: AILicenseWriter,
+  // },
+  // { path: PageURL.ADMIN_AI_PACKAGE_INFO, component: AIPackageWriter },
 ];

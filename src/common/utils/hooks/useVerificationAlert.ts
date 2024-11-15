@@ -8,7 +8,7 @@ const useVerificationAlert = () => {
   const { t } = useTranslation();
 
   const redirectToVerification = () => {
-    history.push(PageURL.VERIFY_EMAIL);
+    history.push(PageURL.RESEND_VERIFY_EMAIL);
   };
 
   const isVerificationRequired = () =>
