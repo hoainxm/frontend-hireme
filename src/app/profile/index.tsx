@@ -1,5 +1,5 @@
 import React, { useState, useEffect, HTMLAttributes, FC, useRef } from 'react';
-import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message, List } from 'antd';
+import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message, List, Form, Input, Select, DatePicker } from 'antd';
 import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined, FilePdfOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { UserProfile } from '../auth/models';
 import { getUserProfile, uploadAvatar, uploadCV, getResumeByUser } from './api';
@@ -14,6 +14,7 @@ import HistoryApply from './HistoryApply';
 import { useAppDispatch } from '../../store/store';
 import { getUserProfileThunk } from '../../store/reducer/userSlice/userThunk';
 import MyCV from './MyCV';
+import dayjs from 'dayjs';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -21,6 +22,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const { Sider, Content } = Layout;
 const { Title, Text } = Typography;
+const { Option } = Select;
 
 export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const { t } = useTranslation();
@@ -31,7 +33,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const [isImagePreviewVisible, setIsImagePreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const dispatch = useAppDispatch();
 
   const fetchInfo = async () => {
@@ -79,7 +81,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
 
   const handleConfirmUpload = async () => {
     if (fileInputRef.current?.files) {
-      const file = fileInputRef.current.files[0]; 
+      const file = fileInputRef.current.files[0];
       try {
         const response = await uploadAvatar(file);
         message.success('Avatar uploaded successfully');
@@ -112,6 +114,16 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     setIsImagePreviewVisible(false);
   };
 
+  const handleEditClick = () => {
+    setIsEditModalVisible(true);
+  };
+
+  const handleEditCancel = () => {
+    setIsEditModalVisible(false);
+  };
+
+  const handleEditSubmit = async (values: any) => {};
+
   const renderContent = () => {
     switch (selectedMenu) {
       case 'history':
@@ -135,6 +147,8 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
                       {userInfo?.name}
                     </Title>
                     <Text className={style['user-role']}>{userInfo?.role?.name}</Text>
+                    <br />
+                    <Text className={style['user-email']}>{userInfo?.email}</Text>
                   </div>
                 </Row>
               </Col>
@@ -145,6 +159,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
                 <Title level={4} className={style['section-title']}>
                   Thông tin cá nhân
                 </Title>
+
                 <Row className={style['user-details']}>
                   <Col span={12} className={style['detail-item']}>
                     <Text className={style.label}>Họ tên: </Text> {userInfo?.name}
@@ -153,7 +168,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
                     <Text className={style.label}>Giới tính: </Text> {userInfo?.gender}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Email: </Text> {userInfo?.email}
+                    <Text className={style.label}>Ngày sinh: </Text> {userInfo?.dateOfBirth}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
                     <Text className={style.label}>Điện thoại: </Text> {userInfo?.phone || 'Chưa có số điện thoại'}
@@ -166,7 +181,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
                     {mappedSkills.length > 0 ? mappedSkills.join(', ') : 'Chưa có kỹ năng'}
                   </Col>
                 </Row>
-                <Button type='link' icon={<EditOutlined />} className={style['edit-button']}>
+                <Button type='link' icon={<EditOutlined />} className={style['edit-button']} onClick={handleEditClick}>
                   Chỉnh sửa
                 </Button>
               </Col>
@@ -241,6 +256,46 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
 
       <Modal visible={isImagePreviewVisible} footer={null} onCancel={handlePreviewCancel} centered className={modalStyle['full-image-modal']}>
         <img src={previewImage || ''} alt='Full Avatar Preview' style={{ width: '100%' }} />
+      </Modal>
+
+      <Modal title='Chỉnh sửa thông tin cá nhân' visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
+        <Form layout='vertical' initialValues={userInfo} onFinish={handleEditSubmit}>
+          <Form.Item label='Họ tên' name='name'>
+            <Input />
+          </Form.Item>
+          <Form.Item label='Giới tính' name='gender'>
+            <Select>
+              <Option value='nam'>Nam</Option>
+              <Option value='nu'>Nữ</Option>
+              <Option value='khong_xac_dinh'>Không xác định</Option>
+            </Select>
+          </Form.Item>
+          {/* <Form.Item label='Ngày sinh' name='dateOfBirth'>
+            <DatePicker
+              format='YYYY-MM-DD'
+              style={{ width: '100%' }}
+              defaultValue={userInfo?.dateOfBirth ? dayjs(userInfo.dateOfBirth, 'YYYY-MM-DD') : undefined}
+              onChange={(date, dateString) => {
+                console.log('Ngày được chọn:', dateString); // Xử lý giá trị khi người dùng chọn
+              }}
+            />
+          </Form.Item> */}
+
+          <Form.Item label='Điện thoại' name='phone'>
+            <Input />
+          </Form.Item>
+          <Form.Item label='Địa chỉ' name='address'>
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              Lưu
+            </Button>
+            <Button onClick={handleEditCancel} style={{ marginLeft: '8px' }}>
+              Hủy
+            </Button>
+          </Form.Item>
+        </Form>
       </Modal>
     </MainLayout>
   );
