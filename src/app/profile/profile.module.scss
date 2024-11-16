@@ -87,9 +87,15 @@
       color: #333;
     }
 
-    .user-role {
+    .user-role,
+    .user-email {
       font-size: 1em;
       color: #666;
+    }
+
+    .user-email {
+      display: block;
+      margin-top: 8px !important;
     }
   }
 
