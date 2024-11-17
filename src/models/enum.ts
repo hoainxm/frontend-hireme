@@ -9,6 +9,7 @@ export enum ScopeKey {
   USER = 'ffcs8VCz8VFSGTDa3dfx',
   SELECTED_SECTION_DOT = 'c2VsZWN0ZWRJdGVt',
   COUNT_DOWN = 'Y291bnRkb3du',
+  IS_PREMIUM_SECTION = 'aXNfcHJlbWl1bV9zZWN0aW9u',
 }
 
 export enum ScopeValue {
@@ -18,7 +19,11 @@ export enum ScopeValue {
   ENG = 'FClcBFF0I7m8YRWXqFDV',
   AUTOMATE = 'dHJ1ZQ==',
   NO_AUTOMATE = 'ZmFsc2U=',
+  LITE = 'bGl0ZQ==',
+  PLUS = 'cGx1cw==',
+  MAX = 'bWF4',
 }
+
 
 export enum PageURL {
   // User
@@ -41,6 +46,8 @@ export enum PageURL {
   LICENSE_MANAGEMENT = '/license-management',
 
   PRODUCT_OVERVIEW = '/:process/:program/:feature',
+
+  PAYMENT_STATUS = '/payment-status',
 
   // Product
   PRODUCT_COMPUTER_VISION = '/product/computer-vision',

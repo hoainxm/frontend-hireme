@@ -1,11 +1,27 @@
 import { paymentAPIUrl } from '../../common/utils/constants';
 import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
-import axios, { AxiosRequestConfig } from 'axios';
-import { response } from 'express';
-import { PageURL } from '@models/enum';
+import axios from 'axios';
+
 /** @format */
 
-export const doGetCreatePayment = async (params: { amount: number; ipAddr: string }) => {
-  const returnURL = PageURL.UPGRADE;
-  return doGet(`${paymentAPIUrl}/create-payment`, { ...params, vnp_ReturnUrl: returnURL });
+const getToken = () => localStorage.getItem('access_token');
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+export const doPostCreatePayment = (data: { amount: number; ipAddr: string }): Promise<ApiResponse<any>> => {
+  return doPost(`${paymentAPIUrl}/create-payment`, data);
+};
+
+export const doGetVerifyTransaction = (data: { txnRef: string; vnp_Amount: string }): Promise<any> => {
+  const queryParams = new URLSearchParams(data).toString();
+  return doGet(`${paymentAPIUrl}/verify?${queryParams}`);
 };
