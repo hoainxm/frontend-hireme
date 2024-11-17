@@ -21,16 +21,16 @@ export const updateAIFeatureOfPackageAPI = (packageId: string, data: Array<AIFea
   return doPost(`api/ai-package/${packageId}/features/`, data);
 };
 
-const BASE_URL = 'http://your-api-url.com/api'; // Thay thế bằng URL thật của bạn
+// const BASE_URL = 'http://your-api-url.com/api'; // Thay thế bằng URL thật của bạn
 
-export const api = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// export const api = axios.create({
+//   baseURL: BASE_URL,
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
-export const fetchData = (endpoint: string) => api.get(`/${endpoint}`);
-export const createData = (endpoint: string, data: any) => api.post(`/${endpoint}`, data);
-export const updateData = (endpoint: string, id: string, data: any) => api.put(`/${endpoint}/${id}`, data);
-export const deleteData = (endpoint: string, id: string) => api.delete(`/${endpoint}/${id}`);
+// export const fetchData = (endpoint: string) => api.get(`/${endpoint}`);
+// export const createData = (endpoint: string, data: any) => api.post(`/${endpoint}`, data);
+// export const updateData = (endpoint: string, id: string, data: any) => api.put(`/${endpoint}/${id}`, data);
+// export const deleteData = (endpoint: string, id: string) => api.delete(`/${endpoint}/${id}`);

@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import style from '../upgrade.module.scss';
-import { doGetCreatePayment } from '../api';
+import style from './upgrade.module.scss';
+import { doGetVerifyTransaction, doPostCreatePayment } from '../api';
 import { useHistory, useLocation } from 'react-router-dom';
-import { PageURL } from '@models/enum';
+import { PageURL, ScopeKey, ScopeValue } from '@models/enum';
+import { Alert } from '../../../common/utils/popup';
 
 interface Props {
   sectionId: string;

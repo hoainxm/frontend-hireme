@@ -1,44 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { createData, fetchData, updateData } from '../../api';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchJobById, createJob, updateJob } from './api'; // Import your API functions
+import style from './job.module.scss';
 
-export const JobForm: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [companyId, setCompanyId] = useState('');
+const JobForm: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
-  const history = useHistory();
+  const [job, setJob] = useState({ name: '', salary: 0, location: '', skills: '', company: '' });
 
   useEffect(() => {
     if (id) {
-      fetchData(`jobs/${id}`)
-        .then((res) => {
-          setTitle(res.data.title);
-          setCompanyId(res.data.companyId);
-        })
-        .catch((err) => console.error(err));
+      fetchJobById(id).then((data) => setJob(data)); // Fetch job details if editing
     }
   }, [id]);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setJob({ ...job, [name]: value });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const data = { title, companyId };
-    const apiCall = id ? updateData(`jobs`, id, data) : createData(`jobs`, data);
-
-    apiCall
-      .then(() => {
-        alert(id ? 'Job updated successfully!' : 'Job created successfully!');
-        history.push('/dashboard/jobs');
-      })
-      .catch((err) => console.error(err));
+    if (id) {
+      updateJob(id, job).then(() => alert('Job updated successfully!'));
+    } else {
+      createJob(job).then(() => alert('Job created successfully!'));
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={style.jobForm} onSubmit={handleSubmit}>
       <h2>{id ? 'Edit Job' : 'Create Job'}</h2>
-      <input type='text' placeholder='Job Title' value={title} onChange={(e) => setTitle(e.target.value)} required />
-      <input type='text' placeholder='Company ID' value={companyId} onChange={(e) => setCompanyId(e.target.value)} required />
-      <button type='submit'>{id ? 'Update' : 'Create'}</button>
+      <label>
+        Job Name:
+        <input type='text' name='name' value={job.name} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Salary:
+        <input type='number' name='salary' value={job.salary} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Location:
+        <input type='text' name='location' value={job.location} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Skills:
+        <input type='text' name='skills' value={job.skills} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Company:
+        <input type='text' name='company' value={job.company} onChange={handleInputChange} required />
+      </label>
+      <button type='submit'>{id ? 'Update Job' : 'Create Job'}</button>
     </form>
   );
 };
