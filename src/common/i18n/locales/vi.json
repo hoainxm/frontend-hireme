@@ -785,5 +785,6 @@
   "error.login": "email/password không chính xác, vui lòng thử lại.",
   "forgotPassword.send.success": "Gửi yêu cầu đặt lại mật khẩu thành công",
   "user.update-password": "Chỉnh sửa mật khẩu",
-  "user.update-password.title": "Quản lý hồ sơ của bạn - Chỉnh sửa mật khẩu"
+  "user.update-password.title": "Quản lý hồ sơ của bạn - Chỉnh sửa mật khẩu",
+  "payment.success": "Thanh toán thành công, cảm ơn bạn đã sử dụng dịch vụ."
 }
