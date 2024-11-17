@@ -30,14 +30,10 @@ import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
 import { VerifyEmail } from '../app/auth/verify-email';
 import JobDetail from '../app/jobs/components/JobDetail';
 import SavedJobs from '../app/jobs/savedJobs/index';
-import CompanyList from '../app/company/components/CompanyList';
-import InfoCompany from '../app/company/components/InfoCompany';
 import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
 import Upgrade from '../app/upgrade';
-import Dashboard from '../app/admin/dashboard/Dashboard';
-// import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },

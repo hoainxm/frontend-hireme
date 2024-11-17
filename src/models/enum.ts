@@ -24,6 +24,7 @@ export enum ScopeValue {
   MAX = 'bWF4',
 }
 
+
 export enum PageURL {
   // User
   HOME = '/',
@@ -45,6 +46,8 @@ export enum PageURL {
   LICENSE_MANAGEMENT = '/license-management',
 
   PRODUCT_OVERVIEW = '/:process/:program/:feature',
+
+  PAYMENT_STATUS = '/payment-status',
 
   // Product
   PRODUCT_COMPUTER_VISION = '/product/computer-vision',

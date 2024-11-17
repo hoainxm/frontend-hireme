@@ -53,7 +53,6 @@ import { WhyHireMeSection } from './WhyHireMeSection';
 import { CDP } from './components/projects/CDP';
 import { YOUTUBE_VIDEO_ID } from '../../common/utils/constants';
 import { SectionID } from '../../models/enum';
-import UpgradeAccount from '../upgrade/components/upgradeAccount';
 
 interface Item {
   icon: keyof typeof IconMapName;

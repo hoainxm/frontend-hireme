@@ -9,11 +9,9 @@ const PaymentCallback: React.FC = () => {
     const status = urlParams.get('vnp_TransactionStatus');
 
     if (status === '00') {
-      // Giao dịch thành công
-      history.push('/upgrade-success'); // Điều hướng đến trang thành công
+      history.push('/upgrade-success');
     } else {
-      // Giao dịch thất bại
-      history.push('/upgrade-failure'); // Điều hướng đến trang thất bại
+      history.push('/upgrade-failure');
     }
   }, [history]);
 

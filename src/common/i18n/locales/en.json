@@ -775,5 +775,6 @@
   "error.login": "Email/password is incorrect, please try again.",
   "forgotPassword.send.success": "Password reset request sent successfully",
   "user.update-password": "Update Password",
-  "user.update-password.title": "Manage your profile - Edit password"
+  "user.update-password.title": "Manage your profile - Edit password",
+  "payment.success": "Payment successful, thank you for using the service."
 }

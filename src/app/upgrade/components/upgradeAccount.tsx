@@ -4,7 +4,6 @@ import style from '../upgrade.module.scss';
 import { doGetCreatePayment } from '../api';
 import { useHistory, useLocation } from 'react-router-dom';
 import { PageURL } from '@models/enum';
-import { response } from 'express';
 
 interface Props {
   sectionId: string;
@@ -13,43 +12,75 @@ interface Props {
 export const UpgradeAccount: FC<Props> = (props) => {
   const { sectionId } = props;
   const { t } = useTranslation();
-  const location = useLocation();
-  const history = useHistory();
-  const [activePlan, setActivePlan] = useState<string>(localStorage.getItem('userPlan') || 'lite');
+  const [isPremium, setIsPremium] = useState<string>(localStorage.getItem(ScopeKey.IS_PREMIUM_SECTION) || ScopeValue.LITE);
 
-  const redirectToUpgradePage = () => {
-    history.push(PageURL.UPGRADE);
-  };
-  const getQueryParams = (query: string) => {
-    return new URLSearchParams(query);
-  };
+  const [amount, setAmount] = useState<string | null | number>(null);
 
-  const handlePurchase = async (amount: number, plan: string) => {
+  const handlePurchase = async (amount: number) => {
     try {
       const ipAddr = '127.0.0.1';
-      const response = await doGetCreatePayment({ amount, ipAddr });
+      const response = await doPostCreatePayment({ amount, ipAddr });
 
       if (response?.data?.url) {
         window.location.href = response.data.url;
+      } else {
+        throw new Error('Không thể tạo giao dịch.');
       }
-      // console.log('Payment response:', response);
+      console.log('Payment response:', response);
     } catch (error) {
       console.error('Payment failed:', error);
     }
   };
 
+  const verifyTransaction = async (txnRef: string, vnp_Amount: string) => {
+    try {
+      const dataSubmit = { txnRef, vnp_Amount };
+      const response = await doGetVerifyTransaction(dataSubmit);
+
+      console.log('response.data', response.data);
+
+      if (response?.data?.status === 'success') {
+        const vnpAmountRaw = response?.data?.data?.vnp_Amount;
+        const vnpAmount = parseInt(vnpAmountRaw, 10) / 100;
+
+        if (isNaN(vnpAmount)) {
+          return;
+        }
+
+        Alert.success({ title: t('sucess.title'), content: t('payment.success') });
+
+        console.log('isPremium', isPremium);
+        let plan = ScopeValue.LITE;
+        if (vnpAmount === 100000) {
+          plan = ScopeValue.PLUS;
+        } else if (vnpAmount === 200000) {
+          plan = ScopeValue.MAX;
+        }
+
+        console.log('Plan to save:', plan);
+        localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
+        setIsPremium(plan);
+      }
+    } catch (error) {
+      console.error('Error verifying transaction:', error);
+    }
+  };
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const responseCode = queryParams.get('vnp_ResponseCode');
-    const transactionStatus = queryParams.get('vnp_TransactionStatus');
-
-    if (responseCode === '00' && transactionStatus === '00') {
-      const newPlan = 'plus';
-      setActivePlan(newPlan);
-      localStorage.setItem('userPlan', newPlan);
-      history.replace(PageURL.UPGRADE);
+    const txnRef = queryParams.get('vnp_TxnRef');
+    const vnp_Amount = queryParams.get('vnp_Amount');
+    if (vnp_Amount) {
+      setAmount(Number(amount) / 100);
     }
-  }, [location.search, history]);
+
+    const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+    window.history.replaceState(null, '', cleanUrl);
+
+    if (txnRef) {
+      verifyTransaction(txnRef, vnp_Amount as string);
+    }
+  }, [location]);
 
   return (
     <div id={sectionId} title={t('title.update')}>
@@ -120,14 +151,9 @@ export const UpgradeAccount: FC<Props> = (props) => {
                   {t('price.lite')}
                   {t('month')}
                 </p>
-                <p>
-                  {' '}
-                  {/* {t('billed')} {t('discount.lite')} {t('yearly')} */}
-                  {/* {t('litelite')} */}
-                </p>
               </div>
-              <button disabled={activePlan === 'lite'} className={style.selectButton1}>
-                {activePlan === 'lite' ? t('button.actived') : t('button.getNow')}
+              <button disabled={isPremium === ScopeValue.LITE} className={style.selectButton1}>
+                {isPremium === ScopeValue.LITE ? t('button.actived') : t('button.getNow')}
               </button>
             </div>
 
@@ -138,14 +164,16 @@ export const UpgradeAccount: FC<Props> = (props) => {
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.plus')}</p>
-                <p>
-                  {' '}
-                  {t('billed')}
-                  {t('monthly')}
-                </p>
               </div>
-              <button onClick={() => handlePurchase(100000, 'plus')} disabled={activePlan === 'plus'} className={style.selectButton2}>
-                {activePlan === 'plus' ? t('button.actived') : t('button.getNow')}
+              <button
+                onClick={() => {
+                  handlePurchase(100000);
+                  setIsPremium(ScopeValue.PLUS);
+                }}
+                disabled={isPremium === 'plus'}
+                className={style.selectButton2}
+              >
+                {isPremium === ScopeValue.PLUS ? t('button.actived') : t('button.getNow')}
               </button>
             </div>
 
@@ -156,13 +184,16 @@ export const UpgradeAccount: FC<Props> = (props) => {
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.max')}</p>
-                <p>
-                  {' '}
-                  {t('billed')} {t('monthly')}
-                </p>
               </div>
-              <button onClick={() => handlePurchase(200000, 'max')} disabled={activePlan === 'max'} className={style.selectButton3}>
-                {activePlan === 'max' ? t('button.actived') : t('button.getNow')}
+              <button
+                onClick={() => {
+                  handlePurchase(200000);
+                  setIsPremium(ScopeValue.MAX);
+                }}
+                disabled={isPremium === 'max'}
+                className={style.selectButton3}
+              >
+                {isPremium === ScopeValue.MAX ? t('button.actived') : t('button.getNow')}
               </button>
             </div>
           </div>
