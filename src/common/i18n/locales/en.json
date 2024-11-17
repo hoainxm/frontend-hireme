@@ -381,6 +381,11 @@
   "joblist.title": "Discover your dream job from top hiring opportunities on HireMe",
 
   "admin.home": "Dashboard",
+  "admin.userManagement": "Users",
+  "admin.CVManagement": "CVs",
+  "admin.companyManagement": "Companies",
+  "admin.jobManagement": "Jobs",
+
   "admin.inform.title": "Welcome information",
   "admin.tenant.tenantManagement": "Tenant management",
 

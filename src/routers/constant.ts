@@ -36,6 +36,7 @@ import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
 import Upgrade from '../app/upgrade';
+import Dashboard from '../app/admin/dashboard/Dashboard';
 // import Category from '../app/jobs/Category';
 
 export const APP_ROUTE: Array<RouteModel> = [
@@ -81,6 +82,10 @@ export const PUBLIC_ROUTE = [
   {
     path: PageURL.COMPANY_DETAIL,
     component: CompanyDetail,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE,
+    component: AICloudFeatureManagement,
   },
 ];
 

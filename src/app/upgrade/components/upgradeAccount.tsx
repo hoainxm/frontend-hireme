@@ -4,6 +4,7 @@ import style from '../upgrade.module.scss';
 import { doGetCreatePayment } from '../api';
 import { useHistory, useLocation } from 'react-router-dom';
 import { PageURL } from '@models/enum';
+import { response } from 'express';
 
 interface Props {
   sectionId: string;
@@ -31,7 +32,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
       if (response?.data?.url) {
         window.location.href = response.data.url;
       }
-      console.log('Payment response:', response);
+      // console.log('Payment response:', response);
     } catch (error) {
       console.error('Payment failed:', error);
     }

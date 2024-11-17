@@ -403,6 +403,11 @@
   "joblist.title": "Khám phá công việc mơ ước từ những cơ hội tuyển dụng hàng đầu trên HireMe",
 
   "admin.home": "Trang chủ",
+  "admin.userManagement": "Người dùng",
+  "admin.CVManagement": "CV",
+  "admin.companyManagement": "Công ty",
+  "admin.jobManagement": "Việc làm",
+
   "admin.inform.title": "Thông tin chào mừng",
   "admin.tenant.tenantManagement": "Quản lý công ty",
 

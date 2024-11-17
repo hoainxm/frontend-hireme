@@ -9,6 +9,7 @@ export enum ScopeKey {
   USER = 'ffcs8VCz8VFSGTDa3dfx',
   SELECTED_SECTION_DOT = 'c2VsZWN0ZWRJdGVt',
   COUNT_DOWN = 'Y291bnRkb3du',
+  IS_PREMIUM_SECTION = 'aXNfcHJlbWl1bV9zZWN0aW9u',
 }
 
 export enum ScopeValue {
@@ -18,6 +19,9 @@ export enum ScopeValue {
   ENG = 'FClcBFF0I7m8YRWXqFDV',
   AUTOMATE = 'dHJ1ZQ==',
   NO_AUTOMATE = 'ZmFsc2U=',
+  LITE = 'bGl0ZQ==',
+  PLUS = 'cGx1cw==',
+  MAX = 'bWF4',
 }
 
 export enum PageURL {
@@ -77,6 +81,13 @@ export enum PageURL {
   // Admin
   ADMIN = '/admin',
   ADMIN_LOGIN = '/admin/login',
+
+  ADMIN_MANAGE = '/manage',
+  ADMIN_MANAGE_USER = '/manage/user',
+  ADMIN_MANAGE_COMPANY = '/manage/company',
+  ADMIN_MANAGE_JOB = '/manage/job',
+  ADMIN_MANAGE_CV = '/manage/cvs',
+
   ADMIN_AI_PACKAGE_WRITER = '/ai-cloud-features/ai-package/:action',
   ADMIN_AI_PACKAGE_INFO = '/ai-cloud-features/ai-package/:action/:id',
   ADMIN_AI_API_KEY = '/cloud-api-key',
@@ -133,6 +144,11 @@ export enum PageName {
 
   // Admin
   ADMIN_DASHBOARD = 'admin.home',
+  ADMIN_MANAGE_USER = 'admin.userManagement',
+  ADMIN_MANAGE_CV = 'admin.CVManagement',
+  ADMIN_MANAGE_JOB = 'admin.jobManagement',
+  ADMIN_MANAGE_COMPANY = 'admin.companyManagement',
+
   WELCOME_INFORM_MANAGEMENT = 'admin.inform.title',
   TENANT_MANAGEMENT = 'admin.tenant.tenantManagement',
 }
@@ -291,6 +307,14 @@ export enum PopupLevel {
   COMING_SOON,
   LOADING,
   AUTHENTICATE,
+}
+
+export enum AdminManageTabs {
+  USER = 'user',
+  ADMIN = 'admin',
+  COMPANY = 'companies',
+  JOBS = 'jobs',
+  CV = 'cvs',
 }
 
 export enum APICloudFeatureTabs {
