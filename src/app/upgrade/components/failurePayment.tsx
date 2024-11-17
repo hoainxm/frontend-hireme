@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import style from './upgrade.module.scss';
 import MainLayout from '../../../common/ui/layout/main-layout';
 
-
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
 }

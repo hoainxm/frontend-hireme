@@ -79,6 +79,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.COMPANY_DETAIL,
     component: CompanyDetail,
   },
+  {
+    path: PageURL.ADMIN_MANAGE,
+    component: AICloudFeatureManagement,
+  },
 ];
 
 export const PRIVATE_ROUTE = [

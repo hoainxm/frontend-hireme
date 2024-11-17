@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './upgrade.module.scss';
-import { doPostCreatePayment, doGetVerifyTransaction } from '../api';
-import { ScopeKey, ScopeValue } from '@models/enum';
+import { doGetVerifyTransaction, doPostCreatePayment } from '../api';
+import { useHistory, useLocation } from 'react-router-dom';
+import { PageURL, ScopeKey, ScopeValue } from '@models/enum';
 import { Alert } from '../../../common/utils/popup';
 
 interface Props {
@@ -26,6 +27,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
       } else {
         throw new Error('Không thể tạo giao dịch.');
       }
+      console.log('Payment response:', response);
     } catch (error) {
       console.error('Payment failed:', error);
     }
