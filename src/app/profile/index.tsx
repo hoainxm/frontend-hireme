@@ -259,7 +259,14 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       </Modal>
 
       <Modal title='Chỉnh sửa thông tin cá nhân' visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
-        <Form layout='vertical' initialValues={userInfo} onFinish={handleEditSubmit}>
+        <Form
+          layout='vertical'
+          initialValues={{
+            ...userInfo,
+            dateOfBirth: userInfo?.dateOfBirth ? dayjs(userInfo.dateOfBirth) : null,
+          }}
+          onFinish={handleEditSubmit}
+        >
           <Form.Item label='Họ tên' name='name'>
             <Input />
           </Form.Item>
@@ -270,19 +277,11 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
               <Option value='khong_xac_dinh'>Không xác định</Option>
             </Select>
           </Form.Item>
-          {/* <Form.Item label='Ngày sinh' name='dateOfBirth'>
-            <DatePicker
-              format='YYYY-MM-DD'
-              style={{ width: '100%' }}
-              defaultValue={userInfo?.dateOfBirth ? dayjs(userInfo.dateOfBirth, 'YYYY-MM-DD') : undefined}
-              onChange={(date, dateString) => {
-                console.log('Ngày được chọn:', dateString); // Xử lý giá trị khi người dùng chọn
-              }}
-            />
-          </Form.Item> */}
-
+          <Form.Item label='Ngày sinh' name='dateOfBirth'>
+            <DatePicker format='YYYY-MM-DD' style={{ width: '100%' }} />
+          </Form.Item>
           <Form.Item label='Điện thoại' name='phone'>
-            <Input />
+            <Input type='number' />
           </Form.Item>
           <Form.Item label='Địa chỉ' name='address'>
             <Input />

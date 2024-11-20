@@ -1,4 +1,4 @@
-import { paymentAPIUrl } from '../../common/utils/constants';
+import { paymentAPIUrl, userAPIUrl } from '../../common/utils/constants';
 import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
 import axios from 'axios';
 
@@ -24,4 +24,8 @@ export const doPostCreatePayment = (data: { amount: number; ipAddr: string }): P
 export const doGetVerifyTransaction = (data: { txnRef: string; vnp_Amount: string }): Promise<any> => {
   const queryParams = new URLSearchParams(data).toString();
   return doGet(`${paymentAPIUrl}/verify?${queryParams}`);
+};
+
+export const setPremium = (data: { typePre: string }): Promise<ApiResponse<any>> => {
+  return doPost(`${userAPIUrl}/set-premium`, data);
 };
