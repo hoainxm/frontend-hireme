@@ -1,0 +1,64 @@
+.jobForm {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+
+  label {
+    margin-bottom: 10px;
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+  }
+
+  button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+.jobList {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  }
+
+  button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

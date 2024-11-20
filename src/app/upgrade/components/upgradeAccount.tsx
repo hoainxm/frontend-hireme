@@ -26,6 +26,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
       } else {
         throw new Error('Không thể tạo giao dịch.');
       }
+      console.log('Payment response:', response);
     } catch (error) {
       console.error('Payment failed:', error);
     }
