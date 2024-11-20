@@ -1,25 +1,17 @@
 /** @format */
 
-import axios from 'axios';
+import { doGet, doPost, doPut, doDelete } from '../../../../../common/utils/baseAPI';
 
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
+const BASE_URL = '/companies';
 
-export const fetchData = async (endpoint: string) => {
-  const response = await axios.get(`${BASE_URL}/${endpoint}`);
-  return response.data;
+export const fetchCompanies = async (page: number, pageSize: number) => {
+  return doGet(`${BASE_URL}`, { page, page_size: pageSize });
 };
 
-export const createData = async (endpoint: string, data: object) => {
-  const response = await axios.post(`${BASE_URL}/${endpoint}`, data);
-  return response.data;
+export const createCompany = async (companyData: Record<string, any>) => {
+  return doPost(`${BASE_URL}`, companyData);
 };
 
-export const updateData = async (endpoint: string, id: string, data: object) => {
-  const response = await axios.put(`${BASE_URL}/${endpoint}/${id}`, data);
-  return response.data;
-};
-
-export const deleteData = async (endpoint: string, id: string) => {
-  const response = await axios.delete(`${BASE_URL}/${endpoint}/${id}`);
-  return response.data;
+export const deleteCompany = async (companyId: string) => {
+  return doDelete(`${BASE_URL}/${companyId}`);
 };

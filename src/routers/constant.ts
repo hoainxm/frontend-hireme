@@ -34,6 +34,11 @@ import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
 import Upgrade from '../app/upgrade';
+// import UserManagement from '../app/admin/dashboard/components/user';
+import UserManagement from '../app/admin/dashboard/components/user';
+import JobManagement from '../app/admin/dashboard/components/job';
+import CompanyManagement from '../app/admin/dashboard/components/company';
+import CVManagement from '../app/admin/dashboard/components/cv';
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
@@ -81,7 +86,23 @@ export const PUBLIC_ROUTE = [
   },
   {
     path: PageURL.ADMIN_MANAGE,
-    component: AICloudFeatureManagement,
+    component: UserManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_USER,
+    component: UserManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_JOB,
+    component: JobManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_COMPANY,
+    component: CompanyManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_CV,
+    component: CVManagement,
   },
 ];
 

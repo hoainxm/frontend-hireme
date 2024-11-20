@@ -34,6 +34,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const dispatch = useAppDispatch();
 
   const fetchInfo = async () => {
@@ -258,7 +259,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
         <img src={previewImage || ''} alt='Full Avatar Preview' style={{ width: '100%' }} />
       </Modal>
 
-      <Modal title='Chỉnh sửa thông tin cá nhân' visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
+      <Modal title={t('editProfile')} visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
         <Form
           layout='vertical'
           initialValues={{
@@ -267,31 +268,46 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           }}
           onFinish={handleEditSubmit}
         >
-          <Form.Item label='Họ tên' name='name'>
+          <Form.Item label={t('field.fullName')} name='name'>
             <Input />
           </Form.Item>
-          <Form.Item label='Giới tính' name='gender'>
-            <Select>
-              <Option value='nam'>Nam</Option>
-              <Option value='nu'>Nữ</Option>
-              <Option value='khong_xac_dinh'>Không xác định</Option>
+          <Form.Item label={t('field.gender')} name='gender'>
+            <Select placeholder={t('field.hint.gender')}>
+              <Option value='nam'>{t('male')}</Option>
+              <Option value='nu'>{t('female')}</Option>
+              <Option value='khong_xac_dinh'>{t('undefined')}</Option>
             </Select>
           </Form.Item>
-          <Form.Item label='Ngày sinh' name='dateOfBirth'>
-            <DatePicker format='YYYY-MM-DD' style={{ width: '100%' }} />
+          <Form.Item label={t('field.birthday')} name='dateOfBirth'>
+            <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
           </Form.Item>
-          <Form.Item label='Điện thoại' name='phone'>
-            <Input type='number' />
+          <Form.Item label={t('support.phone')} name='phone'>
+            <Input type='number' placeholder={t('field.hint.phone')} />
           </Form.Item>
-          <Form.Item label='Địa chỉ' name='address'>
-            <Input />
+          <Form.Item label={t('support.phone')} name='address'>
+            <Input placeholder={t('hr.staff.hint.address')} />
+          </Form.Item>
+          <Form.Item label={t('field.skills')} name='skills'>
+            <Select
+              mode='multiple'
+              allowClear
+              placeholder={t('field.skillsPlaceholder')}
+              value={selectedSkills}
+              onChange={(values) => setSelectedSkills(values)}
+            >
+              {SkillsOptions.map((skill) => (
+                <Option key={skill} value={skill}>
+                  {skill}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item>
             <Button type='primary' htmlType='submit'>
-              Lưu
+              {t('btn.save')}
             </Button>
             <Button onClick={handleEditCancel} style={{ marginLeft: '8px' }}>
-              Hủy
+              {t('btn.cancel')}
             </Button>
           </Form.Item>
         </Form>

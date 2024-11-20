@@ -1,17 +1,32 @@
-import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import JobList from './JobList';
-import JobForm from './JobForm';
+/** @format */
 
-const JobManagement: React.FC = () => {
-  const { path } = useRouteMatch();
+import { AdminManageTabs, APICloudFeatureTabs, PageName } from '../../../../../models/enum';
+import React, { FC } from 'react';
+import AdminContentLayout from '../../../../../common/ui/layout/admin-content-layout';
+import { RouteComponentProps } from 'react-router-dom';
+import { TabItem } from '../../../../../common/ui/layout/model';
+import TabLayout from '../../../../../common/ui/layout/tab-layout';
+import { useTranslation } from 'react-i18next';
+import JobListedByAdmin from './JobListedByAdmin';
+
+interface Props extends RouteComponentProps<any> {}
+
+const JobManagement: FC<Props> = (props: Props) => {
+  const { t } = useTranslation();
+
+  const HEADERS: Array<TabItem> = [
+    // { name: AdminManageTabs.USER, contentId: 'user' },
+    // { name: AdminManageTabs.COMPANY, contentId: 'company' },
+    { name: AdminManageTabs.JOBS, contentId: 'job' },
+    // { name: AdminManageTabs.CV, contentId: 'cv' },
+  ];
 
   return (
-    <Switch>
-      <Route exact path={path} component={JobList} />
-      <Route path={`${path}/edit/:id`} component={JobForm} />
-      <Route path={`${path}/create`} component={JobForm} />
-    </Switch>
+    <AdminContentLayout dropDefaultContent title={t('admin.jobManagement')} activate={PageName.ADMIN_DASHBOARD}>
+      <TabLayout tabs={HEADERS}>
+        <JobListedByAdmin key={0} id='job' />
+      </TabLayout>
+    </AdminContentLayout>
   );
 };
 

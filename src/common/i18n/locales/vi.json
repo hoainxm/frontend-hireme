@@ -138,7 +138,7 @@
   "field.position": "Vị trí công việc bạn mong muốn",
   "field.experiencePlaceholder": "Cấp bậc",
   "field.positionPlaceholder": "Tên công việc bạn muốn ứng tuyển",
-  "field.skillsPlaceholder": "Kỹ năng",
+  "field.skillsPlaceholder": "Chọn kỹ năng",
   "field.provincePlaceholder": "Tỉnh/thành phố",
 
   "found": "Tìm thấy",
@@ -284,6 +284,7 @@
   "btn.resendVerify": "Nhận mã xác minh",
   "error.tokenVerifyInvalid": "Mã xác minh không hợp lệ",
 
+  "editProfile": "Chỉnh sửa thông tin cá nhân",
   "field.hint.tenant_name": "Nhập tên công ty",
   "field.fullName": "Họ và tên",
   "field.hint.fullName": "Nhập họ và tên",
@@ -403,10 +404,19 @@
   "joblist.title": "Khám phá công việc mơ ước từ những cơ hội tuyển dụng hàng đầu trên HireMe",
 
   "admin.home": "Trang chủ",
-  "admin.userManagement": "Người dùng",
-  "admin.CVManagement": "CV",
-  "admin.companyManagement": "Công ty",
-  "admin.jobManagement": "Việc làm",
+  "field.admin.user": "Người dùng",
+  "field.admin.company": "Công ty",
+  "field.admin.job": "Việc làm",
+  "field.admin.cv": "CV",
+  "field.verified": "Đã xác minh",
+  "field.unverified": "Chưa xác minh",
+
+  "btn.admin.addUser": "Thêm người dùng",
+
+  "admin.userManagement": "Quản lý người dùng",
+  "admin.CVManagement": "Quản lý CV",
+  "admin.companyManagement": "Quản lý công ty",
+  "admin.jobManagement": "Quản lý việc làm",
 
   "admin.inform.title": "Thông tin chào mừng",
   "admin.tenant.tenantManagement": "Quản lý công ty",
@@ -731,6 +741,7 @@
   "voice": "Giọng đọc",
   "male": "Nam",
   "female": "Nữ",
+  "undefined": "Không xác định",
   "convertResult": "Kết quả chuyển đổi",
   "prescriptionCreatedDate": "Ngày tạo đơn thuốc",
   "date": "Ngày",
