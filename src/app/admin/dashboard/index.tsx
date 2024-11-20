@@ -9,10 +9,6 @@ import SysAPIKeyManagement from './ai-api-key';
 import { TabItem } from '../../../common/ui/layout/model';
 import TabLayout from '../../../common/ui/layout/tab-layout';
 import { useTranslation } from 'react-i18next';
-import CompanyForm from './components/company/CompanyForm';
-import JobForm from './components/job/JobForm';
-import CVForm from './components/cv/CVForm';
-import UserForm from './components/user/UserForm';
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -22,16 +18,15 @@ const AICloudFeatureManagement: FC<Props> = (props: Props) => {
   const HEADERS: Array<TabItem> = [
     { name: APICloudFeatureTabs.APIKEY, contentId: 'atab' },
     { name: APICloudFeatureTabs.PACKAGE, contentId: 'ptab' },
-    { name: AdminManageTabs.USER, contentId: 'user' },
   ];
 
   return (
     <AdminContentLayout dropDefaultContent title={t('ai.apikey.management')} activate={PageName.ADMIN_DASHBOARD}>
       <TabLayout tabs={HEADERS}>
-        <CompanyForm key={0} />
+        {/* <CompanyForm key={0} />
         <JobForm key={1} />
         <CVForm key={2} />
-        <UserForm key={3} />
+        <UserForm key={3} /> */}
         <SysAPIKeyManagement key={0} id='atab' />
         <AIPackageManagement key={1} id={'ptab'} />
       </TabLayout>

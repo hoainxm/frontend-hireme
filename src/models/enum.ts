@@ -24,7 +24,6 @@ export enum ScopeValue {
   MAX = 'bWF4',
 }
 
-
 export enum PageURL {
   // User
   HOME = '/',
@@ -147,10 +146,10 @@ export enum PageName {
 
   // Admin
   ADMIN_DASHBOARD = 'admin.home',
-  ADMIN_MANAGE_USER = 'admin.userManagement',
-  ADMIN_MANAGE_CV = 'admin.CVManagement',
-  ADMIN_MANAGE_JOB = 'admin.jobManagement',
-  ADMIN_MANAGE_COMPANY = 'admin.companyManagement',
+  ADMIN_MANAGE_USER = 'field.admin.user',
+  ADMIN_MANAGE_CV = 'field.admin.cv',
+  ADMIN_MANAGE_JOB = 'field.admin.job',
+  ADMIN_MANAGE_COMPANY = 'field.admin.company',
 
   WELCOME_INFORM_MANAGEMENT = 'admin.inform.title',
   TENANT_MANAGEMENT = 'admin.tenant.tenantManagement',
@@ -313,11 +312,11 @@ export enum PopupLevel {
 }
 
 export enum AdminManageTabs {
-  USER = 'user',
   ADMIN = 'admin',
-  COMPANY = 'companies',
-  JOBS = 'jobs',
-  CV = 'cvs',
+  USER = 'field.admin.user',
+  COMPANY = 'field.admin.company',
+  JOBS = 'field.admin.job',
+  CV = 'field.admin.cv',
 }
 
 export enum APICloudFeatureTabs {
