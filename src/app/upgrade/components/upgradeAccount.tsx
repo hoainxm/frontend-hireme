@@ -1,9 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './upgrade.module.scss';
-import { doGetVerifyTransaction, doPostCreatePayment } from '../api';
-import { useHistory, useLocation } from 'react-router-dom';
-import { PageURL, ScopeKey, ScopeValue } from '@models/enum';
+import { doPostCreatePayment, doGetVerifyTransaction, setPremium } from '../api';
+import { ScopeKey, ScopeValue } from '@models/enum';
 import { Alert } from '../../../common/utils/popup';
 
 interface Props {
@@ -50,7 +49,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
 
         Alert.success({ title: t('sucess.title'), content: t('payment.success') });
 
-        console.log('isPremium', isPremium);
         let plan = ScopeValue.LITE;
         if (vnpAmount === 100000) {
           plan = ScopeValue.PLUS;
@@ -61,6 +59,9 @@ export const UpgradeAccount: FC<Props> = (props) => {
         console.log('Plan to save:', plan);
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
         setIsPremium(plan);
+        const dataSubmit = { typePre: plan };
+        const check = await setPremium(dataSubmit);
+        console.log('check: ', check);
       }
     } catch (error) {
       console.error('Error verifying transaction:', error);
@@ -199,7 +200,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
             </div>
           </div>
         </div>
-      </div>
+    </div>
     </div>
   );
 };

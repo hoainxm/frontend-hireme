@@ -3,7 +3,7 @@ import { PageName, Palette } from '../../models/enum';
 import { useTranslation } from 'react-i18next';
 import style from '../../app/upgrade/components/upgrade.module.scss';
 import MainLayout from '../../common/ui/layout/main-layout';
-import UpgradeAccount from './components/upgradeAccount';
+import UpgradeAccount from './components/UpgradeAccount';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
