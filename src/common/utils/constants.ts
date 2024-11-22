@@ -160,6 +160,7 @@ export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
 export const authAPIUrl = 'api/v1/auth';
 export const userAPIUrl = 'api/v1/users';
 export const jobsAPIUrl = 'api/v1/jobs';
+export const companiesAPIUrl = 'api/v1/companies';
 export const resumeAPIUrl = 'api/v1/resumes';
 export const fileAPIUrl = 'api/v1/files';
 export const paymentAPIUrl = 'api/v1/payment';

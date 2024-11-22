@@ -303,8 +303,12 @@
   "field.hint.address": "Nhập địa chỉ",
   "field.role": "Chức năng",
   "field.premium": "Nâng cấp",
-  "field.last_updated": "Chỉnh sửa cuối",
-  "field.none": " ",
+  "field.last_updated": "Chỉnh sửa lần cuối",
+  "field.notSet": "-",
+  "field.companyName": "Tên công ty",
+  "field.location": "Địa điểm",
+  "field.startDate": "Ngày bắt đầu",
+  "field.endDate": "Ngày kết thúc",
 
   "error.tenantExists": "Tên công ty đã tồn tại",
   "field.error.maxLength": "Độ dài của trường này chỉ tối đa là",
@@ -417,6 +421,9 @@
   "field.unverified": "Chưa xác minh",
 
   "btn.admin.addUser": "Thêm người dùng",
+  "btn.admin.addCompany": "Thêm công ty",
+  "btn.admin.addJob": "Thêm việc làm",
+  "btn.admin.addCV": "Thêm CV",
 
   "admin.userManagement": "Quản lý người dùng",
   "admin.CVManagement": "Quản lý CV",

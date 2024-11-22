@@ -17,7 +17,7 @@ const CVManagement: FC<Props> = (props: Props) => {
   const HEADERS: Array<TabItem> = [{ name: AdminManageTabs.CV, contentId: 'cv' }];
 
   return (
-    <AdminContentLayout dropDefaultContent title={t('admin.cvManagement')} activate={PageName.ADMIN_DASHBOARD}>
+    <AdminContentLayout dropDefaultContent title={t('admin.CVManagement')} activate={PageName.ADMIN_DASHBOARD}>
       <TabLayout tabs={HEADERS}>
         <CVListedByAdmin key={0} id='cv' />
       </TabLayout>

@@ -16,9 +16,9 @@ const UserManagement: FC<Props> = (props: Props) => {
 
   const HEADERS: Array<TabItem> = [
     { name: AdminManageTabs.USER, contentId: 'user' },
-    { name: AdminManageTabs.COMPANY, contentId: 'company' },
-    { name: AdminManageTabs.JOBS, contentId: 'job' },
-    { name: AdminManageTabs.CV, contentId: 'cv' },
+    // { name: AdminManageTabs.COMPANY, contentId: 'company' },
+    // { name: AdminManageTabs.JOBS, contentId: 'job' },
+    // { name: AdminManageTabs.CV, contentId: 'cv' },
   ];
 
   return (
