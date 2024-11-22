@@ -1,11 +1,20 @@
 /** @format */
 
-import { doGet, doPost, doPut, doDelete } from '../../../../../common/utils/baseAPI';
+import { ApiResponse, APIResponse, doDelete, doGet, doPost } from '../../../../../common/utils/baseAPI';
+import axios from 'axios';
+import { UserProfile, UserProfileByAdmin } from '../../../../auth/models';
+import { companiesAPIUrl, userAPIUrl, jobsAPIUrl } from '../../../../../common/utils/constants';
+import { Company } from '../../../../company/model';
+import { Job } from '../../../../jobs/model';
 
+const getToken = () => localStorage.getItem('access_token');
 const BASE_URL = '/jobs';
 
-export const fetchJobs = async (page: number, pageSize: number) => {
-  return doGet(`${BASE_URL}`, { page, page_size: pageSize });
+export const fetchJobsByAdmin = async (
+  current: number,
+  pageSize: number
+): Promise<ApiResponse<{ meta: { current: number; pageSize: number; pages: number; total: number }; result: Job[] }>> => {
+  return doGet(`${jobsAPIUrl}?current=${current}&pageSize=${pageSize}`);
 };
 
 export const createJob = async (jobData: Record<string, any>) => {

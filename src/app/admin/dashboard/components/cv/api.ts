@@ -1,10 +1,21 @@
 /** @format */
 
-import { doGet, doPost, doPut, doDelete } from '../../../../../common/utils/baseAPI';
+import { ApiResponse, APIResponse, doDelete, doGet, doPost, doPut } from '../../../../../common/utils/baseAPI';
+import axios from 'axios';
+import { UserProfile, UserProfileByAdmin } from '../../../../auth/models';
+import { resumeAPIUrl } from '../../../../../common/utils/constants';
+import { Company } from '../../../../company/model';
+import { Job } from '../../../../jobs/model';
+import { CV } from './model';
 
-/** Fetch a paginated list of CVs */
-export const fetchCVs = (page: number, pageSize: number) => {
-  return doGet('/cvs', { page, pageSize });
+const getToken = () => localStorage.getItem('access_token');
+const BASE_URL = '/jobs';
+
+export const fetchCVsByAdmin = async (
+  current: number,
+  pageSize: number
+): Promise<ApiResponse<{ meta: { current: number; pageSize: number; pages: number; total: number }; result: CV[] }>> => {
+  return doGet(`${resumeAPIUrl}?current=${current}&pageSize=${pageSize}`);
 };
 
 /** Fetch a specific CV by ID */

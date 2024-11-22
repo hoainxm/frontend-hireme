@@ -16,7 +16,10 @@ import { handleErrorNoPermission } from '../../../../../common/utils/common';
 import { fetchUsersByAdmin } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
-import Delete from '../../../../../common/ui/assets/icon/Delete.svg';
+import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
+import { ROLES } from '../../constants';
+import { PremiumPlanMapping } from '../../constants';
+import dayjs from 'dayjs';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -26,7 +29,6 @@ interface Props {
 const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
   const history = useHistory();
-
   const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -42,18 +44,23 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.verified'),
     t('field.premium'),
     t('field.last_updated'),
-    t('field.none'),
+    t('field.action'),
   ];
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
     fetchUsersByAdmin(page, pageSize)
       .then((res) => {
-        console.log(res.data.result);
+        const { meta, result } = res.data;
+        const usersWithRoleNames = res.data.result.map((user) => ({
+          ...user,
+          role: ROLES.find((role) => role._id === user.role)?.name || '-',
+        }));
         setUsers(res.data.result);
-        // setCurrentPage(res.page);
-        // setTotalPage(Math.ceil(res.total / res.page_size));
-        // setTotalData(res.total);
+        setUsers(usersWithRoleNames);
+        setCurrentPage(meta.current);
+        setTotalPage(meta.pages);
+        setTotalData(meta.total);
       })
       .catch((error) => {
         if (error.response?.status === 403) handleErrorNoPermission(error, t);
@@ -110,13 +117,13 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
               key={user._id}
               data={[
                 index + 1,
-                user.name || '-',
-                user.email || '-',
-                user.role || '-',
+                user.name || t('field.notSet'),
+                user.email || t('field.notSet'),
+                user.role || t('field.notSet'),
                 <Image src={user.isVerify ? Yes : No} alt={user.isVerify ? 'Verified' : 'Not Verified'} width={20} height={20} />,
-                user.isPremium,
-                user.updatedAt,
-                <Image src={Delete} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />,
+                PremiumPlanMapping[user.isPremium],
+                dayjs(user.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+                <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />,
               ]}
               onClick={() => history.push(`${PageURL.ADMIN_MANAGE_USER}/update/${user._id}`)}
             />

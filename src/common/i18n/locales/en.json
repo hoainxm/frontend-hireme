@@ -282,7 +282,11 @@
   "field.role": "Role",
   "field.premium": "Premium",
   "field.last_updated": "Last updated",
-  "field.none": " ",
+  "field.notSet": "-",
+  "field.companyName": "Company name",
+  "field.location": "Location",
+  "field.startDate": "Started date",
+  "field.endDate": "Ended date",
 
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",

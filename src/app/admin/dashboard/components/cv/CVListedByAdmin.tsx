@@ -1,48 +1,60 @@
 /** @format */
 
 import React, { FC, useState, useEffect } from 'react';
-import { fetchCVs, deleteCV } from './api';
-import { CV } from './model';
-import { CTable, CButton, CTPaging, CTPageSize, CTRow, BlankFrame, Loading } from '../../../../../common/ui/base';
-import { useTranslation } from 'react-i18next';
+import { CTable, CTPaging, CTPageSize, CTRow, BlankFrame, Loading, CButton } from '../../../../../common/ui/base';
 import { Confirm, Alert } from '../../../../../common/utils/popup';
+import { fetchCVsByAdmin, deleteCV } from './api'; // Replace with the actual API functions
+import { CV } from './model'; // Replace with the actual CV model
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { PageURL } from '../../../../../models/enum';
+import { Image } from 'react-bootstrap';
+import dayjs from 'dayjs';
+import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 
 interface Props {
-  // isSysAdminSite?: boolean;
   id: string;
 }
 
-const CVListedByAdmin: FC<Props> = (props: Props) => {
+const CVListedByAdmin: FC<Props> = ({ id }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [cvs, setCVs] = useState<CV[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
 
-  const fetchData = (page: number) => {
+  const TABLE_HEADER = [t('field.numeric'), t('field.email'), t('field.status'), t('field.last_updated'), t('field.action')];
+
+  const fetchCVs = (page: number) => {
     setIsLoading(true);
-    fetchCVs(page, pageSize)
+    fetchCVsByAdmin(page, pageSize)
       .then((res) => {
-        setCVs(res.data.results);
-        setCurrentPage(res.data.page);
-        setTotalPage(Math.ceil(res.data.total / pageSize));
-        setTotalData(res.data.total);
+        const { meta, result } = res.data;
+        setCVs(result);
+        setCurrentPage(meta.current);
+        setTotalPage(meta.pages);
+        setTotalData(meta.total);
       })
       .catch(() => Alert.error({ title: t('error.title'), content: t('error.fetchFailed') }))
       .finally(() => setIsLoading(false));
   };
 
-  const handleDelete = (id: string) => {
+  const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPageSize(parseInt(e.target.value, 10));
+  };
+
+  const handleDelete = (cvId: string) => {
     Confirm.delete({
       title: t('confirm.deleteTitle'),
       content: t('confirm.deleteContent'),
       onConfirm: () => {
-        deleteCV(id)
+        deleteCV(cvId)
           .then(() => {
             Alert.success({ title: t('success.title'), content: t('success.deleted') });
-            fetchData(currentPage);
+            fetchCVs(currentPage);
           })
           .catch(() => Alert.error({ title: t('error.title'), content: t('error.deleteFailed') }));
       },
@@ -50,39 +62,49 @@ const CVListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchData(1);
+    fetchCVs(1); // Initial fetch
   }, [pageSize]);
 
   return (
-    <>
+    <div>
       <div className='d-flex justify-content-end mb-3'>
-        <CButton
-          label={t('action.addCV')}
-          onClick={() => {
-            /* Redirect to add CV form */
-          }}
-        />
+        <CButton label={t('btn.admin.addCV')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_CV}/create`)} />
       </div>
-      <CTable>
+      <CTable responsive maxHeight={833}>
         <thead>
-          <CTRow header data={[t('field.name'), t('field.owner'), t('field.actions')]} />
+          <CTRow header data={TABLE_HEADER} />
         </thead>
         <tbody>
           {cvs.length > 0 ? (
             cvs.map((cv, index) => (
-              <CTRow key={index} data={[cv.name, cv.owner.name, <button onClick={() => handleDelete(cv._id)}>{t('action.delete')}</button>]} />
+              <CTRow
+                key={cv._id}
+                data={[
+                  index + 1,
+                  cv.email || t('field.notSet'),
+                  cv.status || t('field.notSet'),
+                  dayjs(cv.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+                  <Image src={TrashIcon} alt='Delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(cv._id)} />,
+                ]}
+              />
             ))
           ) : (
-            <BlankFrame title={t('message.noData')} />
+            <BlankFrame className='blank-frame' title={t('field.hint.noData')} />
           )}
         </tbody>
       </CTable>
-      <div className='d-flex justify-content-between mt-3'>
-        <CTPageSize onChange={(e) => setPageSize(Number(e.target.value))} totalData={totalData} />
-        <CTPaging currentPage={currentPage} totalPage={totalPage} onGetData={fetchData} />
-      </div>
+      {cvs.length > 0 && (
+        <div className='d-flex justify-content-between mt-5'>
+          <div>
+            <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
+          </div>
+          <div>
+            <CTPaging className='mt-4' currentPage={currentPage} totalPage={totalPage} onGetData={fetchCVs} />
+          </div>
+        </div>
+      )}
       <Loading isOpen={isLoading} />
-    </>
+    </div>
   );
 };
 
