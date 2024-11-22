@@ -301,6 +301,11 @@
   "field.hint.birthday": "Chọn ngày sinh",
   "field.hint.gender": "Chọn giới tính",
   "field.hint.address": "Nhập địa chỉ",
+  "field.role": "Chức năng",
+  "field.premium": "Nâng cấp",
+  "field.last_updated": "Chỉnh sửa cuối",
+  "field.none": " ",
+
   "error.tenantExists": "Tên công ty đã tồn tại",
   "field.error.maxLength": "Độ dài của trường này chỉ tối đa là",
   "error.tenantAliasExists": "Mã công ty đã tồn tại",

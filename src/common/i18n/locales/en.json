@@ -279,6 +279,10 @@
   "field.cfmNewPassword": "Confirm password new",
   "field.hint.birthday": "Chooose your birthday",
   "field.hint.gender": "Choose your gender",
+  "field.role": "Role",
+  "field.premium": "Premium",
+  "field.last_updated": "Last updated",
+  "field.none": " ",
 
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",
