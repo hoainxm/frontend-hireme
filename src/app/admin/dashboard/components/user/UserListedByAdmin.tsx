@@ -3,8 +3,8 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
-import { fetchUsers, deleteUser } from './api'; // Ensure these APIs exist and are imported correctly
-import { UserProfile } from '../../../../auth/models'; // Define your User model accordingly
+// import { fetchUsers, deleteUser } from './api'; // Ensure these APIs exist and are imported correctly
+import { UserProfile, UserProfileByAdmin } from '../../../../auth/models'; // Define your User model accordingly
 import { APIResponse } from '../../../../../common/utils/baseAPI';
 import { Image } from 'react-bootstrap';
 import Trash from '../../../../common/ui/assets/ic/20px/trash-bin.svg';
@@ -13,6 +13,10 @@ import { PageURL } from '../../../../../models/enum';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
+import { fetchUsersByAdmin } from './api';
+import Yes from '../../../../../common/ui/assets/images/Success.svg';
+import No from '../../../../../common/ui/assets/icon/Error.svg';
+import Delete from '../../../../../common/ui/assets/icon/Delete.svg';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -23,23 +27,33 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  const [users, setUsers] = useState<UserProfile[]>([]);
+  const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [pageSize, setPageSize] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
 
-  const TABLE_HEADER = [t('field.numeric'), t('field.name'), t('field.email'), t('field.verified')];
+  const TABLE_HEADER = [
+    t('field.numeric'),
+    t('field.name'),
+    t('field.email'),
+    t('field.role'),
+    t('field.verified'),
+    t('field.premium'),
+    t('field.last_updated'),
+    t('field.none'),
+  ];
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
-    fetchUsers(page, pageSize)
+    fetchUsersByAdmin(page, pageSize)
       .then((res) => {
-        setUsers(res.data.results);
-        setCurrentPage(res.data.page);
-        setTotalPage(Math.ceil(res.data.total / res.data.page_size));
-        setTotalData(res.data.total);
+        console.log(res.data.result);
+        setUsers(res.data.result);
+        // setCurrentPage(res.page);
+        // setTotalPage(Math.ceil(res.total / res.page_size));
+        // setTotalData(res.total);
       })
       .catch((error) => {
         if (error.response?.status === 403) handleErrorNoPermission(error, t);
@@ -64,14 +78,14 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       title: t('cfm.deleteUser.title'),
       content: t('cfm.deleteUser.content'),
       onConfirm: () => {
-        deleteUser(userId)
-          .then(() => {
-            Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
-            fetchAllUsers(checkValidPageAfterDelete());
-          })
-          .catch(() => {
-            Alert.error({ title: 'Oops!', content: t('error.stWrong') });
-          });
+        // deleteUser(userId)
+        //   .then(() => {
+        //     Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
+        //     fetchAllUsers(checkValidPageAfterDelete());
+        //   })
+        //   .catch(() => {
+        //     Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+        //   });
       },
     });
   };
@@ -98,9 +112,11 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
                 index + 1,
                 user.name || '-',
                 user.email || '-',
-                user.role?.name || '-',
-                user.isVerify ? t('field.verified') : t('field.unverified'),
-                <CButton label={t('action.delete')} onClick={() => onDeleteUser(user._id)} className='btn-danger' />,
+                user.role || '-',
+                <Image src={user.isVerify ? Yes : No} alt={user.isVerify ? 'Verified' : 'Not Verified'} width={20} height={20} />,
+                user.isPremium,
+                user.updatedAt,
+                <Image src={Delete} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />,
               ]}
               onClick={() => history.push(`${PageURL.ADMIN_MANAGE_USER}/update/${user._id}`)}
             />

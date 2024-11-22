@@ -57,8 +57,7 @@ const Header: FC<Props> = (props: Props) => {
           <div className={style.logo}>
             <Image src={MainLogo} className={style.logoImg} />
           </div>
-
-          <h4 className={style.title}>{t('title.name')}</h4>
+          {/* <h4 className={style.title}>{t('title.name')}</h4> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='collapse-navbar' />
         <Navbar.Collapse id='collapse-navbar' className='justify-content-end'>

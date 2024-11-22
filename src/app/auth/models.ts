@@ -17,6 +17,27 @@ export interface UserProfile {
   myCV: string[];
 }
 
+export interface UserProfileByAdmin {
+  avatar: string;
+  skills: any[];
+  isVerify: boolean;
+  isPremium: string;
+  myCV: any[];
+  _id: string;
+  name: string;
+  email: string;
+  age: number;
+  gender: string;
+  address: string;
+  role: string;
+  isDeleted: boolean;
+  deletedAt: any;
+  __v: number;
+  createdAt: string;
+  updatedAt: string;
+  refreshToken: string;
+}
+
 export interface Role {
   _id: string;
   name: string;
