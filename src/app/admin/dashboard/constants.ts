@@ -24,8 +24,14 @@ export const PremiumPlanMapping: { [key: string]: string } = {
   [ScopeValue.MAX]: 'Max',
 };
 
-export const PREMIUM_RANKING: Partial<Record<ScopeValue, number>> = {
+export const PREMIUM_RANKING: Record<ScopeValue, number> = {
   [ScopeValue.LITE]: 1,
   [ScopeValue.PLUS]: 2,
   [ScopeValue.MAX]: 3,
+  [ScopeValue.TRUE]: 0,
+  [ScopeValue.FALSE]: 0,
+  [ScopeValue.VIE]: 0,
+  [ScopeValue.ENG]: 0,
+  [ScopeValue.AUTOMATE]: 0,
+  [ScopeValue.NO_AUTOMATE]: 0,
 };
