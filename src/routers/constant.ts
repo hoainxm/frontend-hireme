@@ -39,6 +39,7 @@ import UserManagement from '../app/admin/dashboard/components/user';
 import JobManagement from '../app/admin/dashboard/components/job';
 import CompanyManagement from '../app/admin/dashboard/components/company';
 import CVManagement from '../app/admin/dashboard/components/cv';
+import HRDashboard from '../app/hr';
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
@@ -140,6 +141,10 @@ export const PRIVATE_ROUTE = [
   {
     path: PageURL.SAVED_JOBS,
     component: SavedJobs,
+  },
+  {
+    path: PageURL.HR_MANAGE,
+    component: HRDashboard,
   },
 ];
 

@@ -39,6 +39,7 @@ export enum PageURL {
   COMPANY = '/companies/',
   COMPANY_DETAIL = '/companies/:companyId',
 
+  HR_MANAGE = '/hr/',
   CATEGORY = '/news/categories',
 
   PROFILE_MANAGEMENT = '/profile',
@@ -111,6 +112,8 @@ export enum PageName {
   UPGRADE = 'user.upgrade',
   CHANGE_PASSWORD = 'user.changePassword',
 
+  HR_DASHBOARD = 'hr.management',
+
   PRODUCT = 'user.product',
   ABOUT_US = 'user.aboutUs',
   NEWS = 'user.news',
@@ -150,6 +153,8 @@ export enum PageName {
   ADMIN_MANAGE_CV = 'field.admin.cv',
   ADMIN_MANAGE_JOB = 'field.admin.job',
   ADMIN_MANAGE_COMPANY = 'field.admin.company',
+
+  HR_MANAGE = 'field.hr.management',
 
   WELCOME_INFORM_MANAGEMENT = 'admin.inform.title',
   TENANT_MANAGEMENT = 'admin.tenant.tenantManagement',
