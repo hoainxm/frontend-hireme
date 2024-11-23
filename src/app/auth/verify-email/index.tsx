@@ -9,6 +9,8 @@ import Error from '../../../common/ui/assets/icon/Error.svg';
 import { PageURL } from '@models/enum';
 import { doVerifyEmailToken } from '../api';
 import { AxiosError } from 'axios';
+import { useAppDispatch } from '../../../store/store';
+import { logoutThunk } from '../../../store/reducer/userSlice/userThunk';
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -20,7 +22,7 @@ export const VerifyEmail = (): ReactElement => {
   const tokenCheckVerify = query.get('token');
   const [isCheckVerifyEmail, setIsCheckVerifyEmail] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>();
-
+  const dispatch = useAppDispatch();
   const redirectToVerifyPage = () => {
     history.push(PageURL.RESEND_VERIFY_EMAIL);
   };
@@ -36,6 +38,7 @@ export const VerifyEmail = (): ReactElement => {
         console.log(res);
         if (res && res.statusCode === 200) {
           setIsCheckVerifyEmail(true);
+          await dispatch(logoutThunk());
         }
       } catch (error: AxiosError | any) {
         if (error.response?.status === 400) {

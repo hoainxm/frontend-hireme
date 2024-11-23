@@ -39,6 +39,7 @@ export interface User {
   avatar: string;
   phone: string;
   dateOfBirth: string;
+  isPremium: string;
 }
 
 export interface Role {

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginThunk, getUserProfileThunk, logoutThunk } from './userThunk';
 import { UserProfile } from '../../../app/auth/models';
+import { ScopeKey } from '@models/enum';
 
 interface UserState {
   isFetchingLogin: boolean;
@@ -30,6 +31,7 @@ export const userSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.isFetchingLogin = false;
         localStorage.setItem('access_token', payload.data.access_token);
+        localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, payload.data.user.isPremium);
         state.userLogin = payload.data.access_token;
       })
       .addCase(loginThunk.rejected, (state) => {
@@ -54,6 +56,7 @@ export const userSlice = createSlice({
         state.userLogin = null;
         state.userProfile = null;
         localStorage.removeItem('access_token');
+        localStorage.removeItem(ScopeKey.IS_PREMIUM_SECTION);
       })
       .addCase(logoutThunk.rejected, (state) => {
         state.isLoggingOut = false;

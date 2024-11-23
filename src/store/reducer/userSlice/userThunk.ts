@@ -9,7 +9,7 @@ export const loginThunk = createAsyncThunk('user/login', async (payload: LoginFo
   try {
     await sleep();
     const res = await doLogin(payload);
-
+    console.log('res', res);
     return res;
   } catch (error: any) {
     return rejectWithValue(error.response.data);
