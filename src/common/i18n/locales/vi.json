@@ -309,6 +309,12 @@
   "field.location": "Địa điểm",
   "field.startDate": "Ngày bắt đầu",
   "field.endDate": "Ngày kết thúc",
+  "field.jobName": "Tên công việc",
+  "field.submissionTime": "Thời gian ứng tuyển",
+  "hr.dashboard.title": "Trang quản lý",
+  "field.hint.noData": "Không có dữ liệu ",
+  "error.title": "Đã xảy ra lỗi",
+  "error.fetchFailed": "Không thể lấy dữ liệu",
 
   "error.tenantExists": "Tên công ty đã tồn tại",
   "field.error.maxLength": "Độ dài của trường này chỉ tối đa là",

@@ -287,6 +287,12 @@
   "field.location": "Location",
   "field.startDate": "Started date",
   "field.endDate": "Ended date",
+  "field.jobName": "Job name",
+  "field.submissionTime": "Submission time",
+  "hr.dashboard.title": "Management Dashboard",
+  "field.hint.noData": "No data available",
+  "error.title": "An Error Occurred",
+  "error.fetchFailed": "Failed to fetch data",
 
   "error.tenantExists": "Tenant name already exists",
   "field.error.maxLength": "Maximum length of this field is",
