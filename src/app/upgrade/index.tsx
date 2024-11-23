@@ -3,7 +3,7 @@ import { PageName, Palette } from '../../models/enum';
 import { useTranslation } from 'react-i18next';
 import style from '../../app/upgrade/components/upgrade.module.scss';
 import MainLayout from '../../common/ui/layout/main-layout';
-import UpgradeAccount from './components/UpgradeAccount';
+import UpgradeAccount from './components/upgradeAccount';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -24,8 +24,9 @@ export const Upgrade: FC<Props> = ({ sectionId }) => {
           </div>
         </div>
       </section>
-      <UpgradeAccount sectionId={sectionId} />
+
       <div className={style.note}>
+        <UpgradeAccount sectionId={sectionId} />
         <p>
           <strong>{t('upgrade.note.label')}</strong> {t('upgrade.note.description')}
         </p>

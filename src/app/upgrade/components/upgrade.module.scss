@@ -59,7 +59,7 @@ main > .container {
   padding: 20px 200px;
   background-color: #f0f4f8;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .leftSection,
@@ -231,9 +231,20 @@ h4 {
   }
 }
 
+.selectButton1:disabled,
+.selectButton2:disabled,
+.selectButton3:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  transition: none;
+}
+
 .note {
   background: #f0f4f8;
-  padding: 0px 200px 20px 200px;
+  padding: 0px 200px 0px 200px;
   text-align: center;
   font-size: 14px;
   color: #333;

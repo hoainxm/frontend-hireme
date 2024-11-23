@@ -4,7 +4,7 @@ import style from './upgrade.module.scss';
 import { doPostCreatePayment, doGetVerifyTransaction, setPremium } from '../api';
 import { ScopeKey, ScopeValue } from '@models/enum';
 import { Alert } from '../../../common/utils/popup';
-import { PREMIUM_RANKING } from 'app/admin/dashboard/constants';
+import { PREMIUM_RANKING } from '../../../app/admin/dashboard/constants';
 
 interface Props {
   sectionId: string;
@@ -14,7 +14,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
   const { sectionId } = props;
   const { t } = useTranslation();
   const [isPremium, setIsPremium] = useState<ScopeValue>((localStorage.getItem(ScopeKey.IS_PREMIUM_SECTION) as ScopeValue) || ScopeValue.LITE);
-
   const [amount, setAmount] = useState<string | null | number>(null);
 
   const handlePurchase = async (amount: number) => {
@@ -155,7 +154,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
                   {t('month')}
                 </p>
               </div>
-              <button disabled={(PREMIUM_RANKING[isPremium] || 0) > (PREMIUM_RANKING[ScopeValue.LITE] || 0)} className={style.selectButton1}>
+              <button disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.LITE]} className={style.selectButton1}>
                 {isPremium === ScopeValue.LITE ? t('button.actived') : t('button.getNow')}
               </button>
             </div>
@@ -171,9 +170,9 @@ export const UpgradeAccount: FC<Props> = (props) => {
               <button
                 onClick={() => {
                   handlePurchase(100000);
-                  setIsPremium(ScopeValue.PLUS);
+                  // setIsPremium(ScopeValue.PLUS);
                 }}
-                disabled={(PREMIUM_RANKING[isPremium] || 0) > (PREMIUM_RANKING[ScopeValue.PLUS] || 0)}
+                disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.PLUS]}
                 className={style.selectButton2}
               >
                 {isPremium === ScopeValue.PLUS ? t('button.actived') : t('button.getNow')}
@@ -191,9 +190,9 @@ export const UpgradeAccount: FC<Props> = (props) => {
               <button
                 onClick={() => {
                   handlePurchase(200000);
-                  setIsPremium(ScopeValue.MAX);
+                  // setIsPremium(ScopeValue.MAX);
                 }}
-                disabled={(PREMIUM_RANKING[isPremium] || 0) > (PREMIUM_RANKING[ScopeValue.MAX] || 0)}
+                disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.MAX]}
                 className={style.selectButton3}
               >
                 {isPremium === ScopeValue.MAX ? t('button.actived') : t('button.getNow')}
