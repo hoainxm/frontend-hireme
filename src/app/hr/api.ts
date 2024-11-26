@@ -3,7 +3,23 @@
 import { ApiResponse, doGet, doPost, doPut, doDelete } from '../../common/utils/baseAPI';
 import { jobsAPIUrl, resumeAPIUrl } from '../../common/utils/constants';
 import { Job } from '../jobs/model';
-import { Resume } from './model';
+import { Resume, ResumeStatus } from './model';
+
+export const createJob = async (data: {
+  name: string;
+  skills: string[];
+  companyId: string;
+  location: string;
+  salary: number;
+  quantity: number;
+  level: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+}): Promise<ApiResponse<Job>> => {
+  return doPost(`${jobsAPIUrl}`, data);
+};
 
 export const fetchJobsByHR = async (
   current: number,
@@ -29,8 +45,12 @@ export const createResume = async (data: { email: string; jobId: string; company
   return doPost(resumeAPIUrl, data);
 };
 
-export const updateResume = async (id: string, data: { status: string }): Promise<ApiResponse<Resume>> => {
-  return doPut(`${resumeAPIUrl}/${id}`, data);
+// export const updateResume = async (id: string, data: { status: string }): Promise<ApiResponse<Resume>> => {
+//   return doPut(`${resumeAPIUrl}/${id}`, data);
+// };
+
+export const updateResumeStatus = async (id: string, status: ResumeStatus): Promise<void> => {
+  return doPut(`${resumeAPIUrl}/${id}`, { status });
 };
 
 export const deleteResume = async (id: string): Promise<ApiResponse<void>> => {

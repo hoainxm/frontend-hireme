@@ -1,4 +1,5 @@
 export interface Company {
+  cvList: boolean;
   _id: string;
   name: string;
   address: string;

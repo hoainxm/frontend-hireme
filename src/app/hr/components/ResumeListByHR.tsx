@@ -1,16 +1,21 @@
 /** @format */
 
-import React, { FC, useEffect, useState } from 'react';
-import { fetchResumesByHR } from '../api';
+import React, { FC, useState, useEffect } from 'react';
+import { fetchResumesByHR, updateResumeStatus } from '../api';
 import { Resume } from '../model';
+import { Image } from 'react-bootstrap';
 import { CTable, CTPaging, CTPageSize, CTRow, BlankFrame, Loading } from '../../../common/ui/base';
-import { Alert } from '../.././../common/utils/popup';
+import { Alert, Confirm } from '../../../common/utils/popup';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import { ResumeStatus, ResumeStatusMapping, ResumeStatusOptions } from '../model';
+import { Modal, Form, Select, Button } from 'antd';
+import Edit from '../../../common/ui/assets/icon/Edit.svg';
 
 interface Props {
   id: string;
 }
+
 const ResumeListByHR: FC<Props> = () => {
   const { t } = useTranslation();
   const [resumes, setResumes] = useState<Resume[]>([]);
@@ -18,6 +23,8 @@ const ResumeListByHR: FC<Props> = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [selectedResume, setSelectedResume] = useState<Resume | null>(null);
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -26,8 +33,10 @@ const ResumeListByHR: FC<Props> = () => {
     t('field.companyName'),
     t('field.status'),
     t('field.submissionTime'),
+    t('field.action'),
   ];
 
+  // Fetch data from API
   const fetchData = (page: number) => {
     setIsLoading(true);
     fetchResumesByHR(page, pageSize)
@@ -45,9 +54,33 @@ const ResumeListByHR: FC<Props> = () => {
     setPageSize(parseInt(e.target.value, 10));
   };
 
+  // Handle Edit
+  const handleEditClick = (resume: Resume) => {
+    setSelectedResume(resume);
+    setIsModalVisible(true);
+  };
+
+  const handleModalCancel = () => {
+    setSelectedResume(null);
+    setIsModalVisible(false);
+  };
+
+  const handleModalSubmit = async (values: { status: ResumeStatus }) => {
+    if (selectedResume) {
+      try {
+        await updateResumeStatus(selectedResume._id, values.status);
+        Alert.success({ title: t('success.title'), content: t('success.updated') });
+        setIsModalVisible(false);
+        fetchData(currentPage);
+      } catch {
+        Alert.error({ title: t('error.title'), content: t('error.updateFailed') });
+      }
+    }
+  };
+
   useEffect(() => {
-    fetchData(1);
-  }, [pageSize]);
+    fetchData(currentPage);
+  }, [currentPage, pageSize]);
 
   return (
     <div>
@@ -65,8 +98,12 @@ const ResumeListByHR: FC<Props> = () => {
                   resume.email || t('field.notSet'),
                   resume.jobId?.name || t('field.notSet'),
                   resume.companyId?.name || t('field.notSet'),
-                  t(`status.${resume.status.toLowerCase()}`),
+                  ResumeStatusMapping[resume.status as ResumeStatus] || t('field.notSet'),
                   dayjs(resume.createdAt).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                  // <Button type='link' onClick={() => handleEditClick(resume)}>
+                  //   {t('btn.edit')}
+                  // </Button>,
+                  <Image src={Edit} alt='edit' className='icon-action' style={{ cursor: 'pointer' }} onClick={() => handleEditClick(resume)} />,
                 ]}
               />
             ))
@@ -86,6 +123,22 @@ const ResumeListByHR: FC<Props> = () => {
         </div>
       )}
       <Loading isOpen={isLoading} />
+
+      <Modal title={t('editStatus')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
+        <Form layout='vertical' initialValues={{ status: selectedResume?.status }} onFinish={handleModalSubmit}>
+          <Form.Item label={t('field.status')} name='status' rules={[{ required: true, message: t('error.fieldRequired') }]}>
+            <Select options={ResumeStatusOptions} />
+          </Form.Item>
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              {t('btn.save')}
+            </Button>
+            <Button onClick={handleModalCancel} style={{ marginLeft: '8px' }}>
+              {t('btn.cancel')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

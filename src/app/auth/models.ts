@@ -26,6 +26,7 @@ export interface UserProfileByAdmin {
   _id: string;
   name: string;
   email: string;
+  dateOfBirth: string;
   age: number;
   gender: string;
   address: string;
