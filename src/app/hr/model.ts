@@ -22,3 +22,20 @@ export interface Resume {
   isDeleted: boolean;
   deletedAt: string | null;
 }
+
+export enum ResumeStatus {
+  PENDING = 'PENDING',
+  ACCEPT = 'ACCEPT',
+  REJECT = 'REJECT',
+}
+
+export const ResumeStatusMapping: Record<ResumeStatus, string> = {
+  [ResumeStatus.PENDING]: 'PENDING',
+  [ResumeStatus.ACCEPT]: 'ACCEPT',
+  [ResumeStatus.REJECT]: 'REJECT',
+};
+
+export const ResumeStatusOptions = Object.keys(ResumeStatus).map((key) => ({
+  value: ResumeStatus[key as ResumeStatus],
+  label: ResumeStatusMapping[ResumeStatus[key as ResumeStatus]],
+}));

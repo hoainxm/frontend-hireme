@@ -3,13 +3,12 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
-// import { fetchUsers, deleteUser } from './api'; // Ensure these APIs exist and are imported correctly
-import { UserProfile, UserProfileByAdmin } from '../../../../auth/models'; // Define your User model accordingly
+// import { fetchUsers, deleteUser } from './api';
+import { Role, UserProfile, UserProfileByAdmin } from '../../../../auth/models';
 import { APIResponse } from '../../../../../common/utils/baseAPI';
 import { Image } from 'react-bootstrap';
-import Trash from '../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import { NOT_SET } from '../../../../../common/utils/constants';
-import { PageURL } from '../../../../../models/enum';
+import { PageURL, ScopeValue } from '../../../../../models/enum';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
@@ -17,9 +16,10 @@ import { fetchUsersByAdmin } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
-import { ROLES } from '../../constants';
-import { PremiumPlanMapping } from '../../constants';
+import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
 import dayjs from 'dayjs';
+import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
+import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -35,6 +35,8 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
+  const [isEditModalVisible, setIsEditModalVisible] = useState<boolean>(false);
+  const [selectedUser, setSelectedUser] = useState<UserProfileByAdmin | null>(null);
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -80,6 +82,26 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     return currentPage;
   };
 
+  const handleEditClick = (user: UserProfileByAdmin) => {
+    setSelectedUser(user);
+    setIsEditModalVisible(true);
+  };
+
+  const handleEditCancel = () => {
+    setSelectedUser(null);
+    setIsEditModalVisible(false);
+  };
+
+  const handleEditSubmit = async (values: any) => {
+    try {
+      message.success('Thông tin đã được cập nhật thành công!');
+      setIsEditModalVisible(false);
+      fetchAllUsers(currentPage);
+    } catch (error) {
+      message.error('Cập nhật thất bại!');
+    }
+  };
+
   const onDeleteUser = (userId: string) => {
     Confirm.delete({
       title: t('cfm.deleteUser.title'),
@@ -104,9 +126,9 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      {/* <div className='d-flex justify-content-end mb-3'>
         <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_USER}/create`)} />
-      </div>
+      </div> */}
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -123,9 +145,18 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
                 <Image src={user.isVerify ? Yes : No} alt={user.isVerify ? 'Verified' : 'Not Verified'} width={20} height={20} />,
                 PremiumPlanMapping[user.isPremium],
                 dayjs(user.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
-                <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />,
+                <div className='d-flex align-items-center'>
+                  <Image
+                    src={Edit}
+                    alt='edit'
+                    width={20}
+                    height={20}
+                    style={{ cursor: 'pointer', marginRight: 10 }}
+                    onClick={() => handleEditClick(user)}
+                  />
+                  <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />
+                </div>,
               ]}
-              onClick={() => history.push(`${PageURL.ADMIN_MANAGE_USER}/update/${user._id}`)}
             />
           ))}
         </tbody>
@@ -143,6 +174,78 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
         <BlankFrame className='blank-frame' title={t('field.hint.no_data')} />
       )}
       <Loading isOpen={isLoading} />
+
+      <Modal title={t('editProfile')} visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
+        <Form
+          layout='vertical'
+          initialValues={{
+            ...selectedUser,
+            dateOfBirth: selectedUser?.dateOfBirth ? dayjs(selectedUser.dateOfBirth) : null,
+          }}
+          onFinish={handleEditSubmit}
+        >
+          {/* Họ tên */}
+          <Form.Item label={t('field.fullName')} name='name'>
+            <Input disabled />
+          </Form.Item>
+
+          {/* Email */}
+          <Form.Item label={t('field.email')} name='email'>
+            <Input disabled />
+          </Form.Item>
+
+          {/* Vai trò */}
+          <Form.Item label={t('field.role')} name='role'>
+            <Select>
+              {ROLES.map((role: Role) => (
+                <Select.Option key={role._id} value={role._id}>
+                  {role.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
+          {/* Ngày sinh */}
+          <Form.Item label={t('field.birthday')} name='dateOfBirth'>
+            <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Địa chỉ */}
+          <Form.Item label={t('field.address')} name='address'>
+            <Input />
+          </Form.Item>
+
+          {/* Premium */}
+          <Form.Item label={t('field.premium')} name='isPremium'>
+            <Input disabled />
+          </Form.Item>
+
+          {/* Xác thực */}
+          <Form.Item label={t('field.verified')} name='isVerify'>
+            <Input disabled />
+          </Form.Item>
+
+          {/* Ngày tạo */}
+          <Form.Item label={t('field.createdAt')} name='createdAt'>
+            <Input disabled value={dayjs(selectedUser?.createdAt).format('YYYY-MM-DD HH:mm:ss')} />
+          </Form.Item>
+
+          {/* Lần cập nhật cuối */}
+          <Form.Item label={t('field.last_updated')} name='updatedAt'>
+            <Input disabled value={dayjs(selectedUser?.updatedAt).format('YYYY-MM-DD HH:mm:ss')} />
+          </Form.Item>
+
+          {/* Nút Lưu và Hủy */}
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              {t('btn.save')}
+            </Button>
+            <Button onClick={handleEditCancel} style={{ marginLeft: '8px' }}>
+              {t('btn.cancel')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

@@ -8,10 +8,12 @@ import { Confirm, Alert } from '../../../../../common/utils/popup';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'react-bootstrap';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
+import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { useHistory } from 'react-router-dom';
 import { PageURL } from '../../../../../models/enum';
 import dayjs from 'dayjs';
 import { onChange } from 'react-toastify/dist/core/store';
+import { Button, Form, Input, Modal } from 'antd';
 
 interface Props {
   id: string;
@@ -26,6 +28,8 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
   const [totalPage, setTotalPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
   const TABLE_HEADER = [t('field.numeric'), t('field.name'), t('field.address'), t('field.last_updated'), t('field.action')];
 
@@ -47,10 +51,26 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
     setPageSize(parseInt(e.target.value, 10));
   };
 
+  const handleEditClick = (company: Company) => {
+    setSelectedCompany(company);
+    setIsModalVisible(true);
+  };
+
+  const handleModalCancel = () => {
+    setSelectedCompany(null);
+    setIsModalVisible(false);
+  };
+
+  const handleModalSubmit = (values: any) => {
+    Alert.success({ title: t('success.title'), content: t('success.updated') });
+    setIsModalVisible(false);
+    fetchCompanies(currentPage);
+  };
+
   const handleDelete = (id: string) => {
     Confirm.delete({
-      title: t('confirm.deleteTitle'),
-      content: t('confirm.deleteContent'),
+      title: t('cfm.deleteCompany.title'),
+      content: t('cfm.deleteCompany.content'),
       onConfirm: () => {
         deleteCompany(id);
         // Add delete API call if available
@@ -70,9 +90,9 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      {/* <div className='d-flex justify-content-end mb-3'>
         <CButton label={t('btn.admin.addCompany')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_COMPANY}/create`)} />
-      </div>
+      </div> */}
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -87,9 +107,24 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
                   company.name || t('field.notSet'),
                   company.address || t('field.notSet'),
                   dayjs(company.updatedAt?.$date).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
-                  <Image src={TrashIcon} alt='Delete' className='icon-action ml-3' onClick={() => handleDelete(company._id)} />,
+                  <div className='d-flex align-items-center'>
+                    <Image
+                      src={Edit}
+                      alt='Edit'
+                      className='icon-action'
+                      style={{ cursor: 'pointer', marginRight: 10 }}
+                      onClick={() => handleEditClick(company)}
+                    />
+                    <Image
+                      src={TrashIcon}
+                      alt='Delete'
+                      className='icon-action'
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleDelete(company._id)}
+                    />
+                  </div>,
                 ]}
-                onClick={() => history.push(`${PageURL.ADMIN_MANAGE_COMPANY}/update/${company._id}`)}
+                // onClick={() => history.push(`${PageURL.ADMIN_MANAGE_COMPANY}/update/${company._id}`)}
               />
             ))
           ) : (
@@ -108,6 +143,37 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
         </div>
       )}
       <Loading isOpen={isLoading} />
+
+      <Modal title={t('field.companyDetail')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
+        <Form
+          layout='vertical'
+          initialValues={{
+            ...selectedCompany,
+          }}
+          onFinish={handleModalSubmit}
+        >
+          <Form.Item label={t('field.name')} name='name'>
+            <Input disabled />
+          </Form.Item>
+          <Form.Item label={t('field.address')} name='address'>
+            <Input disabled />
+          </Form.Item>
+          <Form.Item label={t('field.createdAt')} name='createdAt'>
+            <Input disabled />
+          </Form.Item>
+          <Form.Item label={t('field.last_updated')} name='updatedAt'>
+            <Input disabled />
+          </Form.Item>
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              {t('btn.save')}
+            </Button>
+            <Button onClick={handleModalCancel} style={{ marginLeft: 8 }}>
+              {t('btn.cancel')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
