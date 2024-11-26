@@ -24,8 +24,9 @@ export const Jobs: FC<Props> = ({ sectionId }) => {
   const fetchAllJobs = async () => {
     try {
       const result = await getAllJobs();
-      setJobs(result.data);
-      setFilteredJobs(result.data);
+      const activeJobs = result.data.filter((job: JobType) => job.isActive);
+      setJobs(activeJobs);
+      setFilteredJobs(activeJobs);
     } catch (error) {
       console.log(error);
     }

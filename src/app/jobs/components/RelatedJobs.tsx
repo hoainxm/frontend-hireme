@@ -51,7 +51,7 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
 
   useEffect(() => {
     fetchRelatedJobs();
-  }, [idCompany, skills]); // Thêm idCompany và skills vào dependency array
+  }, [idCompany, skills]);
 
   if (!relatedJobs || relatedJobs.length === 0) {
     return <div>{t('noData')}</div>;
@@ -97,7 +97,6 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
               />
 
               <div className={style['related-jobs__details']}>
-                {/* <div className={style['related-jobs__item-title']}>{job.name}</div> */}
                 <Tooltip title={job.name}>
                   <div className={`${style['related-jobs__item-title']} ${style.truncated}`}>{job.name}</div>
                 </Tooltip>
@@ -108,10 +107,6 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
               <button className={style['related-jobs__group-btn-apply']} disabled={isJobExpired(job.endDate)}>
                 {t('jobDetail.applyNow')}
               </button>
-
-              {/* <div className={style['related-jobs__group-btn']}>
-                <FavoriteButton job={job} />
-              </div> */}
             </div>
           ))}
         </div>
