@@ -8,10 +8,10 @@ import { UserProfile } from '../../app/auth/models';
 
 export const makeClientToUnauthorize = ({ isSysAdmin }: { isSysAdmin: boolean }) => {
   localStorage.removeItem('pageTable');
-  localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.FALSE);
-  localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.FALSE);
+  // localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.FALSE);
+  // localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.FALSE);
   sessionStorage.setItem(ScopeKey.ACCESS_TOKEN, encodeBase64(''));
-  window.location.href = isSysAdmin ? PageURL.ADMIN_LOGIN : PageURL.HOME;
+  // window.location.href = isSysAdmin ? PageURL.ADMIN_LOGIN : PageURL.HOME;
 };
 
 export const dataUrlToFile = async (dataUrl: string, fileName: string): Promise<File> => {
@@ -62,9 +62,9 @@ export const decodeBase64 = (data: string) => {
   return Buffer.from(data, 'base64').toString('ascii');
 };
 
-export const getKeyPair = (userInfo: UserProfile) => {
-  return `${userInfo.id}${userInfo.username}${userInfo.social_token}iMRA7RRL9l`;
-};
+// export const getKeyPair = (userInfo: UserProfile) => {
+//   return `${userInfo.id}${userInfo.username}${userInfo.social_token}iMRA7RRL9l`;
+// };
 
 export const copyToClipboard = (text: string) => {
   var tempInput = document.createElement('input');

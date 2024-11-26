@@ -5,12 +5,12 @@ import AccountBlack from '@images/AccountBlack.svg';
 import React, { FC, useState } from 'react';
 import { Image, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { UserProfile } from '../../../../app/auth/models';
 import { IconMapName, SVGIcon } from '../../../../common/ui/assets/icon';
 import { NOT_SET, PROFILE_ITEMS } from '../../../../common/utils/constants';
 import { Confirm } from '../../../../common/utils/popup';
-import { Palette, ScopeKey, SectionID } from '../../../../models/enum';
+import { PageURL, Palette, ScopeKey, SectionID } from '../../../../models/enum';
 import style from './profile.module.scss';
 import useLocalStorage from '@hooks/useLocalStorage';
 import { useAppDispatch } from '../../../../store/store';
@@ -41,6 +41,8 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
         // }),
         {
           await dispatch(logoutThunk());
+
+          history.push(PageURL.HOME);
         },
     });
   };

@@ -12,7 +12,11 @@ const PrivateRoute: FC<Props> = (props: Props) => {
   const { component, path, exact } = props;
   let isAuthenticated = localStorage.getItem(ScopeKey.IS_AUTHENTICATED);
 
-  return true ? <Route path={path} component={component} exact={exact} /> : <Redirect to={`${PageURL.LOGIN}`} />;
+  return (isAuthenticated as ScopeValue) === ScopeValue.TRUE ? (
+    <Route path={path} component={component} exact={exact} />
+  ) : (
+    <Redirect to={`${PageURL.LOGIN}`} />
+  );
 };
 
 export default PrivateRoute;

@@ -61,10 +61,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.LOGIN,
     component: Login,
   },
-  {
-    path: PageURL.ADMIN_LOGIN,
-    component: Login,
-  },
+  // {
+  //   path: PageURL.ADMIN_LOGIN,
+  //   component: Login,
+  // },
   {
     path: PageURL.REGISTER,
     component: Register,
@@ -85,31 +85,9 @@ export const PUBLIC_ROUTE = [
     path: PageURL.COMPANY_DETAIL,
     component: CompanyDetail,
   },
-  {
-    path: PageURL.ADMIN_MANAGE,
-    component: UserManagement,
-  },
-  {
-    path: PageURL.ADMIN_MANAGE_USER,
-    component: UserManagement,
-  },
-  {
-    path: PageURL.ADMIN_MANAGE_JOB,
-    component: JobManagement,
-  },
-  {
-    path: PageURL.ADMIN_MANAGE_COMPANY,
-    component: CompanyManagement,
-  },
-  {
-    path: PageURL.ADMIN_MANAGE_CV,
-    component: CVManagement,
-  },
 ];
 
 export const PRIVATE_ROUTE = [
-  // { path: PageURL.PRODUCT_OVERVIEW, component: ProductLayout },
-  // { path: PageURL.LICENSE_MANAGEMENT, component: LicenseManagement },
   {
     path: PageURL.PROFILE_MANAGEMENT,
     component: ProfileUser,
@@ -149,16 +127,24 @@ export const PRIVATE_ROUTE = [
 ];
 
 export const ADMIN_ROUTE = [
-  // { path: PageURL.ADMIN, component: AICloudFeatureManagement },
-  // { path: PageURL.ADMIN_WELCOME_INFORM, component: WelcomeInformation },
-  // { path: PageURL.ADMIN_TENANT, component: Tenant },
-  // {
-  //   path: PageURL.ADMIN_AI_PACKAGE_WRITER,
-  //   component: AIPackageWriter,
-  // },
-  // {
-  //   path: PageURL.ADMIN_AI_API_KEY_WRITER,
-  //   component: AILicenseWriter,
-  // },
-  // { path: PageURL.ADMIN_AI_PACKAGE_INFO, component: AIPackageWriter },
+  {
+    path: PageURL.ADMIN_MANAGE,
+    component: UserManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_USER,
+    component: UserManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_JOB,
+    component: JobManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_COMPANY,
+    component: CompanyManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_CV,
+    component: CVManagement,
+  },
 ];

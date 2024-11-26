@@ -14,12 +14,7 @@ interface Props extends RouteComponentProps<any> {}
 const UserManagement: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
 
-  const HEADERS: Array<TabItem> = [
-    { name: AdminManageTabs.USER, contentId: 'user' },
-    // { name: AdminManageTabs.COMPANY, contentId: 'company' },
-    // { name: AdminManageTabs.JOBS, contentId: 'job' },
-    // { name: AdminManageTabs.CV, contentId: 'cv' },
-  ];
+  const HEADERS: Array<TabItem> = [{ name: AdminManageTabs.USER, contentId: 'user' }];
 
   return (
     <AdminContentLayout dropDefaultContent title={t('admin.userManagement')} activate={PageName.ADMIN_DASHBOARD}>
