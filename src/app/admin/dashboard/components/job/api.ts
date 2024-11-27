@@ -17,8 +17,8 @@ export const fetchJobsByAdmin = async (
   return doGet(`${jobsAPIUrl}?current=${current}&pageSize=${pageSize}`);
 };
 
-export const createJob = async (jobData: Record<string, any>) => {
-  return doPost(`${BASE_URL}`, jobData);
+export const createJob = async (data: Job): Promise<ApiResponse<Job>> => {
+  return doPost(`${jobsAPIUrl}`, data);
 };
 
 export const deleteJob = async (jobId: string) => {

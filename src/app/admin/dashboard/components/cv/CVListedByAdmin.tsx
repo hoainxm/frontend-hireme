@@ -67,9 +67,9 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      {/* <div className='d-flex justify-content-end mb-3'>
         <CButton label={t('btn.admin.addCV')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_CV}/create`)} />
-      </div>
+      </div> */}
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -84,7 +84,7 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
                   cv.email || t('field.notSet'),
                   cv.status || t('field.notSet'),
                   dayjs(cv.createdAt).format('YYYY-MM-DD HH:mm:ss'),
-                  <Image src={TrashIcon} alt='Delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(cv._id)} />,
+                  // <Image src={TrashIcon} alt='Delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(cv._id)} />,
                 ]}
               />
             ))
