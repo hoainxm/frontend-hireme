@@ -16,6 +16,9 @@ export const createJob = async (data: {
   description: string;
   startDate: string;
   endDate: string;
+  workForm: string[];
+  gender: string;
+  experience: number;
   isActive: boolean;
 }): Promise<ApiResponse<Job>> => {
   return doPost(`${jobsAPIUrl}`, data);
@@ -42,7 +45,7 @@ export const fetchResumeById = async (id: string): Promise<ApiResponse<Resume>> 
 };
 
 export const createResume = async (data: { email: string; jobId: string; companyId: string; url: string }): Promise<ApiResponse<Resume>> => {
-  return doPost(resumeAPIUrl, data);
+  return doPost(`${resumeAPIUrl}`, data);
 };
 
 // export const updateResume = async (id: string, data: { status: string }): Promise<ApiResponse<Resume>> => {

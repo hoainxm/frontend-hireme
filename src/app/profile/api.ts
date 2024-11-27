@@ -2,7 +2,7 @@ import { BASE_URL, fileAPIUrl, resumeAPIUrl, userAPIUrl } from '../../common/uti
 /** @format */
 
 import axios, { AxiosPromise } from 'axios';
-import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
+import { ApiResponse, doGet, doPost, doPut } from '../../common/utils/baseAPI';
 import { UserProfile } from '../../app/auth/models';
 import { Resume } from './model';
 
@@ -21,6 +21,10 @@ axios.interceptors.request.use(
 
 export const getUserProfile = async (): Promise<ApiResponse<UserProfile>> => {
   return doGet(`${userAPIUrl}/profile`);
+};
+
+export const updateUserProfile = async (userId: string, data: Partial<UserProfile>): Promise<ApiResponse<UserProfile>> => {
+  return doPut(`${userAPIUrl}/${userId}`, data);
 };
 
 export const getResumeByUser = async (): Promise<ApiResponse<Resume[]>> => {

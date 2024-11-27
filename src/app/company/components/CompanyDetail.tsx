@@ -129,7 +129,7 @@ const CompanyDetail: React.FC = () => {
                   <div className={style['in-detail']}>
                     <FontAwesomeIcon icon={faUsers} />
                     {company.scale}
-                    {'+'} {t('jobDetail.companyStaff')}
+                    {t('jobDetail.companyStaff')}
                   </div>
                   <div className={style['in-detail']}>
                     <FontAwesomeIcon icon={faMap} />

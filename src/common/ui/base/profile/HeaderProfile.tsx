@@ -26,7 +26,7 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
   const history = useHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.OCR_BANNER);
+  // const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.OCR_BANNER);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logout = (): void => {
@@ -41,7 +41,6 @@ export const HeaderProfile: FC<Props> = (props: Props) => {
         // }),
         {
           await dispatch(logoutThunk());
-
           history.push(PageURL.HOME);
         },
     });
