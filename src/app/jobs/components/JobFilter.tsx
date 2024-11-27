@@ -25,6 +25,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
     if (input) {
       setSelectedProvince(input);
       const suggestions = locationData.filter((province) => province.Name.toLowerCase().includes(input.toLowerCase())).map((prov) => prov.Name);
+
       setProvinceSuggestions(suggestions);
     } else {
       setSelectedProvince('');
