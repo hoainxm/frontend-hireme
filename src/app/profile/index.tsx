@@ -1,8 +1,8 @@
 import React, { useState, useEffect, HTMLAttributes, FC, useRef } from 'react';
 import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message, List, Form, Input, Select, DatePicker } from 'antd';
-import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined, FilePdfOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
+import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 import { UserProfile } from '../auth/models';
-import { getUserProfile, uploadAvatar, uploadCV, getResumeByUser, updateUserProfile } from './api';
+import { getUserProfile, updateMe, uploadAvatar } from './api';
 import style from '../profile/profile.module.scss';
 import modalStyle from './UploadAvatarModal.module.scss';
 import MainLayout from '@layout/main-layout';
@@ -15,6 +15,7 @@ import { useAppDispatch } from '../../store/store';
 import { getUserProfileThunk } from '../../store/reducer/userSlice/userThunk';
 import MyCV from './MyCV';
 import dayjs from 'dayjs';
+import { UpdateMe } from './model';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -123,18 +124,28 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     setIsEditModalVisible(false);
   };
 
-  const handleEditSubmit = async (values: any) => {
+  const handleEditSubmit = async (values: UpdateMe) => {
+    const formattedData = {
+      ...values,
+      gender: values.gender === 'Không xác định' ? '' : values.gender,
+      dateOfBirth: dayjs(values.dateOfBirth).format('YYYY-MM-DD'),
+      skills: values.skills.map((skill: string) => skill.toLowerCase()),
+    };
+
+    console.log('Formatted Data:', formattedData);
+
     try {
       if (!userInfo?._id) {
         throw new Error('User ID is missing');
       }
 
-      const response = await updateUserProfile(userInfo._id, values);
-      message.success('Thông tin đã được cập nhật thành công!');
+      const response = await updateMe(userInfo._id, formattedData);
+      message.success('Information has been updated successfully!');
       setUserInfo(response.data);
       setIsEditModalVisible(false);
+      fetchInfo();
     } catch (error) {
-      message.error('Cập nhật thông tin thất bại!');
+      message.error('Update information failed!');
       console.error('Error updating profile:', error);
     }
   };
@@ -298,7 +309,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           <Form.Item label={t('support.phone')} name='phone'>
             <Input type='number' placeholder={t('field.hint.phone')} />
           </Form.Item>
-          <Form.Item label={t('support.phone')} name='address'>
+          <Form.Item label={t('field.address')} name='address'>
             <Input placeholder={t('hr.staff.hint.address')} />
           </Form.Item>
           <Form.Item label={t('field.skills')} name='skills'>
@@ -316,7 +327,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}
             </Button>

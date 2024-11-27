@@ -36,6 +36,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   const handleExperienceSearch = (input: string) => {
     const suggestions = experienceOptions.filter((experience) => experience.includes(input));
     setFilteredExperience(suggestions);
+
   };
 
   const handleFilter = () => {

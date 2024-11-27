@@ -46,3 +46,12 @@ export interface UpdatedBy2 {
   _id: string;
   email: string;
 }
+
+export interface UpdateMe {
+  name: string;
+  gender: string;
+  address: string;
+  phone: string;
+  dateOfBirth: string;
+  skills: string[];
+}

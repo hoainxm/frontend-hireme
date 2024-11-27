@@ -2,9 +2,9 @@ import { BASE_URL, fileAPIUrl, resumeAPIUrl, userAPIUrl } from '../../common/uti
 /** @format */
 
 import axios, { AxiosPromise } from 'axios';
-import { ApiResponse, doGet, doPost, doPut } from '../../common/utils/baseAPI';
+import { ApiResponse, doGet, doPatch, doPost, doPut } from '../../common/utils/baseAPI';
 import { UserProfile } from '../../app/auth/models';
-import { Resume } from './model';
+import { Resume, UpdateMe } from './model';
 
 const getToken = () => localStorage.getItem('access_token');
 
@@ -23,8 +23,8 @@ export const getUserProfile = async (): Promise<ApiResponse<UserProfile>> => {
   return doGet(`${userAPIUrl}/profile`);
 };
 
-export const updateUserProfile = async (userId: string, data: Partial<UserProfile>): Promise<ApiResponse<UserProfile>> => {
-  return doPut(`${userAPIUrl}/${userId}`, data);
+export const updateMe = async (userId: string, payload: UpdateMe): Promise<ApiResponse<any>> => {
+  return doPatch(`${userAPIUrl}/${userId}`, payload);
 };
 
 export const getResumeByUser = async (): Promise<ApiResponse<Resume[]>> => {
