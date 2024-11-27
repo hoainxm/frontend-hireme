@@ -13,6 +13,7 @@ interface JobListProps {
 
 const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false }) => {
   const { t } = useTranslation();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [currentJobs, setCurrentJobs] = useState<JobType[]>([]);
   const jobsPerPage = 10;
@@ -21,15 +22,6 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
 
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-
-  // useEffect(() => {
-  //   if (isSavedJobs) {
-  //     const savedJobsFromStorage = JSON.parse(localStorage.getItem('savedJobs') || '[]');
-  //     setCurrentJobs(savedJobsFromStorage);
-  //   } else {
-  //     setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
-  //   }
-  // }, [isSavedJobs, listJobs, currentPage, indexOfFirstJob, indexOfLastJob]);
 
   useEffect(() => {
     setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
@@ -50,13 +42,10 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
     const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return daysRemaining > 0 ? daysRemaining : 0;
   };
-
   return (
     <div className={style.jobListContainer}>
       {listJobs.length === 0 ? (
-        <div className={style.noResults}>
-          {t('noJobsFound')} {/* Hiển thị thông báo không có công việc phù hợp */}
-        </div>
+        <div className={style.noResults}>{t('noJobsFound')}</div>
       ) : (
         <div className={style.jobList}>
           {listJobs && totalJobs > 0 && (

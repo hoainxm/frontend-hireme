@@ -13,13 +13,6 @@ import Company from '../../assets/ic/24px/dashboard/company.svg';
 import CV from '../../assets/ic/24px/dashboard/cv.svg';
 
 export const shortcutData: Shortcut[] = [
-  // {
-  //   name: PageName.ADMIN_DASHBOARD,
-  //   url: PageURL.ADMIN,
-  //   icon: Home,
-  //   iconSelected: HomeBlue,
-  //   isActive: false,
-  // },
   {
     name: PageName.ADMIN_MANAGE_USER,
     url: PageURL.ADMIN_MANAGE_USER,
@@ -49,18 +42,3 @@ export const shortcutData: Shortcut[] = [
     isActive: true,
   },
 ];
-
-// {
-//   name: PageName.WELCOME_INFORM_MANAGEMENT,
-//   url: PageURL.ADMIN_WELCOME_INFORM,
-//   icon: Dashboard,
-//   iconSelected: DashboardBlue,
-//   isActive: false,
-// },
-// {
-//   name: PageName.TENANT_MANAGEMENT,
-//   url: PageURL.ADMIN_TENANT,
-//   icon: Staff,
-//   iconSelected: StaffBlue,
-//   isActive: false,
-// },

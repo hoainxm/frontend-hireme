@@ -83,7 +83,6 @@ export enum PageURL {
 
   // Admin
   ADMIN = '/admin',
-  ADMIN_LOGIN = '/admin/login',
 
   ADMIN_MANAGE = '/manage',
   ADMIN_MANAGE_USER = '/manage/user',

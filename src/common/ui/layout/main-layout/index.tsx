@@ -26,11 +26,10 @@ const MainLayout: FC<Props> = (props: Props) => {
   const history = useHistory();
   const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
 
-  
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (localStorage.getItem(ScopeKey.IS_SYSTEM_ADMIN) === ScopeValue.TRUE) {
-        history.push(PageURL.ADMIN);
+        history.push(PageURL.ADMIN_MANAGE);
       } else {
         if (!userInfo) {
           await dispatch(getUserProfileThunk());

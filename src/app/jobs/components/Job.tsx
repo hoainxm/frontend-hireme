@@ -61,7 +61,7 @@ const Job: React.FC<JobProps> = ({ job, isJobExpired, getRemainingDays }) => {
             {/* <button className={`${style.btn} ${style.btnApply}`} disabled={isJobExpired(job.endDate)}>
               {t('jobDetail.applyNow')}
             </button> */}
-            <ApplyButton jobname={job.name} disabled={isJobExpired(job.endDate)} onClick={handleApplyClick} />
+            <ApplyButton jobName={job.name} companyId={job.company._id} jobId={job._id} disabled={isJobExpired(job.endDate)} />
             <FavoriteButton job={job} />
           </div>
         </div>

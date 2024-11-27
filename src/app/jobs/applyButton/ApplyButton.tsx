@@ -21,7 +21,7 @@ const ApplyButton: React.FC<ApplyButtonProps> = ({ jobName, companyId, jobId, di
   const { isLoginRequired } = useLoginAlert();
   const { isVerificationRequired } = useVerificationAlert();
   const userLogin = useAppSelector((state: RootState) => state.user);
-  console.log('user login: ');
+
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     setIsLoggedIn(!!token);
