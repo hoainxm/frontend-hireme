@@ -2,7 +2,7 @@ import React, { useState, useEffect, HTMLAttributes, FC, useRef } from 'react';
 import { Avatar, Button, Layout, Menu, Typography, Card, Row, Col, Divider, Modal, message, List, Form, Input, Select, DatePicker } from 'antd';
 import { UserOutlined, CameraOutlined, EditOutlined, UploadOutlined, FilePdfOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { UserProfile } from '../auth/models';
-import { getUserProfile, uploadAvatar, uploadCV, getResumeByUser } from './api';
+import { getUserProfile, uploadAvatar, uploadCV, getResumeByUser, updateUserProfile } from './api';
 import style from '../profile/profile.module.scss';
 import modalStyle from './UploadAvatarModal.module.scss';
 import MainLayout from '@layout/main-layout';
@@ -123,7 +123,21 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     setIsEditModalVisible(false);
   };
 
-  const handleEditSubmit = async (values: any) => {};
+  const handleEditSubmit = async (values: any) => {
+    try {
+      if (!userInfo?._id) {
+        throw new Error('User ID is missing');
+      }
+
+      const response = await updateUserProfile(userInfo._id, values);
+      message.success('Thông tin đã được cập nhật thành công!');
+      setUserInfo(response.data);
+      setIsEditModalVisible(false);
+    } catch (error) {
+      message.error('Cập nhật thông tin thất bại!');
+      console.error('Error updating profile:', error);
+    }
+  };
 
   const renderContent = () => {
     switch (selectedMenu) {

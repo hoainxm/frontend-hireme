@@ -67,6 +67,7 @@ const JobListByHR: FC<Props> = () => {
       handleModalClose();
     } catch (error) {
       Alert.error({ title: t('error.title'), content: t('error.createJobFailed') });
+      handleModalClose();
     }
   };
 

@@ -140,6 +140,10 @@
   "field.positionPlaceholder": "Tên công việc bạn muốn ứng tuyển",
   "field.skillsPlaceholder": "Chọn kỹ năng",
   "field.provincePlaceholder": "Tỉnh/thành phố",
+  "field.levelPlaceholder": "Chọn cấp độ",
+  "field.description": "Mô tả công việc",
+  "success.jobCreated": "Tạo việc làm mới thành công",
+  "error.createJobFailed": "Tạo việc làm mới thất bại",
 
   "found": "Tìm thấy",
   "list": "Danh sách",

@@ -48,4 +48,19 @@ export const SkillsOptions = [
   'Selenium',
 ];
 
-export const experienceOptions = ['Intern', 'Fresher', 'Junior', 'Mid-level', 'Senior', 'Lead'];
+// export const experienceOptions = ['Intern', 'Fresher', 'Junior', 'Mid-level', 'Senior', 'Lead'];
+
+export const experienceOptions = [
+  'Intern Developer',
+  'Fresher Developer',
+  'Junior Developer',
+  'Middle Developer',
+  'Senior Developer',
+  'Lead Developer',
+  'Principal Engineer',
+  'Software Architect',
+  'Technical Manager',
+  'Director of Engineering',
+  'VP of Engineering',
+  'Chief Technology Officer (CTO)',
+];
