@@ -40,6 +40,7 @@ export enum PageURL {
   COMPANY_DETAIL = '/companies/:companyId',
 
   HR_MANAGE = '/hr/',
+
   CATEGORY = '/news/categories',
 
   PROFILE_MANAGEMENT = '/profile',

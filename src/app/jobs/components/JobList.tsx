@@ -3,6 +3,7 @@ import style from '../jobs.module.scss';
 import { useTranslation } from 'react-i18next';
 import { Job as JobType } from '../../jobs/model';
 import Job from '../components/Job';
+import JobFilter from './JobFilter';
 import { BackToTop } from '@base/button/BackToTop';
 import dayjs from 'dayjs';
 
@@ -17,15 +18,15 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
   const [currentPage, setCurrentPage] = useState(1);
   const [currentJobs, setCurrentJobs] = useState<JobType[]>([]);
   const jobsPerPage = 10;
-  const totalJobs = listJobs.length;
-  const totalPages = Math.max(Math.ceil(totalJobs / jobsPerPage), 1);
-
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
 
-  useEffect(() => {
-    setCurrentJobs(listJobs.slice(indexOfFirstJob, indexOfLastJob));
-  }, [listJobs, currentPage, indexOfFirstJob, indexOfLastJob]);
+  const [filters, setFilters] = useState({
+    position: '',
+    experience: '',
+    skills: [],
+    province: '',
+  });
 
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -42,8 +43,39 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
     const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return daysRemaining > 0 ? daysRemaining : 0;
   };
+
+  const applyFilters = (jobList: JobType[]) => {
+    const { position, experience, skills, province } = filters;
+
+    return jobList.filter((job) => {
+      const matchesPosition = position ? job.name.toLowerCase().includes(position.toLowerCase()) : true;
+
+      const matchesExperience = experience ? job.experience === experience : true;
+
+      const matchesSkills = skills.length ? skills.every((skill) => job.skills.includes(skill)) : true;
+
+      const matchesProvince = province ? job.location.toLowerCase().includes(province.toLowerCase()) : true;
+
+      return matchesPosition && matchesExperience && matchesSkills && matchesProvince;
+    });
+  };
+
+  const filteredJobs = applyFilters(listJobs);
+  const totalJobs = filteredJobs.length;
+  const totalPages = Math.max(Math.ceil(totalJobs / jobsPerPage), 1);
+
+  useEffect(() => {
+    const indexOfLastJob = currentPage * jobsPerPage;
+    const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+    setCurrentJobs(filteredJobs.slice(indexOfFirstJob, indexOfLastJob));
+  }, [filteredJobs, currentPage, jobsPerPage]);
+
   return (
     <div className={style.jobListContainer}>
+      <div className={style.filterContainer}>
+        <JobFilter onFilter={(newFilters) => setFilters(newFilters)} />
+      </div>
+
       {listJobs.length === 0 ? (
         <div className={style.noResults}>{t('noJobsFound')}</div>
       ) : (

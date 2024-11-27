@@ -3,7 +3,6 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
-// import { fetchUsers, deleteUser } from './api';
 import { Role, UserProfile, UserProfileByAdmin } from '../../../../auth/models';
 import { APIResponse } from '../../../../../common/utils/baseAPI';
 import { Image } from 'react-bootstrap';
@@ -20,6 +19,8 @@ import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
 import dayjs from 'dayjs';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import { getAllCompanies } from '../../../../company/api';
+import { updateUserProfile } from 'app/profile/api';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -37,6 +38,9 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const [totalData, setTotalData] = useState<number>(0);
   const [isEditModalVisible, setIsEditModalVisible] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserProfileByAdmin | null>(null);
+  // const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
+  // const [selectedRole, setSelectedRole] = useState<string | undefined>(selectedUser?.role);
+  // const [selectedCompany, setSelectedCompany] = useState<string | undefined>(selectedUser?.companyId || '');
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -48,6 +52,8 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.last_updated'),
     t('field.action'),
   ];
+
+  console.log('selectedUser', selectedUser);
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -93,13 +99,18 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   const handleEditSubmit = async (values: any) => {
-    try {
-      message.success('Thông tin đã được cập nhật thành công!');
-      setIsEditModalVisible(false);
-      fetchAllUsers(currentPage);
-    } catch (error) {
-      message.error('Cập nhật thất bại!');
-    }
+    // const payload = {
+    //   ...values,
+    //   companyId: selectedRole === 'HR' ? selectedCompany : undefined,
+    // };
+    // try {
+    //   await updateUserProfile(selectedUser?._id || '', payload);
+    //   message.success('Thông tin đã được cập nhật thành công!');
+    //   setIsEditModalVisible(false);
+    //   fetchAllUsers(currentPage);
+    // } catch (error) {
+    //   message.error('Cập nhật thất bại!');
+    // }
   };
 
   const onDeleteUser = (userId: string) => {
@@ -118,6 +129,24 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       },
     });
   };
+
+  // useEffect(() => {
+  //   if (selectedRole === 'HR') {
+  //     getAllCompanies(1, 100)
+  //       .then((res) => {
+  //         if (Array.isArray(res.data)) {
+  //           setCompanies(res.data);
+  //         } else {
+  //           setCompanies([]);
+  //           console.error('API response is not an array:', res.data);
+  //         }
+  //       })
+  //       .catch(() => {
+  //         setCompanies([]);
+  //         Alert.error({ title: 'Oops!', content: 'Không thể tải danh sách công ty!' });
+  //       });
+  //   }
+  // }, [selectedRole]);
 
   useEffect(() => {
     fetchAllUsers(currentPage);
@@ -180,6 +209,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           layout='vertical'
           initialValues={{
             ...selectedUser,
+            role: selectedUser?.role,
             dateOfBirth: selectedUser?.dateOfBirth ? dayjs(selectedUser.dateOfBirth) : null,
           }}
           onFinish={handleEditSubmit}
@@ -188,53 +218,59 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           <Form.Item label={t('field.fullName')} name='name'>
             <Input disabled />
           </Form.Item>
-
           {/* Email */}
           <Form.Item label={t('field.email')} name='email'>
             <Input disabled />
           </Form.Item>
-
           {/* Vai trò */}
-          <Form.Item label={t('field.role')} name='role'>
-            <Select>
+          {/* <Form.Item label={t('field.role')} name='role'>
+            <Select
+              onChange={(value) => {
+                setSelectedRole(value);
+              }}
+            >
               {ROLES.map((role: Role) => (
-                <Select.Option key={role._id} value={role._id}>
+                <Select.Option key={role._id} value={role.name}>
                   {role.name}
                 </Select.Option>
               ))}
             </Select>
-          </Form.Item>
-
+          </Form.Item> */}
+          {/* {selectedRole === 'HR' && (
+            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+              <Select placeholder={t('field.selectCompany')} onChange={(value) => setSelectedCompany(value)}>
+                {companies.map((company) => (
+                  <Select.Option key={company._id} value={company._id}>
+                    {company.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )} */}
           {/* Ngày sinh */}
           <Form.Item label={t('field.birthday')} name='dateOfBirth'>
             <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
           </Form.Item>
-
           {/* Địa chỉ */}
           <Form.Item label={t('field.address')} name='address'>
             <Input />
           </Form.Item>
-
           {/* Premium */}
           <Form.Item label={t('field.premium')} name='isPremium'>
             <Input disabled />
           </Form.Item>
-
           {/* Xác thực */}
           <Form.Item label={t('field.verified')} name='isVerify'>
             <Input disabled />
           </Form.Item>
-
           {/* Ngày tạo */}
           <Form.Item label={t('field.createdAt')} name='createdAt'>
             <Input disabled value={dayjs(selectedUser?.createdAt).format('YYYY-MM-DD HH:mm:ss')} />
           </Form.Item>
-
           {/* Lần cập nhật cuối */}
           <Form.Item label={t('field.last_updated')} name='updatedAt'>
             <Input disabled value={dayjs(selectedUser?.updatedAt).format('YYYY-MM-DD HH:mm:ss')} />
           </Form.Item>
-
           {/* Nút Lưu và Hủy */}
           <Form.Item>
             <Button type='primary' htmlType='submit'>

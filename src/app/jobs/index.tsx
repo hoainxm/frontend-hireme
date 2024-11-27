@@ -70,7 +70,7 @@ export const Jobs: FC<Props> = ({ sectionId }) => {
           </div>
         </div>
       </section>
-      <JobFilter onFilter={handleFilter} />
+      {/* <JobFilter onFilter={handleFilter} /> */}
       <JobList listJobs={filteredJobs.length > 0 ? filteredJobs : jobs} />
       <PartnerSection sectionId={sectionId} />
     </MainLayout>

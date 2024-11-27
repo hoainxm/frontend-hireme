@@ -1,6 +1,12 @@
 import { ScopeValue } from '@models/enum';
 
-export const ROLES = [
+interface Role {
+  _id: string;
+  name: string;
+  description: string;
+}
+
+export const ROLES: Role[] = [
   {
     _id: '66373e557f14689e42416321',
     name: 'SUPER_ADMIN',
