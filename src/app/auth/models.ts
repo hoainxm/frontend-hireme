@@ -1,3 +1,4 @@
+import { CompanyId } from './../profile/model';
 /** @format */
 
 export interface UserProfile {
@@ -24,6 +25,7 @@ export interface UserProfileByAdmin {
   isPremium: string;
   myCV: any[];
   _id: string;
+  // companyId: string;
   name: string;
   email: string;
   dateOfBirth: string;

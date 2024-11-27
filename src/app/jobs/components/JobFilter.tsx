@@ -15,21 +15,27 @@ interface JobFilterProps {
 const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   const { t } = useTranslation();
   const [position, setPosition] = useState<string>('');
-  const [selectedExperience, setSelectedExperience] = useState<string | undefined>('');
+  const [selectedExperience, setSelectedExperience] = useState<string>();
+  const [filteredExperience, setFilteredExperience] = useState<string[]>(experienceOptions);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [filteredSkills, setFilteredSkills] = useState<string[]>(SkillsOptions);
   const [selectedProvince, setSelectedProvince] = useState<string>('');
-
   const [provinceSuggestions, setProvinceSuggestions] = useState<string[]>(locationData.map((prov) => prov.Name));
 
-  const handleProvinceChange = (input: string | undefined) => {
-    if (input) {
-      setSelectedProvince(input);
-      const suggestions = locationData.filter((province) => province.Name.toLowerCase().includes(input.toLowerCase())).map((prov) => prov.Name);
-      setProvinceSuggestions(suggestions);
-    } else {
-      setSelectedProvince('');
-      setProvinceSuggestions(locationData.map((prov) => prov.Name));
-    }
+  const handleProvinceChange = (input: string) => {
+    const suggestions = locationData.filter((province) => province.Name.includes(input)).map((prov) => prov.Name);
+    setProvinceSuggestions(suggestions);
+    setSelectedProvince(input);
+  };
+
+  const handleSkillSearch = (input: string) => {
+    const suggestions = SkillsOptions.filter((skill) => skill.includes(input));
+    setFilteredSkills(suggestions);
+  };
+
+  const handleExperienceSearch = (input: string) => {
+    const suggestions = experienceOptions.filter((experience) => experience.includes(input));
+    setFilteredExperience(suggestions);
   };
 
   const handleFilter = () => {
@@ -45,6 +51,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   return (
     <Form layout='vertical' onFinish={handleFilter} className={style.jobfilter}>
       <Row gutter={16}>
+        {/* Position Input */}
         <Col span={8}>
           <Form.Item>
             <Input
@@ -56,35 +63,34 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
+        {/* Experience Filter */}
         <Col span={4}>
           <Form.Item>
-            <Select
+            <AutoComplete
               placeholder={t('field.experiencePlaceholder')}
-              value={selectedExperience && selectedExperience.length > 0 ? selectedExperience : undefined}
+              value={selectedExperience}
+              options={filteredExperience.map((exp) => ({ value: exp }))}
+              onSearch={handleExperienceSearch}
               onChange={(value) => setSelectedExperience(value)}
               allowClear
-              className={style.select}
-            >
-              {experienceOptions.map((exp) => (
-                <Option key={exp} value={exp}>
-                  {exp}
-                </Option>
-              ))}
-            </Select>
+              className={style.input}
+            />
           </Form.Item>
         </Col>
 
+        {/* Skills Filter */}
         <Col span={4}>
           <Form.Item className={style.skillsFilter}>
             <Select
               mode='multiple'
               placeholder={t('field.skillsPlaceholder')}
               value={selectedSkills}
+              onSearch={handleSkillSearch}
               onChange={(value) => setSelectedSkills(value)}
               allowClear
               className={style.select}
             >
-              {SkillsOptions.map((skill) => (
+              {filteredSkills.map((skill) => (
                 <Option key={skill} value={skill}>
                   {skill}
                 </Option>
@@ -93,6 +99,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
+        {/* Province Filter */}
         <Col span={4}>
           <Form.Item className={style.provinceFilter}>
             <AutoComplete
@@ -106,6 +113,7 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
           </Form.Item>
         </Col>
 
+        {/* Search Button */}
         <Col span={4}>
           <Button type='primary' htmlType='submit' className={style.button}>
             <SearchOutlined />

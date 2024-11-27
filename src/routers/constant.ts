@@ -120,10 +120,6 @@ export const PRIVATE_ROUTE = [
     path: PageURL.SAVED_JOBS,
     component: SavedJobs,
   },
-  {
-    path: PageURL.HR_MANAGE,
-    component: HRDashboard,
-  },
 ];
 
 export const ADMIN_ROUTE = [
@@ -146,5 +142,9 @@ export const ADMIN_ROUTE = [
   {
     path: PageURL.ADMIN_MANAGE_CV,
     component: CVManagement,
+  },
+  {
+    path: PageURL.HR_MANAGE,
+    component: HRDashboard,
   },
 ];
