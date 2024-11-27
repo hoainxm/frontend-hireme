@@ -36,9 +36,8 @@ const AppRouter: FC = () => {
           {!checkAdmin()
             ? PRIVATE_ROUTE.map((route, index) => <PrivateRoute key={index} {...route} exact />)
             : ADMIN_ROUTE.map((route, index) => <AdminRoute key={index} {...route} exact />)}
-          <Redirect path='/admin' to={PageURL.ADMIN_LOGIN} />
-          <Redirect path='/' to={PageURL.HOME} />
-          {/* <Route component={HTTP404} /> */}
+          <Redirect path='/admin/' to={PageURL.ADMIN_MANAGE} />
+          <Redirect to={PageURL.HOME} />
         </Switch>
       </Router>
       {toasts.map((toast, index) => (

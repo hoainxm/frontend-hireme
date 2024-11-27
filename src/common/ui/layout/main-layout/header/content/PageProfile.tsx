@@ -14,10 +14,9 @@ import { useDispatch } from 'react-redux';
 import { UserProfile } from '../../../../../../app/auth/models';
 
 import { PageURL, ScopeKey } from '../../../../../../models/enum';
-import { makeClientToUnauthorize } from '../../../../../utils/common';
 import { Confirm } from '../../../../../utils/popup';
-import { resetPopup } from '../../../popup-layout/slice';
 import { useAppSelector, RootState } from '../../../../../../store/store';
+import { logoutThunk } from '../../../../../../store/reducer/userSlice/userThunk';
 
 interface Props {
   isSysAdmin?: boolean;
@@ -27,7 +26,6 @@ const PageProfile: FC<Props> = (props: Props) => {
   const { isSysAdmin = false } = props;
   const history = useHistory();
   const dispatch = useDispatch();
-  // const userInfo: UserProfile | null = useSelector((state: RootState) => state.main.userInfo);
   const userInfo: UserProfile | null = useAppSelector((state: RootState) => state.user.userProfile);
 
   const { t } = useTranslation();
@@ -36,13 +34,10 @@ const PageProfile: FC<Props> = (props: Props) => {
     Confirm.logout({
       title: t('auth.logout'),
       content: t('auth.logout.question'),
-      onConfirm: () =>
-        doLogout().then(() => {
-          // dispatch(resetUserInfo());
-          dispatch(resetPopup());
-          makeClientToUnauthorize({ isSysAdmin });
-          localStorage.removeItem(ScopeKey.USER);
-        }),
+      onConfirm: async () => {
+        await dispatch(logoutThunk());
+        history.push(PageURL.HOME);
+      },
     });
   };
 
