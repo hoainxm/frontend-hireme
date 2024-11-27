@@ -39,7 +39,6 @@ export enum PageURL {
   COMPANY = '/companies/',
   COMPANY_DETAIL = '/companies/:companyId',
 
-  HR_MANAGE = '/hr/',
   CATEGORY = '/news/categories',
 
   PROFILE_MANAGEMENT = '/profile',
@@ -90,6 +89,10 @@ export enum PageURL {
   ADMIN_MANAGE_JOB = '/manage/job',
   ADMIN_MANAGE_CV = '/manage/cvs',
 
+  // HR
+  HR_MANAGE = '/manage/hr',
+
+  //
   ADMIN_AI_PACKAGE_WRITER = '/ai-cloud-features/ai-package/:action',
   ADMIN_AI_PACKAGE_INFO = '/ai-cloud-features/ai-package/:action/:id',
   ADMIN_AI_API_KEY = '/cloud-api-key',
