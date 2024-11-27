@@ -1,34 +1,43 @@
+/** @format */
+
 import React, { useEffect, useState } from 'react';
-import MainLayout from '@layout/main-layout';
-import { PageName } from '@models/enum';
 import { getAllCompanies } from '../api';
 import { Company } from '../components/Company';
-import InfoCompany from './InfoCompany';
 import style from './CompanyList.module.scss';
 import { Company as CompanyType } from '../model';
-import CompanyCard from './CompanyCard';
-import ApplyButton from '../../jobs/applyButton/ApplyButton';
+import { CTPaging, CTPageSize, Loading } from '../../../common/ui/base';
 
-interface CompanyListProps {
-  listCompanies?: CompanyType[];
-}
-
-const CompanyList: React.FC<CompanyListProps> = ({ listCompanies = [] }) => {
+const CompanyList: React.FC = () => {
   const [companies, setCompanies] = useState<CompanyType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(9);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchCompanies = async () => {
+      setIsLoading(true);
       try {
         const response = await getAllCompanies(currentPage, pageSize);
         setCompanies(response.data.result);
+        setTotal(response.data.meta.total);
       } catch (error) {
         console.error('Error fetching companies:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchCompanies();
-  }, [currentPage]);
+  }, [currentPage, pageSize]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePageSizeChange = (size: number) => {
+    setPageSize(size);
+    setCurrentPage(1);
+  };
 
   return (
     <div className={style['list-container']}>
@@ -39,6 +48,20 @@ const CompanyList: React.FC<CompanyListProps> = ({ listCompanies = [] }) => {
           </div>
         ))}
       </div>
+      <div className={style['pagination-container']}>
+        {companies.length > 0 && (
+          <>
+            {/* <CTPageSize className='mt-3' totalData={total} defaultPageSize={pageSize} onChange={(size) => handlePageSizeChange(size)} /> */}
+            <CTPaging
+              className='mt-4'
+              currentPage={currentPage}
+              totalPage={Math.ceil(total / pageSize)}
+              onGetData={(page) => handlePageChange(page)}
+            />
+          </>
+        )}
+      </div>
+      <Loading isOpen={isLoading} />
     </div>
   );
 };
