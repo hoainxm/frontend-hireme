@@ -5,19 +5,24 @@ import { CButton, CTPaging, CTPageSize, CTRow, CTable, BlankFrame, Loading } fro
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { fetchJobsByAdmin, deleteJob } from './api';
-import { Job } from '../../../../jobs/model';
+import { fetchJobsByAdmin, deleteJob, createJob } from './api';
+import { getAllCompanies } from '../../../../../app/company/api';
+import { Company, Job } from '../../../../jobs/model';
 import { PageURL } from '../../../../../models/enum';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
 import dayjs from 'dayjs';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import { Image } from 'react-bootstrap';
+import { Button, DatePicker, Form, Input, InputNumber, message, Modal, Select } from 'antd';
+import { experienceOptions, SkillsOptions, Status, WorkForm } from '../../../../../app/jobs/constant';
 
 interface Props {
   id: string;
 }
 
-const JobListedByAdmin: FC<Props> = () => {
+const { Option } = Select;
+
+export const JobListedByAdmin: FC<Props> = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -26,6 +31,10 @@ const JobListedByAdmin: FC<Props> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [form] = Form.useForm();
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -55,6 +64,54 @@ const JobListedByAdmin: FC<Props> = () => {
       .finally(() => setIsLoading(false));
   };
 
+  const loadAllCompanies = async () => {
+    try {
+      const res = await getAllCompanies(1, 100);
+      setCompanies(res.data.result);
+    } catch (error) {
+      message.error(t('error.fetchCompaniesFailed'));
+    }
+  };
+
+  const handleCompanyChange = (companyId: string) => {
+    const selected = companies.find((company) => company._id === companyId);
+    setSelectedCompany(selected || null);
+  };
+
+  const handleFormSubmit = async (values: any) => {
+    try {
+      if (!selectedCompany) {
+        message.error(t('error.companyNotSelected'));
+        return;
+      }
+
+      const filteredCompany = {
+        _id: selectedCompany._id,
+        name: selectedCompany.name,
+        logo: selectedCompany.logo,
+        // scale: selectedCompany.scale,
+        scale: 500,
+      };
+
+      const formattedData = {
+        ...values,
+        company: filteredCompany,
+        startDate: dayjs(values.startDate).toISOString(),
+        endDate: dayjs(values.endDate).toISOString(),
+      };
+
+      delete formattedData.companyId;
+
+      await createJob(formattedData);
+      message.success(t('success.jobCreated'));
+      fetchAllJobs(currentPage);
+      setIsModalVisible(false);
+      form.resetFields();
+    } catch (error) {
+      message.error(t('error.createJobFailed'));
+    }
+  };
+
   const handleDelete = (id: string) => {
     Confirm.delete({
       title: t('confirm.deleteJob'),
@@ -71,7 +128,17 @@ const JobListedByAdmin: FC<Props> = () => {
   };
 
   useEffect(() => {
+    const fetchAllCompanies = async () => {
+      try {
+        const res = await getAllCompanies(1, 100);
+        setCompanies(res.data.result);
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+      }
+    };
+    fetchAllCompanies();
     fetchAllJobs(1);
+    loadAllCompanies();
     // eslint-disable-next-line
   }, [pageSize]);
 
@@ -82,7 +149,7 @@ const JobListedByAdmin: FC<Props> = () => {
   return (
     <div>
       <div className='d-flex justify-content-end mb-3'>
-        <CButton className='ml-2' label={t('btn.admin.addJob')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_JOB}/create`)} />
+        <CButton className='ml-2' label={t('btn.admin.addJob')} onClick={() => setIsModalVisible(true)} />
       </div>
       <CTable responsive maxHeight={833}>
         <thead>
@@ -122,6 +189,119 @@ const JobListedByAdmin: FC<Props> = () => {
         </div>
       )}
       <Loading isOpen={isLoading} />
+
+      <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} centered>
+        <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
+          {/* Tên công việc */}
+          <Form.Item label={t('field.jobName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Kỹ năng */}
+          <Form.Item label={t('field.skills')} name='skills' rules={[{ required: true, message: t('field.required') }]}>
+            <Select mode='tags' placeholder={t('field.skillsPlaceholder')} options={SkillsOptions.map((skill) => ({ value: skill, label: skill }))} />
+          </Form.Item>
+
+          {/* Công ty */}
+          <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+            <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
+              {companies.map((company) => (
+                <Select.Option key={company._id} value={company._id}>
+                  {company.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
+          {/* Địa điểm */}
+          <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Lương */}
+          <Form.Item label={t('field.salary')} name='salary' rules={[{ required: true, message: t('field.required') }]}>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Số lượng */}
+          <Form.Item label={t('jobDetail.quantity')} name='quantity' rules={[{ required: true, message: t('field.required') }]}>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Cấp bậc */}
+          <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.required') }]}>
+            <Select placeholder={t('field.levelPlaceholder')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
+          </Form.Item>
+
+          {/* Hình thức làm việc */}
+          <Form.Item
+            label={t('field.workForm')}
+            name='workForm'
+            rules={[
+              { required: true, message: t('field.required') },
+              {
+                type: 'array',
+                message: t('field.invalidArray'),
+              },
+            ]}
+          >
+            <Select mode='multiple' placeholder={t('field.workFormPlaceholder')} options={WorkForm.map((form) => ({ value: form, label: form }))} />
+          </Form.Item>
+
+          {/* Giới tính */}
+          <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.required') }]}>
+            <Select
+              placeholder={t('field.genderPlaceholder')}
+              options={[
+                { value: 'Nam', label: t('male') },
+                { value: 'Nữ', label: t('female') },
+                { value: 'Không yêu cầu', label: t('notRequired') },
+              ]}
+            />
+          </Form.Item>
+
+          {/* Kinh nghiệm */}
+          <Form.Item label={t('field.experience')} name='experience' rules={[{ required: true, message: t('field.required') }]}>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Mô tả */}
+          <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.required') }]}>
+            <Input.TextArea />
+          </Form.Item>
+
+          {/* Ngày bắt đầu */}
+          <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.required') }]}>
+            <DatePicker style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Ngày kết thúc */}
+          <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.required') }]}>
+            <DatePicker style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Trạng thái hoạt động */}
+          <Form.Item label={t('field.status')} name='isActive' rules={[{ required: true, message: t('field.required') }]}>
+            <Select placeholder={t('field.selectStatus')}>
+              {Status.map((status) => (
+                <Select.Option key={status} value={status === 'Active'}>
+                  {status}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
+          {/* Nút Lưu và Hủy */}
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              {t('btn.save')}
+            </Button>
+            <Button onClick={() => setIsModalVisible(false)} style={{ marginLeft: '8px' }}>
+              {t('btn.cancel')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

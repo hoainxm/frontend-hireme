@@ -64,3 +64,7 @@ export const experienceOptions = [
   'VP of Engineering',
   'Chief Technology Officer (CTO)',
 ];
+
+export const WorkForm = ['Full-time', 'Part - time', 'Remote', 'Hybrid', 'Freelance', 'Contract - based', 'On - site'];
+
+export const Status = ['Active', 'Inactive'];
