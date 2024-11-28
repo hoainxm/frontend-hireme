@@ -90,7 +90,6 @@ export const JobListedByAdmin: FC<Props> = () => {
         name: selectedCompany.name,
         logo: selectedCompany.logo,
         scale: selectedCompany.scale,
-        // scale: 500,
       };
 
       const formattedData = {
@@ -117,12 +116,13 @@ export const JobListedByAdmin: FC<Props> = () => {
       title: t('confirm.deleteJob'),
       content: t('confirm.deleteJobContent'),
       onConfirm: () => {
-        deleteJob(id)
-          .then(() => {
-            Alert.success({ title: t('success.title'), content: t('success.jobDeleted') });
-            fetchAllJobs(currentPage);
-          })
-          .catch(() => Alert.error({ title: 'Oops!', content: t('error.stWrong') }));
+        try {
+          deleteJob(id);
+          Alert.success({ title: t('success.title'), content: t('success.jobDeleted') });
+          fetchAllJobs(currentPage);
+        } catch (error) {
+          Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+        }
       },
     });
   };
@@ -168,9 +168,15 @@ export const JobListedByAdmin: FC<Props> = () => {
                   `${job.salary.toLocaleString()} VND`,
                   dayjs(job.startDate).format('DD-MM-YYYY'),
                   dayjs(job.endDate).format('DD-MM-YYYY'),
-                  <Image src={TrashIcon} alt={t('action.delete')} className='icon-action ml-3' onClick={() => handleDelete(job._id)} />,
+                  <Image
+                    src={TrashIcon}
+                    alt={t('action.delete')}
+                    className='icon-action ml-3'
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleDelete(job._id)}
+                  />,
                 ]}
-                onClick={() => history.push(`${PageURL.ADMIN_MANAGE_JOB}/update/${job._id}`)}
+                // onClick={() => history.push(`${PageURL.ADMIN_MANAGE_JOB}/update/${job._id}`)}
               />
             ))
           ) : (
@@ -261,7 +267,7 @@ export const JobListedByAdmin: FC<Props> = () => {
           </Form.Item>
 
           {/* Kinh nghiệm */}
-          <Form.Item label={t('field.experience')} name='experience' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.yearsExperience')} name='experience' rules={[{ required: true, message: t('field.required') }]}>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
 

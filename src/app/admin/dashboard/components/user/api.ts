@@ -1,4 +1,4 @@
-import { ApiResponse, APIResponse, doGet } from '../../../../../common/utils/baseAPI';
+import { ApiResponse, APIResponse, doDelete, doGet, doPost } from '../../../../../common/utils/baseAPI';
 import axios from 'axios';
 import { UserProfile, UserProfileByAdmin } from '../../../../auth/models';
 import { userAPIUrl } from '../../../../../common/utils/constants';
@@ -24,13 +24,13 @@ export const fetchUsersByAdmin = (
   return doGet(`${userAPIUrl}?current=${current}&pageSize=${pageSize}`);
 };
 
-// export const deleteUser = async (userId: string): Promise<void> => {
-//   return axios.delete(`${BASE_URL}/users/${userId}`);
-// };
+export const deleteUser = async (userId: string): Promise<void> => {
+  return doDelete(`${userAPIUrl}/${userId}`);
+};
 
-// export const createUser = async (userData: Partial<UserProfile>): Promise<UserProfile> => {
-//   return axios.post(`${BASE_URL}/users`, userData);
-// };
+export const createUser = async (userData: Partial<UserProfile>): Promise<UserProfile> => {
+  return doPost(`${userAPIUrl}`, userData);
+};
 
 // export const updateUser = async (userId: string, userData: Partial<UserProfile>): Promise<UserProfile> => {
 //   return axios.put(`${BASE_URL}/users/${userId}`, userData);

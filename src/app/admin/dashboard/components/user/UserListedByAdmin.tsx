@@ -11,7 +11,7 @@ import { PageURL, ScopeValue } from '../../../../../models/enum';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
-import { fetchUsersByAdmin } from './api';
+import { createUser, deleteUser, fetchUsersByAdmin } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
@@ -21,6 +21,7 @@ import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { getAllCompanies } from '../../../../company/api';
 import { updateUserProfile } from 'app/profile/api';
+import { useForm } from 'antd/es/form/Form';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -37,7 +38,11 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
   const [isEditModalVisible, setIsEditModalVisible] = useState<boolean>(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserProfileByAdmin | null>(null);
+  const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
+  const [selectedRole, setSelectedRole] = useState<string | undefined>();
+  const [form] = Form.useForm();
   // const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
   // const [selectedRole, setSelectedRole] = useState<string | undefined>(selectedUser?.role);
   // const [selectedCompany, setSelectedCompany] = useState<string | undefined>(selectedUser?.companyId || '');
@@ -81,6 +86,45 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     setPageSize(parseInt(e.target.value, 10));
   };
 
+  const loadAllCompanies = async () => {
+    try {
+      const res = await getAllCompanies(1, 100);
+      setCompanies(res.data.result);
+    } catch (error) {
+      message.error(t('error.fetchCompaniesFailed'));
+    }
+  };
+
+  const handleCreateUser = async (values: any) => {
+    try {
+      const payload: any = {
+        ...values,
+        dateOfBirth: dayjs(values.dateOfBirth).format('DD/MM/YYYY'),
+      };
+
+      if (selectedRole === '66376960e60f6eda1161fdf2') {
+        const selectedCompany = companies.find((company) => company._id === values.companyId);
+        if (!selectedCompany) {
+          message.error('Công ty không hợp lệ');
+          return;
+        }
+
+        payload.company = {
+          _id: selectedCompany._id,
+          name: selectedCompany.name,
+        };
+      }
+
+      await createUser(payload);
+      Alert.success({ title: t('success.title'), content: t('success.userCreated') });
+      fetchAllUsers(currentPage);
+      setIsCreateModalVisible(false);
+      form.resetFields();
+    } catch (error) {
+      Alert.error({ title: t('fail.title'), content: t('error.createUserFailed') });
+    }
+  };
+
   const checkValidPageAfterDelete = () => {
     if (users.length === 1) {
       return currentPage > 1 ? currentPage - 1 : 1;
@@ -118,14 +162,16 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       title: t('cfm.deleteUser.title'),
       content: t('cfm.deleteUser.content'),
       onConfirm: () => {
-        // deleteUser(userId)
-        //   .then(() => {
-        //     Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
-        //     fetchAllUsers(checkValidPageAfterDelete());
-        //   })
-        //   .catch(() => {
-        //     Alert.error({ title: 'Oops!', content: t('error.stWrong') });
-        //   });
+        deleteUser(userId)
+          .then(() => {
+            // message.success(t('success.userDeleted'));
+            Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
+            fetchAllUsers(currentPage);
+            // fetchAllUsers(checkValidPageAfterDelete());
+          })
+          .catch(() => {
+            Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+          });
       },
     });
   };
@@ -155,9 +201,9 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      {/* <div className='d-flex justify-content-end mb-3'>
-        <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_USER}/create`)} />
-      </div> */}
+      <div className='d-flex justify-content-end mb-3'>
+        <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} />
+      </div>
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -203,6 +249,98 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
         <BlankFrame className='blank-frame' title={t('field.hint.no_data')} />
       )}
       <Loading isOpen={isLoading} />
+
+      <Modal title={t('btn.admin.addUser')} visible={isCreateModalVisible} onCancel={() => setIsCreateModalVisible(false)} footer={null} centered>
+        <Form
+          layout='vertical'
+          onFinish={handleCreateUser} // Hàm xử lý tạo người dùng
+        >
+          {/* Họ tên */}
+          <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Email */}
+          <Form.Item label={t('field.email')} name='email' rules={[{ required: true, type: 'email', message: t('field.invalidEmail') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Mật khẩu */}
+          <Form.Item label={t('field.password')} name='password' rules={[{ required: true, message: t('field.required') }]}>
+            <Input.Password />
+          </Form.Item>
+
+          {/* Giới tính */}
+          <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.required') }]}>
+            <Select>
+              <Select.Option value='male'>{t('field.male')}</Select.Option>
+              <Select.Option value='female'>{t('field.female')}</Select.Option>
+              <Select.Option value='other'>{t('field.other')}</Select.Option>
+            </Select>
+          </Form.Item>
+
+          {/* Địa chỉ */}
+          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Vai trò */}
+          <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.required') }]}>
+            <Select
+              onChange={(value) => setSelectedRole(value)} // Cập nhật trạng thái
+            >
+              {ROLES.map((role) => (
+                <Select.Option key={role._id} value={role._id}>
+                  {role.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
+          {selectedRole === '66376960e60f6eda1161fdf2' && (
+            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+              <Select placeholder={t('field.selectCompany')}>
+                {companies.map((company) => (
+                  <Select.Option key={company._id} value={company._id}>
+                    {company.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )}
+
+          {/* Công ty */}
+          {/* <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+            <Select placeholder={t('field.selectCompany')}>
+              {companies.map((company) => (
+                <Select.Option key={company._id} value={company._id}>
+                  {company.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item> */}
+
+          {/* Số điện thoại */}
+          <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+
+          {/* Ngày sinh */}
+          <Form.Item label={t('field.birthday')} name='dateOfBirth' rules={[{ required: true, message: t('field.required') }]}>
+            <DatePicker format='DD/MM/YYYY' style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Nút Lưu */}
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>
+              {t('btn.save')}
+            </Button>
+            <Button onClick={() => setIsCreateModalVisible(false)} style={{ marginLeft: '8px' }}>
+              {t('btn.cancel')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
 
       <Modal title={t('editProfile')} visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
         <Form

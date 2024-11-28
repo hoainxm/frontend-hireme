@@ -22,5 +22,5 @@ export const createJob = async (data: Job): Promise<ApiResponse<Job>> => {
 };
 
 export const deleteJob = async (jobId: string) => {
-  return doDelete(`${BASE_URL}/${jobId}`);
+  return doDelete(`${jobsAPIUrl}/${jobId}`);
 };
