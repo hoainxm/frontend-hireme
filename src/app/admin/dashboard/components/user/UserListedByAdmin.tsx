@@ -250,27 +250,21 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       )}
       <Loading isOpen={isLoading} />
 
+      {/*  Modal update thong tin */}
       <Modal title={t('btn.admin.addUser')} visible={isCreateModalVisible} onCancel={() => setIsCreateModalVisible(false)} footer={null} centered>
-        <Form
-          layout='vertical'
-          onFinish={handleCreateUser} // Hàm xử lý tạo người dùng
-        >
-          {/* Họ tên */}
+        <Form layout='vertical' onFinish={handleCreateUser}>
           <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
             <Input />
           </Form.Item>
 
-          {/* Email */}
           <Form.Item label={t('field.email')} name='email' rules={[{ required: true, type: 'email', message: t('field.invalidEmail') }]}>
             <Input />
           </Form.Item>
 
-          {/* Mật khẩu */}
           <Form.Item label={t('field.password')} name='password' rules={[{ required: true, message: t('field.required') }]}>
             <Input.Password />
           </Form.Item>
 
-          {/* Giới tính */}
           <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.required') }]}>
             <Select>
               <Select.Option value='male'>{t('field.male')}</Select.Option>
@@ -279,12 +273,10 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             </Select>
           </Form.Item>
 
-          {/* Địa chỉ */}
           <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.required') }]}>
             <Input />
           </Form.Item>
 
-          {/* Vai trò */}
           <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.required') }]}>
             <Select
               onChange={(value) => setSelectedRole(value)} // Cập nhật trạng thái
@@ -320,17 +312,14 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             </Select>
           </Form.Item> */}
 
-          {/* Số điện thoại */}
           <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.required') }]}>
             <Input />
           </Form.Item>
 
-          {/* Ngày sinh */}
           <Form.Item label={t('field.birthday')} name='dateOfBirth' rules={[{ required: true, message: t('field.required') }]}>
             <DatePicker format='DD/MM/YYYY' style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Nút Lưu */}
           <Form.Item>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}

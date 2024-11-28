@@ -128,8 +128,7 @@ const CompanyDetail: React.FC = () => {
                 <div className={style['box-detail']}>
                   <div className={style['in-detail']}>
                     <FontAwesomeIcon icon={faUsers} />
-                    {company.scale}
-                    {t('jobDetail.companyStaff')}
+                    {company.scale} {t('jobDetail.companyStaff')}
                   </div>
                   <div className={style['in-detail']}>
                     <FontAwesomeIcon icon={faMap} />

@@ -13,7 +13,8 @@ import { useHistory } from 'react-router-dom';
 import { PageURL } from '../../../../../models/enum';
 import dayjs from 'dayjs';
 import { onChange } from 'react-toastify/dist/core/store';
-import { Button, Form, Input, InputNumber, Modal } from 'antd';
+import { Button, Col, Form, Input, InputNumber, Modal, Row, Upload } from 'antd';
+import CreateCompanyModal from './CreateCompanyModal';
 
 interface Props {
   id: string;
@@ -57,11 +58,6 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
     setIsModalVisible(true);
   };
 
-  const handleModalCancel = () => {
-    setSelectedCompany(null);
-    setIsModalVisible(false);
-  };
-
   const handleCreateCompany = async (values: any) => {
     try {
       await createCompany(values);
@@ -74,11 +70,6 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
     }
   };
 
-  const handleModalSubmit = (values: any) => {
-    Alert.success({ title: t('success.title'), content: t('success.updated') });
-    setIsModalVisible(false);
-    fetchCompanies(currentPage);
-  };
 
   const handleDelete = (id: string) => {
     Confirm.delete({
@@ -97,7 +88,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchCompanies(1); // Initial fetch
+    fetchCompanies(1);
   }, [pageSize]);
 
   return (
@@ -156,33 +147,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
       )}
       <Loading isOpen={isLoading} />
 
-      <Modal title={t('btn.admin.addCompany')} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
-        <Form form={form} layout='vertical' onFinish={handleCreateCompany}>
-          <Form.Item label={t('field.name')} name='name' rules={[{ required: true, message: t('field.required') }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.required') }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.required') }]}>
-            <Input.TextArea />
-          </Form.Item>
-          <Form.Item label={t('field.logo')} name='logo' rules={[{ required: true, message: t('field.required') }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={t('field.scale')} name='scale' rules={[{ required: true, message: t('field.required') }]}>
-            <InputNumber min={1} style={{ width: '100%' }} />
-          </Form.Item>
-          <Form.Item>
-            <Button type='primary' htmlType='submit'>
-              {t('btn.save')}
-            </Button>
-            <Button onClick={() => setIsModalVisible(false)} style={{ marginLeft: 8 }}>
-              {t('btn.cancel')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+      <CreateCompanyModal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)} onSubmit={handleCreateCompany} form={form} />
     </div>
   );
 };
