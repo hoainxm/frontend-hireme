@@ -12,7 +12,7 @@ export interface Resume {
   email: string;
   userId: string;
   url: string;
-  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  status: 'PENDING' | 'REVIEW' | 'APPROVED' | 'REJECTED';
   companyId: Company;
   jobId: Job;
   history: History[];
@@ -25,12 +25,14 @@ export interface Resume {
 
 export enum ResumeStatus {
   PENDING = 'PENDING',
+  REVIEW = 'REVIEW',
   ACCEPT = 'ACCEPT',
   REJECT = 'REJECT',
 }
 
 export const ResumeStatusMapping: Record<ResumeStatus, string> = {
   [ResumeStatus.PENDING]: 'PENDING',
+  [ResumeStatus.REVIEW]: 'REVIEW',
   [ResumeStatus.ACCEPT]: 'ACCEPT',
   [ResumeStatus.REJECT]: 'REJECT',
 };

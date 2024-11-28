@@ -33,6 +33,7 @@
   "field.user": "User",
   "field.user.id": "Tenant id",
   "field.status.copied": "Copied",
+  "editStatus": "Edit status",
 
   "ai.apikey.management": "API key management",
   "ai.apikey.add": "Add API key",
@@ -358,6 +359,8 @@
   "popup.comingSoon": "This feature is under development. Please try again once we are done.",
   "popup.loginRequired": "You need to log in to use this feature.",
   "sucess.title": "Success",
+  "success.updateResume": "Update resume successfully.",
+  "error.updateResume": "Update resume failed",
 
   "cfm.deletedPackage.title": "Delete feature pack",
   "cfm.deletedPackage.content": "You want to delete this package",
