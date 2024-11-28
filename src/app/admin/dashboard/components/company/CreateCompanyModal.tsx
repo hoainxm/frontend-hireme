@@ -5,10 +5,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UploadOutlined } from '@ant-design/icons';
 import { CreateCompanyModalProps } from './type';
 import { uploadLogo } from './api';
+import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 
 const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, onSubmit, form }) => {
+  const { t } = useTranslation();
   const [fileList, setFileList] = useState<any[]>([]);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -54,7 +56,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
   const handleCancelPreview = () => setPreviewVisible(false);
 
   return (
-    <Modal width={1000} title='Tạo mới Company' visible={isVisible} onCancel={onClose} footer={null}>
+    <Modal width={1000} title={t('btn.admin.addCompany')} visible={isVisible} onCancel={onClose} footer={null}>
       <Form
         form={form}
         layout='vertical'
@@ -68,19 +70,19 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
       >
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item label='Tên công ty' name='name' rules={[{ required: true, message: 'Vui lòng nhập tên công ty!' }]}>
+            <Form.Item label={t('jobDetail.companyName')} name='name' rules={[{ required: true, message: 'Vui lòng nhập tên công ty!' }]}>
               <Input placeholder='Nhập tên công ty' />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label='Địa chỉ' name='address' rules={[{ required: true, message: 'Vui lòng nhập địa chỉ công ty!' }]}>
+            <Form.Item label={t('jobDetail.companyAddress')} name='address' rules={[{ required: true, message: 'Vui lòng nhập địa chỉ công ty!' }]}>
               <Input placeholder='Nhập địa chỉ công ty' />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item label='Ảnh Logo' name='logo' rules={[{ required: true, message: 'Vui lòng upload ảnh logo!' }]}>
+            <Form.Item label={t('jobDetail.companyLogo')} name='logo' rules={[{ required: true, message: 'Vui lòng upload ảnh logo!' }]}>
               <Upload
                 listType='picture-card'
                 maxCount={1}
@@ -99,7 +101,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label='Quy mô' name='scale' rules={[{ required: true, message: 'Vui lòng chọn quy mô!' }]}>
+            <Form.Item label={t('jobDetail.companyScale')} name='scale' rules={[{ required: true, message: 'Vui lòng chọn quy mô!' }]}>
               <Select placeholder='Chọn quy mô'>
                 <Option value={50}>50</Option>
                 <Option value={100}>100</Option>
@@ -109,7 +111,8 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item label='Miêu tả' name='description' rules={[{ required: true, message: 'Vui lòng nhập miêu tả!' }]}>
+
+        <Form.Item label={t('description')} name='description' rules={[{ required: true }]}>
           <CKEditor
             editor={ClassicEditor}
             data={form.getFieldValue('description') || ''}
@@ -125,6 +128,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             }}
           />
         </Form.Item>
+
         <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button type='primary' htmlType='submit'>
             Tạo mới

@@ -8,8 +8,8 @@ export interface Company {
   createdBy: CreatedBy;
   isDeleted: boolean;
   deletedAt: any;
-  createdAt: CreatedAt;
-  updatedAt: UpdatedAt;
+  createdAt: string;
+  updatedAt: string;
   __v: number;
   scale: string;
 }
@@ -17,12 +17,4 @@ export interface Company {
 export interface CreatedBy {
   _id: string;
   email: string;
-}
-
-export interface CreatedAt {
-  $date: string;
-}
-
-export interface UpdatedAt {
-  $date: string;
 }

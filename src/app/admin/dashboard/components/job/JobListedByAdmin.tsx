@@ -4,17 +4,17 @@ import React, { FC, useEffect, useState } from 'react';
 import { CButton, CTPaging, CTPageSize, CTRow, CTable, BlankFrame, Loading } from '../../../../../common/ui/base';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import { fetchJobsByAdmin, deleteJob, createJob } from './api';
 import { getAllCompanies } from '../../../../../app/company/api';
 import { Company, Job } from '../../../../jobs/model';
-import { PageURL } from '../../../../../models/enum';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
 import dayjs from 'dayjs';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import { Image } from 'react-bootstrap';
 import { Button, DatePicker, Form, Input, InputNumber, message, Modal, Select } from 'antd';
 import { experienceOptions, SkillsOptions, Status, WorkForm } from '../../../../../app/jobs/constant';
+import True from '../../../../../common/ui/assets/images/Success.svg';
+import False from '../../../../../common/ui/assets/icon/Error.svg';
 
 interface Props {
   id: string;
@@ -24,7 +24,6 @@ const { Option } = Select;
 
 export const JobListedByAdmin: FC<Props> = () => {
   const { t } = useTranslation();
-  const history = useHistory();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -44,6 +43,7 @@ export const JobListedByAdmin: FC<Props> = () => {
     t('field.salary'),
     t('field.startDate'),
     t('field.endDate'),
+    t('field.status'),
     t('field.action'),
   ];
 
@@ -59,7 +59,7 @@ export const JobListedByAdmin: FC<Props> = () => {
       })
       .catch((error) => {
         if (error.response?.status === 403) handleErrorNoPermission(error, t);
-        else Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+        else Alert.error({ title: t('error.title'), content: t('error.stWrong') });
       })
       .finally(() => setIsLoading(false));
   };
@@ -69,7 +69,7 @@ export const JobListedByAdmin: FC<Props> = () => {
       const res = await getAllCompanies(1, 100);
       setCompanies((res.data as any).result);
     } catch (error) {
-      message.error(t('error.fetchCompaniesFailed'));
+      Alert.error(t('error.fetchCompaniesFailed'));
     }
   };
 
@@ -81,7 +81,7 @@ export const JobListedByAdmin: FC<Props> = () => {
   const handleFormSubmit = async (values: any) => {
     try {
       if (!selectedCompany) {
-        message.error(t('error.companyNotSelected'));
+        Alert.error(t('error.companyNotSelected'));
         return;
       }
 
@@ -102,12 +102,12 @@ export const JobListedByAdmin: FC<Props> = () => {
       delete formattedData.companyId;
 
       await createJob(formattedData);
-      message.success(t('success.jobCreated'));
+      Alert.success({ title: t('success.title'), content: t('success.jobCreated') });
       fetchAllJobs(currentPage);
       setIsModalVisible(false);
       form.resetFields();
     } catch (error) {
-      message.error(t('error.createJobFailed'));
+      Alert.error({ title: t('error.title'), content: t('error.createJobFailed') });
     }
   };
 
@@ -121,7 +121,7 @@ export const JobListedByAdmin: FC<Props> = () => {
           Alert.success({ title: t('success.title'), content: t('success.jobDeleted') });
           fetchAllJobs(currentPage);
         } catch (error) {
-          Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+          Alert.error({ title: t('error.title'), content: t('error.stWrong') });
         }
       },
     });
@@ -168,6 +168,7 @@ export const JobListedByAdmin: FC<Props> = () => {
                   `${job.salary.toLocaleString()} VND`,
                   dayjs(job.startDate).format('DD-MM-YYYY'),
                   dayjs(job.endDate).format('DD-MM-YYYY'),
+                  <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />,
                   <Image
                     src={TrashIcon}
                     alt={t('action.delete')}

@@ -36,7 +36,6 @@ const ResumeListByHR: FC<Props> = () => {
     t('field.action'),
   ];
 
-  // Fetch data from API
   const fetchData = (page: number) => {
     setIsLoading(true);
     fetchResumesByHR(page, pageSize)
@@ -54,7 +53,6 @@ const ResumeListByHR: FC<Props> = () => {
     setPageSize(parseInt(e.target.value, 10));
   };
 
-  // Handle Edit
   const handleEditClick = (resume: Resume) => {
     setSelectedResume(resume);
     setIsModalVisible(true);
@@ -69,11 +67,11 @@ const ResumeListByHR: FC<Props> = () => {
     if (selectedResume) {
       try {
         await updateResumeStatus(selectedResume._id, values.status);
-        Alert.success({ title: t('success.title'), content: t('success.updated') });
+        Alert.success({ title: t('success.title'), content: t('success.updateResume') });
         setIsModalVisible(false);
         fetchData(currentPage);
       } catch {
-        Alert.error({ title: t('error.title'), content: t('error.updateFailed') });
+        Alert.error({ title: t('error.title'), content: t('error.updateResume') });
       }
     }
   };

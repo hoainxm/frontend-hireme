@@ -150,6 +150,8 @@
   "success.CompanyCreated": "Tạo công ty mới thành công",
   "error.createCompanyFailed": "Tạo công ty mới thất bại",
   "error.createUserFailed": "Tạo người dùng mới thất bại",
+  "success.updateResume": "Cập nhật trạng thái thành công",
+  "error.updateResume": "Cập nhật trạng thái thất bại",
 
   "found": "Tìm thấy",
   "list": "Danh sách",
@@ -230,6 +232,7 @@
   "jobDetail.employmentType": "Hình thức làm việc",
   "jobDetail.companyName": "Tên công ty",
   "jobDetail.companyScale": "Quy mô",
+  "jobDetail.companyLogo": "Logo công ty",
   "jobDetail.companyIndustry": "Lĩnh vực",
   "jobDetail.companyAddress": "Địa chỉ",
   "jobDetail.companyStaff": "nhân viên",
@@ -295,6 +298,7 @@
   "error.tokenVerifyInvalid": "Mã xác minh không hợp lệ",
 
   "editProfile": "Chỉnh sửa thông tin cá nhân",
+  "editStatus": "Chỉnh sửa trạng thái",
   "field.hint.tenant_name": "Nhập tên công ty",
   "field.fullName": "Họ và tên",
   "field.hint.fullName": "Nhập họ và tên",
