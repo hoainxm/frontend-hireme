@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { FC, useState, useEffect } from 'react';
-import { deleteCompany, fetchCompaniesByAdmin } from './api';
+import { createCompany, deleteCompany, fetchCompaniesByAdmin } from './api';
 import { Company } from '../../../../company/model';
 import { CTable, CTPaging, CTPageSize, CTRow, BlankFrame, Loading, CButton } from '../../../../../common/ui/base';
 import { Confirm, Alert } from '../../../../../common/utils/popup';
@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { PageURL } from '../../../../../models/enum';
 import dayjs from 'dayjs';
 import { onChange } from 'react-toastify/dist/core/store';
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, InputNumber, Modal } from 'antd';
 
 interface Props {
   id: string;
@@ -30,6 +30,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
   const [totalData, setTotalData] = useState<number>(0);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [form] = Form.useForm();
 
   const TABLE_HEADER = [t('field.numeric'), t('field.name'), t('field.address'), t('field.last_updated'), t('field.action')];
 
@@ -61,6 +62,18 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
     setIsModalVisible(false);
   };
 
+  const handleCreateCompany = async (values: any) => {
+    try {
+      await createCompany(values);
+      Alert.success({ title: t('success.title'), content: t('success.companyCreated') });
+      fetchCompanies(currentPage);
+      setIsModalVisible(false);
+      form.resetFields();
+    } catch (error) {
+      Alert.error({ title: t('error.title'), content: t('error.createCompanyFailed') });
+    }
+  };
+
   const handleModalSubmit = (values: any) => {
     Alert.success({ title: t('success.title'), content: t('success.updated') });
     setIsModalVisible(false);
@@ -72,14 +85,13 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
       title: t('cfm.deleteCompany.title'),
       content: t('cfm.deleteCompany.content'),
       onConfirm: () => {
-        deleteCompany(id);
-        // Add delete API call if available
-        // deleteCompanyByAdmin(id)
-        //   .then(() => {
-        //     Alert.success({ title: t('success.title'), content: t('success.deleted') });
-        //     fetchCompanies(currentPage);
-        //   })
-        //   .catch(() => Alert.error({ title: t('error.title'), content: t('error.deleteFailed') }));
+        try {
+          deleteCompany(id);
+          Alert.success({ title: t('success.title'), content: t('success.deleted') });
+          fetchCompanies(currentPage);
+        } catch (error) {
+          Alert.error({ title: t('error.title'), content: t('error.deleteFailed') });
+        }
       },
     });
   };
@@ -90,9 +102,9 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      {/* <div className='d-flex justify-content-end mb-3'>
-        <CButton label={t('btn.admin.addCompany')} onClick={() => history.push(`${PageURL.ADMIN_MANAGE_COMPANY}/create`)} />
-      </div> */}
+      <div className='d-flex justify-content-end mb-3'>
+        <CButton label={t('btn.admin.addCompany')} onClick={() => setIsModalVisible(true)} />
+      </div>
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -106,7 +118,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
                   index + 1,
                   company.name || t('field.notSet'),
                   company.address || t('field.notSet'),
-                  dayjs(company.updatedAt?.$date).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                  dayjs(company.updatedAt.$date).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
                   <div className='d-flex align-items-center'>
                     <Image
                       src={Edit}
@@ -144,31 +156,28 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
       )}
       <Loading isOpen={isLoading} />
 
-      <Modal title={t('field.companyDetail')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
-        <Form
-          layout='vertical'
-          initialValues={{
-            ...selectedCompany,
-          }}
-          onFinish={handleModalSubmit}
-        >
-          <Form.Item label={t('field.name')} name='name'>
-            <Input disabled />
+      <Modal title={t('btn.admin.addCompany')} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
+        <Form form={form} layout='vertical' onFinish={handleCreateCompany}>
+          <Form.Item label={t('field.name')} name='name' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
           </Form.Item>
-          <Form.Item label={t('field.address')} name='address'>
-            <Input disabled />
+          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
           </Form.Item>
-          <Form.Item label={t('field.createdAt')} name='createdAt'>
-            <Input disabled />
+          <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.required') }]}>
+            <Input.TextArea />
           </Form.Item>
-          <Form.Item label={t('field.last_updated')} name='updatedAt'>
-            <Input disabled />
+          <Form.Item label={t('field.logo')} name='logo' rules={[{ required: true, message: t('field.required') }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item label={t('field.scale')} name='scale' rules={[{ required: true, message: t('field.required') }]}>
+            <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}
             </Button>
-            <Button onClick={handleModalCancel} style={{ marginLeft: 8 }}>
+            <Button onClick={() => setIsModalVisible(false)} style={{ marginLeft: 8 }}>
               {t('btn.cancel')}
             </Button>
           </Form.Item>

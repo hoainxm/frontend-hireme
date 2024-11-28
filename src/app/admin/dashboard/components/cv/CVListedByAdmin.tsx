@@ -26,7 +26,7 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
 
-  const TABLE_HEADER = [t('field.numeric'), t('field.email'), t('field.status'), t('field.last_updated'), t('field.action')];
+  const TABLE_HEADER = [t('field.numeric'), t('field.email'), t('field.status'), t('field.last_updated')];
 
   const fetchCVs = (page: number) => {
     setIsLoading(true);
