@@ -328,7 +328,8 @@
   "btn.add": "Add",
   "btn.new": "Add new",
   "btn.save": "Save",
-  "follow.Btn": "Follow company",
+  "follow.Btn": "+ Follow company",
+  "unfollow": "Unfollow",
   "btn.unsave": "Unsave",
   "btn.savePassword": "Save new password",
   "btn.apply": "Apply",
@@ -400,6 +401,12 @@
   "user.profile.title": "Manage Your Profile - Edit and Save Changes",
   "user.license.management": "License management",
   "user.trial": "Get started for free",
+
+  "user.followedCompanies": "Followed Companies",
+  "followedCompanies.title": "Discover the companies you have followed and explore the best job opportunities",
+  "noFollowedCompanies": "You are not following any companies yet",
+  "browseCompaniesPage": "Check out the companies page now",
+  "browseCompanies": "Go to Companies Page",
 
   "news.title.category": "Categories",
   "category.list": "Category List",

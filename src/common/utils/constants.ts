@@ -239,6 +239,12 @@ export const PROFILE_ITEMS = [
     isActive: true,
   },
   {
+    name: PageName.FOLLOWED_COMPANIES,
+    url: PageURL.FOLLOWED_COMPANIES,
+    icon: 'NameEntity',
+    isActive: true,
+  },
+  {
     name: PageName.SAVED_JOBS,
     url: PageURL.SAVED_JOBS,
     icon: 'Save',

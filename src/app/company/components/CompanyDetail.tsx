@@ -14,6 +14,7 @@ import RelatedJobs from '../../jobs/components/RelatedJobs';
 import CompanyBanner from '@images/AuthBackground1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMap, faUsers, faPlus } from '@fortawesome/free-solid-svg-icons';
+import FollowCompany from './FollowCompany';
 
 interface RouteParams {
   companyId: string;
@@ -136,9 +137,10 @@ const CompanyDetail: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className={style['followBtn']}>
+              {/* <div className={style['followBtn']}>
                 <FontAwesomeIcon icon={faPlus} /> {t('follow.Btn')}
-              </div>
+              </div> */}
+              <FollowCompany companyId={company._id} companyName={company.name} companyLogo={company.logo} companyAddress={company.address} />
             </div>
           </div>
 

@@ -33,11 +33,13 @@ export enum PageURL {
   JOBS = '/jobs',
   JOB_DETAIL = '/jobs/:jobId',
   SAVED_JOBS = '/savedJobs',
+
   UPGRADE = '/upgrade',
   UPDATE_PASSWORD = '/update-password',
 
-  COMPANY = '/companies/',
+  COMPANY = '/companies',
   COMPANY_DETAIL = '/companies/:companyId',
+  FOLLOWED_COMPANIES = '/followed-companies',
 
   CATEGORY = '/news/categories',
 
@@ -160,6 +162,7 @@ export enum PageName {
 
   WELCOME_INFORM_MANAGEMENT = 'admin.inform.title',
   TENANT_MANAGEMENT = 'admin.tenant.tenantManagement',
+  FOLLOWED_COMPANIES = 'followed.company',
 }
 
 export enum ProductLabel {

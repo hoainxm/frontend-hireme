@@ -20,8 +20,7 @@ import dayjs from 'dayjs';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { getAllCompanies } from '../../../../company/api';
-import { updateUserProfile } from 'app/profile/api';
-import { useForm } from 'antd/es/form/Form';
+import { updateMe } from '../../../../../app/profile/api';
 
 interface Props {
   // isSysAdminSite?: boolean;
