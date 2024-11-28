@@ -48,8 +48,6 @@ export const SkillsOptions = [
   'Selenium',
 ];
 
-// export const experienceOptions = ['Intern', 'Fresher', 'Junior', 'Mid-level', 'Senior', 'Lead'];
-
 export const experienceOptions = [
   'Intern Developer',
   'Fresher Developer',
@@ -65,6 +63,6 @@ export const experienceOptions = [
   'Chief Technology Officer (CTO)',
 ];
 
-export const WorkForm = ['Full-time', 'Part - time', 'Remote', 'Hybrid', 'Freelance', 'Contract - based', 'On - site'];
+export const WorkForm = ['Full-time', 'Part-time', 'Remote', 'Hybrid', 'Freelance', 'Contract-based', 'On-site'];
 
 export const Status = ['Active', 'Inactive'];
