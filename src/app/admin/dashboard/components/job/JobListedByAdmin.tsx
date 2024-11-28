@@ -89,8 +89,8 @@ export const JobListedByAdmin: FC<Props> = () => {
         _id: selectedCompany._id,
         name: selectedCompany.name,
         logo: selectedCompany.logo,
-        // scale: selectedCompany.scale,
-        scale: 500,
+        scale: selectedCompany.scale,
+        // scale: 500,
       };
 
       const formattedData = {

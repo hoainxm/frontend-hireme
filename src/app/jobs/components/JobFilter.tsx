@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Form, Input, Select, Button, AutoComplete, Row, Col } from 'antd';
+import { Form, Input, Select, AutoComplete, Row, Col, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import locationData from './location.json';
 import { SkillsOptions, experienceOptions } from '../constant';
@@ -16,7 +16,6 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   const { t } = useTranslation();
   const [position, setPosition] = useState<string>('');
   const [selectedExperience, setSelectedExperience] = useState<string>();
-  const [filteredExperience, setFilteredExperience] = useState<string[]>(experienceOptions);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [filteredSkills, setFilteredSkills] = useState<string[]>(SkillsOptions);
   const [selectedProvince, setSelectedProvince] = useState<string>('');
@@ -29,21 +28,19 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   };
 
   const handleSkillSearch = (input: string) => {
-    const suggestions = SkillsOptions.filter((skill) => skill.includes(input));
-    setFilteredSkills(suggestions);
-  };
-
-  const handleExperienceSearch = (input: string) => {
-    const suggestions = experienceOptions.filter((experience) => experience.includes(input));
-    setFilteredExperience(suggestions);
-
+    if (input) {
+      const suggestions = SkillsOptions.filter((skill) => skill.toLowerCase().includes(input.toLowerCase()));
+      setFilteredSkills(suggestions);
+    } else {
+      setFilteredSkills(SkillsOptions);
+    }
   };
 
   const handleFilter = () => {
     const filters = {
       position,
       experience: selectedExperience,
-      skills: selectedSkills,
+      skills: selectedSkills.map((skill) => skill.toLowerCase()),
       province: selectedProvince,
     };
     onFilter(filters);
@@ -52,7 +49,6 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
   return (
     <Form layout='vertical' onFinish={handleFilter} className={style.jobfilter}>
       <Row gutter={16}>
-        {/* Position Input */}
         <Col span={8}>
           <Form.Item>
             <Input
@@ -63,31 +59,27 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
             />
           </Form.Item>
         </Col>
-
-        {/* Experience Filter */}
         <Col span={4}>
           <Form.Item>
             <AutoComplete
               placeholder={t('field.experiencePlaceholder')}
               value={selectedExperience}
-              options={filteredExperience.map((exp) => ({ value: exp }))}
-              onSearch={handleExperienceSearch}
+              options={experienceOptions.map((exp) => ({ value: exp }))}
               onChange={(value) => setSelectedExperience(value)}
               allowClear
               className={style.input}
             />
           </Form.Item>
         </Col>
-
-        {/* Skills Filter */}
         <Col span={4}>
           <Form.Item className={style.skillsFilter}>
             <Select
               mode='multiple'
               placeholder={t('field.skillsPlaceholder')}
               value={selectedSkills}
-              onSearch={handleSkillSearch}
               onChange={(value) => setSelectedSkills(value)}
+              onSearch={handleSkillSearch}
+              filterOption={false}
               allowClear
               className={style.select}
             >
@@ -99,22 +91,18 @@ const JobFilter: FC<JobFilterProps> = ({ onFilter }) => {
             </Select>
           </Form.Item>
         </Col>
-
-        {/* Province Filter */}
         <Col span={4}>
           <Form.Item className={style.provinceFilter}>
             <AutoComplete
               placeholder={t('field.provincePlaceholder')}
               value={selectedProvince}
-              onChange={handleProvinceChange}
               options={provinceSuggestions.map((prov) => ({ value: prov }))}
+              onChange={handleProvinceChange}
               allowClear
               className={style.input}
             />
           </Form.Item>
         </Col>
-
-        {/* Search Button */}
         <Col span={4}>
           <Button type='primary' htmlType='submit' className={style.button}>
             <SearchOutlined />
