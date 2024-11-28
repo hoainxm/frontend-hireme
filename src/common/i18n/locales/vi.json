@@ -149,6 +149,7 @@
   "error.createJobFailed": "Tạo việc làm mới thất bại",
   "success.CompanyCreated": "Tạo công ty mới thành công",
   "error.createCompanyFailed": "Tạo công ty mới thất bại",
+  "error.createUserFailed": "Tạo người dùng mới thất bại",
 
   "found": "Tìm thấy",
   "list": "Danh sách",
@@ -276,6 +277,8 @@
   "success.title": "Thành công",
   "success.deleted": "Xóa thành công",
   "success.companyCreated": "Tạo công ty mới thành công",
+  "success.userCreated": "Tạo người dùng thành công",
+  "success.userDeleted": "Xóa người dùng thành công",
   "emailVerify.title": "Xác minh email của bạn",
   "emailVerify.success.title": "Thành công",
   "emailVerify.fail.title": "Không thành công",

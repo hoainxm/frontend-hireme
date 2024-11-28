@@ -22,7 +22,7 @@ export const createCompany = async (data: Company): Promise<ApiResponse<Company>
 export const uploadLogo = async (file: File): Promise<any> => {
   const formData = new FormData();
   formData.append('fileUpload', file);
-  return doPost(`${fileAPIUrl}/uploadr`, formData, {
+  return doPost(`${fileAPIUrl}/upload`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       folder_type: 'company',
