@@ -363,7 +363,8 @@
   "btn.cancel": "Hủy",
   "btn.add": "Thêm",
   "btn.save": "Lưu",
-  "follow.Btn": "Theo dõi công ty",
+  "follow.Btn": "+ Theo dõi công ty",
+  "unfollow": "Hủy theo dõi",
   "btn.unsave": "Huỷ lưu",
   "btn.savePassword": "Lưu mật khẩu mới",
   "btn.apply": "Áp dụng",
@@ -435,6 +436,12 @@
   "user.license.management": "Quản lý license",
   "user.trial": "Trải nghiệm miễn phí",
 
+  "user.followedCompanies": "Công ty đã theo dõi",
+  "followedCompanies.title": "Khám phá những công ty mà bạn đã theo dõi, tìm kiếm những cơ hội việc làm tốt nhất",
+  "noFollowedCompanies": "Bạn hiện tại chưa theo dõi công ty nào",
+  "browseCompaniesPage": "Hãy kiểm tra trang công ty ngay nhé",
+  "browseCompanies": "Đến trang công ty",
+
   "news.title.category": "Phân loại theo chủ đề",
   "category.list": "Danh sách chủ đề",
   "all.news": "Tất cả tin tức",
@@ -462,6 +469,7 @@
 
   "admin.inform.title": "Thông tin chào mừng",
   "admin.tenant.tenantManagement": "Quản lý công ty",
+  "followed.company": "Theo dõi công ty",
 
   "home.banner01.content": "HireMe - Nơi kết nối tài năng với cơ hội việc làm. Chúng tôi mang đến cho bạn những vị trí hấp dẫn từ các công ty hàng đầu.",
   "home.banner02.content": "Khám phá sự nghiệp mơ ước của bạn với HireMe. Chúng tôi hỗ trợ bạn trong việc tìm kiếm công việc phù hợp với kỹ năng và đam mê của mình.",
