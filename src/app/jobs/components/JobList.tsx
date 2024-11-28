@@ -6,6 +6,7 @@ import Job from '../components/Job';
 import JobFilter from './JobFilter';
 import { BackToTop } from '@base/button/BackToTop';
 import dayjs from 'dayjs';
+import { Button } from 'antd';
 
 interface JobListProps {
   listJobs?: JobType[];
@@ -16,21 +17,18 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
   const { t } = useTranslation();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentJobs, setCurrentJobs] = useState<JobType[]>([]);
   const jobsPerPage = 10;
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
 
   const [filters, setFilters] = useState({
     position: '',
     experience: '',
-    skills: [],
+    skills: [] as string[],
     province: '',
   });
 
-  const handlePageClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const [filteredJobs, setFilteredJobs] = useState<JobType[]>([]);
+  const [currentJobs, setCurrentJobs] = useState<JobType[]>([]);
+  const [sortOrder, setSortOrder] = useState<'recent' | 'oldest'>('recent');
 
   const isJobExpired = (endDate: string): boolean => {
     return dayjs(endDate).isBefore(dayjs());
@@ -40,35 +38,47 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
     const end = new Date(endDate);
     const now = new Date();
     const timeDiff = end.getTime() - now.getTime();
-    const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return daysRemaining > 0 ? daysRemaining : 0;
+    return Math.max(Math.ceil(timeDiff / (1000 * 3600 * 24)), 0);
   };
 
   const applyFilters = (jobList: JobType[]) => {
     const { position, experience, skills, province } = filters;
 
-    return jobList.filter((job) => {
+    let filtered = jobList.filter((job) => {
       const matchesPosition = position ? job.name.toLowerCase().includes(position.toLowerCase()) : true;
-
-      const matchesExperience = experience ? job.experience === experience : true;
-
-      const matchesSkills = skills.length ? skills.every((skill) => job.skills.includes(skill)) : true;
-
+      const matchesExperience = experience ? job.level.toLowerCase() === experience.toLowerCase() : true;
+      const matchesSkills = skills.length ? skills.every((skill) => job.skills.includes(skill.toLowerCase())) : true;
       const matchesProvince = province ? job.location.toLowerCase().includes(province.toLowerCase()) : true;
 
       return matchesPosition && matchesExperience && matchesSkills && matchesProvince;
     });
+
+    if (sortOrder === 'recent') {
+      filtered = filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else if (sortOrder === 'oldest') {
+      filtered = filtered.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    }
+
+    return filtered;
   };
 
-  const filteredJobs = applyFilters(listJobs);
-  const totalJobs = filteredJobs.length;
-  const totalPages = Math.max(Math.ceil(totalJobs / jobsPerPage), 1);
+  useEffect(() => {
+    setFilteredJobs(applyFilters(listJobs));
+    setCurrentPage(1);
+  }, [filters, listJobs, sortOrder]);
 
   useEffect(() => {
     const indexOfLastJob = currentPage * jobsPerPage;
     const indexOfFirstJob = indexOfLastJob - jobsPerPage;
     setCurrentJobs(filteredJobs.slice(indexOfFirstJob, indexOfLastJob));
-  }, [filteredJobs, currentPage, jobsPerPage]);
+  }, [filteredJobs, currentPage]);
+
+  const handleSortToggle = () => {
+    setSortOrder((prevOrder) => (prevOrder === 'recent' ? 'oldest' : 'recent'));
+  };
+
+  const totalJobs = filteredJobs.length;
+  const totalPages = Math.max(Math.ceil(totalJobs / jobsPerPage), 1);
 
   return (
     <div className={style.jobListContainer}>
@@ -83,6 +93,9 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
           {listJobs && totalJobs > 0 && (
             <div className={style.jobCount}>
               {t('found')} {totalJobs} {t('job.match')}
+              <Button type='primary' onClick={handleSortToggle}>
+                {sortOrder === 'recent' ? t('Sort by Oldest') : t('Sort by Recent')}
+              </Button>
             </div>
           )}
           {currentJobs.map((job) => (
@@ -92,17 +105,15 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
       )}
 
       <div className={style.pagination}>
-        {Number.isFinite(totalPages) &&
-          totalPages > 0 &&
-          Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => handlePageClick(index + 1)}
-              className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
-            >
-              {index + 1}
-            </button>
-          ))}
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
       <BackToTop />
     </div>

@@ -67,7 +67,7 @@ export const JobListedByAdmin: FC<Props> = () => {
   const loadAllCompanies = async () => {
     try {
       const res = await getAllCompanies(1, 100);
-      setCompanies(res.data.result);
+      setCompanies((res.data as any).result);
     } catch (error) {
       message.error(t('error.fetchCompaniesFailed'));
     }
@@ -131,7 +131,7 @@ export const JobListedByAdmin: FC<Props> = () => {
     const fetchAllCompanies = async () => {
       try {
         const res = await getAllCompanies(1, 100);
-        setCompanies(res.data.result);
+        setCompanies((res.data as any).result);
       } catch (error) {
         console.error('Error fetching companies:', error);
       }
@@ -198,17 +198,14 @@ export const JobListedByAdmin: FC<Props> = () => {
 
       <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} centered>
         <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
-          {/* Tên công việc */}
           <Form.Item label={t('field.jobName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
             <Input />
           </Form.Item>
 
-          {/* Kỹ năng */}
           <Form.Item label={t('field.skills')} name='skills' rules={[{ required: true, message: t('field.required') }]}>
             <Select mode='tags' placeholder={t('field.skillsPlaceholder')} options={SkillsOptions.map((skill) => ({ value: skill, label: skill }))} />
           </Form.Item>
 
-          {/* Công ty */}
           <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
             <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
               {companies.map((company) => (
@@ -219,27 +216,22 @@ export const JobListedByAdmin: FC<Props> = () => {
             </Select>
           </Form.Item>
 
-          {/* Địa điểm */}
           <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.required') }]}>
             <Input />
           </Form.Item>
 
-          {/* Lương */}
           <Form.Item label={t('field.salary')} name='salary' rules={[{ required: true, message: t('field.required') }]}>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Số lượng */}
           <Form.Item label={t('jobDetail.quantity')} name='quantity' rules={[{ required: true, message: t('field.required') }]}>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Cấp bậc */}
           <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.required') }]}>
             <Select placeholder={t('field.levelPlaceholder')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
           </Form.Item>
 
-          {/* Hình thức làm việc */}
           <Form.Item
             label={t('field.workForm')}
             name='workForm'
@@ -254,7 +246,6 @@ export const JobListedByAdmin: FC<Props> = () => {
             <Select mode='multiple' placeholder={t('field.workFormPlaceholder')} options={WorkForm.map((form) => ({ value: form, label: form }))} />
           </Form.Item>
 
-          {/* Giới tính */}
           <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.required') }]}>
             <Select
               placeholder={t('field.genderPlaceholder')}
@@ -266,27 +257,22 @@ export const JobListedByAdmin: FC<Props> = () => {
             />
           </Form.Item>
 
-          {/* Kinh nghiệm */}
           <Form.Item label={t('field.yearsExperience')} name='experience' rules={[{ required: true, message: t('field.required') }]}>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Mô tả */}
           <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.required') }]}>
             <Input.TextArea />
           </Form.Item>
 
-          {/* Ngày bắt đầu */}
           <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.required') }]}>
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Ngày kết thúc */}
           <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.required') }]}>
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
-          {/* Trạng thái hoạt động */}
           <Form.Item label={t('field.status')} name='isActive' rules={[{ required: true, message: t('field.required') }]}>
             <Select placeholder={t('field.selectStatus')}>
               {Status.map((status) => (
@@ -297,7 +283,6 @@ export const JobListedByAdmin: FC<Props> = () => {
             </Select>
           </Form.Item>
 
-          {/* Nút Lưu và Hủy */}
           <Form.Item>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}

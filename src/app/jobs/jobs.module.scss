@@ -57,7 +57,10 @@ main > .container {
     }
   }
 }
-
+.jobCount {
+  display: flex;
+  justify-content: space-between;
+}
 .categoryContainer {
   padding: 80px 144px 80px 144px;
   position: inherit;
