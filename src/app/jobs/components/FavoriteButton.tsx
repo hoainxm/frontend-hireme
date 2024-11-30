@@ -35,6 +35,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ job }) => {
       isLoginRequired();
       return;
     }
+
     const savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
     if (!savedJobs.some((savedJob: Job) => savedJob._id === job._id)) {
       savedJobs.push(job);

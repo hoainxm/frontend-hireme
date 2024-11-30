@@ -92,7 +92,8 @@
   "auth.promptContent": "Khi nhấp vào “Đăng ký” bên dưới, bạn đã đọc đồng ý với các <strong>Chính sách bảo mật và điều khoản dịch vụ</strong> của HireMe.",
   "auth.privacyPolicy": "Chính sách quyền riêng tư",
   "auth.haveAccount": "Bạn đã có tài khoản?",
-  "auth.signupSuccess": "Đăng ký thành công! Chọn đồng ý để về trang đăng nhập.",
+  "auth.signupSuccess": "Đăng ký thành công! Hãy xác thực email của bạn trước khi đăng nhập.",
+  "note.checkYourEmail": "Kiểm tra hòm thư spam nếu bạn không tìm thấy email xác minh",
   "auth.createNewPassSuccess.first": "Tạo mật khẩu mới thành công.",
   "auth.createNewPassSuccess.second": "Hãy đăng nhập với mật khẩu mới bạn nhé.",
   "auth.emailVerification": "Vui lòng kiểm tra email và nhấp vào liên kết đính kèm.",
@@ -144,6 +145,8 @@
   "field.skillsPlaceholder": "Chọn kỹ năng",
   "field.provincePlaceholder": "Tỉnh/thành phố",
   "field.levelPlaceholder": "Chọn cấp độ",
+  "sort.by.oldest": "Sắp xếp từ cũ nhất đến mới nhất",
+  "sort.by.recent": "Sắp xếp từ mới nhất tới cũ nhất",
   "field.description": "Mô tả công việc",
   "success.jobCreated": "Tạo việc làm mới thành công",
   "error.createJobFailed": "Tạo việc làm mới thất bại",
@@ -152,6 +155,8 @@
   "error.createUserFailed": "Tạo người dùng mới thất bại",
   "success.updateResume": "Cập nhật trạng thái thành công",
   "error.updateResume": "Cập nhật trạng thái thất bại",
+  "confirm.deleteJob": "Xóa việc làm",
+  "confirm.deleteJobContent": "Bạn có chắc chắn muốn xóa việc làm này? Thao tác này không thể hoàn tác.",
 
   "found": "Tìm thấy",
   "list": "Danh sách",
@@ -426,6 +431,7 @@
   "user.upgrade": "Gói nâng cấp",
   "user.savedJobs": "Việc làm đã lưu",
   "user.changePassword": "Đổi mật khẩu",
+  "hr.management": "Quản lý",
 
   "noSavedJobs": "Bạn hiện tại không có việc làm đã lưu",
   "checkJobsPage": "Hãy kiểm tra trang việc làm ngay nhé",
@@ -456,6 +462,7 @@
   "field.admin.cv": "CV",
   "field.verified": "Đã xác minh",
   "field.unverified": "Chưa xác minh",
+  "field.hr.management": "Quản lý HR",
 
   "btn.admin.addUser": "Thêm người dùng",
   "btn.admin.addCompany": "Thêm công ty",

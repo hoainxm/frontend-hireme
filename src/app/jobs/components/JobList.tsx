@@ -94,7 +94,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
             <div className={style.jobCount}>
               {t('found')} {totalJobs} {t('job.match')}
               <Button type='primary' onClick={handleSortToggle}>
-                {sortOrder === 'recent' ? t('Sort by Oldest') : t('Sort by Recent')}
+                {sortOrder === 'recent' ? t('sort.by.oldest') : t('sort.by.recent')}
               </Button>
             </div>
           )}

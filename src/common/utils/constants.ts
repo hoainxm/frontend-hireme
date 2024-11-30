@@ -210,6 +210,16 @@ export const NAV_ITEMS = [
   // },
 ];
 
+export const NAV_ITEMS_HR = [
+  ...NAV_ITEMS,
+  {
+    name: PageName.HR_DASHBOARD,
+    url: PageURL.HR_MANAGE,
+    sectionId: SectionID.HOME_BANNER,
+    isActive: false,
+  },
+];
+
 export const SOCIAL_LINKS = [
   {
     url: 'https://www.facebook.com/hoainxm',

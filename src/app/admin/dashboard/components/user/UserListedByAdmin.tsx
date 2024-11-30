@@ -21,6 +21,8 @@ import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { getAllCompanies } from '../../../../company/api';
 import { updateMe } from '../../../../../app/profile/api';
+import { Company } from '../../../../../app/jobs/model';
+import { CompanyId } from '../../../../../app/profile/model';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -41,6 +43,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const [selectedUser, setSelectedUser] = useState<UserProfileByAdmin | null>(null);
   const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
   const [selectedRole, setSelectedRole] = useState<string | undefined>();
+  const [selectedCompany, setSelectedCompany] = useState<CompanyId | null>(null);
   const [form] = Form.useForm();
   // const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
   // const [selectedRole, setSelectedRole] = useState<string | undefined>(selectedUser?.role);
@@ -88,10 +91,15 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const loadAllCompanies = async () => {
     try {
       const res = await getAllCompanies(1, 100);
-      setCompanies(res.data.result);
+      setCompanies((res.data as any).result);
     } catch (error) {
       message.error(t('error.fetchCompaniesFailed'));
     }
+  };
+
+  const handleCompanyChange = (companyId: string) => {
+    const selected = companies.find((company) => company._id === companyId);
+    setSelectedCompany(selected || null);
   };
 
   const handleCreateUser = async (values: any) => {
@@ -163,13 +171,12 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       onConfirm: () => {
         deleteUser(userId)
           .then(() => {
-            // message.success(t('success.userDeleted'));
             Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
             fetchAllUsers(currentPage);
             // fetchAllUsers(checkValidPageAfterDelete());
           })
           .catch(() => {
-            Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+            Alert.error({ title: t('error.title'), content: t('error.stWrong') });
           });
       },
     });
@@ -252,19 +259,19 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       {/*  Modal update thong tin */}
       <Modal title={t('btn.admin.addUser')} visible={isCreateModalVisible} onCancel={() => setIsCreateModalVisible(false)} footer={null} centered>
         <Form layout='vertical' onFinish={handleCreateUser}>
-          <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item label={t('field.email')} name='email' rules={[{ required: true, type: 'email', message: t('field.invalidEmail') }]}>
+          <Form.Item label={t('field.email')} name='email' rules={[{ required: true, type: 'email', message: t('field.error.email') }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item label={t('field.password')} name='password' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.password')} name='password' rules={[{ required: true, message: t('field.error.required') }]}>
             <Input.Password />
           </Form.Item>
 
-          <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
             <Select>
               <Select.Option value='male'>{t('field.male')}</Select.Option>
               <Select.Option value='female'>{t('field.female')}</Select.Option>
@@ -272,11 +279,11 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             </Select>
           </Form.Item>
 
-          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.error.required') }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.error.required') }]}>
             <Select
               onChange={(value) => setSelectedRole(value)} // Cập nhật trạng thái
             >
@@ -289,7 +296,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           </Form.Item>
 
           {selectedRole === '66376960e60f6eda1161fdf2' && (
-            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select placeholder={t('field.selectCompany')}>
                 {companies.map((company) => (
                   <Select.Option key={company._id} value={company._id}>
@@ -311,11 +318,11 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             </Select>
           </Form.Item> */}
 
-          <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.error.required') }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item label={t('field.birthday')} name='dateOfBirth' rules={[{ required: true, message: t('field.required') }]}>
+          <Form.Item label={t('field.birthday')} name='dateOfBirth' rules={[{ required: true, message: t('field.error.required') }]}>
             <DatePicker format='DD/MM/YYYY' style={{ width: '100%' }} />
           </Form.Item>
 
@@ -340,15 +347,14 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           }}
           onFinish={handleEditSubmit}
         >
-          {/* Họ tên */}
           <Form.Item label={t('field.fullName')} name='name'>
             <Input disabled />
           </Form.Item>
-          {/* Email */}
+
           <Form.Item label={t('field.email')} name='email'>
             <Input disabled />
           </Form.Item>
-          {/* Vai trò */}
+
           {/* <Form.Item label={t('field.role')} name='role'>
             <Select
               onChange={(value) => {
@@ -373,31 +379,31 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
               </Select>
             </Form.Item>
           )} */}
-          {/* Ngày sinh */}
+
           <Form.Item label={t('field.birthday')} name='dateOfBirth'>
             <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
           </Form.Item>
-          {/* Địa chỉ */}
+
           <Form.Item label={t('field.address')} name='address'>
             <Input />
           </Form.Item>
-          {/* Premium */}
+
           <Form.Item label={t('field.premium')} name='isPremium'>
             <Input disabled />
           </Form.Item>
-          {/* Xác thực */}
+
           <Form.Item label={t('field.verified')} name='isVerify'>
             <Input disabled />
           </Form.Item>
-          {/* Ngày tạo */}
+
           <Form.Item label={t('field.createdAt')} name='createdAt'>
             <Input disabled value={dayjs(selectedUser?.createdAt).format('YYYY-MM-DD HH:mm:ss')} />
           </Form.Item>
-          {/* Lần cập nhật cuối */}
+
           <Form.Item label={t('field.last_updated')} name='updatedAt'>
             <Input disabled value={dayjs(selectedUser?.updatedAt).format('YYYY-MM-DD HH:mm:ss')} />
           </Form.Item>
-          {/* Nút Lưu và Hủy */}
+
           <Form.Item>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}

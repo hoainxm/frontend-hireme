@@ -54,8 +54,15 @@ const Register: FC<Props> = (props: Props) => {
       .then((res) => {
         Alert.success({
           title: t('sucess.title'),
-          content: t('auth.signupSuccess'),
-          onConfirm: () => history.push(PageURL.LOGIN),
+          content: (
+            <div>
+              {t('auth.signupSuccess')}
+              <p style={{ color: 'red', marginTop: '10px' }}>{t('note.checkYourEmail')}</p>
+            </div>
+          ),
+          onConfirm: () => {
+            window.location.href = 'http://www.gmail.com';
+          },
         });
         setErrorMsg('');
         Object.keys(errorState).forEach((errorKey) => {
