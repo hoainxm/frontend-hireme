@@ -3,6 +3,24 @@
   flex-direction: column;
   align-items: center;
 
+  .search-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+
+    .search-input {
+      border-radius: 25px; // Bo góc
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Tạo bóng
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+
+      &:focus-within {
+        border-color: #0a4e99; // Thay đổi màu viền khi focus
+        box-shadow: 0 0 5px rgba(10, 78, 153, 0.5);
+      }
+    }
+  }
+
   .company-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -34,41 +52,6 @@
     }
   }
 
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 20px;
-
-    &__pagination__button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid #0a4e99;
-      background-color: white;
-      color: #032170;
-      font-size: 16px;
-      margin: 0 5px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #0a4e99;
-        color: white;
-      }
-
-      &--active {
-        background-color: #0a4e99;
-        color: white;
-        font-weight: bold;
-      }
-    }
-  }
-
   .pagination-container {
     padding-bottom: 20px;
     display: flex;
@@ -77,5 +60,12 @@
     background: #f5f5f5;
     align-items: center;
     align-self: center;
+  }
+
+  .empty-container {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #888;
   }
 }

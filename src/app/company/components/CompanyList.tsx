@@ -5,10 +5,13 @@ import { getAllCompanies } from '../api';
 import { Company } from '../components/Company';
 import style from './CompanyList.module.scss';
 import { Company as CompanyType } from '../model';
-import { CTPaging, CTPageSize, Loading } from '../../../common/ui/base';
+import { CTPaging, Loading } from '../../../common/ui/base';
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 const CompanyList: React.FC = () => {
   const [companies, setCompanies] = useState<CompanyType[]>([]);
+  const [filteredCompanies, setFilteredCompanies] = useState<CompanyType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(9);
   const [total, setTotal] = useState(0);
@@ -19,8 +22,10 @@ const CompanyList: React.FC = () => {
       setIsLoading(true);
       try {
         const response = await getAllCompanies(currentPage, pageSize);
-        setCompanies(response.data.result);
-        setTotal(response.data.meta.total);
+        const companiesData = (response.data as any).result;
+        setCompanies(companiesData);
+        setFilteredCompanies(companiesData);
+        setTotal((response.data as any).meta.total);
       } catch (error) {
         console.error('Error fetching companies:', error);
       } finally {
@@ -34,33 +39,47 @@ const CompanyList: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const handlePageSizeChange = (size: number) => {
-    setPageSize(size);
-    setCurrentPage(1);
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.toLowerCase();
+    const filtered = companies.filter((company) => company.name.toLowerCase().includes(value));
+    setFilteredCompanies(filtered);
   };
 
   return (
     <div className={style['list-container']}>
-      <div className={style['company-list']}>
-        {companies.map((company) => (
-          <div key={company._id} className={style['company-list__item']}>
-            <Company company={company} />
-          </div>
-        ))}
+      <div className={style['search-container']}>
+        <Input
+          size='large'
+          placeholder='Nhập tên công ty để tìm kiếm...'
+          prefix={<SearchOutlined style={{ fontSize: '18px', color: '#888' }} />}
+          onChange={handleSearch}
+          className={style['search-input']}
+        />
       </div>
-      <div className={style['pagination-container']}>
-        {companies.length > 0 && (
-          <>
-            {/* <CTPageSize className='mt-3' totalData={total} defaultPageSize={pageSize} onChange={(size) => handlePageSizeChange(size)} /> */}
+
+      {filteredCompanies.length > 0 ? (
+        <>
+          <div className={style['company-list']}>
+            {filteredCompanies.map((company) => (
+              <div key={company._id} className={style['company-list__item']}>
+                <Company company={company} />
+              </div>
+            ))}
+          </div>
+
+          <div className={style['pagination-container']}>
             <CTPaging
               className='mt-4'
               currentPage={currentPage}
               totalPage={Math.ceil(total / pageSize)}
               onGetData={(page) => handlePageChange(page)}
             />
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      ) : (
+        <div className={style['empty-container']}>Không có công ty nào phù hợp với từ khóa tìm kiếm.</div>
+      )}
+
       <Loading isOpen={isLoading} />
     </div>
   );
