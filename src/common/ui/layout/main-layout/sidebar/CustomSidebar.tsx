@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { Modal, Nav } from 'react-bootstrap';
 import style from './sidebar.module.scss';
-import { NAV_ITEMS, PROFILE_ITEMS } from '../../../../utils/constants';
+import { NAV_ITEMS, PROFILE_ITEMS, NAV_ITEMS_HR } from '../../../../utils/constants';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PageName, Palette, ScopeKey } from '../../../../../models/enum';
@@ -11,11 +11,15 @@ import { Confirm } from '../../../../utils/popup';
 import { doLogout } from '../../api';
 import { useDispatch } from 'react-redux';
 import { makeClientToUnauthorize } from '../../../../utils/common';
+import { UserProfile } from '../../../../../app/auth/models';
+import { getUserProfile } from '../../../../../app/profile/api';
+import { useAppSelector, RootState } from '../../../../../store/store';
 
 interface Props {
   active: PageName;
   isShow: boolean;
   handleClose: () => void;
+  userProfile: UserProfile;
 }
 
 export const CustomSidebar = (props: Props): ReactElement => {
@@ -24,11 +28,13 @@ export const CustomSidebar = (props: Props): ReactElement => {
   const history = useHistory();
 
   const [navItems, setNavItems] = useState<Array<NavItem>>(NAV_ITEMS);
+  const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
+  // console.log(userInfo?.role.name);
 
-  const setActive = (name: PageName): void => {
-    const updateNavItems = navItems.map((item) => ({ ...item, isActive: item.name === name }));
-    setNavItems(updateNavItems);
-  };
+  // const setActive = (name: PageName): void => {
+  //   const updateNavItems = navItems.map((item) => ({ ...item, isActive: item.name === name }));
+  //   setNavItems(updateNavItems);
+  // };
 
   const logout = (): void => {
     Confirm.logout({
@@ -42,13 +48,22 @@ export const CustomSidebar = (props: Props): ReactElement => {
     });
   };
 
+  const getNavItemsByRole = (): Array<NavItem> => {
+    if (userInfo?.role.name === 'HR') {
+      return NAV_ITEMS_HR;
+    }
+    return NAV_ITEMS;
+  };
+
   useEffect(() => {
-    setActive(active);
+    // setActive(active);
+    const items = getNavItemsByRole();
+    setNavItems(items.map((item) => ({ ...item, isActive: item.name === active })));
   }, []);
 
   return (
     <Modal show={isShow} dialogClassName={style.customDialog} contentClassName={style.contentDialog} onHide={handleClose} scrollable>
-      <Modal.Header closeButton className={style.modalHeader} />
+      {/* <Modal.Header closeButton className={style.modalHeader} /> */}
       <Modal.Body className={style.modalBody}>
         <Nav className={style.navbar}>
           {navItems.map((item, index) => (

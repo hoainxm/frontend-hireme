@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { ResumeStatus, ResumeStatusMapping, ResumeStatusOptions } from '../model';
 import { Modal, Form, Select, Button } from 'antd';
 import Edit from '../../../common/ui/assets/icon/Edit.svg';
+import ResumeTable from './ResumeTable';
 
 interface Props {
   id: string;
@@ -82,7 +83,7 @@ const ResumeListByHR: FC<Props> = () => {
 
   return (
     <div>
-      <CTable responsive maxHeight={833}>
+      {/* <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
         </thead>
@@ -109,8 +110,8 @@ const ResumeListByHR: FC<Props> = () => {
             <BlankFrame className='blank-frame' title={t('field.hint.noData')} />
           )}
         </tbody>
-      </CTable>
-      {resumes.length > 0 && (
+      </CTable> */}
+      {/* {resumes.length > 0 && (
         <div className='d-flex justify-content-between mt-5'>
           <div>
             <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
@@ -119,7 +120,8 @@ const ResumeListByHR: FC<Props> = () => {
             <CTPaging className='mt-4' currentPage={currentPage} totalPage={Math.ceil(totalData / pageSize)} onGetData={fetchData} />
           </div>
         </div>
-      )}
+      )} */}
+      <ResumeTable resumes={resumes} handleEditClick={handleEditClick} />
       <Loading isOpen={isLoading} />
 
       <Modal title={t('editStatus')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
