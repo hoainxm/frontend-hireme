@@ -93,7 +93,8 @@
   "auth.promptContent": "To learn more about how HireMe collects, uses, shares and protects your personal data, please see <strong>here</strong>",
   "auth.privacyPolicy": "Privacy policy",
   "auth.haveAccount": "You have an account?",
-  "auth.signupSuccess": "Register successfully!",
+  "auth.signupSuccess": "Register successfully. Please verify your account before logging in. Check your spam inbox for more information.",
+  "note.checkYourEmail": "Check your spam inbox if you don't see the verify email",
   "auth.createNewPassSuccess.first": "Created new password successfully.",
   "auth.createNewPassSuccess.second": "Let's login with new password.",
   "auth.emailVerification": "Please check your email and click the attached link.",
@@ -148,6 +149,8 @@
   "field.positionPlaceholder": "Job position you desire",
   "field.skillsPlaceholder": "Choose your skills",
   "field.provincePlaceholder": "Province/City",
+  "sort.by.oldest": "Sort by oldest to newest",
+  "sort.by.recent": "Sort by newest to oldest",
 
   "found": "Found",
   "savedJobs": "Saved Jobs",
@@ -392,6 +395,7 @@
   "user.savedJobs": "Bookmarks job",
   "user.upgrade": "Upgrade Package",
   "user.changePassword": "Change Password",
+  "hr.management": "Management",
 
   "noSavedJobs": "You currently have no saved jobs",
   "checkJobsPage": "Please check the job page now",
@@ -424,6 +428,7 @@
   "btn.admin.addJob": "Add job",
   "field.verified": "",
   "field.unverified": "",
+  "field.hr.management": "HR Management",
 
   "admin.userManagement": "Users Management",
   "admin.CVManagement": "CVs Management",

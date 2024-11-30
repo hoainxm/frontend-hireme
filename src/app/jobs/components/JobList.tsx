@@ -106,6 +106,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
             </>
           ) : (
             <div style={{ display: 'flex', justifyContent: 'center' }}>Không tìm thấy việc làm phù hợp với từ khoá tìm kiếm.</div>
+
           )}
         </div>
       )}

@@ -140,7 +140,7 @@ const CompanyDetail: React.FC = () => {
               {/* <div className={style['followBtn']}>
                 <FontAwesomeIcon icon={faPlus} /> {t('follow.Btn')}
               </div> */}
-              <FollowCompany companyId={company._id} companyName={company.name} companyLogo={company.logo} companyAddress={company.address} />
+              <FollowCompany company={company} />
             </div>
           </div>
 
