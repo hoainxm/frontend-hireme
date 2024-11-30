@@ -44,7 +44,7 @@ export const JobListedByAdmin: FC<Props> = () => {
     t('field.startDate'),
     t('field.endDate'),
     t('field.status'),
-    t('field.action'),
+    // t('field.action'),
   ];
 
   const fetchAllJobs = (page: number) => {
@@ -148,9 +148,9 @@ export const JobListedByAdmin: FC<Props> = () => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      {/* <div className='d-flex justify-content-end mb-3'>
         <CButton className='ml-2' label={t('btn.admin.addJob')} onClick={() => setIsModalVisible(true)} />
-      </div>
+      </div> */}
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
@@ -168,14 +168,17 @@ export const JobListedByAdmin: FC<Props> = () => {
                   `${job.salary.toLocaleString()} VND`,
                   dayjs(job.startDate).format('DD-MM-YYYY'),
                   dayjs(job.endDate).format('DD-MM-YYYY'),
-                  <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />,
-                  <Image
-                    src={TrashIcon}
-                    alt={t('action.delete')}
-                    className='icon-action ml-3'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleDelete(job._id)}
-                  />,
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
+                  </div>,
+
+                  // <Image
+                  //   src={TrashIcon}
+                  //   alt={t('action.delete')}
+                  //   className='icon-action ml-3'
+                  //   style={{ cursor: 'pointer' }}
+                  //   onClick={() => handleDelete(job._id)}
+                  // />,
                 ]}
                 // onClick={() => history.push(`${PageURL.ADMIN_MANAGE_JOB}/update/${job._id}`)}
               />

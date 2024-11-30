@@ -18,6 +18,11 @@ export interface UserProfile {
   myCV: string[];
 }
 
+export interface Role {
+  _id: string;
+  name: string;
+}
+
 export interface UserProfileByAdmin {
   avatar: string;
   skills: any[];
@@ -39,11 +44,6 @@ export interface UserProfileByAdmin {
   createdAt: string;
   updatedAt: string;
   refreshToken: string;
-}
-
-export interface Role {
-  _id: string;
-  name: string;
 }
 
 export interface Permission {

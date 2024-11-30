@@ -15,10 +15,10 @@ const FollowedCompanyList: React.FC = () => {
   const history = useHistory();
   const [followedCompanies, setFollowedCompanies] = useState<Company[]>([]);
 
+  // Lấy danh sách công ty đã theo dõi từ localStorage
   useEffect(() => {
     const followedCompaniesFromStorage = JSON.parse(localStorage.getItem('followedCompanies') || '[]');
-    const validCompanies = followedCompaniesFromStorage.filter((company: Company) => company && company._id); // Filter valid entries
-    setFollowedCompanies(validCompanies);
+    setFollowedCompanies(followedCompaniesFromStorage);
   }, []);
 
   const handleCompanyClick = (companyId: string) => {
@@ -45,12 +45,11 @@ const FollowedCompanyList: React.FC = () => {
 
   return (
     <div className={style['followed-companies']}>
-      <h2 className={style['followed-companies__title']}>{t('user.followedCompanies')}</h2>
       <ul className={style['followed-companies__list']}>
         {followedCompanies.map((company) => (
-          <li key={company._id} className={style['followed-companies__item']}>
+          <div key={company._id} className={style['followed-companies__item']}>
             <div className={style['followed-companies__info']} onClick={() => handleCompanyClick(company._id)}>
-              <img src={company.logo} alt={company.name} className={style['followed-companies__logo']} />
+              {/* <img src={company.logo} alt={company.name} className={style['followed-companies__logo']} /> */}
               <div className={style['followed-companies__details']}>
                 <h3 className={style['followed-companies__name']}>{company.name}</h3>
                 <p className={style['followed-companies__address']}>{company.address}</p>
@@ -59,7 +58,7 @@ const FollowedCompanyList: React.FC = () => {
             <button className={style['followed-companies__remove']} onClick={() => removeFollowedCompany(company._id)}>
               {t('unfollow')}
             </button>
-          </li>
+          </div>
         ))}
       </ul>
     </div>
