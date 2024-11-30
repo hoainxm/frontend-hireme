@@ -87,34 +87,43 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
       </div>
 
       {listJobs.length === 0 ? (
-        <div className={style.noResults}>{t('noJobsFound')}</div>
+        <div className={style.noResults}>{t('No jobs available at the moment')}</div>
       ) : (
-        <div className={style.jobList}>
-          {listJobs && totalJobs > 0 && (
-            <div className={style.jobCount}>
-              {t('found')} {totalJobs} {t('job.match')}
-              <Button type='primary' onClick={handleSortToggle}>
-                {sortOrder === 'recent' ? t('Sort by Oldest') : t('Sort by Recent')}
-              </Button>
-            </div>
+        <div>
+          {filteredJobs.length > 0 ? (
+            <>
+              <div className={style.jobList}>
+                <div className={style.jobCount}>
+                  {t('Found')} {totalJobs} {t('job.match')}
+                  <Button type='primary' onClick={handleSortToggle}>
+                    {sortOrder === 'recent' ? t('Sort by Oldest') : t('Sort by Recent')}
+                  </Button>
+                </div>
+                {currentJobs.map((job) => (
+                  <Job key={job._id} job={job} isJobExpired={isJobExpired} getRemainingDays={getRemainingDays} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>Không tìm thấy việc làm phù hợp với từ khoá tìm kiếm.</div>
           )}
-          {currentJobs.map((job) => (
-            <Job key={job._id} job={job} isJobExpired={isJobExpired} getRemainingDays={getRemainingDays} />
+        </div>
+      )}
+
+      {filteredJobs.length > 0 && (
+        <div className={style.pagination}>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
+            >
+              {index + 1}
+            </button>
           ))}
         </div>
       )}
 
-      <div className={style.pagination}>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`${style.pageButton} ${currentPage === index + 1 ? style.active : ''}`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
       <BackToTop />
     </div>
   );
