@@ -91,10 +91,11 @@ export enum PageURL {
   ADMIN_MANAGE_COMPANY = '/manage/company',
   ADMIN_MANAGE_JOB = '/manage/job',
   ADMIN_MANAGE_CV = '/manage/cvs',
+  ADMIN_MANAGE_PERMISSION = '/manage/permission',
+  ADMIN_MANAGE_ROLE = '/manage/role',
 
   // HR
-  HR_MANAGE_JOBS = '/manage/hr/jobs',
-  HR_MANAGE_RESUME = '/manage/hr/resumes',
+  HR_MANAGE = '/manage/hr',
 
   //
   ADMIN_AI_PACKAGE_WRITER = '/ai-cloud-features/ai-package/:action',
@@ -159,6 +160,8 @@ export enum PageName {
   ADMIN_MANAGE_CV = 'field.admin.cv',
   ADMIN_MANAGE_JOB = 'field.admin.job',
   ADMIN_MANAGE_COMPANY = 'field.admin.company',
+  ADMIN_MANAGE_PERMISSION = 'field.admin.permission',
+  ADMIN_MANAGE_ROLE = 'field.admin.role',
 
   HR_MANAGE = 'field.hr.management',
 
@@ -329,6 +332,8 @@ export enum AdminManageTabs {
   COMPANY = 'field.admin.company',
   JOBS = 'field.admin.job',
   CV = 'field.admin.cv',
+  PERMISSION = 'field.admin.permission',
+  ROLE = 'field.admin.role',
 }
 
 export enum APICloudFeatureTabs {

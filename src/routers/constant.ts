@@ -37,6 +37,10 @@ import CompanyManagement from '../app/admin/dashboard/components/company';
 import CVManagement from '../app/admin/dashboard/components/cv';
 import HRDashboard from '../app/hr';
 import FollowedCompanies from '../app/company/followCompany/index';
+import PermissionManagement from '../app/admin/dashboard/components/permission'
+import RoleManagement from '../app/admin/dashboard/components/role'
+
+
 
 export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
@@ -139,11 +143,19 @@ export const ADMIN_ROUTE = [
     path: PageURL.ADMIN_MANAGE_CV,
     component: CVManagement,
   },
+  {
+    path: PageURL.ADMIN_MANAGE_PERMISSION,
+    component: PermissionManagement,
+  },
+  {
+    path: PageURL.ADMIN_MANAGE_ROLE,
+    component: RoleManagement,
+  },
 ];
 
 export const HR_ROUTE = [
   {
-    path: PageURL.HR_MANAGE_JOBS,
+    path: PageURL.HR_MANAGE,
     component: HRDashboard,
   },
 ];
