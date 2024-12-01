@@ -236,6 +236,7 @@
   "jobDetail.people": "people",
   "jobDetail.noRequirement": "Not required",
   "jobDetail.relatedJob": "Related Jobs",
+  "followed.company": "Followed Company",
 
   "btn.applyNow": "Apply Now",
   "applyForPosition": "Apply for",
@@ -400,6 +401,8 @@
   "noSavedJobs": "You currently have no saved jobs",
   "checkJobsPage": "Please check the job page now",
   "browseJobs": "Go to the job page",
+  "saveJob.success": "You have saved the job: ",
+  "unsaveJob.success": "You have unsaved the job: ",
 
   "user.profile.management": "Personal Profile",
   "user.profile.title": "Manage Your Profile - Edit and Save Changes",
@@ -821,6 +824,10 @@
   "fail.title": "Failed",
   "error.existEmail": "Email already exists. Please try another email.",
   "timeApplicationJob": "Application deadline: ",
+  "appliedCandidatesButton": "View the number of applicants",
+  "appliedCandidates": " applicants have applied for this job",
+  "upgradeToContinue": "Upgrade to continue",
+  "popup.upgradeRequired": "You need to upgrade to use this feature",
 
   "error.login": "Email/password is incorrect, please try again.",
   "forgotPassword.send.success": "Password reset request sent successfully",

@@ -1,4 +1,4 @@
-
+import { CompanyId } from './../profile/model';
 /** @format */
 
 export interface UserProfile {
@@ -16,6 +16,10 @@ export interface UserProfile {
   avatar?: string;
   skills: string[];
   myCV: string[];
+  company?: {
+    _id: string;
+    name: string;
+  };
 }
 
 export interface Role {

@@ -1,9 +1,6 @@
 import { UserProfile } from './../app/auth/models';
 /** @format */
 
-import AICloudFeatureManagement from '../app/admin/dashboard';
-import AILicenseWriter from '../app/admin/dashboard/ai-api-key/writer/AILicenseWriter';
-import AIPackageWriter from '../app/admin/dashboard/ai-package/AIPackageWriter';
 import { ForgotPassword } from '../app/auth/forgotPassword';
 import Home from '../app/home';
 import { Inbody } from '../app/trial/ocr/in-body';
@@ -14,7 +11,7 @@ import { ProductOCR } from '../app/product/ocr';
 import Register from '../app/auth/register';
 import { ResetPassword } from '../app/auth/resetPassword';
 import { RouteModel } from './models';
-import Tenant from '../app/admin/tenant/management';
+
 import WelcomeInformation from '../app/admin/welcome-info';
 import { Prescription } from '../app/trial/ocr/prescription';
 import { ProductLayout } from '@layout/product-layout';
@@ -22,7 +19,6 @@ import { LicenseManagement } from '../app/license';
 import { DynamicTemplate } from '../app/trial/ocr/dynamic-template';
 import { CreateDynamicTemplate } from '../app/trial/ocr/dynamic-template/CreateDynamicTemplate';
 import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamicResult';
-import { TextToSpeech } from '../app/audio-processing/tts';
 import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
 import Companies from '../app/company';
@@ -50,7 +46,6 @@ export const APP_ROUTE: Array<RouteModel> = [
   { path: PageURL.OCR_DYNAMIC_TEMPLATE_UPDATE, component: UpdateDynamicTemplate },
   { path: PageURL.OCR_DYNAMIC_TEMPLATE, component: DynamicTemplate },
   { path: PageURL.OCR_DYNAMIC_TEMPLATE_RESULT, component: ShowDynamicResult },
-  { path: PageURL.TEXT_TO_SPEECH, component: TextToSpeech },
 ];
 
 export const PUBLIC_ROUTE = [

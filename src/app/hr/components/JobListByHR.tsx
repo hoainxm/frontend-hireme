@@ -126,8 +126,32 @@ const JobListByHR: FC<Props> = () => {
       <div className='d-flex justify-content-end mb-3'>
         <CButton label={t('btn.admin.addJob')} onClick={() => setIsModalVisible(true)} />
       </div>
-      <JobTable jobs={jobs} />
-      {/* {jobs.length > 0 && (
+      {/* <JobTable jobs={jobs} /> */}
+      <CTable responsive maxHeight={833}>
+        <thead>
+          <CTRow header data={TABLE_HEADER} />
+        </thead>
+        <tbody>
+          {jobs.length > 0 ? (
+            jobs.map((job, index) => (
+              <CTRow
+                key={job._id}
+                data={[
+                  index + 1,
+                  job.name || t('field.notSet'),
+                  job.company.name || t('field.notSet'),
+                  job.location || t('field.notSet'),
+                  `${job.salary.toLocaleString()} VND` || t('field.notSet'),
+                  dayjs(job.updatedAt).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                ]}
+              />
+            ))
+          ) : (
+            <BlankFrame className='blank-frame' title={t('field.hint.noData')} />
+          )}
+        </tbody>
+      </CTable>
+      {jobs.length > 0 && (
         <div className='d-flex justify-content-between mt-5'>
           <div>
             <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
@@ -136,7 +160,7 @@ const JobListByHR: FC<Props> = () => {
             <CTPaging className='mt-4' currentPage={currentPage} totalPage={Math.ceil(totalData / pageSize)} onGetData={fetchData} />
           </div>
         </div>
-      )} */}
+      )}
       <Loading isOpen={isLoading} />
 
       <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={handleModalClose} footer={null} centered>
