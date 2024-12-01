@@ -54,6 +54,7 @@ const AppRouter: FC = () => {
 
           {isAdmin && <Redirect to={PageURL.ADMIN_MANAGE_USER} />}
           {isHr && <Redirect to={PageURL.HR_MANAGE_JOBS} />}
+
           <Redirect to={PageURL.HOME} />
         </Switch>
       </Router>
