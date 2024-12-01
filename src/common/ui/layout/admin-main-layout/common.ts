@@ -41,4 +41,18 @@ export const shortcutData: Shortcut[] = [
     iconSelected: HomeBlue,
     isActive: true,
   },
+  {
+    name: PageName.ADMIN_MANAGE_PERMISSION,
+    url: PageURL.ADMIN_MANAGE_PERMISSION,
+    icon: CV,
+    iconSelected: HomeBlue,
+    isActive: true,
+  },
+  {
+    name: PageName.ADMIN_MANAGE_ROLE,
+    url: PageURL.ADMIN_MANAGE_ROLE,
+    icon: CV,
+    iconSelected: HomeBlue,
+    isActive: true,
+  },
 ];

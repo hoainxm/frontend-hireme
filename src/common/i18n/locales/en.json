@@ -427,6 +427,8 @@
   "field.admin.company": "Companies",
   "field.admin.job": "Jobs",
   "field.admin.cv": "CVs",
+  "field.admin.permission": "Permission",
+  "field.admin.role": "Role",
   "btn.admin.addUser": "Add user",
   "btn.admin.addJob": "Add job",
   "field.verified": "",
@@ -437,6 +439,8 @@
   "admin.CVManagement": "CVs Management",
   "admin.companyManagement": "Companies Management",
   "admin.jobManagement": "Jobs Management",
+  "admin.permissionManagement": "Permissions Management",
+  "admin.roleManagement": "Roles Management",
 
   "admin.inform.title": "Welcome information",
   "admin.tenant.tenantManagement": "Tenant management",

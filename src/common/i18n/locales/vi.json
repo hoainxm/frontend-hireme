@@ -465,9 +465,13 @@
   "field.admin.company": "Công ty",
   "field.admin.job": "Việc làm",
   "field.admin.cv": "CV",
+  "field.admin.permission": "Quyền hạn",
+  "field.admin.role": "Vai trò",
   "field.verified": "Đã xác minh",
   "field.unverified": "Chưa xác minh",
   "field.hr.management": "Quản lý HR",
+  "admin.permissionManagement": "Quản lý quyền hạn",
+  "admin.roleManagement": "Quản lý vai trò",
 
   "btn.admin.addUser": "Thêm người dùng",
   "btn.admin.addCompany": "Thêm công ty",
