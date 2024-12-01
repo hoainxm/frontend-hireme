@@ -22,19 +22,21 @@ const Home: FC = () => {
     const token = urlParams.get('token');
     const isPremium = urlParams.get('isPremium');
     const isAdmin = urlParams.get('isAdmin');
+    const isHr = urlParams.get('isHr');
     const isAuth = urlParams.get('isAuth');
-
-    console.log('Token:', token);
-    console.log('isPremium:', isPremium);
-    console.log('isAdmin:', isAdmin);
-    console.log('isAuth:', isAuth);
 
     if (token) {
       localStorage.setItem('access_token', token);
       localStorage.setItem(ScopeKey.IS_AUTHENTICATED, isAuth as string);
       localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, isAdmin as string);
+      localStorage.setItem(ScopeKey.IS_SYSTEM_HR, isHr as string);
       localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, isPremium as string);
       urlParams.delete('token');
+      urlParams.delete('isPremium');
+      urlParams.delete('isAdmin');
+      urlParams.delete('isHr');
+      urlParams.delete('isAuth');
+
       history.replace({
         pathname: location.pathname,
         search: urlParams.toString(),

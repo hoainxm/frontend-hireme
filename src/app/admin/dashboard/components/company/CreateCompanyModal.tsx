@@ -1,62 +1,59 @@
 import React, { FC, useState } from 'react';
-import { Modal, Form, Input, Row, Col, Upload, Button, Select } from 'antd';
+import { Modal, Form, Input, Row, Col, Upload, Button, Select, message } from 'antd';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UploadOutlined } from '@ant-design/icons';
 import { CreateCompanyModalProps } from './type';
 import { uploadLogo } from './api';
-import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 
 const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, onSubmit, form }) => {
-  const { t } = useTranslation();
   const [fileList, setFileList] = useState<any[]>([]);
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [previewTitle, setPreviewTitle] = useState('');
+
 
   const handleFileChange = async (info: any) => {
-    const { file, fileList } = info;
+    const { file } = info;
 
-    setFileList(fileList);
+    const uploadedFile = file.originFileObj || file;
 
-    if (file.status === 'done' || file.status === 'uploading') {
-      try {
-        const uploadedFile = file.originFileObj || file;
-        if (!uploadedFile) {
-          console.error('Không tìm thấy file gốc!');
-          return;
-        }
+    if (!uploadedFile) {
+      message.error('Không tìm thấy file để upload!');
+      return;
+    }
 
-        const response = await uploadLogo(uploadedFile);
+    try {
+      const formData = new FormData();
+      formData.append('file', uploadedFile);
+
+      const response = await uploadLogo(uploadedFile);
+
+      if (response?.data?.fileName) {
         const fileName = response.data.fileName;
 
         form.setFieldsValue({ logo: fileName });
-      } catch (error) {
-        console.error('Lỗi upload file:', error);
+        setFileList([
+          {
+            uid: file.uid,
+            name: file.name,
+            status: 'done',
+            url: response.data.url || '',
+          },
+        ]);
+
+        message.success('Ảnh logo đã được tải lên thành công!');
+      } else {
+        throw new Error('Phản hồi API không có fileName.');
       }
+    } catch (error) {
+      console.error('Lỗi upload file:', error);
+      message.error('Lỗi khi tải lên ảnh logo!');
+      setFileList([]);
     }
   };
-
-  const handlePreview = async (file: any) => {
-    if (!file.url && !file.preview) {
-      file.preview = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result as string);
-      });
-    }
-
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-  };
-
-  const handleCancelPreview = () => setPreviewVisible(false);
 
   return (
-    <Modal width={1000} title={t('btn.admin.addCompany')} visible={isVisible} onCancel={onClose} footer={null}>
+    <Modal width={1000} title='Tạo mới Company' visible={isVisible} onCancel={onClose} footer={null}>
       <Form
         form={form}
         layout='vertical'
@@ -64,33 +61,28 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
           const updatedValues = {
             ...values,
             description: form.getFieldValue('description'),
+            logo: form.getFieldValue('logo'),
           };
+          console.log('Dữ liệu gửi đi:', updatedValues);
           onSubmit(updatedValues);
         }}
       >
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item label={t('jobDetail.companyName')} name='name' rules={[{ required: true, message: 'Vui lòng nhập tên công ty!' }]}>
+            <Form.Item label='Tên công ty' name='name' rules={[{ required: true, message: 'Vui lòng nhập tên công ty!' }]}>
               <Input placeholder='Nhập tên công ty' />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label={t('jobDetail.companyAddress')} name='address' rules={[{ required: true, message: 'Vui lòng nhập địa chỉ công ty!' }]}>
+            <Form.Item label='Địa chỉ' name='address' rules={[{ required: true, message: 'Vui lòng nhập địa chỉ công ty!' }]}>
               <Input placeholder='Nhập địa chỉ công ty' />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item label={t('jobDetail.companyLogo')} name='logo' rules={[{ required: true, message: 'Vui lòng upload ảnh logo!' }]}>
-              <Upload
-                listType='picture-card'
-                maxCount={1}
-                fileList={fileList}
-                beforeUpload={() => false}
-                onChange={handleFileChange}
-                onPreview={handlePreview}
-              >
+            <Form.Item label='Ảnh Logo' name='logo' rules={[{ required: true, message: 'Vui lòng upload ảnh logo!' }]}>
+              <Upload listType='picture-card' maxCount={1} fileList={fileList} beforeUpload={() => false} onChange={handleFileChange}>
                 {fileList.length < 1 && (
                   <div>
                     <UploadOutlined />
@@ -101,7 +93,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label={t('jobDetail.companyScale')} name='scale' rules={[{ required: true, message: 'Vui lòng chọn quy mô!' }]}>
+            <Form.Item label='Quy mô' name='scale' rules={[{ required: true, message: 'Vui lòng chọn quy mô!' }]}>
               <Select placeholder='Chọn quy mô'>
                 <Option value={50}>50</Option>
                 <Option value={100}>100</Option>
@@ -111,8 +103,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             </Form.Item>
           </Col>
         </Row>
-
-        <Form.Item label={t('description')} name='description' rules={[{ required: true }]}>
+        <Form.Item label='Miêu tả' name='description' rules={[{ required: true, message: 'Vui lòng nhập miêu tả!' }]}>
           <CKEditor
             editor={ClassicEditor}
             data={form.getFieldValue('description') || ''}
@@ -128,7 +119,6 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
             }}
           />
         </Form.Item>
-
         <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button type='primary' htmlType='submit'>
             Tạo mới
@@ -138,10 +128,6 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
           </Button>
         </Form.Item>
       </Form>
-
-      <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancelPreview}>
-        <img alt='Preview' style={{ width: '100%' }} src={previewImage} />
-      </Modal>
     </Modal>
   );
 };

@@ -1,17 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './upgrade.module.scss';
-import { doPostCreatePayment, doGetVerifyTransaction, setPremium } from '../api';
+import { doPostCreatePayment, doGetVerifyTransaction, setPremium, setSubscriber } from '../api';
 import { ScopeKey, ScopeValue } from '@models/enum';
 import { Alert } from '../../../common/utils/popup';
 import { PREMIUM_RANKING } from '../../../app/admin/dashboard/constants';
+import { UserProfile } from 'app/auth/models';
 
 interface Props {
   sectionId: string;
+  userInfo: UserProfile;
 }
 
 export const UpgradeAccount: FC<Props> = (props) => {
-  const { sectionId } = props;
+  const { sectionId, userInfo } = props;
   const { t } = useTranslation();
   const [isPremium, setIsPremium] = useState<ScopeValue>((localStorage.getItem(ScopeKey.IS_PREMIUM_SECTION) as ScopeValue) || ScopeValue.LITE);
   const [amount, setAmount] = useState<string | null | number>(null);
@@ -38,7 +40,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
       const response = await doGetVerifyTransaction(dataSubmit);
 
       console.log('response.data', response.data);
-
       if (response?.data?.status === 'success') {
         const vnpAmountRaw = response?.data?.data?.vnp_Amount;
         const vnpAmount = parseInt(vnpAmountRaw, 10) / 100;
@@ -47,6 +48,10 @@ export const UpgradeAccount: FC<Props> = (props) => {
           return;
         }
 
+        const dataSubscriber = { name: userInfo.name, email: userInfo.email, skills: userInfo.skills };
+
+        const check = await setSubscriber(dataSubscriber);
+        console.log('check', check);
         Alert.success({ title: t('sucess.title'), content: t('payment.success') });
 
         let plan = ScopeValue.LITE;
@@ -55,8 +60,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
         } else if (vnpAmount === 200000) {
           plan = ScopeValue.MAX;
         }
-
-        console.log('Plan to save:', plan);
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
         setIsPremium(plan);
         const dataSubmit = { typePre: plan };

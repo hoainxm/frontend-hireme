@@ -139,9 +139,11 @@ export const ADMIN_ROUTE = [
     path: PageURL.ADMIN_MANAGE_CV,
     component: CVManagement,
   },
+];
+
+export const HR_ROUTE = [
   {
-    path: PageURL.HR_MANAGE,
+    path: PageURL.HR_MANAGE_JOBS,
     component: HRDashboard,
   },
 ];
-

@@ -1,4 +1,4 @@
-import { paymentAPIUrl, userAPIUrl } from '../../common/utils/constants';
+import { paymentAPIUrl, subscriberAPIUrl, userAPIUrl } from '../../common/utils/constants';
 import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
 import axios from 'axios';
 
@@ -28,4 +28,8 @@ export const doGetVerifyTransaction = (data: { txnRef: string; vnp_Amount: strin
 
 export const setPremium = (data: { typePre: string }): Promise<ApiResponse<any>> => {
   return doPost(`${userAPIUrl}/set-premium`, data);
+};
+
+export const setSubscriber = (data: { name: string; email: string; skills: string[] }): Promise<ApiResponse<any>> => {
+  return doPost(`${subscriberAPIUrl}`, data);
 };

@@ -31,7 +31,7 @@ export const TopNavigation: FC<Props> = (props) => {
   const isFetchingProfile = useAppSelector((state: RootState) => state.user.isFetchingProfile);
 
   const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
-  
+
   const [_, setStoredValue] = useLocalStorage(ScopeKey.SELECTED_SECTION_DOT, SectionID.HOME_BANNER);
   const [navItems, setNavItems] = useState<Array<NavItem>>(NAV_ITEMS);
   const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false);
