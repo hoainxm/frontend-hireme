@@ -15,6 +15,7 @@ import { updatePassword } from '../api';
 import { Alert } from '../../../common/utils/popup';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { message } from 'antd';
 
 export const UpdatePassword = () => {
   const { t } = useTranslation();
@@ -67,15 +68,15 @@ export const UpdatePassword = () => {
       const responseData = res as any;
 
       if (responseData && responseData.statusCode === 201) {
-        toast.success(responseData.data?.message || responseData.message || 'Password updated successfully!');
+        message.success(responseData.data?.message || responseData.message || t('update.pw.success'));
         history.push(PageURL.HOME);
       }
     } catch (error: any) {
       if (error.response?.status === 400) {
-        toast.error(error.response.data?.message || 'An error occurred.');
+        message.error(error.response.data?.message || t('error.stWrong'));
       } else {
         console.error('Unexpected error:', error);
-        toast.error('An unexpected error occurred. Please try again later.');
+        message.error(t('error.stWrong'));
       }
     } finally {
       setOnLoading(false);
