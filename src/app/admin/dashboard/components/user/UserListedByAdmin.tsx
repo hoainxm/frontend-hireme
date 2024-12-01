@@ -3,7 +3,7 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
-import { Role, UserProfile, UserProfileByAdmin } from '../../../../auth/models';
+import { Role, UserProfileByAdmin } from '../../../../auth/models';
 import { APIResponse } from '../../../../../common/utils/baseAPI';
 import { Image } from 'react-bootstrap';
 import { NOT_SET } from '../../../../../common/utils/constants';
@@ -19,10 +19,8 @@ import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
 import dayjs from 'dayjs';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
-import { getAllCompanies } from '../../../../company/api';
-import { updateMe } from '../../../../../app/profile/api';
-import { Company } from '../../../../../app/jobs/model';
 import { CompanyId } from '../../../../../app/profile/model';
+import { fetchCompaniesByAdmin } from '../company/api';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -31,7 +29,6 @@ interface Props {
 
 const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
-  const history = useHistory();
   const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -45,9 +42,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const [selectedRole, setSelectedRole] = useState<string | undefined>();
   const [selectedCompany, setSelectedCompany] = useState<CompanyId | null>(null);
   const [form] = Form.useForm();
-  // const [companies, setCompanies] = useState<{ _id: string; name: string }[]>([]);
-  // const [selectedRole, setSelectedRole] = useState<string | undefined>(selectedUser?.role);
-  // const [selectedCompany, setSelectedCompany] = useState<string | undefined>(selectedUser?.companyId || '');
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -89,11 +83,15 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   const loadAllCompanies = async () => {
-    try {
-      const res = await getAllCompanies(1, 100);
-      setCompanies((res.data as any).result);
-    } catch (error) {
-      message.error(t('error.fetchCompaniesFailed'));
+    if (selectedRole === '66376960e60f6eda1161fdf2') {
+      try {
+        const res = await fetchCompaniesByAdmin(1, 100);
+        setCompanies(res.data.result);
+      } catch (error) {
+        message.error(t('error.fetchCompaniesFailed'));
+      }
+    } else {
+      setCompanies([]);
     }
   };
 
@@ -101,6 +99,10 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     const selected = companies.find((company) => company._id === companyId);
     setSelectedCompany(selected || null);
   };
+
+  useEffect(() => {
+    loadAllCompanies();
+  }, [selectedRole]);
 
   const handleCreateUser = async (values: any) => {
     try {
@@ -112,16 +114,16 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       if (selectedRole === '66376960e60f6eda1161fdf2') {
         const selectedCompany = companies.find((company) => company._id === values.companyId);
         if (!selectedCompany) {
-          message.error('Công ty không hợp lệ');
+          message.error('Error');
           return;
         }
-
         payload.company = {
           _id: selectedCompany._id,
           name: selectedCompany.name,
         };
       }
-
+      console.log(payload);
+      delete payload.companyId;
       await createUser(payload);
       Alert.success({ title: t('success.title'), content: t('success.userCreated') });
       fetchAllUsers(currentPage);
@@ -129,6 +131,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       form.resetFields();
     } catch (error) {
       Alert.error({ title: t('fail.title'), content: t('error.createUserFailed') });
+      form.resetFields();
     }
   };
 
@@ -147,6 +150,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   const handleEditCancel = () => {
     setSelectedUser(null);
     setIsEditModalVisible(false);
+    form.resetFields();
   };
 
   const handleEditSubmit = async (values: any) => {
@@ -181,24 +185,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       },
     });
   };
-
-  // useEffect(() => {
-  //   if (selectedRole === 'HR') {
-  //     getAllCompanies(1, 100)
-  //       .then((res) => {
-  //         if (Array.isArray(res.data)) {
-  //           setCompanies(res.data);
-  //         } else {
-  //           setCompanies([]);
-  //           console.error('API response is not an array:', res.data);
-  //         }
-  //       })
-  //       .catch(() => {
-  //         setCompanies([]);
-  //         Alert.error({ title: 'Oops!', content: 'Không thể tải danh sách công ty!' });
-  //       });
-  //   }
-  // }, [selectedRole]);
 
   useEffect(() => {
     fetchAllUsers(currentPage);
@@ -256,7 +242,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       )}
       <Loading isOpen={isLoading} />
 
-      {/*  Modal update thong tin */}
       <Modal title={t('btn.admin.addUser')} visible={isCreateModalVisible} onCancel={() => setIsCreateModalVisible(false)} footer={null} centered>
         <Form layout='vertical' onFinish={handleCreateUser}>
           <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
@@ -284,9 +269,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           </Form.Item>
 
           <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Select
-              onChange={(value) => setSelectedRole(value)} // Cập nhật trạng thái
-            >
+            <Select onChange={(value) => setSelectedRole(value)}>
               {ROLES.map((role) => (
                 <Select.Option key={role._id} value={role._id}>
                   {role.name}
@@ -297,7 +280,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
           {selectedRole === '66376960e60f6eda1161fdf2' && (
             <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.error.required') }]}>
-              <Select placeholder={t('field.selectCompany')}>
+              <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
                 {companies.map((company) => (
                   <Select.Option key={company._id} value={company._id}>
                     {company.name}
@@ -306,17 +289,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
               </Select>
             </Form.Item>
           )}
-
-          {/* Công ty */}
-          {/* <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
-            <Select placeholder={t('field.selectCompany')}>
-              {companies.map((company) => (
-                <Select.Option key={company._id} value={company._id}>
-                  {company.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item> */}
 
           <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.error.required') }]}>
             <Input />
