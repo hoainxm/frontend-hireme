@@ -60,8 +60,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
         setIsPremium(plan);
         const dataSubmit = { typePre: plan };
-        const check = await setPremium(dataSubmit);
-        console.log('check: ', check);
+        await setPremium(dataSubmit);
       }
     } catch (error) {
       console.error('Error verifying transaction:', error);
@@ -170,7 +169,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
               <button
                 onClick={() => {
                   handlePurchase(100000);
-                  // setIsPremium(ScopeValue.PLUS);
                 }}
                 disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.PLUS]}
                 className={style.selectButton2}
@@ -190,7 +188,6 @@ export const UpgradeAccount: FC<Props> = (props) => {
               <button
                 onClick={() => {
                   handlePurchase(200000);
-                  // setIsPremium(ScopeValue.MAX);
                 }}
                 disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.MAX]}
                 className={style.selectButton3}

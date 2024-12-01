@@ -34,6 +34,7 @@ export const userSlice = createSlice({
         localStorage.setItem('access_token', payload.data.access_token);
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, payload.data.user.isPremium);
         localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.TRUE);
+        console.log('payload.data.user.role', payload.data.user.role);
         if (payload.data.user.role.name !== 'NORMAL_USER') {
           localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.TRUE);
         } else {

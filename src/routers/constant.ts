@@ -62,10 +62,6 @@ export const PUBLIC_ROUTE = [
     path: PageURL.LOGIN,
     component: Login,
   },
-  // {
-  //   path: PageURL.ADMIN_LOGIN,
-  //   component: Login,
-  // },
   {
     path: PageURL.REGISTER,
     component: Register,
@@ -153,3 +149,4 @@ export const ADMIN_ROUTE = [
     component: HRDashboard,
   },
 ];
+

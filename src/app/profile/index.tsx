@@ -107,7 +107,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
     : userInfo
     ? `${process.env.REACT_APP_API_URL}/images/avatar/${userInfo.avatar || ''}`
     : Account;
-
+  console.log(userInfo);
   const handlePreviewClick = () => {
     setIsImagePreviewVisible(true);
   };
@@ -149,7 +149,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       console.error('Error updating profile:', error);
     }
   };
-
+  console.log(userInfo);
   const renderContent = () => {
     switch (selectedMenu) {
       case 'history':
@@ -298,9 +298,8 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           </Form.Item>
           <Form.Item label={t('field.gender')} name='gender'>
             <Select placeholder={t('field.hint.gender')}>
-              <Option value='nam'>{t('male')}</Option>
-              <Option value='nu'>{t('female')}</Option>
-              <Option value='khong_xac_dinh'>{t('undefined')}</Option>
+              <Option value='Nam'>{t('male')}</Option>
+              <Option value='Nữ'>{t('female')}</Option>
             </Select>
           </Form.Item>
           <Form.Item label={t('field.birthday')} name='dateOfBirth'>
