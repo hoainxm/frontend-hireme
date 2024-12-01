@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import style from '../../app/upgrade/components/upgrade.module.scss';
 import MainLayout from '../../common/ui/layout/main-layout';
 import UpgradeAccount from './components/upgradeAccount';
+import { RootState, useAppSelector } from '../../store/store';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   sectionId: string;
@@ -12,6 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export const Upgrade: FC<Props> = ({ sectionId }) => {
   const { t } = useTranslation();
 
+  const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
   return (
     <MainLayout active={PageName.UPGRADE}>
       <section id={sectionId} className={style.bannerSection}>
@@ -26,7 +28,7 @@ export const Upgrade: FC<Props> = ({ sectionId }) => {
       </section>
 
       <div className={style.note}>
-        <UpgradeAccount sectionId={sectionId} />
+        {userInfo && <UpgradeAccount sectionId={sectionId} userInfo={userInfo} />}
         <p>
           <strong>{t('upgrade.note.label')}</strong> {t('upgrade.note.description')}
         </p>

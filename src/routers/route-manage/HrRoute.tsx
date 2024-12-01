@@ -8,15 +8,15 @@ interface Props extends RouteProps {
   path: PageURL;
 }
 
-const AdminRoute: FC<Props> = (props: Props) => {
+const HrRoute: FC<Props> = (props: Props) => {
   const { component, path, exact } = props;
-  let isSysAdmin = localStorage.getItem(ScopeKey.IS_SYSTEM_ADMIN);
+  let isSysHr = localStorage.getItem(ScopeKey.IS_SYSTEM_HR);
 
-  return (isSysAdmin as ScopeValue) === ScopeValue.TRUE ? (
+  return (isSysHr as ScopeValue) === ScopeValue.TRUE ? (
     <Route path={path} component={component} exact={exact} />
   ) : (
     <Redirect to={`${PageURL.LOGIN}`} />
   );
 };
 
-export default AdminRoute;
+export default HrRoute;

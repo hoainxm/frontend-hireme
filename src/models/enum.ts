@@ -3,6 +3,7 @@
 export enum ScopeKey {
   IS_AUTHENTICATED = '5Eo8lm11M2UBtWSfU3J5',
   IS_SYSTEM_ADMIN = '64vdFNC8Xb7KZrbEXQ52',
+  IS_SYSTEM_HR = 'SVNfU1lTVEVNX0hS',
   LANG = '7XFJt971uBVOaBwFVXSX',
   AUTOMATE_AUTH = 'vNHYihMUVfimkeb99h31',
   ACCESS_TOKEN = '6HNS8VCz8GELPSDaP4FC',
@@ -92,7 +93,8 @@ export enum PageURL {
   ADMIN_MANAGE_CV = '/manage/cvs',
 
   // HR
-  HR_MANAGE = '/manage/hr',
+  HR_MANAGE_JOBS = '/manage/hr/jobs',
+  HR_MANAGE_RESUME = '/manage/hr/resumes',
 
   //
   ADMIN_AI_PACKAGE_WRITER = '/ai-cloud-features/ai-package/:action',

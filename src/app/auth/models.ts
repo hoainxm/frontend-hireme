@@ -1,3 +1,4 @@
+import { CompanyId } from './../profile/model';
 /** @format */
 
 export interface UserProfile {

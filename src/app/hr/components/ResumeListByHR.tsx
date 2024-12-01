@@ -139,7 +139,7 @@ const ResumeListByHR: FC<Props> = () => {
           <Form.Item label={t('field.status')} name='status' rules={[{ required: true, message: t('error.fieldRequired') }]}>
             <Select options={ResumeStatusOptions} />
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}
             </Button>

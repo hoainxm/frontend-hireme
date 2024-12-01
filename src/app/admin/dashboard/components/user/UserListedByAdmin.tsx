@@ -260,7 +260,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             <Select>
               <Select.Option value='male'>{t('field.male')}</Select.Option>
               <Select.Option value='female'>{t('field.female')}</Select.Option>
-              <Select.Option value='other'>{t('field.other')}</Select.Option>
             </Select>
           </Form.Item>
 

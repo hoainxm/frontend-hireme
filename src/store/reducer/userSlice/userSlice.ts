@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginThunk, getUserProfileThunk, logoutThunk } from './userThunk';
-import { UserProfile } from '../../../app/auth/models';
 import { ScopeKey, ScopeValue } from '@models/enum';
-import { Redirect } from 'react-router-dom';
+import { UserProfile } from 'app/auth/models';
 
 interface UserState {
   isFetchingLogin: boolean;
   isFetchingProfile: boolean;
   isLoggingOut: boolean;
   userLogin: string | null;
-  userProfile: UserProfile | null;
+  userProfile: any | null;
 }
 
 const initialState: UserState = {
@@ -31,18 +30,24 @@ export const userSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.isFetchingLogin = false;
+
         localStorage.setItem('access_token', payload.data.access_token);
-        localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, payload.data.user.isPremium);
         localStorage.setItem(ScopeKey.IS_AUTHENTICATED, ScopeValue.TRUE);
-        if (payload.data.user.role.name !== 'NORMAL_USER') {
+
+        if (payload.data.user.role.name === 'SUPER_ADMIN') {
           localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.TRUE);
+          localStorage.setItem(ScopeKey.IS_SYSTEM_HR, ScopeValue.FALSE); 
+        } else if (payload.data.user.role.name === 'HR') {
+          localStorage.setItem(ScopeKey.IS_SYSTEM_HR, ScopeValue.TRUE);
+          localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.FALSE);
         } else {
           localStorage.setItem(ScopeKey.IS_SYSTEM_ADMIN, ScopeValue.FALSE);
+          localStorage.setItem(ScopeKey.IS_SYSTEM_HR, ScopeValue.FALSE);
         }
+
         state.userLogin = payload.data.access_token;
-      })
-      .addCase(loginThunk.rejected, (state) => {
-        state.isFetchingLogin = false;
+
+        window.dispatchEvent(new Event('storage'));
       })
       .addCase(getUserProfileThunk.pending, (state) => {
         state.isFetchingProfile = true;
@@ -55,6 +60,9 @@ export const userSlice = createSlice({
         state.isFetchingProfile = false;
         state.userProfile = null;
       })
+      .addCase(loginThunk.rejected, (state) => {
+        state.isFetchingLogin = false;
+      })
       .addCase(logoutThunk.pending, (state) => {
         state.isLoggingOut = true;
       })
@@ -62,11 +70,6 @@ export const userSlice = createSlice({
         state.isLoggingOut = false;
         state.userLogin = null;
         state.userProfile = null;
-
-        localStorage.removeItem('access_token');
-        localStorage.removeItem(ScopeKey.IS_AUTHENTICATED);
-        localStorage.removeItem(ScopeKey.IS_SYSTEM_ADMIN);
-        localStorage.removeItem(ScopeKey.IS_PREMIUM_SECTION);
       })
       .addCase(logoutThunk.rejected, (state) => {
         state.isLoggingOut = false;

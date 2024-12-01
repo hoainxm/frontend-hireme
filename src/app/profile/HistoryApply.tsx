@@ -10,6 +10,8 @@ const { Panel } = Collapse;
 
 const HistoryApply = () => {
   const [data, setData] = useState<Resume[]>([]);
+  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const [pageSize, setPageSize] = useState(5); // Items per page
 
   const fetchResume = async () => {
     try {
@@ -31,6 +33,17 @@ const HistoryApply = () => {
       </Title>
       <List
         dataSource={data}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          total: data.length,
+          onChange: (page, size) => {
+            setCurrentPage(page);
+            setPageSize(size);
+          },
+          showSizeChanger: true,
+          pageSizeOptions: ['5', '10', '20'],
+        }}
         renderItem={(item) => (
           <List.Item key={item._id} className={styles['history-apply__list-item']}>
             <Card

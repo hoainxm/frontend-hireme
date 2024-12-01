@@ -6,7 +6,7 @@ import { UserProfile, UserProfileByAdmin } from '../../../../auth/models';
 import { companiesAPIUrl, fileAPIUrl, userAPIUrl } from '../../../../../common/utils/constants';
 import { Company } from 'app/company/model';
 
-const getToken = () => localStorage.getItem('access_token');
+const getToken = () => localStorage.getItem('access_to ken');
 
 export const fetchCompaniesByAdmin = async (
   current: number,

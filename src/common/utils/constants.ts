@@ -164,6 +164,8 @@ export const companiesAPIUrl = 'api/v1/companies';
 export const resumeAPIUrl = 'api/v1/resumes';
 export const fileAPIUrl = 'api/v1/files';
 export const paymentAPIUrl = 'api/v1/payment';
+export const subscriberAPIUrl = 'api/v1/subscribers';
+
 export const COUNT_DOWN = {
   // Count per second
   RESEND_EMAIL: 30,
