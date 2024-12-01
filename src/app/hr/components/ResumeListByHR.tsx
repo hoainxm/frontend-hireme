@@ -12,6 +12,7 @@ import { ResumeStatus, ResumeStatusMapping, ResumeStatusOptions } from '../model
 import { Modal, Form, Select, Button } from 'antd';
 import Edit from '../../../common/ui/assets/icon/Edit.svg';
 import ResumeTable from './ResumeTable';
+import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 
 interface Props {
   id: string;
@@ -83,7 +84,7 @@ const ResumeListByHR: FC<Props> = () => {
 
   return (
     <div>
-      {/* <CTable responsive maxHeight={833}>
+      <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
         </thead>
@@ -102,7 +103,16 @@ const ResumeListByHR: FC<Props> = () => {
                   // <Button type='link' onClick={() => handleEditClick(resume)}>
                   //   {t('btn.edit')}
                   // </Button>,
-                  <Image src={Edit} alt='edit' className='icon-action' style={{ cursor: 'pointer' }} onClick={() => handleEditClick(resume)} />,
+                  <div style={{ alignItems: 'center' }}>
+                    <Button
+                      type='link'
+                      href={`${process.env.REACT_APP_API_URL}/images/resume/${resume.url}`}
+                      target='_blank'
+                      icon={<EyeOutlined />}
+                    ></Button>
+                    <Button onClick={() => handleEditClick(resume)} icon={<EditOutlined />} type='link' target='_blank' />
+                    {/* <Image src={Edit} alt='edit' className='icon-action' style={{ cursor: 'pointer' }} onClick={() => handleEditClick(resume)} /> */}
+                  </div>,
                 ]}
               />
             ))
@@ -110,8 +120,8 @@ const ResumeListByHR: FC<Props> = () => {
             <BlankFrame className='blank-frame' title={t('field.hint.noData')} />
           )}
         </tbody>
-      </CTable> */}
-      {/* {resumes.length > 0 && (
+      </CTable>
+      {resumes.length > 0 && (
         <div className='d-flex justify-content-between mt-5'>
           <div>
             <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
@@ -120,8 +130,8 @@ const ResumeListByHR: FC<Props> = () => {
             <CTPaging className='mt-4' currentPage={currentPage} totalPage={Math.ceil(totalData / pageSize)} onGetData={fetchData} />
           </div>
         </div>
-      )} */}
-      <ResumeTable resumes={resumes} handleEditClick={handleEditClick} />
+      )}
+      {/* <ResumeTable resumes={resumes} handleEditClick={handleEditClick} /> */}
       <Loading isOpen={isLoading} />
 
       <Modal title={t('editStatus')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>

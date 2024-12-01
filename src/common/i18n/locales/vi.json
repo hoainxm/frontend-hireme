@@ -855,6 +855,10 @@
   "error.existEmail": "Email đã tồn tại. Vui lòng thử email khác.",
 
   "timeApplicationJob": "Thời hạn nộp hồ sơ: ",
+  "appliedCandidatesButton": "Xem số lượng người đã ứng tuyển",
+  "appliedCandidates": " người đã ứng tuyển công việc này",
+  "upgradeToContinue": "Nâng cấp để sử dụng",
+  "popup.upgradeRequired": "Bạn cần nâng cấp để sử dụng chức năng này",
   "error.login": "email/password không chính xác, vui lòng thử lại.",
   "forgotPassword.send.success": "Gửi yêu cầu đặt lại mật khẩu thành công",
   "user.update-password": "Chỉnh sửa mật khẩu",

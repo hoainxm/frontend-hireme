@@ -33,24 +33,16 @@ import ADLINK from '@images/ADLINK.png';
 
 import { IconMapName } from '../../common/ui/assets/icon';
 import { TabItem } from '../../common/ui/layout/model';
-import { IPH } from './components/projects/IPH';
+
 import { FC } from 'react';
-import { JapanTrainStation } from './components/projects/JapanTrainStation';
-import { VTTruckMonitoring } from './components/projects/VTTruckMonitoring';
-import { ParkingLot } from './components/projects/ParkingLot';
-import { TLocker } from './components/projects/TLocker';
-import { OCRMCare } from './components/projects/OCRMCare';
-import { DocumentReader } from './components/projects/DocumentReader';
+
 import { Banner } from './Banner';
 import { RecrutingSection } from './RecruitingSection';
-// import { NLPSection } from './UpdateSection';
-import { DASection } from './DASection';
-import { SpeechSection } from './SpeechSection';
-import { TypicalProjectSection } from './TypicalProjectSection';
+
 import { ServiceSection } from './ServiceSection';
 import { PartnerSection } from './PartnerSection';
 import { WhyHireMeSection } from './WhyHireMeSection';
-import { CDP } from './components/projects/CDP';
+
 import { YOUTUBE_VIDEO_ID } from '../../common/utils/constants';
 import { SectionID } from '../../models/enum';
 
@@ -253,17 +245,6 @@ export const SERVICE_ITEMS: Array<Item> = [
 ];
 
 export const PARTNER_IMAGES = [ADLINK, NVIDIA, ASUS, INTEL, BKAV, ADVANTECH, TOPCV, VIETNAMWORKS, LINKEDIN];
-
-export const TYPICAL_PROJECT_TABS: Array<TabItem & { videoId: string; component: FC<any> }> = [
-  { name: 'project.iph', contentId: 'iphtab', videoId: YOUTUBE_VIDEO_ID.IPH, component: IPH },
-  { name: 'project.jpTrainStation', contentId: 'jptab', videoId: YOUTUBE_VIDEO_ID.JP_TRAIN, component: JapanTrainStation },
-  { name: 'project.vtTruckMonitoring', contentId: 'vttab', videoId: YOUTUBE_VIDEO_ID.VT_TRUCK, component: VTTruckMonitoring },
-  { name: 'project.parkingLot', contentId: 'pltab', videoId: YOUTUBE_VIDEO_ID.PARKING_LOT, component: ParkingLot },
-  { name: 'project.tLocker', contentId: 'tltab', videoId: YOUTUBE_VIDEO_ID.TLOCKER, component: TLocker },
-  { name: 'project.ocrMCare', contentId: 'ocrtab', videoId: YOUTUBE_VIDEO_ID.OCR_MCARE, component: OCRMCare },
-  { name: 'project.docsReader', contentId: 'drtab', videoId: YOUTUBE_VIDEO_ID.DOCS_READER, component: DocumentReader },
-  { name: 'project.cdp', contentId: 'cdptab', videoId: YOUTUBE_VIDEO_ID.CDP, component: CDP },
-];
 
 export const HOME_PAGE_SECTIONS: Array<{ sectionId: SectionID; text: string; section: FC<any> }> = [
   {

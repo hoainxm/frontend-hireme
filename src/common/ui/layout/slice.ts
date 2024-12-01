@@ -2,7 +2,7 @@
 
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ScopeKey, ScopeValue, SectionID } from '../../../models/enum';
-import { doGetWelcomeInfo, getProfile } from './api';
+import { doGetWelcomeInfo } from './api';
 
 import { AuthWelcomeInfo } from '../../../app/auth/forms';
 // import { getTenantByIdAPI } from '../../../app/auth/api';
