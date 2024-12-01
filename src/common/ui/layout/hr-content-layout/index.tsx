@@ -3,11 +3,10 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import React, { FC, HTMLAttributes, ReactNode } from 'react';
 
-import AdminMainLayout from '../admin-main-layout';
-import Enable from '../../assets/ic/32px/back.svg';
+import HRMainLayout from './HRMainLayout';
 import { PageName } from '../../../../models/enum';
 import { SVGIcon } from '../../assets/icon';
-import style from './adminContent.module.scss';
+import style from '../admin-content-layout/adminContent.module.scss';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -20,13 +19,13 @@ interface Props extends HTMLAttributes<HTMLElement> {
   backgroundClass?: string;
 }
 
-const AdminContentLayout: FC<Props> = (props: Props) => {
+const HRContentLayout: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { dropDefaultContent = false, backTo, activate, title = t('device.detail.title') } = props;
+  const { dropDefaultContent = false, backTo, activate, title = t('default.page.title') } = props;
 
   return (
-    <AdminMainLayout active={activate}>
+    <HRMainLayout active={activate}>
       <Container className={` ${style.contentLayout} ${props.className}`}>
         <Row className={style.header}>
           <Col className={style.title}>
@@ -45,8 +44,8 @@ const AdminContentLayout: FC<Props> = (props: Props) => {
           </Col>
         </Row>
       </Container>
-    </AdminMainLayout>
+    </HRMainLayout>
   );
 };
 
-export default AdminContentLayout;
+export default HRContentLayout;

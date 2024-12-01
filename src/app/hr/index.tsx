@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import JobListByHR from './components/JobListByHR';
 import ResumeList from './components/ResumeListByHR';
 import ContentLayout from '@layout/content-layout';
+import HRContentLayout from '@layout/hr-content-layout';
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -22,12 +23,12 @@ const HRDashboard: FC<Props> = (props: Props) => {
   ];
 
   return (
-    <AdminContentLayout dropDefaultContent title={t('hr.dashboard.title')} activate={PageName.HR_DASHBOARD}>
+    <HRContentLayout dropDefaultContent title={t('hr.dashboard.title')} activate={PageName.HR_DASHBOARD}>
       <TabLayout tabs={HEADERS}>
         <JobListByHR key={0} id='jobs' />
         <ResumeList key={1} id='resumes' />
       </TabLayout>
-    </AdminContentLayout>
+    </HRContentLayout>
   );
 };
 

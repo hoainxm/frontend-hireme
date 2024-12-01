@@ -148,12 +148,12 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.lite')}</h5>
-                <h6>{t('save.lite')}</h6>
+                {/* <h6>{t('save.lite')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>
                   {t('price.lite')}
-                  {t('month')}
+                  {/* {t('month')} */}
                 </p>
               </div>
               <button disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.LITE]} className={style.selectButton1}>
@@ -164,7 +164,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.plus')}</h5>
-                <h6>{t('save.plus')}</h6>
+                {/* <h6>{t('save.plus')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.plus')}</p>
@@ -183,7 +183,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.max')}</h5>
-                <h6>{t('save.max')}</h6>
+                {/* <h6>{t('save.max')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.max')}</p>

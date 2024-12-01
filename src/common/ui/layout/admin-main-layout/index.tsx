@@ -16,7 +16,7 @@ interface Props {
   active: PageName | string;
 }
 
-const AdminMainLayout: FC<Props> = (props: Props) => {
+const AdminMainLayout: FC<Props> = (props) => {
   const { children, active } = props;
   const closeIconRef = useRef(null);
   const sideBarRef = useRef(null);

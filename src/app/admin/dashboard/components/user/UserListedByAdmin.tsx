@@ -11,20 +11,38 @@ import { PageURL, ScopeValue } from '../../../../../models/enum';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
-import { createUser, deleteUser, fetchUsersByAdmin } from './api';
+import { createUser, deleteUser, fetchUsersByAdmin, updateUser } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
 import dayjs from 'dayjs';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
-import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import { Button, Cascader, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { CompanyId } from '../../../../../app/profile/model';
 import { fetchCompaniesByAdmin } from '../company/api';
+import locationData from '../../../../jobs/components/location.json';
 
 interface Props {
   // isSysAdminSite?: boolean;
   id: string;
+}
+interface Ward {
+  Id: string;
+  Name: string;
+  Level: string;
+}
+
+interface District {
+  Id: string;
+  Name: string;
+  Wards: Ward[];
+}
+
+interface City {
+  Id: string;
+  Name: string;
+  Districts: District[];
 }
 
 const UserListedByAdmin: FC<Props> = (props: Props) => {
@@ -54,7 +72,24 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.action'),
   ];
 
-  console.log('selectedUser', selectedUser);
+  const transformLocationData = (
+    data: City[]
+  ): { value: string; label: string; children?: { value: string; label: string; children?: { value: string; label: string }[] }[] }[] => {
+    return data.map((city) => ({
+      value: city.Name,
+      label: city.Name,
+      children: city.Districts.map((district) => ({
+        value: district.Name,
+        label: district.Name,
+        children: district.Wards.map((ward) => ({
+          value: ward.Name,
+          label: ward.Name,
+        })),
+      })),
+    }));
+  };
+
+  const locationOptions = transformLocationData(locationData as City[]);
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -106,8 +141,10 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   const handleCreateUser = async (values: any) => {
     try {
+      const address = values.address ? values.address.join(' - ') : '';
       const payload: any = {
         ...values,
+        address,
         dateOfBirth: dayjs(values.dateOfBirth).format('DD/MM/YYYY'),
       };
 
@@ -135,13 +172,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     }
   };
 
-  const checkValidPageAfterDelete = () => {
-    if (users.length === 1) {
-      return currentPage > 1 ? currentPage - 1 : 1;
-    }
-    return currentPage;
-  };
-
   const handleEditClick = (user: UserProfileByAdmin) => {
     setSelectedUser(user);
     setIsEditModalVisible(true);
@@ -154,18 +184,20 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   const handleEditSubmit = async (values: any) => {
-    // const payload = {
-    //   ...values,
-    //   companyId: selectedRole === 'HR' ? selectedCompany : undefined,
-    // };
-    // try {
-    //   await updateUserProfile(selectedUser?._id || '', payload);
-    //   message.success('Thông tin đã được cập nhật thành công!');
-    //   setIsEditModalVisible(false);
-    //   fetchAllUsers(currentPage);
-    // } catch (error) {
-    //   message.error('Cập nhật thất bại!');
-    // }
+    const payload = {
+      ...values,
+      isPremium: values.isPremium,
+      isVerify: values.isVerify,
+    };
+    console.log(payload);
+    try {
+      await updateUser(selectedUser?._id || '', payload);
+      message.success('Thông tin đã được cập nhật thành công!');
+      setIsEditModalVisible(false);
+      fetchAllUsers(currentPage);
+    } catch (error) {
+      message.error('Cập nhật thất bại!');
+    }
   };
 
   const onDeleteUser = (userId: string) => {
@@ -177,7 +209,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           .then(() => {
             Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
             fetchAllUsers(currentPage);
-            // fetchAllUsers(checkValidPageAfterDelete());
           })
           .catch(() => {
             Alert.error({ title: t('error.title'), content: t('error.stWrong') });
@@ -264,7 +295,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           </Form.Item>
 
           <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Input />
+            <Cascader options={locationOptions} />
           </Form.Item>
 
           <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.error.required') }]}>
@@ -326,45 +357,21 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             <Input disabled />
           </Form.Item>
 
-          {/* <Form.Item label={t('field.role')} name='role'>
-            <Select
-              onChange={(value) => {
-                setSelectedRole(value);
-              }}
-            >
-              {ROLES.map((role: Role) => (
-                <Select.Option key={role._id} value={role.name}>
-                  {role.name}
+          <Form.Item label={t('field.premium')} name='isPremium' rules={[{ required: true }]}>
+            <Select>
+              {Object.keys(PremiumPlanMapping).map((key) => (
+                <Select.Option key={key} value={key}>
+                  {PremiumPlanMapping[key]}
                 </Select.Option>
               ))}
             </Select>
-          </Form.Item> */}
-          {/* {selectedRole === 'HR' && (
-            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
-              <Select placeholder={t('field.selectCompany')} onChange={(value) => setSelectedCompany(value)}>
-                {companies.map((company) => (
-                  <Select.Option key={company._id} value={company._id}>
-                    {company.name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          )} */}
-
-          <Form.Item label={t('field.birthday')} name='dateOfBirth'>
-            <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item label={t('field.address')} name='address'>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.premium')} name='isPremium'>
-            <Input disabled />
-          </Form.Item>
-
-          <Form.Item label={t('field.verified')} name='isVerify'>
-            <Input disabled />
+          <Form.Item label={t('field.verified')} name='isVerify' rules={[{ required: true }]}>
+            <Select>
+              <Select.Option value={true}>{t('field.verified')}</Select.Option>
+              <Select.Option value={false}>{t('field.unverified')}</Select.Option>
+            </Select>
           </Form.Item>
 
           <Form.Item label={t('field.createdAt')} name='createdAt'>
