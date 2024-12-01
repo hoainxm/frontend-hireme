@@ -4,7 +4,7 @@ import { Job } from '../model';
 import style from '../jobs.module.scss';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tooltip } from 'antd';
+import { message, Tooltip } from 'antd';
 import useLoginAlert from '../../../common/utils/hooks/useLoginAlert';
 import { useTranslation } from 'react-i18next';
 
@@ -41,7 +41,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ job }) => {
       savedJobs.push(job);
       localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
       setIsSaved(true);
-      toast.success(`You have saved the job: ${job.name}`);
+      message.success(`${t('saveJob.success')} ${job.name}`);
     }
   };
 
@@ -57,7 +57,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ job }) => {
     savedJobs = savedJobs.filter((savedJob: Job) => savedJob._id !== job._id);
     localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
     setIsSaved(false);
-    toast.done(`You have unsaved the job: ${job.name}`);
+    message.info(`${t('unsaveJob.success')} ${job.name}`);
   };
 
   return (

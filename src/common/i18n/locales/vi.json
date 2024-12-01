@@ -161,6 +161,8 @@
   "found": "Tìm thấy",
   "list": "Danh sách",
   "savedJobs.title": "Kiểm tra các việc làm bạn đã lưu",
+  "saveJob.success": "Bạn đã lưu việc làm: ",
+  "unsaveJob.success": "Bạn đã bỏ lưu việc làm: ",
   "job.match": "việc làm phù hợp với yêu cầu của bạn",
   "field.updated": "Cập nhật",
 
@@ -370,6 +372,9 @@
   "btn.save": "Lưu",
   "follow.Btn": "+ Theo dõi công ty",
   "unfollow": "Hủy theo dõi",
+  "follow.success": "Bạn đã theo dõi công ty: ",
+  "unfollow.success": "Bạn đã hủy theo dõi công ty: ",
+  "update.pw.success": "Đổi mật khẩu thành công.",
   "btn.unsave": "Huỷ lưu",
   "btn.savePassword": "Lưu mật khẩu mới",
   "btn.apply": "Áp dụng",

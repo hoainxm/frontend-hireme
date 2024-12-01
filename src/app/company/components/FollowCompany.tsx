@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 import useLoginAlert from '@hooks/useLoginAlert';
 import { Company } from 'app/jobs/model';
+import { message } from 'antd';
 
 interface FollowCompanyProps {
   company: Company;
@@ -39,7 +40,7 @@ const FollowCompany: React.FC<FollowCompanyProps> = ({ company }) => {
       followedCompanies.push(company);
       localStorage.setItem('followedCompanies', JSON.stringify(followedCompanies));
       setIsFollowed(true);
-      toast.success(`You are now following: ${company.name}`);
+      message.success(`${t('follow.success')} ${company.name}`);
     }
   };
 
@@ -55,7 +56,7 @@ const FollowCompany: React.FC<FollowCompanyProps> = ({ company }) => {
     followedCompanies = followedCompanies.filter((company: any) => followedCompanies._id !== company.id);
     localStorage.setItem('followedCompanies', JSON.stringify(followedCompanies));
     setIsFollowed(false);
-    toast.info(`You have unfollowed: ${company.name}`);
+    message.info(`${t('unfollow.success')} ${company.name}`);
   };
 
   return (
