@@ -289,8 +289,8 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
           <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
             <Select>
-              <Select.Option value='male'>{t('field.male')}</Select.Option>
-              <Select.Option value='female'>{t('field.female')}</Select.Option>
+              <Select.Option value='Nam'>{t('field.male')}</Select.Option>
+              <Select.Option value='Nữ'>{t('field.female')}</Select.Option>
             </Select>
           </Form.Item>
 
@@ -328,7 +328,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
             <DatePicker format='DD/MM/YYYY' style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type='primary' htmlType='submit'>
               {t('btn.save')}
             </Button>
