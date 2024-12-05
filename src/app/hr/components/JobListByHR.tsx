@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { Form, Input, InputNumber, Modal, Select, Button, DatePicker, Row, Col, Cascader } from 'antd';
-import { experienceOptions, SkillsOptions, Status, WorkForm } from '../../../app/jobs/constant';
+import { experienceOptions, GenderOptions, SkillsOptions, Status, WorkForm } from '../../../app/jobs/constant';
 import { getAllCompanies } from '../../../app/company/api';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -238,13 +238,14 @@ const JobListByHR: FC<Props> = () => {
 
       <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={handleModalClose} footer={null} centered>
         <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
+          {/* Section: Job Information */}
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label={t('field.jobName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Input />
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label={t('field.skills')} name='skills' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select
                   mode='multiple'
@@ -253,10 +254,7 @@ const JobListByHR: FC<Props> = () => {
                 />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
                   {companies.map((company) => (
@@ -267,15 +265,15 @@ const JobListByHR: FC<Props> = () => {
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
               <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Cascader options={locationOptions} />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
                 label={t('field.salary')}
                 name='salary'
@@ -284,7 +282,7 @@ const JobListByHR: FC<Props> = () => {
                 <InputNumber style={{ width: '100%' }} />
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
                 label={t('jobDetail.quantity')}
                 name='quantity'
@@ -296,24 +294,17 @@ const JobListByHR: FC<Props> = () => {
           </Row>
 
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item label={t('field.workForm')} name='workForm' rules={[{ required: true, message: t('field.error.required') }]}>
-                <Select
-                  mode='multiple'
-                  placeholder={t('field.workFormPlaceholder')}
-                  options={WorkForm.map((form) => ({ value: form, label: form }))}
-                />
+                <Select mode='multiple' options={WorkForm.map((form) => ({ value: form, label: form }))} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.error,required') }]}>
+            <Col span={8}>
+              <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select placeholder={t('field.levelPlaceholder')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
                 label={t('field.yearsExperience')}
                 name='experience'
@@ -322,31 +313,54 @@ const JobListByHR: FC<Props> = () => {
                 <InputNumber style={{ width: '100%' }} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form
-                form={form}
-                layout='vertical'
-                onFinish={handleFormSubmit}
-                initialValues={{
-                  isActive: 'Active',
-                }}
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item
+                label={t('field.status')}
+                name='isActive'
+                initialValue='Active'
+                rules={[{ required: true, message: t('field.error.required') }]}
               >
-                <Form.Item label={t('field.status')} name='isActive' rules={[{ required: true, message: t('field.error.required') }]}>
-                  <Select placeholder={t('field.selectStatus')}>
-                    {Status.map((status) => (
-                      <Select.Option key={status} value={status}>
-                        {status}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Form>
+                <Select placeholder={t('field.selectStatus')}>
+                  {Status.map((status) => (
+                    <Select.Option key={status} value={status}>
+                      {status}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
+                <Select placeholder={t('field.selectStatus')}>
+                  {GenderOptions.map((status) => (
+                    <Select.Option key={status} value={status}>
+                      {status}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.error.required') }]}>
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.error.required') }]}>
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item label={t('description')} name='description' rules={[{ required: true, message: t('field.error.required') }]}>
+              <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.error.required') }]}>
                 <CKEditor
                   editor={ClassicEditor}
                   data={form.getFieldValue('description') || ''}
@@ -361,19 +375,6 @@ const JobListByHR: FC<Props> = () => {
                     form.setFieldsValue({ description: data });
                   }}
                 />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.required') }]}>
-                <DatePicker style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.required') }]}>
-                <DatePicker style={{ width: '100%' }} />
               </Form.Item>
             </Col>
           </Row>

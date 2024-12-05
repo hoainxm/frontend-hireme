@@ -53,12 +53,8 @@ const AppRouter: FC = () => {
           {!isAdmin && !isHr && PRIVATE_ROUTE.map((route, index) => <PrivateRoute key={index} {...route} exact />)}
 
           {isAdmin && <Redirect to={PageURL.ADMIN_MANAGE_USER} />}
-<<<<<<< HEAD
           {isHr && <Redirect to={PageURL.HR_MANAGE} />}
-=======
-          {isHr && <Redirect to={PageURL.HR_MANAGE_JOBS} />}
 
->>>>>>> 7c1683c10e95bc7d1fe66456cb4d7fc2debf2ba5
           <Redirect to={PageURL.HOME} />
         </Switch>
       </Router>

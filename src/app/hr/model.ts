@@ -2,7 +2,7 @@ import { User } from 'app/auth/forms';
 import { Company, Job } from 'app/jobs/model';
 
 export interface History {
-  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  status: 'PENDING' | 'REVIEW' | 'APPROVED' | 'REJECTED';
   updatedAt: string;
   updatedBy: User;
 }
@@ -26,15 +26,15 @@ export interface Resume {
 export enum ResumeStatus {
   PENDING = 'PENDING',
   REVIEW = 'REVIEW',
-  ACCEPT = 'ACCEPT',
-  REJECT = 'REJECT',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
 }
 
 export const ResumeStatusMapping: Record<ResumeStatus, string> = {
   [ResumeStatus.PENDING]: 'PENDING',
   [ResumeStatus.REVIEW]: 'REVIEW',
-  [ResumeStatus.ACCEPT]: 'ACCEPT',
-  [ResumeStatus.REJECT]: 'REJECT',
+  [ResumeStatus.APPROVED]: 'APPROVED',
+  [ResumeStatus.REJECTED]: 'REJECTED',
 };
 
 export const ResumeStatusOptions = Object.keys(ResumeStatus).map((key) => ({
