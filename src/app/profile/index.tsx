@@ -127,7 +127,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
   const handleEditSubmit = async (values: UpdateMe) => {
     const formattedData = {
       ...values,
-      gender: values.gender === 'Không xác định' ? '' : values.gender,
+      gender: values.gender === t('undefined') ? '' : values.gender,
       dateOfBirth: dayjs(values.dateOfBirth).format('YYYY-MM-DD'),
       skills: values.skills.map((skill: string) => skill.toLowerCase()),
     };
@@ -183,32 +183,32 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
             <Row gutter={[16, 16]}>
               <Col span={24}>
                 <Title level={4} className={style['section-title']}>
-                  Thông tin cá nhân
+                  {t('field.generalInfo')}
                 </Title>
 
                 <Row className={style['user-details']}>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Họ tên: </Text> {userInfo?.name}
+                    <Text className={style.label}>{t('field.name')}:</Text> {userInfo?.name}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Giới tính: </Text> {userInfo?.gender}
+                    <Text className={style.label}>{t('field.gender')}:</Text> {userInfo?.gender}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Ngày sinh: </Text> {userInfo?.dateOfBirth}
+                    <Text className={style.label}>{t('field.birthday')}:</Text> {userInfo?.dateOfBirth}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Điện thoại: </Text> {userInfo?.phone || 'Chưa có số điện thoại'}
+                    <Text className={style.label}>{t('support.phone')}:</Text> {userInfo?.phone || t('field.notSet')}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Địa chỉ: </Text> {userInfo?.address}
+                    <Text className={style.label}>{t('field.location')}:</Text> {userInfo?.address}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>Kỹ năng: </Text>
-                    {mappedSkills.length > 0 ? mappedSkills.join(', ') : 'Chưa có kỹ năng'}
+                    <Text className={style.label}>{t('field.skills')}: </Text>
+                    {mappedSkills.length > 0 ? mappedSkills.join(', ') : t('field.noSkills')}
                   </Col>
                 </Row>
                 <Button type='link' icon={<EditOutlined />} className={style['edit-button']} onClick={handleEditClick}>
-                  Chỉnh sửa
+                  {t('btn.edit')}
                 </Button>
               </Col>
             </Row>
@@ -232,9 +232,9 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       <Layout className={style['profile-container']}>
         <Sider theme='light'>
           <Menu mode='inline' defaultSelectedKeys={['profile']} onClick={({ key }) => setSelectedMenu(key)}>
-            <Menu.Item key='profile'>Hồ Sơ Của Tôi</Menu.Item>
-            <Menu.Item key='cv'>CV Của Tôi</Menu.Item>
-            <Menu.Item key='history'>Lịch Sử</Menu.Item>
+            <Menu.Item key='profile'>{t('field.profile')}</Menu.Item>
+            <Menu.Item key='cv'>{t('field.myCV')}</Menu.Item>
+            <Menu.Item key='history'>{t('field.history')}</Menu.Item>
           </Menu>
         </Sider>
         <Layout>
@@ -243,7 +243,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       </Layout>
 
       <Modal
-        title='Tải lên Avatar'
+        title={t('uploadImage')}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
@@ -262,9 +262,9 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           ) : (
             <UploadOutlined className={modalStyle['upload-icon']} />
           )}
-          <p className={modalStyle['modal-text']}>{previewImage ? 'Nhấp vào ảnh để xem ảnh gốc' : 'Chọn một hình ảnh để làm avatar của bạn.'}</p>
+          <p className={modalStyle['modal-text']}>{previewImage ? t('btn.checkImage') : t('chooseImage')}</p>
           <Button icon={<UploadOutlined />} onClick={handleUploadClick} className={modalStyle['upload-button']} size='large' type='primary'>
-            Chọn ảnh từ máy tính
+            {t('uploadImageFromComputer')}
           </Button>
           <input type='file' ref={fileInputRef} style={{ display: 'none' }} accept='image/*' onChange={handleFileChange} />
           {previewImage && (

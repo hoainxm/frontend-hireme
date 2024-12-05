@@ -33,5 +33,5 @@ export const createUser = async (userData: Partial<UserProfile>): Promise<UserPr
 };
 
 export const updateUser = async (userId: string, userData: Partial<UserProfile>): Promise<UserProfile> => {
-  return doPatch(`${userAPIUrl}/users/${userId}`, userData);
+  return doPatch(`${userAPIUrl}/${userId}`, userData);
 };

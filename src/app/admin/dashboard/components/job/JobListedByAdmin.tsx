@@ -25,6 +25,8 @@ const { Option } = Select;
 export const JobListedByAdmin: FC<Props> = () => {
   const { t } = useTranslation();
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,6 +55,7 @@ export const JobListedByAdmin: FC<Props> = () => {
       .then((res) => {
         const { meta, result } = res.data;
         setJobs(result);
+        setFilteredJobs(result);
         setCurrentPage(meta.current);
         setTotalPage(meta.pages);
         setTotalData(meta.total);
@@ -76,6 +79,36 @@ export const JobListedByAdmin: FC<Props> = () => {
   const handleCompanyChange = (companyId: string) => {
     const selected = companies.find((company) => company._id === companyId);
     setSelectedCompany(selected || null);
+  };
+
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    if (!value) {
+      setFilteredJobs(jobs);
+      return;
+    }
+
+    const lowerValue = value.toLowerCase();
+    const result = jobs.filter(
+      (job) =>
+        job.name.toLowerCase().includes(lowerValue) ||
+        job.company?.name?.toLowerCase().includes(lowerValue) ||
+        job.location.toLowerCase().includes(lowerValue)
+    );
+    setFilteredJobs(result);
+  };
+
+  const onSearch = (value: string) => {
+    const searchValue = value.toLowerCase();
+    const filtered = jobs.filter(
+      (job) =>
+        job.name.toLowerCase().includes(searchValue) ||
+        job.company.name.toLowerCase().includes(searchValue) ||
+        job.level.toLowerCase().includes(searchValue)
+    );
+    setFilteredJobs(filtered.slice(0, pageSize));
+    setTotalData(filtered.length);
+    setCurrentPage(1);
   };
 
   const handleFormSubmit = async (values: any) => {
@@ -136,7 +169,6 @@ export const JobListedByAdmin: FC<Props> = () => {
         console.error('Error fetching companies:', error);
       }
     };
-    fetchAllCompanies();
     fetchAllJobs(1);
     loadAllCompanies();
     // eslint-disable-next-line
@@ -148,16 +180,23 @@ export const JobListedByAdmin: FC<Props> = () => {
 
   return (
     <div>
-      {/* <div className='d-flex justify-content-end mb-3'>
-        <CButton className='ml-2' label={t('btn.admin.addJob')} onClick={() => setIsModalVisible(true)} />
-      </div> */}
+      <div className='d-flex justify-content-between mb-3'>
+        <Input.Search
+          placeholder={t('field.search')}
+          onSearch={handleSearch}
+          enterButton
+          style={{ width: 600 }}
+          onChange={(e) => onSearch(e.target.value)}
+        />
+        {/* <CButton className='ml-2' label={t('btn.admin.addJob')} onClick={() => setIsModalVisible(true)} /> */}
+      </div>
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
         </thead>
         <tbody>
-          {jobs.length > 0 ? (
-            jobs.map((job, index) => (
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map((job, index) => (
               <CTRow
                 key={job._id}
                 data={[
@@ -171,16 +210,7 @@ export const JobListedByAdmin: FC<Props> = () => {
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
                   </div>,
-
-                  // <Image
-                  //   src={TrashIcon}
-                  //   alt={t('action.delete')}
-                  //   className='icon-action ml-3'
-                  //   style={{ cursor: 'pointer' }}
-                  //   onClick={() => handleDelete(job._id)}
-                  // />,
                 ]}
-                // onClick={() => history.push(`${PageURL.ADMIN_MANAGE_JOB}/update/${job._id}`)}
               />
             ))
           ) : (
