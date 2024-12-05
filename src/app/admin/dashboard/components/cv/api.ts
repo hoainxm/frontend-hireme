@@ -35,5 +35,5 @@ export const updateCV = (id: string, data: { name: string; description: string }
 
 /** Delete a CV */
 export const deleteCV = (id: string) => {
-  return doDelete(`/cvs/${id}`);
+  return doDelete(`${resumeAPIUrl}/${id}`);
 };

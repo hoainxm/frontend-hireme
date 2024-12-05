@@ -10,10 +10,11 @@ import { UserProfile } from 'app/auth/models';
 interface Props {
   sectionId: string;
   userInfo: UserProfile;
+  id: string;
 }
 
 export const UpgradeAccount: FC<Props> = (props) => {
-  const { sectionId, userInfo } = props;
+  const { sectionId, userInfo, id } = props;
   const { t } = useTranslation();
   const [isPremium, setIsPremium] = useState<ScopeValue>((localStorage.getItem(ScopeKey.IS_PREMIUM_SECTION) as ScopeValue) || ScopeValue.LITE);
   const [amount, setAmount] = useState<string | null | number>(null);
@@ -62,6 +63,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
         }
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
         setIsPremium(plan);
+        console.log(setIsPremium);
         const dataSubmit = { typePre: plan };
         await setPremium(dataSubmit);
       }

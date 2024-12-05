@@ -23,3 +23,10 @@ export interface CreateCompanyModalProps {
   onSubmit: (values: CreateCompanyFormValues) => void;
   form: any;
 }
+export interface EditCompanyModalProps {
+  isVisible: boolean;
+  onClose: () => void;
+  onSubmit: (values: CreateCompanyFormValues) => void;
+  form: any;
+  companyData: Company | null;
+}
