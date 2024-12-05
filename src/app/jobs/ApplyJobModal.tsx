@@ -1,9 +1,11 @@
 import { UploadOutlined, FilePdfOutlined, CloseOutlined } from '@ant-design/icons';
 import { Button, Modal, Typography, Radio, Input, Collapse, Upload, Divider, message } from 'antd';
-import React, { FC, useRef, useState, HTMLAttributes } from 'react';
+import React, { FC, useState, HTMLAttributes, useEffect } from 'react';
 import style from './ApplyJobModal.module.scss';
 import { applyFile, createResume } from './api';
 import { useTranslation } from 'react-i18next';
+import { useCVContext } from './components/CVContext';
+import { FileTextOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -20,6 +22,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
   const { t } = useTranslation();
+  const { myListCV } = useCVContext();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
@@ -30,7 +33,6 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
   const handleFileChange = async (file: File) => {
     if (file && file.size <= 5 * 1024 * 1024) {
       setSelectedFile(file);
-
       setSelectedLibraryCV('');
       const res = await applyFile(file);
       if (res && res.data) {
@@ -38,7 +40,7 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
       }
       return false;
     } else {
-      message.error('File must be under 5MB.');
+      message.error(t('fileSupportHint'));
       return false;
     }
   };
@@ -46,30 +48,38 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
   const handleLibraryCVChange = (e: any) => {
     setSelectedLibraryCV(e.target.value);
     setSelectedFile(null);
+    setUrlCV(e.target.value);
   };
 
   const handleApplyClick = async () => {
     if (selectedFile || selectedLibraryCV) {
       setLoading(true);
       try {
-        const dataSubmit = { url: urlCV, companyId, jobId };
+        const dataSubmit = selectedLibraryCV ? { url: selectedLibraryCV, companyId, jobId } : { url: urlCV, companyId, jobId };
+
         const result = await createResume(dataSubmit);
         if (result && result.data) {
-          message.success(`Successfully applied for the job ${jobName}`);
+          message.success(t('submitApplicationSuccess', { jobName }));
           setSelectedFile(null);
           setSelectedLibraryCV('');
           setCoverLetter('');
           onClose();
         }
       } catch (error) {
-        message.error('Application failed. Please try again.');
+        message.error(t('submitApplicationFailure'));
       } finally {
         setLoading(false);
       }
     } else {
-      message.warning('Please select a file or a CV from the library.');
+      message.warning(t('pleaseSelectFileOrCV'));
     }
   };
+
+  useEffect(() => {
+    if (selectedFile && cvSource !== 'upload') {
+      setCvSource('upload');
+    }
+  }, [selectedFile, cvSource]);
 
   return (
     <Modal
@@ -90,7 +100,7 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
             <Panel
               header={
                 <div onClick={() => setCvSource('library')}>
-                  <Text strong>Choose CV from Library 📂</Text>
+                  <Text strong>{t('chooseCVFromLibrary')}</Text>
                 </div>
               }
               key='1'
@@ -103,16 +113,25 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
                 disabled={cvSource !== 'library'}
                 className={style['apply-job-modal__radio-group']}
               >
-                <Radio value='libraryCV1.pdf'>CV 1 - Software Engineer</Radio>
-                <Radio value='libraryCV2.pdf'>CV 2 - Project Manager</Radio>
-                <Radio value='libraryCV3.pdf'>CV 3 - Frontend Developer</Radio>
+                {myListCV.length > 0 ? (
+                  myListCV.map((cv, index) => (
+                    <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <Radio value={cv}>{cv}</Radio>
+                      <Button type='link' icon={<FileTextOutlined />} href={`${process.env.REACT_APP_API_URL}/images/resume/${cv}`} target='_blank'>
+                        {t('btn.viewDetails')}
+                      </Button>
+                    </div>
+                  ))
+                ) : (
+                  <Text type='secondary'>{t('noCVAvailable')}</Text>
+                )}
               </Radio.Group>
             </Panel>
 
             <Panel
               header={
                 <div onClick={() => setCvSource('upload')}>
-                  <Text strong>Upload CV from Computer 💻</Text>
+                  <Text strong>{t('uploadCVFromComputer')}</Text>
                 </div>
               }
               key='2'
@@ -134,27 +153,23 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
                   </div>
                 ) : (
                   <>
-                    <p className='ant-upload-drag-icon'>
-                      <UploadOutlined />
-                    </p>
-                    <p className='ant-upload-text'>Drag or click to upload</p>
-                    <p className='ant-upload-hint'>Supports .doc, .docx, .pdf files under 5MB</p>
+                    <p>{t('dragOrClickToUpload')}</p>
+                    <p>{t('fileSupportHint')}</p>
                   </>
                 )}
               </Dragger>
             </Panel>
           </Collapse>
         </Radio.Group>
-
         <Divider />
 
         <div className={style['apply-job-modal__cover-letter-section']}>
           <Title level={5} className={style['apply-job-modal__cover-letter-title']}>
-            Cover Letter
+            {t('coverLetter')}
           </Title>
           <TextArea
             rows={4}
-            placeholder='Write a brief cover letter...'
+            placeholder={t('writeCoverLetterPlaceholder')}
             value={coverLetter}
             onChange={(e) => setCoverLetter(e.target.value)}
             className={style['apply-job-modal__cover-letter']}
@@ -163,7 +178,7 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
 
         <div className={style['apply-job-modal__actions']}>
           <Button onClick={onClose} className={style['apply-job-modal__cancel-button']}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             type='primary'
@@ -172,7 +187,7 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
             disabled={!(selectedFile || selectedLibraryCV)}
             className={style['apply-job-modal__submit-button']}
           >
-            Submit Application
+            {t('submitApplication')}
           </Button>
         </div>
       </div>

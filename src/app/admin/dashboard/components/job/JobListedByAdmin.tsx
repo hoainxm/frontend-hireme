@@ -286,7 +286,6 @@ export const JobListedByAdmin: FC<Props> = () => {
               options={[
                 { value: 'Nam', label: t('male') },
                 { value: 'Nữ', label: t('female') },
-                { value: 'Không yêu cầu', label: t('notRequired') },
               ]}
             />
           </Form.Item>

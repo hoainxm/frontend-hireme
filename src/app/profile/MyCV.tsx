@@ -5,10 +5,12 @@ import { getResumeByUser, uploadCV } from './api';
 import style from './MyCV.module.scss';
 import { useAppDispatch } from '../../store/store';
 import { getUserProfileThunk } from '../../store/reducer/userSlice/userThunk';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
 const MyCV = () => {
+  const { t } = useTranslation();
   const fileInputRefCv = useRef<HTMLInputElement>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [myListCV, setMyListCV] = useState<string[]>([]);
@@ -65,12 +67,12 @@ const MyCV = () => {
   return (
     <div className={style['my-cv__container']}>
       <Card>
-        <Title level={4}>CV của tôi</Title>
+        <Title level={4}>{t('field.myCV')}</Title>
         <Button icon={<UploadOutlined />} onClick={handleCvUploadClick} type='primary' className={style['my-cv__upload-button']}>
-          Tải lên CV
+          {t('btn.upload')}
         </Button>
         <Divider />
-        <Title level={5}>Danh sách CV đã tải lên</Title>
+        <Title level={5}>{t('field.myCVList')}</Title>
         <List
           className={style['my-cv__list']}
           dataSource={myListCV}
@@ -78,7 +80,7 @@ const MyCV = () => {
             <List.Item
               actions={[
                 <Button type='link' icon={<FileTextOutlined />} href={`${process.env.REACT_APP_API_URL}/images/resume/${fileName}`} target='_blank'>
-                  Xem chi tiết
+                  {t('btn.viewDetails')}
                 </Button>,
               ]}
             >
@@ -88,18 +90,18 @@ const MyCV = () => {
         />
       </Card>
 
-      <Modal title='Tải lên CV mới' visible={isModalVisible} onCancel={handleCancelUpload} footer={null} centered>
+      <Modal title={t('uploadCVLabel')} visible={isModalVisible} onCancel={handleCancelUpload} footer={null} centered>
         <div className={style['my-cv__modal-content']}>
           <input type='file' ref={fileInputRefCv} style={{ display: 'none' }} accept='application/pdf' onChange={handleCvFileChange} />
           <Button onClick={() => fileInputRefCv.current?.click()} icon={<UploadOutlined />} type='primary'>
-            Chọn CV (PDF)
+            {t('uploadCVTitle')}
           </Button>
           {cvFile && <p className={style['my-cv__file-name']}>{cvFile.name}</p>}
           <div className={style['my-cv__upload-actions']}>
             <Button type='primary' onClick={handleConfirmUploadCv} disabled={!cvFile} className={style['my-cv__confirm-button']}>
-              Xác nhận tải lên
+              {t('btn.confirm')}
             </Button>
-            <Button onClick={handleCancelUpload}>Hủy bỏ</Button>
+            <Button onClick={handleCancelUpload}>{t('btn.cancel')}</Button>
           </div>
         </div>
       </Modal>

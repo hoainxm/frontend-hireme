@@ -19,7 +19,6 @@ interface JobCardProps {
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
   const { t } = useTranslation();
-  console.log('check job:', job);
   const isJobExpired = (endDate: string): boolean => {
     return dayjs(endDate).isBefore(dayjs(), 'day');
   };
