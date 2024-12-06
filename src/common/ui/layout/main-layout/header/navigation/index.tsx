@@ -11,7 +11,6 @@ import { CButton } from '../../../../base';
 import { LanguageDropDown } from '../../../../base/dropdown/LanguageDropDown';
 import { NavItem } from '../../../model';
 import style from '../header.module.scss';
-import { MegaMenu } from './MegaMenu';
 import { updateSectionDot } from '@layout/slice';
 import useLocalStorage from '@hooks/useLocalStorage';
 import { Alert } from '../../../../../utils/popup';
@@ -41,9 +40,9 @@ export const TopNavigation: FC<Props> = (props) => {
     setNavItems(updateNavItems);
   };
 
-  const setProductActive = (): boolean => {
-    return location.pathname === PageURL.PRODUCT_OCR || location.pathname === PageURL.PRODUCT_OD;
-  };
+  // const setProductActive = (): boolean => {
+  //   return location.pathname === PageURL.PRODUCT_OCR || location.pathname === PageURL.PRODUCT_OD;
+  // };
 
   const alertComingSoon = () =>
     Alert.comingSoon({
@@ -83,12 +82,12 @@ export const TopNavigation: FC<Props> = (props) => {
             onMouseLeave={() => setShowMegaMenu(false)}
             title={
               <>
-                <p className={item.isActive || setProductActive() ? style.isActive : undefined}>{t(item.name)}</p>
+                {/* <p className={item.isActive || setProductActive() ? style.isActive : undefined}>{t(item.name)}</p> */}
                 <SVGIcon icon={showMegaMenu ? 'ArrowUp' : 'ArrowDown'} color={Palette.WHITE} size={16} />
               </>
             }
           >
-            {showMegaMenu && <MegaMenu />}
+            {/* {showMegaMenu && <MegaMenu />} */}
           </NavDropdown>
         ) : (
           <Nav.Item key={item.name} className={style.navItem}>

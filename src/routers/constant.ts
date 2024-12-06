@@ -3,23 +3,11 @@ import { UserProfile } from './../app/auth/models';
 
 import { ForgotPassword } from '../app/auth/forgotPassword';
 import Home from '../app/home';
-import { Inbody } from '../app/trial/ocr/in-body';
 import Login from '../app/auth/login';
-import { MedicalDevice } from '../app/trial/ocr/medical-device';
 import { PageURL } from '../models/enum';
-import { ProductOCR } from '../app/product/ocr';
 import Register from '../app/auth/register';
 import { ResetPassword } from '../app/auth/resetPassword';
 import { RouteModel } from './models';
-
-import WelcomeInformation from '../app/admin/welcome-info';
-import { Prescription } from '../app/trial/ocr/prescription';
-import { ProductLayout } from '@layout/product-layout';
-import { LicenseManagement } from '../app/license';
-import { DynamicTemplate } from '../app/trial/ocr/dynamic-template';
-import { CreateDynamicTemplate } from '../app/trial/ocr/dynamic-template/CreateDynamicTemplate';
-import { ShowDynamicResult } from '../app/trial/ocr/dynamic-template/ShowDynamicResult';
-import { UpdateDynamicTemplate } from '../app/trial/ocr/dynamic-template/UpdateDynamicTemplate';
 import Jobs from '../app/jobs';
 import Companies from '../app/company';
 import { ResendVerifyEmail } from '../app/auth/resend-verify-email';
@@ -30,27 +18,17 @@ import ProfileUser from '../app/profile/index';
 import CompanyDetail from '../app/company/components/CompanyDetail';
 import { UpdatePassword } from '../app/users/update-password';
 import Upgrade from '../app/upgrade';
-// import UserManagement from '../app/admin/dashboard/components/user';
 import UserManagement from '../app/admin/dashboard/components/user';
 import JobManagement from '../app/admin/dashboard/components/job';
 import CompanyManagement from '../app/admin/dashboard/components/company';
 import CVManagement from '../app/admin/dashboard/components/cv';
 import HRDashboard from '../app/hr';
 import FollowedCompanies from '../app/company/followCompany/index';
-import PermissionManagement from '../app/admin/dashboard/components/permission'
-import RoleManagement from '../app/admin/dashboard/components/role'
+import PermissionManagement from '../app/admin/dashboard/components/permission';
+import RoleManagement from '../app/admin/dashboard/components/role';
+// import UserManagement from '../app/admin/dashboard/components/user';
 
-
-
-export const APP_ROUTE: Array<RouteModel> = [
-  { path: PageURL.OCR_MEDICAL_DEVICE, component: MedicalDevice },
-  { path: PageURL.OCR_IN_BODY, component: Inbody },
-  { path: PageURL.OCR_PRESCRIPTION, component: Prescription },
-  { path: PageURL.OCR_DYNAMIC_TEMPLATE_CREATE, component: CreateDynamicTemplate },
-  { path: PageURL.OCR_DYNAMIC_TEMPLATE_UPDATE, component: UpdateDynamicTemplate },
-  { path: PageURL.OCR_DYNAMIC_TEMPLATE, component: DynamicTemplate },
-  { path: PageURL.OCR_DYNAMIC_TEMPLATE_RESULT, component: ShowDynamicResult },
-];
+export const APP_ROUTE: Array<RouteModel> = [];
 
 export const PUBLIC_ROUTE = [
   {
