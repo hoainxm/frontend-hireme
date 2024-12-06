@@ -158,6 +158,8 @@ export const resumeAPIUrl = 'api/v1/resumes';
 export const fileAPIUrl = 'api/v1/files';
 export const paymentAPIUrl = 'api/v1/payment';
 export const subscriberAPIUrl = 'api/v1/subscribers';
+export const roleAPIUrl = 'api/v1/roles';
+export const permissionAPIUrl = 'api/v1/permissions';
 
 export const COUNT_DOWN = {
   // Count per second

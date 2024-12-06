@@ -18,9 +18,13 @@ import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, Cascader, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { CompanyId } from '../../../../../app/profile/model';
 import { fetchCompaniesByAdmin } from '../company/api';
+
+import { fetchRoleByAdmin } from '../role/api';
+
 import locationData from '../../../../jobs/components/location.json';
 import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
+
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -46,9 +50,14 @@ interface City {
 
 const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
+
+  const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
+  const [role, setRole] = useState<Role[]>([]);
+
   const [allUsers, setAllUsers] = useState<UserProfileByAdmin[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<UserProfileByAdmin[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -72,6 +81,21 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.action'),
   ];
 
+
+  const fetchAllRole = (page: number) => {
+    setIsLoading(true);
+    fetchRoleByAdmin(page, pageSize)
+      .then((res) => {
+        const { result } = res.data;
+        setRole(result);
+      })
+      .catch((error) => {
+        if (error.response?.status === 403) handleErrorNoPermission(error, t);
+        else Alert.error({ title: t('error.title'), content: t('error.stWrong') });
+      })
+      .finally(() => setIsLoading(false));
+  };
+        
   const transformLocationData = (
     data: City[]
   ): { value: string; label: string; children?: { value: string; label: string; children?: { value: string; label: string }[] }[] }[] => {
@@ -90,6 +114,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   const locationOptions = transformLocationData(locationData as City[]);
+
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -157,6 +182,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     loadAllCompanies();
+    fetchAllRole(1);
   }, [selectedRole]);
 
   const handleCreateUser = async (values: any) => {
@@ -310,16 +336,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
         <BlankFrame className='blank-frame' title={t('field.hint.no_data')} />
       )}
       <Loading isOpen={isLoading} />
-      <CreateUserModal
-        visible={isCreateModalVisible}
-        onClose={() => setIsCreateModalVisible(false)}
-        onSubmit={handleCreateUser}
-        companies={companies}
-        locationOptions={locationOptions}
-        setSelectedRole={setSelectedRole}
-        selectedRole={selectedRole}
-      />
-      <EditUserModal visible={isEditModalVisible} onClose={handleEditCancel} onSubmit={handleEditSubmit} selectedUser={selectedUser} />
     </div>
   );
 };

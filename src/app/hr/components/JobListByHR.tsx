@@ -216,9 +216,10 @@ const JobListByHR: FC<Props> = () => {
                   job.company.name || t('field.notSet'),
                   job.location || t('field.notSet'),
                   `${job.salary.toLocaleString()} VND` || t('field.notSet'),
-                  dayjs(job.startDate).format('DD-MM-YYYY HH:mm:ss'),
-                  dayjs(job.endDate).format('DD-MM-YYYY HH:mm:ss'),
-                  dayjs(job.updatedAt).format('DD-MM-YYYY HH:mm:ss') || t('field.notSet'),
+
+                  dayjs(job.startDate).format('HH:mm:ss DD-MM-YYYY'),
+                  dayjs(job.endDate).format('HH:mm:ss DD-MM-YYYY'),
+                  dayjs(job.updatedAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
                   </div>,

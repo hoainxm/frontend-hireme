@@ -52,7 +52,7 @@ const JobTable: FC<Props> = ({ jobs }) => {
       title: t('field.last_updated'),
       dataIndex: 'updatedAt',
       key: 'updatedAt',
-      render: (updatedAt: string) => (updatedAt ? dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss') : <Tag color='volcano'>{t('field.notSet')}</Tag>),
+      render: (updatedAt: string) => (updatedAt ? dayjs(updatedAt).format('HH:mm:ss DD-MM-YYYY') : <Tag color='volcano'>{t('field.notSet')}</Tag>),
     },
   ];
 
