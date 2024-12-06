@@ -2,22 +2,47 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import { fetchJobsByHR } from '../api';
-import { createJob } from '../../../app/admin/dashboard/components/job/api';
+import { createJob, deleteJob } from '../../../app/admin/dashboard/components/job/api';
 import { Company, Job } from '../../jobs/model';
 import { CTable, CTPaging, CTPageSize, CTRow, BlankFrame, Loading, CButton } from '../../../common/ui/base';
-import { Alert } from '../../../common/utils/popup';
+import { Alert, Confirm } from '../../../common/utils/popup';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { Form, Input, InputNumber, Modal, Select, Button, DatePicker, Row, Col } from 'antd';
-import { experienceOptions, SkillsOptions, Status, WorkForm } from '../../../app/jobs/constant';
+import { Form, Input, InputNumber, Modal, Select, Button, DatePicker, Row, Col, Cascader } from 'antd';
+import { experienceOptions, GenderOptions, SkillsOptions, Status, WorkForm } from '../../../app/jobs/constant';
 import { getAllCompanies } from '../../../app/company/api';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import JobTable from './JobTable';
+import True from '../../../common/ui/assets/images/Success.svg';
+import False from '../../../common/ui/assets/icon/Error.svg';
+import TrashIcon from '../../../common/ui/assets/ic/20px/trash-bin.svg';
+import Edit from '../../../common/ui/assets/icon/Edit.svg';
+import { Image } from 'react-bootstrap';
+import locationData from '../../jobs/components/location.json';
+import EditJobModal from './EditJobModal';
 
 interface Props {
   id: string;
+}
+
+interface Ward {
+  Id: string;
+  Name: string;
+  Level: string;
+}
+
+interface District {
+  Id: string;
+  Name: string;
+  Wards: Ward[];
+}
+
+interface City {
+  Id: string;
+  Name: string;
+  Districts: District[];
 }
 
 const JobListByHR: FC<Props> = () => {
@@ -30,7 +55,28 @@ const JobListByHR: FC<Props> = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [companies, setCompanies] = useState<Company[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [form] = Form.useForm();
+
+  const transformLocationData = (
+    data: City[]
+  ): { value: string; label: string; children?: { value: string; label: string; children?: { value: string; label: string }[] }[] }[] => {
+    return data.map((city) => ({
+      value: city.Name,
+      label: city.Name,
+      // children: city.Districts.map((district) => ({
+      //   value: district.Name,
+      //   label: district.Name,
+      //   children: district.Wards.map((ward) => ({
+      //     value: ward.Name,
+      //     label: ward.Name,
+      //   })),
+      // })),
+    }));
+  };
+
+  const locationOptions = transformLocationData(locationData as City[]);
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -38,7 +84,11 @@ const JobListByHR: FC<Props> = () => {
     t('field.companyName'),
     t('field.location'),
     t('field.salary'),
+    t('field.startDate'),
+    t('field.endDate'),
     t('field.last_updated'),
+    t('field.status'),
+    t('field.action'),
   ];
 
   const fetchData = (page: number) => {
@@ -87,8 +137,11 @@ const JobListByHR: FC<Props> = () => {
         scale: selectedCompany.scale,
       };
 
+      const location = values.location ? values.location.join(' - ') : '';
+
       const formattedData = {
         ...values,
+        location,
         company: filteredCompany,
         startDate: dayjs(values.startDate).toISOString(),
         endDate: dayjs(values.endDate).toISOString(),
@@ -110,6 +163,27 @@ const JobListByHR: FC<Props> = () => {
     } catch (error) {
       Alert.error({ title: t('error.title'), content: t('error.createJobFailed') });
     }
+  };
+
+  const handleEditClick = (job: Job) => {
+    setSelectedJob(job);
+    setIsEditModalVisible(true);
+  };
+
+  const handleDelete = (id: string) => {
+    Confirm.delete({
+      title: t('confirm.deleteJob'),
+      content: t('confirm.deleteJobContent'),
+      onConfirm: () => {
+        try {
+          deleteJob(id);
+          Alert.success({ title: t('success.title'), content: t('success.jobDeleted') });
+          fetchData(currentPage);
+        } catch (error) {
+          Alert.error({ title: t('error.title'), content: t('error.stWrong') });
+        }
+      },
+    });
   };
 
   const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -142,7 +216,17 @@ const JobListByHR: FC<Props> = () => {
                   job.company.name || t('field.notSet'),
                   job.location || t('field.notSet'),
                   `${job.salary.toLocaleString()} VND` || t('field.notSet'),
+
+                  dayjs(job.startDate).format('HH:mm:ss DD-MM-YYYY'),
+                  dayjs(job.endDate).format('HH:mm:ss DD-MM-YYYY'),
                   dayjs(job.updatedAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
+                  </div>,
+                  <div style={{ display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <Image src={Edit} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleEditClick(job)} />
+                    <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(job._id)} />
+                  </div>,
                 ]}
               />
             ))
@@ -162,29 +246,26 @@ const JobListByHR: FC<Props> = () => {
         </div>
       )}
       <Loading isOpen={isLoading} />
-
       <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={handleModalClose} footer={null} centered>
         <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
+          {/* Section: Job Information */}
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.jobName')} name='name' rules={[{ required: true, message: t('field.required') }]}>
+            <Col span={8}>
+              <Form.Item label={t('field.jobName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Input />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.skills')} name='skills' rules={[{ required: true, message: t('field.required') }]}>
+            <Col span={8}>
+              <Form.Item label={t('field.skills')} name='skills' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select
-                  mode='tags'
+                  mode='multiple'
                   placeholder={t('field.skillsPlaceholder')}
                   options={SkillsOptions.map((skill) => ({ value: skill, label: skill }))}
                 />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
+            <Col span={8}>
+              <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
                   {companies.map((company) => (
                     <Select.Option key={company._id} value={company._id}>
@@ -194,60 +275,77 @@ const JobListByHR: FC<Props> = () => {
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.required') }]}>
-                <Input />
-              </Form.Item>
-            </Col>
           </Row>
 
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.salary')} name='salary' rules={[{ required: true, message: t('field.required') }]}>
-                <InputNumber style={{ width: '100%' }} />
+            <Col span={8}>
+              <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.error.required') }]}>
+                <Cascader options={locationOptions} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('jobDetail.quantity')} name='quantity' rules={[{ required: true, message: t('field.required') }]}>
-                <InputNumber style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
-                label={t('field.workForm')}
-                name='workForm'
-                rules={[
-                  { required: true, message: t('field.required') },
-                  { type: 'array', message: t('field.invalidArray') },
-                ]}
+                label={t('field.salary')}
+                name='salary'
+                rules={[{ required: true, type: 'number', min: 0, message: t('field.error.required') }]}
               >
-                <Select
-                  mode='multiple'
-                  placeholder={t('field.workFormPlaceholder')}
-                  options={WorkForm.map((form) => ({ value: form, label: form }))}
-                />
+                <InputNumber style={{ width: '100%' }} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.required') }]}>
+            <Col span={8}>
+              <Form.Item
+                label={t('jobDetail.quantity')}
+                name='quantity'
+                rules={[{ required: true, type: 'number', min: 1, message: t('field.error.required') }]}
+              >
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item label={t('field.workForm')} name='workForm' rules={[{ required: true, message: t('field.error.required') }]}>
+                <Select mode='multiple' options={WorkForm.map((form) => ({ value: form, label: form }))} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label={t('field.level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
                 <Select placeholder={t('field.levelPlaceholder')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.yearsExperience')} name='experience' rules={[{ required: true, message: t('field.required') }]}>
+            <Col span={8}>
+              <Form.Item
+                label={t('field.yearsExperience')}
+                name='experience'
+                rules={[{ required: true, type: 'number', min: 0, message: t('field.error.required') }]}
+              >
                 <InputNumber style={{ width: '100%' }} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.status')} name='isActive' rules={[{ required: true, message: t('field.required') }]}>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item
+                label={t('field.status')}
+                name='isActive'
+                initialValue='Active'
+                rules={[{ required: true, message: t('field.error.required') }]}
+              >
                 <Select placeholder={t('field.selectStatus')}>
                   {Status.map((status) => (
+                    <Select.Option key={status} value={status}>
+                      {status}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
+                <Select placeholder={t('field.selectStatus')}>
+                  {GenderOptions.map((status) => (
                     <Select.Option key={status} value={status}>
                       {status}
                     </Select.Option>
@@ -258,8 +356,21 @@ const JobListByHR: FC<Props> = () => {
           </Row>
 
           <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.error.required') }]}>
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.error.required') }]}>
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
             <Col span={24}>
-              <Form.Item label={t('description')} name='description' rules={[{ required: true }]}>
+              <Form.Item label={t('field.description')} name='description' rules={[{ required: true, message: t('field.error.required') }]}>
                 <CKEditor
                   editor={ClassicEditor}
                   data={form.getFieldValue('description') || ''}
@@ -278,19 +389,6 @@ const JobListByHR: FC<Props> = () => {
             </Col>
           </Row>
 
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label={t('field.startDate')} name='startDate' rules={[{ required: true, message: t('field.required') }]}>
-                <DatePicker style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label={t('field.endDate')} name='endDate' rules={[{ required: true, message: t('field.required') }]}>
-                <DatePicker style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-          </Row>
-
           <Row justify='end'>
             <Col>
               <Button type='primary' htmlType='submit'>
@@ -303,6 +401,17 @@ const JobListByHR: FC<Props> = () => {
           </Row>
         </Form>
       </Modal>
+      <EditJobModal
+        visible={isEditModalVisible}
+        onClose={() => setIsEditModalVisible(false)}
+        onEditSuccess={() => {
+          fetchData(currentPage);
+          setIsEditModalVisible(false);
+        }}
+        job={selectedJob}
+        companies={companies}
+      />
+      ;
     </div>
   );
 };

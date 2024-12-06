@@ -54,12 +54,12 @@ main > .container {
 
 .updateSectionContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
-  justify-content: space-between;
-  padding: 20px 200px;
+  justify-content: center;
+  padding: 20px;
   background-color: #f0f4f8;
   border-radius: 16px;
-  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .leftSection,
@@ -71,11 +71,13 @@ main > .container {
 }
 
 .leftSection {
-  width: 60%;
+  flex: 1;
+  max-width: 60%;
 }
 
 .rightSection {
-  width: 40%;
+  flex: 1;
+  max-width: 40%;
 }
 
 h4 {
@@ -154,7 +156,6 @@ h4 {
   h5 {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 15px;
     color: #333;
   }
 
@@ -167,7 +168,15 @@ h4 {
 .planDetails {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Căn giữa tên gói theo chiều dọc */
+  justify-content: center;
+
+  .name {
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
 }
 
 .block {
@@ -244,7 +253,7 @@ h4 {
 
 .note {
   background: #f0f4f8;
-  padding: 0px 200px 0px 200px;
+  padding: 20px;
   text-align: center;
   font-size: 14px;
   color: #333;

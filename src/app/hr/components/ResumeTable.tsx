@@ -40,12 +40,12 @@ const ResumeTable: React.FC<Props> = ({ resumes, handleEditClick }) => {
       key: 'jobName',
       render: (jobName: string) => jobName || <Tag color='volcano'>{t('field.notSet')}</Tag>,
     },
-    {
-      title: t('field.companyName'),
-      dataIndex: ['companyId', 'name'],
-      key: 'companyName',
-      render: (companyName: string) => companyName || <Tag color='volcano'>{t('field.notSet')}</Tag>,
-    },
+    // {
+    //   title: t('field.companyName'),
+    //   dataIndex: ['companyId', 'name'],
+    //   key: 'companyName',
+    //   render: (companyName: string) => companyName || <Tag color='volcano'>{t('field.notSet')}</Tag>,
+    // },
     {
       title: t('field.status'),
       dataIndex: 'status',

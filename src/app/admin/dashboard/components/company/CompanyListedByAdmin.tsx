@@ -15,6 +15,9 @@ import dayjs from 'dayjs';
 import { onChange } from 'react-toastify/dist/core/store';
 import { Button, Col, Form, Input, InputNumber, Modal, Row, Upload } from 'antd';
 import CreateCompanyModal from './CreateCompanyModal';
+import EditCompanyModal from './EditCompanyModal';
+
+const { Search } = Input;
 
 interface Props {
   id: string;
@@ -22,8 +25,9 @@ interface Props {
 
 const CompanyListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
-  const history = useHistory();
   const [companies, setCompanies] = useState<Company[]>([]);
+  const [allCompanies, setAllCompanies] = useState<Company[]>([]);
+  const [filteredCompanies, setFilteredCompanies] = useState<Company[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -35,18 +39,38 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
 
   const TABLE_HEADER = [t('field.numeric'), t('field.name'), t('field.address'), t('field.last_updated'), t('field.action')];
 
-  const fetchCompanies = (page: number) => {
+  const fetchCompanies = async (page: number) => {
     setIsLoading(true);
-    fetchCompaniesByAdmin(page, pageSize)
-      .then((res) => {
-        const { meta, result } = res.data;
-        setCompanies(result);
-        setCurrentPage(meta.current);
-        setTotalPage(meta.pages);
-        setTotalData(meta.total);
-      })
-      .catch(() => Alert.error({ title: t('error.title'), content: t('error.fetchFailed') }))
-      .finally(() => setIsLoading(false));
+    try {
+      const res = await fetchCompaniesByAdmin(page, 1000);
+      const { result } = res.data;
+
+      setAllCompanies(result);
+      setCompanies(result.slice(0, pageSize));
+      setTotalData(result.length);
+      setCurrentPage(1);
+      setFilteredCompanies(result);
+    } catch (error) {
+      Alert.error({ title: t('error.title'), content: t('error.fetchFailed') });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onSearch = (value: string) => {
+    const searchValue = value.toLowerCase();
+    const filtered = allCompanies.filter((company) => company.name.toLowerCase().includes(searchValue));
+    setFilteredCompanies(filtered.slice(0, pageSize));
+    setTotalData(filtered.length);
+    setCurrentPage(1);
+  };
+
+  const handlePaginationChange = (page: number) => {
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+
+    setCurrentPage(page);
+    setCompanies(filteredCompanies.slice(start, end));
   };
 
   const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -92,7 +116,15 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      <div className='d-flex justify-content-between mb-3'>
+        <Input.Search
+          placeholder={t('field.search')}
+          onSearch={onSearch}
+          allowClear
+          enterButton
+          style={{ width: 600 }}
+          onChange={(e) => onSearch(e.target.value)}
+        />
         <CButton label={t('btn.admin.addCompany')} onClick={() => setIsModalVisible(true)} />
       </div>
       <CTable responsive maxHeight={833}>
@@ -100,8 +132,8 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
           <CTRow header data={TABLE_HEADER} />
         </thead>
         <tbody>
-          {companies.length > 0 ? (
-            companies.map((company, index) => (
+          {filteredCompanies.length > 0 ? (
+            filteredCompanies.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((company, index) => (
               <CTRow
                 key={company._id}
                 data={[
@@ -126,7 +158,6 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
                     />
                   </div>,
                 ]}
-                // onClick={() => history.push(`${PageURL.ADMIN_MANAGE_COMPANY}/update/${company._id}`)}
               />
             ))
           ) : (
@@ -139,9 +170,12 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
           <div>
             <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
           </div>
-          <div>
-            <CTPaging className='mt-4' currentPage={currentPage} totalPage={totalPage} onGetData={fetchCompanies} />
-          </div>
+          <CTPaging
+            className='mt-4'
+            currentPage={currentPage}
+            totalPage={Math.ceil(filteredCompanies.length / pageSize)}
+            onGetData={handlePaginationChange}
+          />
         </div>
       )}
       <Loading isOpen={isLoading} />

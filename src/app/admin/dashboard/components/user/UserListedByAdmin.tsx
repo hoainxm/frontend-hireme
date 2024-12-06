@@ -4,36 +4,61 @@ import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
 import { Role, UserProfileByAdmin } from '../../../../auth/models';
-import { APIResponse } from '../../../../../common/utils/baseAPI';
 import { Image } from 'react-bootstrap';
 import { NOT_SET } from '../../../../../common/utils/constants';
-import { PageURL, ScopeValue } from '../../../../../models/enum';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
-import { createUser, deleteUser, fetchUsersByAdmin } from './api';
+import { createUser, deleteUser, fetchUsersByAdmin, updateUser } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
 import dayjs from 'dayjs';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
-import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import { Button, Cascader, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { CompanyId } from '../../../../../app/profile/model';
 import { fetchCompaniesByAdmin } from '../company/api';
+
 import { fetchRoleByAdmin } from '../role/api';
+
+import locationData from '../../../../jobs/components/location.json';
+import EditUserModal from './EditUserModal';
+import CreateUserModal from './CreateUserModal';
+
 
 interface Props {
   // isSysAdminSite?: boolean;
   id: string;
 }
+interface Ward {
+  Id: string;
+  Name: string;
+  Level: string;
+}
+
+interface District {
+  Id: string;
+  Name: string;
+  Wards: Ward[];
+}
+
+interface City {
+  Id: string;
+  Name: string;
+  Districts: District[];
+}
 
 const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
+
   const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
   const [role, setRole] = useState<Role[]>([]);
+
+  const [allUsers, setAllUsers] = useState<UserProfileByAdmin[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<UserProfileByAdmin[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [totalData, setTotalData] = useState<number>(0);
@@ -56,6 +81,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.action'),
   ];
 
+
   const fetchAllRole = (page: number) => {
     setIsLoading(true);
     fetchRoleByAdmin(page, pageSize)
@@ -69,31 +95,71 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       })
       .finally(() => setIsLoading(false));
   };
+        
+  const transformLocationData = (
+    data: City[]
+  ): { value: string; label: string; children?: { value: string; label: string; children?: { value: string; label: string }[] }[] }[] => {
+    return data.map((city) => ({
+      value: city.Name,
+      label: city.Name,
+      // children: city.Districts.map((district) => ({
+      //   value: district.Name,
+      //   label: district.Name,
+      //   children: district.Wards.map((ward) => ({
+      //     value: ward.Name,
+      //     label: ward.Name,
+      //   })),
+      // })),
+    }));
+  };
+
+  const locationOptions = transformLocationData(locationData as City[]);
+
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
-    fetchUsersByAdmin(page, pageSize)
+    fetchUsersByAdmin(page, 1000)
       .then((res) => {
-        const { meta, result } = res.data;
-        const usersWithRoleNames = res.data.result.map((user) => ({
-          ...user,
-          role: ROLES.find((role) => role._id === user.role)?.name || '-',
-        }));
-        setUsers(res.data.result);
-        setUsers(usersWithRoleNames);
-        setCurrentPage(meta.current);
-        setTotalPage(meta.pages);
-        setTotalData(meta.total);
+        const { result } = res.data;
+        setAllUsers(result);
+        setFilteredUsers(result.slice(0, pageSize));
+        setTotalData(result.length);
       })
       .catch((error) => {
         if (error.response?.status === 403) handleErrorNoPermission(error, t);
-        else Alert.error({ title: 'Oops!', content: t('error.stWrong') });
+        else Alert.error({ title: t('error.title'), content: t('error.stWrong') });
       })
       .finally(() => setIsLoading(false));
   };
 
+  const onSearch = (value: string) => {
+    const searchValueLower = value.toLowerCase();
+    setSearchValue(value); // Update search value
+
+    const filtered = allUsers.filter(
+      (user) =>
+        user.name.toLowerCase().includes(searchValueLower) ||
+        user.email.toLowerCase().includes(searchValueLower) ||
+        user.role?.toLowerCase().includes(searchValueLower)
+    );
+
+    setFilteredUsers(filtered.slice(0, pageSize));
+    setTotalData(filtered.length);
+    setCurrentPage(1);
+  };
+
+  const handlePaginationChange = (page: number) => {
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+
+    setCurrentPage(page);
+    setFilteredUsers(allUsers.slice(start, end));
+  };
+
   const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPageSize(parseInt(e.target.value, 10));
+    const value = parseInt(e.target.value, 10);
+    setPageSize(value);
+    fetchAllUsers(1);
   };
 
   const loadAllCompanies = async () => {
@@ -121,8 +187,10 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   const handleCreateUser = async (values: any) => {
     try {
+      const address = values.address ? values.address.join(' - ') : '';
       const payload: any = {
         ...values,
+        address,
         dateOfBirth: dayjs(values.dateOfBirth).format('DD/MM/YYYY'),
       };
 
@@ -150,37 +218,37 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     }
   };
 
-  const checkValidPageAfterDelete = () => {
-    if (users.length === 1) {
-      return currentPage > 1 ? currentPage - 1 : 1;
-    }
-    return currentPage;
-  };
-
   const handleEditClick = (user: UserProfileByAdmin) => {
     setSelectedUser(user);
+    form.setFieldsValue({
+      ...user,
+      dateOfBirth: user.dateOfBirth ? dayjs(user.dateOfBirth) : null,
+    });
     setIsEditModalVisible(true);
   };
 
   const handleEditCancel = () => {
+    form.resetFields();
     setSelectedUser(null);
     setIsEditModalVisible(false);
-    form.resetFields();
   };
 
   const handleEditSubmit = async (values: any) => {
-    // const payload = {
-    //   ...values,
-    //   companyId: selectedRole === 'HR' ? selectedCompany : undefined,
-    // };
-    // try {
-    //   await updateUserProfile(selectedUser?._id || '', payload);
-    //   message.success('Thông tin đã được cập nhật thành công!');
-    //   setIsEditModalVisible(false);
-    //   fetchAllUsers(currentPage);
-    // } catch (error) {
-    //   message.error('Cập nhật thất bại!');
-    // }
+    const payload = {
+      ...values,
+      isPremium: values.isPremium,
+      isVerify: values.isVerify,
+    };
+    console.log(payload);
+    try {
+      await updateUser(selectedUser?._id || '', payload);
+      Alert.success({ title: t('success.title'), content: t('error.updateUserSuccess') });
+      setIsEditModalVisible(false);
+      fetchAllUsers(currentPage);
+    } catch (error) {
+      setIsEditModalVisible(false);
+      Alert.error({ title: t('fail.title'), content: t('error.updateUserFailed') });
+    }
   };
 
   const onDeleteUser = (userId: string) => {
@@ -192,13 +260,17 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           .then(() => {
             Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
             fetchAllUsers(currentPage);
-            // fetchAllUsers(checkValidPageAfterDelete());
           })
           .catch(() => {
             Alert.error({ title: t('error.title'), content: t('error.stWrong') });
           });
       },
     });
+  };
+
+  const getRoleName = (roleId: string): string => {
+    const role = ROLES.find((r) => r._id === roleId);
+    return role ? role.name : 'Unknown Role';
   };
 
   useEffect(() => {
@@ -208,7 +280,15 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <div className='d-flex justify-content-end mb-3'>
+      <div className='d-flex justify-content-between mb-3'>
+        <Input.Search
+          placeholder={t('field.search')}
+          onSearch={onSearch}
+          allowClear
+          enterButton
+          style={{ width: 600 }}
+          onChange={(e) => onSearch(e.target.value)}
+        />
         <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} />
       </div>
       <CTable responsive maxHeight={833}>
@@ -216,14 +296,14 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           <CTRow header data={TABLE_HEADER} />
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {filteredUsers.map((user, index) => (
             <CTRow
               key={user._id}
               data={[
-                index + 1,
+                index + 1 + (currentPage - 1) * pageSize,
                 user.name || t('field.notSet'),
                 user.email || t('field.notSet'),
-                user.role || t('field.notSet'),
+                getRoleName(user.role) || t('field.notSet'),
                 <Image src={user.isVerify ? Yes : No} alt={user.isVerify ? 'Verified' : 'Not Verified'} width={20} height={20} />,
                 PremiumPlanMapping[user.isPremium],
                 dayjs(user.updatedAt).format('HH:mm:ss DD-MM-YYYY'),
@@ -243,163 +323,19 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           ))}
         </tbody>
       </CTable>
-      {users.length > 0 ? (
+      {filteredUsers.length > 0 ? (
         <div className='d-flex justify-content-between mt-5'>
           <div>
             <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
           </div>
           <div>
-            <CTPaging className='mt-4' currentPage={currentPage} totalPage={totalPage} onGetData={fetchAllUsers} />
+            <CTPaging className='mt-4' currentPage={currentPage} totalPage={Math.ceil(totalData / pageSize)} onGetData={handlePaginationChange} />
           </div>
         </div>
       ) : (
         <BlankFrame className='blank-frame' title={t('field.hint.no_data')} />
       )}
       <Loading isOpen={isLoading} />
-
-      <Modal title={t('btn.admin.addUser')} visible={isCreateModalVisible} onCancel={() => setIsCreateModalVisible(false)} footer={null} centered>
-        <Form layout='vertical' onFinish={handleCreateUser}>
-          <Form.Item label={t('field.fullName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.email')} name='email' rules={[{ required: true, type: 'email', message: t('field.error.email') }]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.password')} name='password' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Select>
-              <Select.Option value='Nam'>{t('field.male')}</Select.Option>
-              <Select.Option value='Nữ'>{t('field.female')}</Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item label={t('field.address')} name='address' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Select onChange={(value) => setSelectedRole(value)}>
-              {role.map((role) => (
-                <Select.Option key={role._id} value={role._id}>
-                  {role.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-
-          {selectedRole === '66376960e60f6eda1161fdf2' && (
-            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.error.required') }]}>
-              <Select placeholder={t('field.selectCompany')} onChange={handleCompanyChange}>
-                {companies.map((company) => (
-                  <Select.Option key={company._id} value={company._id}>
-                    {company.name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          )}
-
-          <Form.Item label={t('support.phone')} name='phone' rules={[{ required: true, message: t('field.error.required') }]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.birthday')} name='dateOfBirth' rules={[{ required: true, message: t('field.error.required') }]}>
-            <DatePicker format='DD/MM/YYYY' style={{ width: '100%' }} />
-          </Form.Item>
-
-          <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button type='primary' htmlType='submit'>
-              {t('btn.save')}
-            </Button>
-            <Button onClick={() => setIsCreateModalVisible(false)} style={{ marginLeft: '8px' }}>
-              {t('btn.cancel')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <Modal title={t('editProfile')} visible={isEditModalVisible} onCancel={handleEditCancel} footer={null} centered>
-        <Form
-          layout='vertical'
-          initialValues={{
-            ...selectedUser,
-            role: selectedUser?.role,
-            dateOfBirth: selectedUser?.dateOfBirth ? dayjs(selectedUser.dateOfBirth) : null,
-          }}
-          onFinish={handleEditSubmit}
-        >
-          <Form.Item label={t('field.fullName')} name='name'>
-            <Input disabled />
-          </Form.Item>
-
-          <Form.Item label={t('field.email')} name='email'>
-            <Input disabled />
-          </Form.Item>
-
-          {/* <Form.Item label={t('field.role')} name='role'>
-            <Select
-              onChange={(value) => {
-                setSelectedRole(value);
-              }}
-            >
-              {ROLES.map((role: Role) => (
-                <Select.Option key={role._id} value={role.name}>
-                  {role.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item> */}
-          {/* {selectedRole === 'HR' && (
-            <Form.Item label={t('field.company')} name='companyId' rules={[{ required: true, message: t('field.required') }]}>
-              <Select placeholder={t('field.selectCompany')} onChange={(value) => setSelectedCompany(value)}>
-                {companies.map((company) => (
-                  <Select.Option key={company._id} value={company._id}>
-                    {company.name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          )} */}
-
-          <Form.Item label={t('field.birthday')} name='dateOfBirth'>
-            <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
-          </Form.Item>
-
-          <Form.Item label={t('field.address')} name='address'>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label={t('field.premium')} name='isPremium'>
-            <Input disabled />
-          </Form.Item>
-
-          <Form.Item label={t('field.verified')} name='isVerify'>
-            <Input disabled />
-          </Form.Item>
-
-          <Form.Item label={t('field.createdAt')} name='createdAt'>
-            <Input disabled value={dayjs(selectedUser?.createdAt).format('HH:mm:ss DD-MM-YYYY')} />
-          </Form.Item>
-
-          <Form.Item label={t('field.last_updated')} name='updatedAt'>
-            <Input disabled value={dayjs(selectedUser?.updatedAt).format('HH:mm:ss DD-MM-YYYY')} />
-          </Form.Item>
-
-          <Form.Item>
-            <Button type='primary' htmlType='submit'>
-              {t('btn.save')}
-            </Button>
-            <Button onClick={handleEditCancel} style={{ marginLeft: '8px' }}>
-              {t('btn.cancel')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
     </div>
   );
 };

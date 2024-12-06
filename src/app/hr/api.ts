@@ -24,6 +24,27 @@ export const createJob = async (data: {
   return doPost(`${jobsAPIUrl}`, data);
 };
 
+export const editJob = async (
+  id: string,
+  data: {
+    name: string;
+    skills: string[];
+    salary: number;
+    quantity: number;
+    level: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+    location: string;
+    workForm: string[];
+    gender: string;
+    experience: number;
+    isActive: boolean;
+  }
+): Promise<ApiResponse<Job>> => {
+  return doPatch(`${jobsAPIUrl}/${id}`, data);
+};
+
 export const fetchJobsByHR = async (
   current: number,
   pageSize: number

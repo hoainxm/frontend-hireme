@@ -63,6 +63,8 @@ export const experienceOptions = [
   'Chief Technology Officer (CTO)',
 ];
 
+export const GenderOptions = ['Nam', 'Nữ'];
+
 export const WorkForm = ['Full-time', 'Part-time', 'Remote', 'Hybrid', 'Freelance', 'Contract-based', 'On-site'];
 
 export const Status = ['Active', 'Inactive'];

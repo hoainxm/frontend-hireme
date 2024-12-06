@@ -10,10 +10,11 @@ import { UserProfile } from 'app/auth/models';
 interface Props {
   sectionId: string;
   userInfo: UserProfile;
+  id: string;
 }
 
 export const UpgradeAccount: FC<Props> = (props) => {
-  const { sectionId, userInfo } = props;
+  const { sectionId, userInfo, id } = props;
   const { t } = useTranslation();
   const [isPremium, setIsPremium] = useState<ScopeValue>((localStorage.getItem(ScopeKey.IS_PREMIUM_SECTION) as ScopeValue) || ScopeValue.LITE);
   const [amount, setAmount] = useState<string | null | number>(null);
@@ -62,6 +63,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
         }
         localStorage.setItem(ScopeKey.IS_PREMIUM_SECTION, plan);
         setIsPremium(plan);
+        console.log(setIsPremium);
         const dataSubmit = { typePre: plan };
         await setPremium(dataSubmit);
       }
@@ -148,12 +150,12 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.lite')}</h5>
-                <h6>{t('save.lite')}</h6>
+                {/* <h6>{t('save.lite')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>
                   {t('price.lite')}
-                  {t('month')}
+                  {/* {t('month')} */}
                 </p>
               </div>
               <button disabled={PREMIUM_RANKING[isPremium as ScopeValue] > PREMIUM_RANKING[ScopeValue.LITE]} className={style.selectButton1}>
@@ -164,7 +166,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.plus')}</h5>
-                <h6>{t('save.plus')}</h6>
+                {/* <h6>{t('save.plus')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.plus')}</p>
@@ -183,7 +185,7 @@ export const UpgradeAccount: FC<Props> = (props) => {
             <div className={style.pricingCard}>
               <div className={style.planDetails}>
                 <h5>{t('plans.max')}</h5>
-                <h6>{t('save.max')}</h6>
+                {/* <h6>{t('save.max')}</h6> */}
               </div>
               <div className={style.block}>
                 <p className={style.price}>{t('price.max')}</p>

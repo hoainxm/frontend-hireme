@@ -11,6 +11,8 @@ import StaffBlue from '../../assets/ic/24px/dashboard/staffBlue.svg';
 import Job from '../../assets/ic/24px/dashboard/job.svg';
 import Company from '../../assets/ic/24px/dashboard/company.svg';
 import CV from '../../assets/ic/24px/dashboard/cv.svg';
+import Role from '../../assets/ic/24px/dashboard/role.svg';
+import Permission from '../../assets/ic/24px/dashboard/permission.svg';
 
 export const shortcutData: Shortcut[] = [
   {
@@ -44,14 +46,14 @@ export const shortcutData: Shortcut[] = [
   {
     name: PageName.ADMIN_MANAGE_PERMISSION,
     url: PageURL.ADMIN_MANAGE_PERMISSION,
-    icon: CV,
+    icon: Permission,
     iconSelected: HomeBlue,
     isActive: true,
   },
   {
     name: PageName.ADMIN_MANAGE_ROLE,
     url: PageURL.ADMIN_MANAGE_ROLE,
-    icon: CV,
+    icon: Role,
     iconSelected: HomeBlue,
     isActive: true,
   },

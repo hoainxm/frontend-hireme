@@ -28,7 +28,7 @@ export const Upgrade: FC<Props> = ({ sectionId }) => {
       </section>
 
       <div className={style.note}>
-        {userInfo && <UpgradeAccount sectionId={sectionId} userInfo={userInfo} />}
+        {userInfo && <UpgradeAccount sectionId={sectionId} userInfo={userInfo} id='' />}
         <p>
           <strong>{t('upgrade.note.label')}</strong> {t('upgrade.note.description')}
         </p>

@@ -1,4 +1,4 @@
-import { ApiResponse, APIResponse, doDelete, doGet, doPost, doPut } from '../../../../../common/utils/baseAPI';
+import { ApiResponse, APIResponse, doDelete, doGet, doPatch, doPost, doPut } from '../../../../../common/utils/baseAPI';
 import axios from 'axios';
 import { UserProfile, UserProfileByAdmin } from '../../../../auth/models';
 import { userAPIUrl } from '../../../../../common/utils/constants';
@@ -33,5 +33,5 @@ export const createUser = async (userData: Partial<UserProfile>): Promise<UserPr
 };
 
 export const updateUser = async (userId: string, userData: Partial<UserProfile>): Promise<UserProfile> => {
-  return doPut(`${userAPIUrl}/users/${userId}`, userData);
+  return doPatch(`${userAPIUrl}/${userId}`, userData);
 };
