@@ -18,8 +18,10 @@ import JobTable from './JobTable';
 import True from '../../../common/ui/assets/images/Success.svg';
 import False from '../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../common/ui/assets/ic/20px/trash-bin.svg';
+import Edit from '../../../common/ui/assets/icon/Edit.svg';
 import { Image } from 'react-bootstrap';
 import locationData from '../../jobs/components/location.json';
+import EditJobModal from './EditJobModal';
 
 interface Props {
   id: string;
@@ -53,6 +55,8 @@ const JobListByHR: FC<Props> = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [companies, setCompanies] = useState<Company[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [form] = Form.useForm();
 
   const transformLocationData = (
@@ -161,6 +165,11 @@ const JobListByHR: FC<Props> = () => {
     }
   };
 
+  const handleEditClick = (job: Job) => {
+    setSelectedJob(job);
+    setIsEditModalVisible(true);
+  };
+
   const handleDelete = (id: string) => {
     Confirm.delete({
       title: t('confirm.deleteJob'),
@@ -213,7 +222,8 @@ const JobListByHR: FC<Props> = () => {
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
                   </div>,
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                  <div style={{ display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <Image src={Edit} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleEditClick(job)} />
                     <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(job._id)} />
                   </div>,
                 ]}
@@ -235,7 +245,6 @@ const JobListByHR: FC<Props> = () => {
         </div>
       )}
       <Loading isOpen={isLoading} />
-
       <Modal title={t('btn.admin.addJob')} visible={isModalVisible} onCancel={handleModalClose} footer={null} centered>
         <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
           {/* Section: Job Information */}
@@ -391,6 +400,17 @@ const JobListByHR: FC<Props> = () => {
           </Row>
         </Form>
       </Modal>
+      <EditJobModal
+        visible={isEditModalVisible}
+        onClose={() => setIsEditModalVisible(false)}
+        onEditSuccess={() => {
+          fetchData(currentPage);
+          setIsEditModalVisible(false);
+        }}
+        job={selectedJob}
+        companies={companies}
+      />
+      ;
     </div>
   );
 };

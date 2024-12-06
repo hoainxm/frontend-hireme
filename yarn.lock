@@ -67,7 +67,7 @@
     classnames "^2.2.6"
     rc-util "^5.31.1"
 
-"@ant-design/pro-provider@2.15.2":
+"@ant-design/pro-provider@^2.15.2", "@ant-design/pro-provider@2.15.2":
   version "2.15.2"
   resolved "https://registry.npmjs.org/@ant-design/pro-provider/-/pro-provider-2.15.2.tgz"
   integrity sha512-7WSJcjYIuLwco1YiiSgEEJnrqvg7x/YZap8pxOChRnyNh9S3HuV1D5HTc18kfHTpWqZWTAUcS66b0kMP96uKrw==
@@ -2922,6 +2922,7 @@ aggregate-error@^3.0.0:
   resolved "file:"
   dependencies:
     "@ant-design/icons" "^5.5.1"
+    "@ant-design/pro-provider" "^2.15.2"
     "@ant-design/pro-utils" "^2.16.2"
     "@ckeditor/ckeditor5-build-classic" "^43.3.1"
     "@ckeditor/ckeditor5-react" "^9.4.0"
@@ -5609,6 +5610,7 @@ he@^1.2.0:
   resolved "file:"
   dependencies:
     "@ant-design/icons" "^5.5.1"
+    "@ant-design/pro-provider" "^2.15.2"
     "@ant-design/pro-utils" "^2.16.2"
     "@ckeditor/ckeditor5-build-classic" "^43.3.1"
     "@ckeditor/ckeditor5-react" "^9.4.0"

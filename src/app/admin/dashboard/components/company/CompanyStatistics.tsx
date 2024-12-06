@@ -26,7 +26,7 @@ const CompanyStatistics: FC<Props> = (props: Props) => {
         renderUpdatedCompaniesChart(companies);
         renderCreatedByChart(companies);
       } catch (error) {
-        console.error('Error fetching company data:', error);
+        console.error(t('error.fetchFailed'));
       }
     };
 

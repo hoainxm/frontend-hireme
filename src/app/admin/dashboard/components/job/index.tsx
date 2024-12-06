@@ -1,6 +1,6 @@
 /** @format */
 
-import { AdminManageTabs, APICloudFeatureTabs, PageName } from '../../../../../models/enum';
+import { AdminManageTabs, PageName } from '../../../../../models/enum';
 import React, { FC } from 'react';
 import AdminContentLayout from '../../../../../common/ui/layout/admin-content-layout';
 import { RouteComponentProps } from 'react-router-dom';
