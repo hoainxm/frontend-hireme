@@ -26,7 +26,7 @@ const JobStatistics: FC<Props> = () => {
       setJobs(result);
       renderCharts(result);
     } catch (error) {
-      console.error('Error fetching jobs:', error);
+      console.error(t('error.fetchFailed'));
     }
   };
 
