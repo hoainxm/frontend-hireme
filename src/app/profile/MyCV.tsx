@@ -33,7 +33,7 @@ const MyCV = () => {
     if (file && file.type === 'application/pdf') {
       setCvFile(file);
     } else {
-      message.error('Vui lòng tải lên một file PDF.');
+      message.error(t('error.onlyPdf'));
     }
   };
 
@@ -41,7 +41,7 @@ const MyCV = () => {
     if (cvFile) {
       try {
         await uploadCV(cvFile);
-        message.success('CV đã được tải lên thành công.');
+        message.success(t('success.uploadCv'));
         setCvFile(null);
         setIsModalVisible(false);
         const res = await dispatch(getUserProfileThunk()).unwrap();
@@ -49,8 +49,7 @@ const MyCV = () => {
           setMyListCV(res.data.myCV);
         }
       } catch (error) {
-        message.error('Không thể tải lên CV. Vui lòng thử lại.');
-        console.error(error);
+        message.error(t('success.uploadCv'));
       }
     }
   };

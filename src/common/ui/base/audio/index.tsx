@@ -5,10 +5,8 @@ import Check from '@icon/Check.svg';
 import ArrowDown from '@icon/ArrowDown.svg';
 import Pause from '@icon/Pause.svg';
 import { Image } from 'react-bootstrap';
-import { SPEEDS } from '../../../../app/audio-processing/constant';
 import style from './audio.module.scss';
 import { formatDurationDisplay } from '../../../utils/common';
-
 
 interface Props {
   audio: string | undefined;
@@ -70,14 +68,14 @@ const CAudio: FC<Props> = (props: Props) => {
             <span>{speed}x</span>
             <Image src={ArrowDown} height={16} width={16} />
           </div>
-          <div className={`${style.dropdown} ${!isOpen && 'd-none'}`}>
+          {/* <div className={`${style.dropdown} ${!isOpen && 'd-none'}`}>
             {SPEEDS.map((value) => (
               <div onClick={() => changeSpeed(value)}>
                 {value === speed ? <Image src={Check} /> : <div className={style.boxEmpty}></div>}
                 {value}x
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
         <a href={audio} download='downloaded_text_to_speech.mp3'>
           <Image src={Download} />

@@ -1,7 +1,6 @@
 /** @format */
 
-import { AIFeature, PageName, PageURL, ProductLabel, RequestLimitType, SectionID } from '../../models/enum';
-
+import { PageName, PageURL, SectionID } from '@models/enum';
 import { MegaMenuItem } from '../ui/layout/model';
 import { SelectOption } from '@base/model';
 
@@ -149,12 +148,6 @@ export const AI_FEATURE_TRANSLATE: { [key: string]: string } = {
   ocr_prescription: 'aipackage.ocr.prescription',
   ocr_card_passport: 'aipackage.ocr.cardpassport',
   ocr_dynamic: 'aipackage.ocr.dynamicTemplate',
-};
-
-export const LIMIT_TYPE_TRANSLATE: { [key: string]: string } = {
-  [RequestLimitType.REQUEST]: 'aipackage.limitBy.total',
-  [RequestLimitType.MONTH]: 'aipackage.limitBy.month',
-  [RequestLimitType.DAY]: 'aipackage.limitBy.day',
 };
 
 export const authAPIUrl = 'api/v1/auth';
@@ -313,152 +306,3 @@ export const LICENSE_TYPE: Array<SelectOption> = [
   { label: 'field.licenseType.trial', value: TRIAL_LICENSE },
   { label: 'field.licenseType.purchase', value: PURCHASED_LICENSE },
 ];
-
-export const FEATURE_MAPPING: { [key: string]: AIFeature } = {
-  [PageURL.OCR_MEDICAL_DEVICE]: AIFeature.OCR_HEALTH_DEVICE,
-  [PageURL.OCR_IN_BODY]: AIFeature.OCR_IN_BODY,
-  [PageURL.OCR_PRESCRIPTION]: AIFeature.OCR_PRESCRIPTION,
-  [PageURL.OCR_DYNAMIC_TEMPLATE]: AIFeature.OCR_DYNAMIC_TEMPLATE,
-  [PageURL.OCR_DYNAMIC_TEMPLATE_CREATE]: AIFeature.OCR_DYNAMIC_TEMPLATE,
-  [PageURL.OCR_DYNAMIC_TEMPLATE_RESULT]: AIFeature.OCR_DYNAMIC_TEMPLATE,
-  [PageURL.OCR_DYNAMIC_TEMPLATE_UPDATE]: AIFeature.OCR_DYNAMIC_TEMPLATE,
-  [PageURL.TEXT_TO_SPEECH]: AIFeature.TEXT_TO_SPEECH,
-};
-
-export const FEATURE_NAME_MAPPING: { [key in AIFeature]: string } = {
-  [AIFeature.PEOPLE_DETECTION]: 'product.od.objectDetection',
-  [AIFeature.FACE_DETECTION]: 'product.od.facialExpressionRecognition',
-  [AIFeature.FACE_ID]: 'product.od.faceRecognition',
-  [AIFeature.OCR_CARD_ID]: 'product.ocr.idCard',
-  [AIFeature.OCR_PASSPORT]: '',
-  [AIFeature.OCR_HEALTH_DEVICE]: 'product.ocr.medicalDevice',
-  [AIFeature.OCR_HEALTH_IDENTIFICATION]: '',
-  [AIFeature.OCR_IN_BODY]: 'product.ocr.inBody',
-  [AIFeature.OCR_PRESCRIPTION]: 'product.ocr.prescription',
-  [AIFeature.OCR_CARD_PASSPORT]: 'product.ocr.cardpassport',
-  [AIFeature.OCR_DYNAMIC_TEMPLATE]: 'product.ocr.dynamicTemplate',
-  [AIFeature.TEXT_TO_SPEECH]: 'product.speechProcessing.textToSpeech',
-};
-
-export const PRODUCT_ITEMS: { [key: string]: MegaMenuItem } = {
-  [ProductLabel.COMPUTER_VISION]: {
-    isActive: false,
-    isDisabled: false,
-    isTitle: true,
-    url: '',
-    subName: {
-      [ProductLabel.OCR]: {
-        isActive: false,
-        isDisabled: false,
-        isTitle: true,
-        url: PageURL.PRODUCT_OCR,
-        sectionId: SectionID.OCR_BANNER,
-        subName: {
-          [ProductLabel.OCR_MEDICAL_DEVICE]: {
-            isActive: false,
-            isDisabled: false,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            sectionId: SectionID.OCR_MD,
-            icon: 'MedicalDevice',
-          },
-          [ProductLabel.OCR_IN_BODY]: {
-            isActive: false,
-            isDisabled: false,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            sectionId: SectionID.OCR_IB,
-            icon: 'Inbody',
-          },
-          [ProductLabel.OCR_PRESCRIPTION]: {
-            isActive: false,
-            isDisabled: false,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            sectionId: SectionID.OCR_PRESCRIPTION,
-            icon: 'Prescription',
-          },
-          [ProductLabel.OCR_CARD_ID]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            icon: 'IDCard',
-          },
-          [ProductLabel.OCR_BILL]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            icon: 'Invoice',
-          },
-          [ProductLabel.OCR_LICENSE_PLATE]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OCR,
-            icon: 'LicensePlate',
-          },
-        },
-      },
-      [ProductLabel.OD]: {
-        isActive: false,
-        isDisabled: false,
-        isTitle: true,
-        url: PageURL.PRODUCT_OD,
-        subName: {
-          [ProductLabel.OD_FACE_RECOGNITION]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OD,
-            icon: 'FaceRecognition',
-          },
-          [ProductLabel.OD_FACIAL_EXPRESS_RECOGNITION]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OD,
-            icon: 'Emotion',
-          },
-          [ProductLabel.OD_AGE_GENDER_PREDICTION]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OD,
-            icon: 'AgeGender',
-          },
-          [ProductLabel.OD_OBJECT_TRACKING]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OD,
-            icon: 'PeopleCounting',
-          },
-          [ProductLabel.OD_ACTION_RECOGNITION]: {
-            isActive: false,
-            isDisabled: true,
-            isTitle: false,
-            url: PageURL.PRODUCT_OD,
-            icon: 'ActionRecognition',
-          },
-        },
-      },
-    },
-  },
-  [ProductLabel.NATURAL_LANGUAGE]: {
-    isActive: true,
-    isDisabled: false,
-    isTitle: true,
-  },
-  [ProductLabel.DATA_ANALYTICS]: {
-    isActive: true,
-    isDisabled: false,
-    isTitle: true,
-  },
-  [ProductLabel.AUDIO_SPEECH]: {
-    isActive: true,
-    isDisabled: false,
-    isTitle: true,
-  },
-};
