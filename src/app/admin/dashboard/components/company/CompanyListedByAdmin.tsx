@@ -108,7 +108,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
                   index + 1,
                   company.name || t('field.notSet'),
                   company.address || t('field.notSet'),
-                  dayjs(company.updatedAt).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                  dayjs(company.updatedAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
                   <div className='d-flex align-items-center'>
                     <Image
                       src={Edit}

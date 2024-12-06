@@ -323,6 +323,10 @@
   "field.hint.gender": "Chọn giới tính",
   "field.hint.address": "Nhập địa chỉ",
   "field.role": "Chức năng",
+  "field.id": "Id",
+  "field.module": "Nhóm",
+  "filed.method": "Phương thức",
+  "filed.api": "API",
   "field.premium": "Nâng cấp",
   "field.createdAt": "Thời gian tạo",
   "field.last_updated": "Chỉnh sửa lần cuối",
@@ -347,6 +351,8 @@
   "cfm.deleteUser.content": "Bạn có chắc chắn muốn xóa người dùng này? Thao tác này không thể hoàn tác.",
   "cfm.deleteCompany.title": "Xác nhận xóa công ty",
   "cfm.deleteCompany.content": "Bạn có chắc chắn muốn xóa công ty này? Thao tác này không thể hoàn tác.",
+  "cfm.deleteRole.title": "Xác nhận xóa vai trò",
+  "cfm.deleteRole.content": "Bạn có chắc chắn muốn xóa vai trò này? Thao tác này không thể hoàn tác.",
 
   "error.tenantExists": "Tên công ty đã tồn tại",
   "field.error.maxLength": "Độ dài của trường này chỉ tối đa là",
@@ -477,6 +483,7 @@
   "btn.admin.addCompany": "Thêm công ty",
   "btn.admin.addJob": "Thêm việc làm",
   "btn.admin.addCV": "Thêm CV",
+  "btn.admin.addRole": "Thêm vai trò",
 
   "admin.userManagement": "Quản lý người dùng",
   "admin.CVManagement": "Quản lý CV",
@@ -872,5 +879,6 @@
   "forgotPassword.send.success": "Gửi yêu cầu đặt lại mật khẩu thành công",
   "user.update-password": "Chỉnh sửa mật khẩu",
   "user.update-password.title": "Quản lý hồ sơ của bạn - Chỉnh sửa mật khẩu",
-  "payment.success": "Thanh toán thành công, cảm ơn bạn đã sử dụng dịch vụ."
+  "payment.success": "Thanh toán thành công, cảm ơn bạn đã sử dụng dịch vụ.",
+  "btn.admin.addPermission": "Thêm quyền hạn"
 }

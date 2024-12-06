@@ -21,6 +21,7 @@ import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import { CompanyId } from '../../../../../app/profile/model';
 import { fetchCompaniesByAdmin } from '../company/api';
+import { fetchRoleByAdmin } from '../role/api';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -30,6 +31,7 @@ interface Props {
 const UserListedByAdmin: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
   const [users, setUsers] = useState<UserProfileByAdmin[]>([]);
+  const [role, setRole] = useState<Role[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,7 +56,19 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.action'),
   ];
 
-  console.log('selectedUser', selectedUser);
+  const fetchAllRole = (page: number) => {
+    setIsLoading(true);
+    fetchRoleByAdmin(page, pageSize)
+      .then((res) => {
+        const { result } = res.data;
+        setRole(result);
+      })
+      .catch((error) => {
+        if (error.response?.status === 403) handleErrorNoPermission(error, t);
+        else Alert.error({ title: t('error.title'), content: t('error.stWrong') });
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -102,6 +116,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     loadAllCompanies();
+    fetchAllRole(1);
   }, [selectedRole]);
 
   const handleCreateUser = async (values: any) => {
@@ -211,7 +226,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
                 user.role || t('field.notSet'),
                 <Image src={user.isVerify ? Yes : No} alt={user.isVerify ? 'Verified' : 'Not Verified'} width={20} height={20} />,
                 PremiumPlanMapping[user.isPremium],
-                dayjs(user.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+                dayjs(user.updatedAt).format('HH:mm:ss DD-MM-YYYY'),
                 <div className='d-flex align-items-center'>
                   <Image
                     src={Edit}
@@ -269,7 +284,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
           <Form.Item label={t('field.role')} name='role' rules={[{ required: true, message: t('field.error.required') }]}>
             <Select onChange={(value) => setSelectedRole(value)}>
-              {ROLES.map((role) => (
+              {role.map((role) => (
                 <Select.Option key={role._id} value={role._id}>
                   {role.name}
                 </Select.Option>
@@ -368,11 +383,11 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           </Form.Item>
 
           <Form.Item label={t('field.createdAt')} name='createdAt'>
-            <Input disabled value={dayjs(selectedUser?.createdAt).format('YYYY-MM-DD HH:mm:ss')} />
+            <Input disabled value={dayjs(selectedUser?.createdAt).format('HH:mm:ss DD-MM-YYYY')} />
           </Form.Item>
 
           <Form.Item label={t('field.last_updated')} name='updatedAt'>
-            <Input disabled value={dayjs(selectedUser?.updatedAt).format('YYYY-MM-DD HH:mm:ss')} />
+            <Input disabled value={dayjs(selectedUser?.updatedAt).format('HH:mm:ss DD-MM-YYYY')} />
           </Form.Item>
 
           <Form.Item>

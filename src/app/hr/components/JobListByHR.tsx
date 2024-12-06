@@ -142,7 +142,7 @@ const JobListByHR: FC<Props> = () => {
                   job.company.name || t('field.notSet'),
                   job.location || t('field.notSet'),
                   `${job.salary.toLocaleString()} VND` || t('field.notSet'),
-                  dayjs(job.updatedAt).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                  dayjs(job.updatedAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
                 ]}
               />
             ))

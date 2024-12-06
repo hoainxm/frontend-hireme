@@ -56,7 +56,7 @@ const ResumeTable: React.FC<Props> = ({ resumes, handleEditClick }) => {
       title: t('field.createdAt'),
       dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (createdAt: string) => (createdAt ? dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss') : <Tag color='volcano'>{t('field.notSet')}</Tag>),
+      render: (createdAt: string) => (createdAt ? dayjs(createdAt).format('HH:mm:ss DD-MM-YYYY') : <Tag color='volcano'>{t('field.notSet')}</Tag>),
     },
     {
       title: t('field.action'),

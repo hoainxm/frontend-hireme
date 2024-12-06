@@ -99,7 +99,7 @@ const ResumeListByHR: FC<Props> = () => {
                   resume.jobId?.name || t('field.notSet'),
                   resume.companyId?.name || t('field.notSet'),
                   ResumeStatusMapping[resume.status as ResumeStatus] || t('field.notSet'),
-                  dayjs(resume.createdAt).format('YYYY-MM-DD HH:mm:ss') || t('field.notSet'),
+                  dayjs(resume.createdAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
                   // <Button type='link' onClick={() => handleEditClick(resume)}>
                   //   {t('btn.edit')}
                   // </Button>,

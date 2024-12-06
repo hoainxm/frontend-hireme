@@ -62,7 +62,7 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
   };
 
   useEffect(() => {
-    fetchCVs(1); // Initial fetch
+    fetchCVs(1);
   }, [pageSize]);
 
   return (
@@ -83,7 +83,7 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
                   index + 1,
                   cv.email || t('field.notSet'),
                   cv.status || t('field.notSet'),
-                  dayjs(cv.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+                  dayjs(cv.createdAt).format('HH:mm:ss DD-MM-YYYY'),
                   // <Image src={TrashIcon} alt='Delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(cv._id)} />,
                 ]}
               />

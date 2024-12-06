@@ -19,7 +19,7 @@ const PermissionManagement: FC<Props> = (props: Props) => {
   return (
     <AdminContentLayout dropDefaultContent title={t('admin.permissionManagement')} activate={PageName.ADMIN_MANAGE_PERMISSION}>
       <TabLayout tabs={HEADERS}>
-        <PermissionListedByAdmin />
+        <PermissionListedByAdmin id='permission' key={0} />
       </TabLayout>
     </AdminContentLayout>
   );
