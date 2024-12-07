@@ -163,19 +163,6 @@ const ApplyJobModal: FC<Props> = ({ jobName, onClose, companyId, jobId }) => {
         </Radio.Group>
         <Divider />
 
-        <div className={style['apply-job-modal__cover-letter-section']}>
-          <Title level={5} className={style['apply-job-modal__cover-letter-title']}>
-            {t('coverLetter')}
-          </Title>
-          <TextArea
-            rows={4}
-            placeholder={t('writeCoverLetterPlaceholder')}
-            value={coverLetter}
-            onChange={(e) => setCoverLetter(e.target.value)}
-            className={style['apply-job-modal__cover-letter']}
-          />
-        </div>
-
         <div className={style['apply-job-modal__actions']}>
           <Button onClick={onClose} className={style['apply-job-modal__cancel-button']}>
             {t('cancel')}

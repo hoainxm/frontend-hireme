@@ -652,5 +652,6 @@
   "jobUpdated": "Cập nhật công việc thành công",
   "error": "Lỗi",
   "updateJobFailed": "Cập nhật công việc thất bại",
-  "save": "Lưu"
+  "save": "Lưu",
+  "field.error.endDateAfterStartDate": "Ngày kết thúc phải lớn hơn ngày bắt đầu"
 }
