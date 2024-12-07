@@ -41,3 +41,4 @@ export const ResumeStatusOptions = Object.keys(ResumeStatus).map((key) => ({
   value: ResumeStatus[key as ResumeStatus],
   label: ResumeStatusMapping[ResumeStatus[key as ResumeStatus]],
 }));
+

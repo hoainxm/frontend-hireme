@@ -915,5 +915,6 @@
   "success": "Success",
   "jobUpdated": "Job updated successfully",
   "error": "Error",
-  "updateJobFailed": "Failed to update the job"
+  "updateJobFailed": "Failed to update the job",
+  "field.error.endDateAfterStartDate": "The end date must be greater than the start date"
 }

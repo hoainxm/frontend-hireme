@@ -17,9 +17,7 @@ interface Props extends RouteComponentProps<any> {}
 
 const HRDashboard: FC<Props> = (props: Props) => {
   const { t } = useTranslation();
-  // const userInfo = useAppSelector((state: RootState) => state.user.userProfile);
   const userInfo: UserProfile | null = useAppSelector((state: RootState) => state.user.userProfile);
-  console.log(userInfo);
 
   const HEADERS: Array<TabItem> = [
     { name: t('field.admin.job'), contentId: 'jobs' },
@@ -30,7 +28,7 @@ const HRDashboard: FC<Props> = (props: Props) => {
   return (
     <HRContentLayout dropDefaultContent title={t('hr.dashboard.title')} activate={PageName.HR_DASHBOARD}>
       <TabLayout tabs={HEADERS}>
-        <JobListByHR key={0} id='jobs' />
+        {userInfo?._id && <JobListByHR key={0} id='jobs' idHr={userInfo?._id} />}
         <ResumeList key={1} id='resumes' />
         {userInfo && <UpgradeAccount key={2} id='upgrade' sectionId={'upgradeSection'} userInfo={userInfo} />}
       </TabLayout>
