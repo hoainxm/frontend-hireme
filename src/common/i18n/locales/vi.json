@@ -644,5 +644,6 @@
   "jobUpdated": "Cập nhật công việc thành công",
   "error": "Lỗi",
   "updateJobFailed": "Cập nhật công việc thất bại",
-  "save": "Lưu"
+  "save": "Lưu",
+  "count.afterCount": "Sau {{value}} giây"
 }
