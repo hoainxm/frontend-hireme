@@ -588,7 +588,7 @@
   "user.update-password": "Chỉnh sửa mật khẩu",
   "user.update-password.title": "Quản lý hồ sơ của bạn - Chỉnh sửa mật khẩu",
   "payment.success": "Thanh toán thành công, cảm ơn bạn đã sử dụng dịch vụ.",
-  "btn.admin.addPermission": "Thêm quyền hạn"
+  "btn.admin.addPermission": "Thêm quyền hạn",
   "jobStatistics.title": "Thống kê công việc",
   "jobStatistics.statusDistribution": "Phân bố công việc theo trạng thái",
   "jobStatistics.jobsPerCompany": "Số lượng công việc theo công ty",
@@ -653,5 +653,4 @@
   "error": "Lỗi",
   "updateJobFailed": "Cập nhật công việc thất bại",
   "save": "Lưu"
-
 }

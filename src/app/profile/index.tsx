@@ -298,8 +298,8 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
           </Form.Item>
           <Form.Item label={t('field.gender')} name='gender'>
             <Select placeholder={t('field.hint.gender')}>
-              <Option value='Nam'>{t('male')}</Option>
-              <Option value='Nữ'>{t('female')}</Option>
+              <Option value='Nam'>Nam</Option>
+              <Option value='Nữ'>Nữ</Option>
             </Select>
           </Form.Item>
           <Form.Item label={t('field.birthday')} name='dateOfBirth'>

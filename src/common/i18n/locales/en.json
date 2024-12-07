@@ -780,9 +780,8 @@
   "user.update-password.title": "Manage your profile - Edit password",
   "payment.success": "Payment successful, thank you for using the service.",
 
-
   "cfm.deleteRole.title": "Confirm role deletion",
-  "cfm.deleteRole.content": "Are you sure you want to delete this role? This operation cannot be undone."
+  "cfm.deleteRole.content": "Are you sure you want to delete this role? This operation cannot be undone.",
 
   "field.noSkills": "No skills available",
   "field.error.min": "This field requires a positive number",
@@ -916,5 +915,5 @@
   "success": "Success",
   "jobUpdated": "Job updated successfully",
   "error": "Error",
-  "updateJobFailed":
+  "updateJobFailed": "Failed to update the job"
 }
