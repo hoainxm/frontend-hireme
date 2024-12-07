@@ -141,22 +141,22 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
                   company.name || t('field.notSet'),
                   company.address || t('field.notSet'),
                   dayjs(company.updatedAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
-                  <Image
-                    src={TrashIcon}
-                    alt='Delete'
-                    className='icon-action'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleDelete(company._id)}
-                  />,
-                  // <div className='d-flex align-items-center'>
-                  //   <Image
-                  //     src={Edit}
-                  //     alt='Edit'
-                  //     className='icon-action'
-                  //     style={{ cursor: 'pointer', marginRight: 10 }}
-                  //     onClick={() => handleEditClick(company)}
-                  //   />
-                  // </div>,
+                  <div className='d-flex align-items-center'>
+                    <Image
+                      src={Edit}
+                      alt='Edit'
+                      className='icon-action'
+                      style={{ cursor: 'pointer', marginRight: 10 }}
+                      onClick={() => handleEditClick(company)}
+                    />
+                    <Image
+                      src={TrashIcon}
+                      alt='Delete'
+                      className='icon-action'
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleDelete(company._id)}
+                    />
+                  </div>,
                 ]}
               />
             ))

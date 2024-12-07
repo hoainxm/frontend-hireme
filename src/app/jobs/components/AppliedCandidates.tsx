@@ -29,7 +29,7 @@ const AppliedCandidates: React.FC<AppliedCandidatesProps> = ({ job }) => {
   }, []);
 
   const renderAppliedCandidates = () => {
-    if (upgradePacket === 'bGl0ZQ==') {
+    if (upgradePacket === 'bGl0ZQ==' || upgradePacket == null) {
       return (
         <div onClick={isUpgradeRequired} className={style['job-card__sub-details-title']}>
           <FontAwesomeIcon icon={faEye} className={style['job-card__sub-details-icon']} />

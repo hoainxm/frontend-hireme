@@ -19,7 +19,7 @@ const RoleManagement: FC<Props> = (props: Props) => {
   return (
     <AdminContentLayout dropDefaultContent title={t('admin.roleManagement')} activate={PageName.ADMIN_MANAGE_ROLE}>
       <TabLayout tabs={HEADERS}>
-        <RoleListedByAdmin />
+        <RoleListedByAdmin id='role' key={0} />
       </TabLayout>
     </AdminContentLayout>
   );

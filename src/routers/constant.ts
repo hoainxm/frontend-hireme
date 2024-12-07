@@ -67,6 +67,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.RESEND_VERIFY_EMAIL,
     component: ResendVerifyEmail,
   },
+  {
+    path: PageURL.RESET_PASSWORD,
+    component: ResetPassword,
+  },
 ];
 
 export const PRIVATE_ROUTE = [
@@ -82,10 +86,7 @@ export const PRIVATE_ROUTE = [
     path: PageURL.UPDATE_PASSWORD,
     component: UpdatePassword,
   },
-  {
-    path: PageURL.RESET_PASSWORD,
-    component: ResetPassword,
-  },
+
   {
     path: PageURL.UPGRADE,
     component: Upgrade,

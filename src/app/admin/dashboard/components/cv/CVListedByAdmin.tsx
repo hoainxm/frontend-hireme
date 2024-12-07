@@ -115,8 +115,7 @@ const CVListedByAdmin: FC<Props> = ({ id }) => {
                   index + 1 + (currentPage - 1) * pageSize,
                   cv.email || t('field.notSet'),
                   cv.status || t('field.notSet'),
-                  dayjs(cv.createdAt).format('YYYY-MM-DD HH:mm:ss'),
-                  <Image src={TrashIcon} alt='Delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(cv._id)} />,
+                  dayjs(cv.createdAt).format('HH:mm:ss DD-MM-YYYY'),
                 ]}
               />
             ))

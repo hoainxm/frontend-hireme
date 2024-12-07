@@ -28,9 +28,9 @@ export const JobListedByAdmin: FC<Props> = () => {
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(10);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [totalData, setTotalData] = useState<number>(0);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [companies, setCompanies] = useState<Company[]>([]);
