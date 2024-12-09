@@ -139,7 +139,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
         </Form.Item>
         <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button type='primary' htmlType='submit'>
-            {t('btn.create')}
+            {t('btn.save')}
           </Button>
           <Button onClick={onClose} style={{ marginLeft: 8 }}>
             {t('btn.cancel')}

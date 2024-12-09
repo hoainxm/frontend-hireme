@@ -279,6 +279,8 @@
   "error.uploadError": "Lỗi tải lên",
 
   "editProfile": "Chỉnh sửa thông tin cá nhân",
+  "editProfile.success": "Chỉnh sửa thông tin cá nhân thành công",
+  "editProfile.failed": "Chỉnh sửa thông tin cá nhân thất bại",
   "editStatus": "Chỉnh sửa trạng thái",
   "field.profile": "Hồ sơ của tôi",
   "field.myCV": "CV của tôi",
@@ -653,5 +655,7 @@
   "error": "Lỗi",
   "updateJobFailed": "Cập nhật công việc thất bại",
   "save": "Lưu",
-  "field.error.endDateAfterStartDate": "Ngày kết thúc phải lớn hơn ngày bắt đầu"
+  "field.error.endDateAfterStartDate": "Ngày kết thúc phải lớn hơn ngày bắt đầu",
+  "noCVAvailable": "Hiện tại chưa có sẵn CV nào, hãy thử tải lên từ máy tính của bạn.",
+  "count.afterCount": "Sau {{value}} giây"
 }

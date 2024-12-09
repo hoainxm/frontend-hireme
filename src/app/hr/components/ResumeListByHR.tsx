@@ -3,15 +3,12 @@
 import React, { FC, useState, useEffect } from 'react';
 import { fetchResumesByHR, updateResumeStatus } from '../api';
 import { Resume } from '../model';
-import { Image } from 'react-bootstrap';
 import { CTable, CTPaging, CTPageSize, CTRow, BlankFrame, Loading } from '../../../common/ui/base';
-import { Alert, Confirm } from '../../../common/utils/popup';
+import { Alert } from '../../../common/utils/popup';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { ResumeStatus, ResumeStatusMapping, ResumeStatusOptions } from '../model';
-import { Modal, Form, Select, Button } from 'antd';
-import Edit from '../../../common/ui/assets/icon/Edit.svg';
-import ResumeTable from './ResumeTable';
+import { Modal, Form, Select, Button, Input } from 'antd';
 import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 
 interface Props {
@@ -21,38 +18,66 @@ interface Props {
 const ResumeListByHR: FC<Props> = () => {
   const { t } = useTranslation();
   const [resumes, setResumes] = useState<Resume[]>([]);
+  const [filteredResumes, setFilteredResumes] = useState<Resume[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
-  const [totalData, setTotalData] = useState<number>(0);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null);
 
-  const TABLE_HEADER = [
-    t('field.numeric'),
-    t('field.email'),
-    t('field.jobName'),
-    // t('field.companyName'),
-    t('field.status'),
-    t('field.submissionTime'),
-    t('field.action'),
-  ];
+  const TABLE_HEADER = [t('field.numeric'), t('field.email'), t('field.jobName'), t('field.status'), t('field.submissionTime'), t('field.action')];
 
-  const fetchData = (page: number) => {
+  const fetchData = () => {
     setIsLoading(true);
-    fetchResumesByHR(page, pageSize)
+    fetchResumesByHR(1, 1000)
       .then((res) => {
-        const { meta, result } = res.data;
+        const { result } = res.data;
         setResumes(result);
-        setCurrentPage(meta.current);
-        setTotalData(meta.total);
+        setFilteredResumes(result);
       })
       .catch(() => Alert.error({ title: t('error.title'), content: t('error.fetchFailed') }))
       .finally(() => setIsLoading(false));
   };
 
+  const applyFilters = () => {
+    let filtered = [...resumes];
+
+    if (searchValue) {
+      const lowerValue = searchValue.toLowerCase();
+      filtered = filtered.filter(
+        (resume) =>
+          resume.email.toLowerCase().includes(lowerValue) ||
+          (resume.jobId?.name && resume.jobId.name.toLowerCase().includes(lowerValue)) ||
+          (resume.status && ResumeStatusMapping[resume.status]?.toLowerCase().includes(lowerValue))
+      );
+    }
+
+    if (sortOrder === 'newest') {
+      filtered = filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else if (sortOrder === 'oldest') {
+      filtered = filtered.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    }
+
+    setFilteredResumes(filtered);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [resumes, searchValue, sortOrder]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSortToggle = () => {
+    setSortOrder((prevOrder) => (prevOrder === 'newest' ? 'oldest' : 'newest'));
+  };
+
   const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(e.target.value, 10));
+    setCurrentPage(1);
   };
 
   const handleEditClick = (resume: Resume) => {
@@ -71,7 +96,7 @@ const ResumeListByHR: FC<Props> = () => {
         await updateResumeStatus(selectedResume._id, values.status);
         Alert.success({ title: t('success.title'), content: t('success.updateResume') });
         setIsModalVisible(false);
-        fetchData(currentPage);
+        fetchData();
       } catch {
         Alert.error({ title: t('error.title'), content: t('error.updateResume') });
       }
@@ -79,30 +104,39 @@ const ResumeListByHR: FC<Props> = () => {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage, pageSize]);
+    fetchData();
+  }, []);
 
   return (
     <div>
+      <div className='d-flex justify-content-between mb-3'>
+        <Input.Search
+          type='text'
+          placeholder={t('field.search')}
+          value={searchValue}
+          onChange={handleSearchChange}
+          style={{ marginBottom: '16px', maxWidth: '300px' }}
+        />
+        <Button type='primary' onClick={handleSortToggle}>
+          {sortOrder === 'newest' ? t('sort.by.oldest') : t('sort.by.recent')}
+        </Button>
+      </div>
+
       <CTable responsive maxHeight={833}>
         <thead>
           <CTRow header data={TABLE_HEADER} />
         </thead>
         <tbody>
-          {resumes.length > 0 ? (
-            resumes.map((resume, index) => (
+          {filteredResumes.length > 0 ? (
+            filteredResumes.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((resume, index) => (
               <CTRow
                 key={resume._id}
                 data={[
-                  index + 1,
+                  index + 1 + (currentPage - 1) * pageSize,
                   resume.email || t('field.notSet'),
                   resume.jobId?.name || t('field.notSet'),
-                  // resume.companyId?.name || t('field.notSet'),
                   ResumeStatusMapping[resume.status as ResumeStatus] || t('field.notSet'),
                   dayjs(resume.createdAt).format('HH:mm:ss DD-MM-YYYY') || t('field.notSet'),
-                  // <Button type='link' onClick={() => handleEditClick(resume)}>
-                  //   {t('btn.edit')}
-                  // </Button>,
                   <div style={{ alignItems: 'center' }}>
                     <Button
                       type='link'
@@ -111,7 +145,6 @@ const ResumeListByHR: FC<Props> = () => {
                       icon={<EyeOutlined />}
                     ></Button>
                     <Button onClick={() => handleEditClick(resume)} icon={<EditOutlined />} type='link' target='_blank' />
-                    {/* <Image src={Edit} alt='edit' className='icon-action' style={{ cursor: 'pointer' }} onClick={() => handleEditClick(resume)} /> */}
                   </div>,
                 ]}
               />
@@ -121,17 +154,21 @@ const ResumeListByHR: FC<Props> = () => {
           )}
         </tbody>
       </CTable>
-      {resumes.length > 0 && (
+      {filteredResumes.length > 0 && (
         <div className='d-flex justify-content-between mt-5'>
           <div>
-            <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={totalData} defaultPageSize={pageSize} />
+            <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={filteredResumes.length} defaultPageSize={pageSize} />
           </div>
           <div>
-            <CTPaging className='mt-4' currentPage={currentPage} totalPage={Math.ceil(totalData / pageSize)} onGetData={fetchData} />
+            <CTPaging
+              className='mt-4'
+              currentPage={currentPage}
+              totalPage={Math.ceil(filteredResumes.length / pageSize)}
+              onGetData={(page) => setCurrentPage(page)}
+            />
           </div>
         </div>
       )}
-      {/* <ResumeTable resumes={resumes} handleEditClick={handleEditClick} /> */}
       <Loading isOpen={isLoading} />
 
       <Modal title={t('editStatus')} visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>

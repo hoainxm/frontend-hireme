@@ -176,7 +176,6 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
         statusOptions={Status.map((status) => ({ value: status, label: status }))}
         genderOptions={GenderOptions.map((gender) => ({ value: gender, label: gender }))}
       />
-      ;
       <EditJobModal
         visible={isEditModalVisible}
         onClose={() => setIsEditModalVisible(false)}

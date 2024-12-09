@@ -140,12 +140,12 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       }
 
       const response = await updateMe(userInfo._id, formattedData);
-      message.success('Information has been updated successfully!');
+      message.success(t('editProfile.success'));
       setUserInfo(response.data);
       setIsEditModalVisible(false);
       fetchInfo();
     } catch (error) {
-      message.error('Update information failed!');
+      message.error(t('editProfile.failed'));
       console.error('Error updating profile:', error);
     }
   };
@@ -303,7 +303,12 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
             </Select>
           </Form.Item>
           <Form.Item label={t('field.birthday')} name='dateOfBirth'>
-            <DatePicker format='YYYY-MM-DD' placeholder={t('field.hint.birthday')} style={{ width: '100%' }} />
+            <DatePicker
+              format='YYYY-MM-DD'
+              placeholder={t('field.hint.birthday')}
+              style={{ width: '100%' }}
+              disabledDate={(current) => current && current > dayjs().endOf('day')}
+            />
           </Form.Item>
           <Form.Item label={t('support.phone')} name='phone'>
             <Input type='number' placeholder={t('field.hint.phone')} />

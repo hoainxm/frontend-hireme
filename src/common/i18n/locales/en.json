@@ -266,6 +266,8 @@
   "btn.resendVerify": "Send Verification Code",
   "error.tokenVerifyInvalid": "The verification token is invalid.",
   "editProfile": "Edit Personal Profile",
+  "editProfile.success": "Successfully updated personal information",
+  "editProfile.failed": "Failed to update personal information",
   "field.hint.companyName": "Enter company name",
   "field.fullName": "Full name",
   "field.hint.fullName": "Enter full name",
@@ -916,5 +918,6 @@
   "jobUpdated": "Job updated successfully",
   "error": "Error",
   "updateJobFailed": "Failed to update the job",
-  "field.error.endDateAfterStartDate": "The end date must be greater than the start date"
+  "field.error.endDateAfterStartDate": "The end date must be greater than the start date",
+  "noCVAvailable": "Currently, there are no CVs available. Please try uploading one from your computer."
 }
