@@ -179,7 +179,9 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
       <EditJobModal
         visible={isEditModalVisible}
         onClose={() => setIsEditModalVisible(false)}
-        onEditSuccess={() => {}}
+        onEditSuccess={() => {
+          fetchData(currentPage);
+        }}
         job={selectedJob}
         companies={companies}
       />

@@ -25,7 +25,6 @@ import locationData from '../../../../jobs/components/location.json';
 import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
 
-
 interface Props {
   // isSysAdminSite?: boolean;
   id: string;
@@ -81,7 +80,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     t('field.action'),
   ];
 
-
   const fetchAllRole = (page: number) => {
     setIsLoading(true);
     fetchRoleByAdmin(page, pageSize)
@@ -95,7 +93,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
       })
       .finally(() => setIsLoading(false));
   };
-        
+
   const transformLocationData = (
     data: City[]
   ): { value: string; label: string; children?: { value: string; label: string; children?: { value: string; label: string }[] }[] }[] => {
@@ -114,7 +112,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
   };
 
   const locationOptions = transformLocationData(locationData as City[]);
-
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -289,7 +286,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           style={{ width: 600 }}
           onChange={(e) => onSearch(e.target.value)}
         />
-        <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} />
+        {/* <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} /> */}
       </div>
       <CTable responsive maxHeight={833}>
         <thead>
@@ -308,14 +305,14 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
                 PremiumPlanMapping[user.isPremium],
                 dayjs(user.updatedAt).format('HH:mm:ss DD-MM-YYYY'),
                 <div className='d-flex align-items-center'>
-                  <Image
+                  {/* <Image
                     src={Edit}
                     alt='edit'
                     width={20}
                     height={20}
                     style={{ cursor: 'pointer', marginRight: 10 }}
                     onClick={() => handleEditClick(user)}
-                  />
+                  /> */}
                   <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => onDeleteUser(user._id)} />
                 </div>,
               ]}
