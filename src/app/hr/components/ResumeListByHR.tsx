@@ -23,6 +23,7 @@ const ResumeListByHR: FC<Props> = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null);
@@ -54,6 +55,10 @@ const ResumeListByHR: FC<Props> = () => {
       );
     }
 
+    if (statusFilter) {
+      filtered = filtered.filter((resume) => resume.status === statusFilter);
+    }
+
     if (sortOrder === 'newest') {
       filtered = filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     } else if (sortOrder === 'oldest') {
@@ -65,7 +70,7 @@ const ResumeListByHR: FC<Props> = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [resumes, searchValue, sortOrder]);
+  }, [resumes, searchValue, sortOrder, statusFilter]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -75,12 +80,26 @@ const ResumeListByHR: FC<Props> = () => {
     setSortOrder((prevOrder) => (prevOrder === 'newest' ? 'oldest' : 'newest'));
   };
 
-  const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPageSize(parseInt(e.target.value, 10));
+  const handleStatusFilterChange = (value: string | null) => {
+    setStatusFilter(value);
+  };
+
+  const handleResetFilters = () => {
+    setSearchValue('');
+    setStatusFilter(null);
+    setSortOrder('newest');
+    setFilteredResumes(resumes);
     setCurrentPage(1);
   };
 
   const handleEditClick = (resume: Resume) => {
+    if (resume.status === 'APPROVED' || resume.status === 'REJECTED') {
+      Alert.warning({
+        title: t('warning.title'),
+        content: t('warning.cannotEdit'),
+      });
+      return;
+    }
     setSelectedResume(resume);
     setIsModalVisible(true);
   };
@@ -117,6 +136,16 @@ const ResumeListByHR: FC<Props> = () => {
           onChange={handleSearchChange}
           style={{ marginBottom: '16px', maxWidth: '300px' }}
         />
+        <Select
+          allowClear
+          placeholder='Lọc theo trạng thái'
+          style={{ width: '200px' }}
+          onChange={handleStatusFilterChange}
+          options={ResumeStatusOptions}
+        />
+        <Button type='default' onClick={handleResetFilters}>
+          {t('btn.reset')}
+        </Button>
         <Button type='primary' onClick={handleSortToggle}>
           {sortOrder === 'newest' ? t('sort.by.oldest') : t('sort.by.recent')}
         </Button>
@@ -144,7 +173,12 @@ const ResumeListByHR: FC<Props> = () => {
                       target='_blank'
                       icon={<EyeOutlined />}
                     ></Button>
-                    <Button onClick={() => handleEditClick(resume)} icon={<EditOutlined />} type='link' target='_blank' />
+                    <Button
+                      onClick={() => handleEditClick(resume)}
+                      icon={<EditOutlined />}
+                      type='link'
+                      disabled={resume.status === 'APPROVED' || resume.status === 'REJECTED'}
+                    />
                   </div>,
                 ]}
               />
@@ -157,7 +191,12 @@ const ResumeListByHR: FC<Props> = () => {
       {filteredResumes.length > 0 && (
         <div className='d-flex justify-content-between mt-5'>
           <div>
-            <CTPageSize className='mt-3' onChange={onChangePageSize} totalData={filteredResumes.length} defaultPageSize={pageSize} />
+            <CTPageSize
+              className='mt-3'
+              onChange={(e) => setPageSize(parseInt(e.target.value, 10))}
+              totalData={filteredResumes.length}
+              defaultPageSize={pageSize}
+            />
           </div>
           <div>
             <CTPaging

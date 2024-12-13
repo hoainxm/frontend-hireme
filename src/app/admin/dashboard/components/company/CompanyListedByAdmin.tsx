@@ -9,13 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { Image } from 'react-bootstrap';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
-import { useHistory } from 'react-router-dom';
-import { PageURL } from '../../../../../models/enum';
 import dayjs from 'dayjs';
-import { onChange } from 'react-toastify/dist/core/store';
-import { Button, Col, Form, Input, InputNumber, Modal, Row, Upload } from 'antd';
+import {Form, Input, } from 'antd';
 import CreateCompanyModal from './CreateCompanyModal';
-import EditCompanyModal from './EditCompanyModal';
 
 const { Search } = Input;
 

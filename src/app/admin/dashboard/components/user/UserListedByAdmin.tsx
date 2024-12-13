@@ -5,24 +5,21 @@ import { Alert, Confirm } from '../../../../../common/utils/popup';
 import { BlankFrame, CButton, CTPageSize, CTPaging, CTRow, CTable, Loading } from '../../../../../common/ui/base';
 import { Role, UserProfileByAdmin } from '../../../../auth/models';
 import { Image } from 'react-bootstrap';
-import { NOT_SET } from '../../../../../common/utils/constants';
 import { useTranslation } from 'react-i18next';
 import { handleErrorNoPermission } from '../../../../../common/utils/common';
-import { createUser, deleteUser, fetchUsersByAdmin, updateUser } from './api';
+import { createUser, deleteUser, fetchUsersByAdmin,  } from './api';
 import Yes from '../../../../../common/ui/assets/images/Success.svg';
 import No from '../../../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
-import { PremiumPlanMapping, PREMIUM_RANKING, ROLES } from '../../constants';
+import { PremiumPlanMapping, ROLES } from '../../constants';
 import dayjs from 'dayjs';
-import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
-import { Button, Cascader, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import { Form, Input, message } from 'antd';
 import { CompanyId } from '../../../../../app/profile/model';
 import { fetchCompaniesByAdmin } from '../company/api';
 
 import { fetchRoleByAdmin } from '../role/api';
 
 import locationData from '../../../../jobs/components/location.json';
-import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
 
 interface Props {
@@ -100,18 +97,12 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     return data.map((city) => ({
       value: city.Name,
       label: city.Name,
-      // children: city.Districts.map((district) => ({
-      //   value: district.Name,
-      //   label: district.Name,
-      //   children: district.Wards.map((ward) => ({
-      //     value: ward.Name,
-      //     label: ward.Name,
-      //   })),
-      // })),
     }));
   };
 
+
   const locationOptions = transformLocationData(locationData as City[]);
+
 
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
@@ -131,7 +122,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   const onSearch = (value: string) => {
     const searchValueLower = value.toLowerCase();
-    setSearchValue(value); // Update search value
+    setSearchValue(value);
 
     const filtered = allUsers.filter(
       (user) =>
@@ -202,7 +193,6 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           name: selectedCompany.name,
         };
       }
-      console.log(payload);
       delete payload.companyId;
       await createUser(payload);
       Alert.success({ title: t('success.title'), content: t('success.userCreated') });
@@ -230,23 +220,23 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     setIsEditModalVisible(false);
   };
 
-  const handleEditSubmit = async (values: any) => {
-    const payload = {
-      ...values,
-      isPremium: values.isPremium,
-      isVerify: values.isVerify,
-    };
-    console.log(payload);
-    try {
-      await updateUser(selectedUser?._id || '', payload);
-      Alert.success({ title: t('success.title'), content: t('error.updateUserSuccess') });
-      setIsEditModalVisible(false);
-      fetchAllUsers(currentPage);
-    } catch (error) {
-      setIsEditModalVisible(false);
-      Alert.error({ title: t('fail.title'), content: t('error.updateUserFailed') });
-    }
-  };
+  // const handleEditSubmit = async (values: any) => {
+  //   const payload = {
+  //     ...values,
+  //     isPremium: values.isPremium,
+  //     isVerify: values.isVerify,
+  //   };
+  //   console.log(payload);
+  //   try {
+  //     await updateUser(selectedUser?._id || '', payload);
+  //     Alert.success({ title: t('success.title'), content: t('error.updateUserSuccess') });
+  //     setIsEditModalVisible(false);
+  //     fetchAllUsers(currentPage);
+  //   } catch (error) {
+  //     setIsEditModalVisible(false);
+  //     Alert.error({ title: t('fail.title'), content: t('error.updateUserFailed') });
+  //   }
+  // };
 
   const onDeleteUser = (userId: string) => {
     Confirm.delete({
@@ -256,7 +246,8 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
         deleteUser(userId)
           .then(() => {
             Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
-            fetchAllUsers(currentPage);
+
+            fetchAllUsers(1);
           })
           .catch(() => {
             Alert.error({ title: t('error.title'), content: t('error.stWrong') });
@@ -286,7 +277,17 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           style={{ width: 600 }}
           onChange={(e) => onSearch(e.target.value)}
         />
-        {/* <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} /> */}
+
+        <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} />
+        <CreateUserModal
+          visible={isCreateModalVisible}
+          onClose={() => setIsCreateModalVisible(false)}
+          onSubmit={handleCreateUser}
+          companies={companies}
+          locationOptions={transformLocationData(locationData)}
+          setSelectedRole={setSelectedRole}
+          selectedRole={selectedRole}
+        />
       </div>
       <CTable responsive maxHeight={833}>
         <thead>
