@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Form, Input, InputNumber, Modal, Select, Button, DatePicker, Row, Col, Cascader } from 'antd';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -53,18 +53,6 @@ const AddJobModal: FC<AddJobModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
-  const [filteredCities, setFilteredCities] = useState<{ value: string; label: string }[]>([]);
-
-  const handleCitySearch = (inputValue: string) => {
-    const filtered = locationData
-      .filter((city) => city.Name.toLowerCase().includes(inputValue.toLowerCase()))
-      .map((city) => ({
-        value: city.Name,
-        label: city.Name,
-      }));
-
-    setFilteredCities(filtered);
-  };
 
   const transformLocationData = (
     data: City[]
@@ -84,9 +72,6 @@ const AddJobModal: FC<AddJobModalProps> = ({
   };
 
   const locationOptions = transformLocationData(locationData as City[]);
-  useEffect(() => {
-    setFilteredCities(locationOptions);
-  }, []);
 
   const handleFormSubmit = async (values: any) => {
     try {
@@ -135,13 +120,7 @@ const AddJobModal: FC<AddJobModalProps> = ({
           </Col>
           <Col span={8}>
             <Form.Item label={t('field.location')} name='location' rules={[{ required: true, message: t('field.error.required') }]}>
-              <Select
-                showSearch
-                placeholder={t('field.provincePlaceholder')}
-                onSearch={handleCitySearch}
-                options={filteredCities.length > 0 ? filteredCities : locationOptions}
-                filterOption={false}
-              />
+              <Cascader options={locationOptions} />
             </Form.Item>
           </Col>
         </Row>
