@@ -33,7 +33,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
       });
     }
   }, [job, form]);
-  console.log('job', job);
+
   const handleFormSubmit = async (values: any) => {
     try {
       const formattedData = {
@@ -43,7 +43,6 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
         quantity: values.quantity,
         level: values.level,
         description: values.description,
-
         startDate: values.startDate ? values.startDate.toISOString() : '',
         endDate: values.endDate ? values.endDate.toISOString() : '',
         location: values.location ? values.location.join(' - ') : '',
@@ -54,7 +53,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
       };
 
       await editJob(job._id, formattedData);
-      onEditSuccess();
+      await onEditSuccess();
       Alert.success({ title: t('success.title'), content: t('jobUpdated') });
       form.resetFields();
       onClose();
@@ -69,16 +68,19 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
       <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
         <Row gutter={24}>
           <Col span={8}>
+
             <Form.Item label={t('jobName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
             <Form.Item label={t('skills')} name='skills' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select mode='multiple' placeholder={t('selectSkills')} options={SkillsOptions.map((skill) => ({ value: skill, label: skill }))} />
             </Form.Item>
           </Col>
-          <Col span={8}>
+        </Row>
+        <Row gutter={16}>
+          <Col span={12}>
             <Form.Item label={t('location')} name='location' rules={[{ required: true, message: t('field.error.required') }]}>
               <Cascader options={[]} placeholder={t('job.selectLocation')} />
             </Form.Item>
@@ -98,7 +100,9 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               />
             </Form.Item>
           </Col>
-          <Col span={8}>
+        </Row>
+        <Row gutter={16}>
+          <Col span={12}>
             <Form.Item label={t('quantity')} name='quantity' rules={[{ required: true, type: 'number', min: 1, message: t('field.error.required') }]}>
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
@@ -111,6 +115,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
         </Row>
         <Row gutter={24}>
           <Col span={8}>
+
             <Form.Item label={t('level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
@@ -120,9 +125,9 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item label={t('field.gender')} name='gender' rules={[{ required: true, message: t('field.error.required') }]}>
-              <Select placeholder={t('field.genderPlaceholder')} options={GenderOptions.map((gender) => ({ value: gender, label: gender }))} />
+          <Col span={12}>
+            <Form.Item label={t('endDate')} name='endDate' rules={[{ required: true, message: t('field.error.required') }]}>
+              <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
         </Row>

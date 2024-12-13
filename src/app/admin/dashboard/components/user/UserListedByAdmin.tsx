@@ -100,6 +100,10 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
     }));
   };
 
+
+  const locationOptions = transformLocationData(locationData as City[]);
+
+
   const fetchAllUsers = (page: number) => {
     setIsLoading(true);
     fetchUsersByAdmin(page, 1000)
@@ -273,6 +277,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
           style={{ width: 600 }}
           onChange={(e) => onSearch(e.target.value)}
         />
+
         <CButton className='ml-2' label={t('btn.admin.addUser')} onClick={() => setIsCreateModalVisible(true)} />
         <CreateUserModal
           visible={isCreateModalVisible}
