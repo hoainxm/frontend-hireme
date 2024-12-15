@@ -24,6 +24,7 @@ import { fetchRoleByAdmin } from '../role/api';
 import locationData from '../../../../jobs/components/location.json';
 import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
+import { current } from '@reduxjs/toolkit';
 
 interface Props {
   // isSysAdminSite?: boolean;
@@ -131,7 +132,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
 
   const onSearch = (value: string) => {
     const searchValueLower = value.toLowerCase();
-    setSearchValue(value); // Update search value
+    setSearchValue(value);
 
     const filtered = allUsers.filter(
       (user) =>
@@ -256,6 +257,7 @@ const UserListedByAdmin: FC<Props> = (props: Props) => {
         deleteUser(userId)
           .then(() => {
             Alert.success({ title: t('success.title'), content: t('success.userDeleted') });
+            setCurrentPage(pageSize);
             fetchAllUsers(currentPage);
           })
           .catch(() => {
