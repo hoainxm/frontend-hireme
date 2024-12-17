@@ -26,9 +26,10 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
         ...job,
         skills: job.skills,
         location: job.location ? job.location.split(' - ') : [],
-        startDate: dayjs(job.startDate),
-        endDate: dayjs(job.endDate),
+        startDate: job.startDate ? dayjs(job.startDate) : null,
+        endDate: job.endDate ? dayjs(job.endDate) : null,
         isActive: job.isActive ? 'Active' : 'Inactive',
+        workForm: job.workForm,
       });
     }
   }, [job, form]);
@@ -52,7 +53,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
       };
 
       await editJob(job._id, formattedData);
-      onEditSuccess();
+      await onEditSuccess();
       Alert.success({ title: t('success.title'), content: t('jobUpdated') });
       form.resetFields();
       onClose();
@@ -63,10 +64,11 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
   };
 
   return (
-    <Modal title={t('editModalTitle')} visible={visible} onCancel={onClose} footer={null} centered>
+    <Modal title={t('editModalTitle')} visible={visible} width={1000} onCancel={onClose} footer={null} centered>
       <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
-        <Row gutter={16}>
-          <Col span={12}>
+        <Row gutter={24}>
+          <Col span={8}>
+
             <Form.Item label={t('jobName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
               <Input />
             </Form.Item>
@@ -83,9 +85,19 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               <Cascader options={[]} placeholder={t('job.selectLocation')} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+        </Row>
+        <Row gutter={24}>
+          <Col span={8}>
             <Form.Item label={t('salary')} name='salary' rules={[{ required: true, type: 'number', min: 0, message: t('field.error.required') }]}>
-              <InputNumber style={{ width: '100%' }} />
+              <InputNumber
+                style={{ width: '100%' }}
+                min={0}
+                onKeyPress={(e) => {
+                  if (!/^\d$/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -95,16 +107,22 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
+            <Form.Item label={t('field.workForm')} name='workForm' rules={[{ required: true, message: t('field.error.required') }]}>
+              <Select mode='multiple' placeholder={t('field.workFormPlaceholder')} options={WorkForm.map((form) => ({ value: form, label: form }))} />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col span={8}>
+
             <Form.Item label={t('level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item label={t('startDate')} name='startDate' rules={[{ required: true, message: t('field.error.required') }]}>
-              <DatePicker style={{ width: '100%' }} />
+          <Col span={8}>
+            <Form.Item label={t('level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
+              <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -113,13 +131,23 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={16}>
-          <Col span={12}>
+        <Row gutter={24}>
+          <Col span={8}>
             <Form.Item label={t('status')} name='isActive' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select placeholder={t('selectStatus')}>
                 <Select.Option value='Active'>{t('status.active')}</Select.Option>
                 <Select.Option value='Inactive'>{t('status.inactive')}</Select.Option>
               </Select>
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label={t('startDate')} name='startDate' rules={[{ required: true, message: t('field.error.required') }]}>
+              <DatePicker style={{ width: '100%' }} />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label={t('endDate')} name='endDate' rules={[{ required: true, message: t('field.error.required') }]}>
+              <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
         </Row>

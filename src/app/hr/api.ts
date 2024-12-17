@@ -1,7 +1,7 @@
 /** @format */
 
 import { ApiResponse, doGet, doPost, doPut, doDelete, doPatch } from '../../common/utils/baseAPI';
-import { jobsAPIUrl, resumeAPIUrl } from '../../common/utils/constants';
+import { companiesAPIUrl, jobsAPIUrl, resumeAPIUrl, userAPIUrl } from '../../common/utils/constants';
 import { Job } from '../jobs/model';
 import { Resume, ResumeStatus } from './model';
 
@@ -79,4 +79,12 @@ export const updateResumeStatus = async (id: string, status: ResumeStatus): Prom
 
 export const deleteResume = async (id: string): Promise<ApiResponse<void>> => {
   return doDelete(`${resumeAPIUrl}/${id}`);
+};
+
+export const fetchUserById = async (id: string): Promise<ApiResponse<any>> => {
+  return doGet(`${userAPIUrl}/${id}`);
+};
+
+export const fetchCompanyById = async (id: string): Promise<ApiResponse<any>> => {
+  return doGet(`${companiesAPIUrl}/${id}`);
 };
