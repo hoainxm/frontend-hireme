@@ -39,7 +39,7 @@ const CreateCompanyModal: FC<CreateCompanyModalProps> = ({ isVisible, onClose, o
           },
         ]);
 
-        Alert.success({ title: t('success.title'), content: t('success.logoUploaded') });
+        // Alert.success({ title: t('success.title'), content: t('success.logoUploaded') });
       } else {
         throw new Error(t('error.uploadError'));
       }
