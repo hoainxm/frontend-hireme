@@ -657,5 +657,7 @@
   "save": "Lưu",
   "field.error.endDateAfterStartDate": "Ngày kết thúc phải lớn hơn ngày bắt đầu",
   "noCVAvailable": "Hiện tại chưa có sẵn CV nào, hãy thử tải lên từ máy tính của bạn.",
-  "count.afterCount": "Sau {{value}} giây"
+  "count.afterCount": "Sau {{value}} giây",
+  "success.uploadAvatar": "Tải lên avatar thành công",
+  "failed.uploadAvatar": "Tải lên avatar thất bại"
 }

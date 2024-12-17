@@ -86,7 +86,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
       const file = fileInputRef.current.files[0];
       try {
         const response = await uploadAvatar(file);
-        message.success('Avatar uploaded successfully');
+        message.success(t('success.uploadAvatar'));
         setUserInfo((prevUserInfo) => ({
           ...prevUserInfo!,
           avatar: response.avatar,
@@ -96,7 +96,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
         await fetchInfo();
         await dispatch(getUserProfileThunk()).unwrap();
       } catch (error) {
-        message.error('Failed to upload avatar');
+        message.error(t('failed.uploadAvatar'));
         console.error(error);
       }
     }

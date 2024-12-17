@@ -744,5 +744,7 @@
   "error": "Error",
   "updateJobFailed": "Failed to update the job",
   "field.error.endDateAfterStartDate": "The end date must be greater than the start date",
-  "noCVAvailable": "Currently, there are no CVs available. Please try uploading one from your computer."
+  "noCVAvailable": "Currently, there are no CVs available. Please try uploading one from your computer.",
+  "success.uploadAvater": "Avatar uploaded successfully",
+  "failed.uploadAvater": "Failed to upload avatar"
 }

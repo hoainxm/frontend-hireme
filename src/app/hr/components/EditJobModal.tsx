@@ -68,24 +68,24 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
       <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
         <Row gutter={24}>
           <Col span={8}>
-
             <Form.Item label={t('jobName')} name='name' rules={[{ required: true, message: t('field.error.required') }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item label={t('skills')} name='skills' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select mode='multiple' placeholder={t('selectSkills')} options={SkillsOptions.map((skill) => ({ value: skill, label: skill }))} />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item label={t('location')} name='location' rules={[{ required: true, message: t('field.error.required') }]}>
               <Cascader options={[]} placeholder={t('job.selectLocation')} />
             </Form.Item>
           </Col>
         </Row>
+        {/* <Row gutter={16}>
+         
+        </Row> */}
         <Row gutter={24}>
           <Col span={8}>
             <Form.Item label={t('salary')} name='salary' rules={[{ required: true, type: 'number', min: 0, message: t('field.error.required') }]}>
@@ -100,9 +100,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item label={t('quantity')} name='quantity' rules={[{ required: true, type: 'number', min: 1, message: t('field.error.required') }]}>
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
@@ -113,9 +111,11 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
             </Form.Item>
           </Col>
         </Row>
+        {/* <Row gutter={16}>
+         
+        </Row> */}
         <Row gutter={24}>
           <Col span={8}>
-
             <Form.Item label={t('level')} name='level' rules={[{ required: true, message: t('field.error.required') }]}>
               <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
@@ -125,7 +125,7 @@ const EditJobModal: FC<Props> = ({ visible, onClose, onEditSuccess, job, compani
               <Select placeholder={t('selectLevel')} options={experienceOptions.map((level) => ({ value: level, label: level }))} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item label={t('endDate')} name='endDate' rules={[{ required: true, message: t('field.error.required') }]}>
               <DatePicker style={{ width: '100%' }} />
             </Form.Item>

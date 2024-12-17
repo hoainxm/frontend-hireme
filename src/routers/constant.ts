@@ -71,6 +71,10 @@ export const PUBLIC_ROUTE = [
     path: PageURL.RESET_PASSWORD,
     component: ResetPassword,
   },
+  {
+    path: PageURL.VERIFY_EMAIL,
+    component: VerifyEmail,
+  },
 ];
 
 export const PRIVATE_ROUTE = [
@@ -78,10 +82,7 @@ export const PRIVATE_ROUTE = [
     path: PageURL.PROFILE_MANAGEMENT,
     component: ProfileUser,
   },
-  {
-    path: PageURL.VERIFY_EMAIL,
-    component: VerifyEmail,
-  },
+
   {
     path: PageURL.UPDATE_PASSWORD,
     component: UpdatePassword,
