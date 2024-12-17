@@ -10,7 +10,7 @@ import { Image } from 'react-bootstrap';
 import TrashIcon from '../../../../../common/ui/assets/ic/20px/trash-bin.svg';
 import Edit from '../../../../../common/ui/assets/icon/Edit.svg';
 import dayjs from 'dayjs';
-import {Form, Input, } from 'antd';
+import { Form, Input } from 'antd';
 import CreateCompanyModal from './CreateCompanyModal';
 
 const { Search } = Input;
@@ -82,7 +82,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
     try {
       await createCompany(values);
       Alert.success({ title: t('success.title'), content: t('success.companyCreated') });
-      fetchCompanies(currentPage);
+      fetchCompanies(1);
       setIsModalVisible(false);
       form.resetFields();
     } catch (error) {
@@ -98,7 +98,7 @@ const CompanyListedByAdmin: FC<Props> = (props: Props) => {
         try {
           deleteCompany(id);
           Alert.success({ title: t('success.title'), content: t('success.deleted') });
-          fetchCompanies(currentPage);
+          fetchCompanies(1);
         } catch (error) {
           Alert.error({ title: t('error.title'), content: t('error.deleteFailed') });
         }
