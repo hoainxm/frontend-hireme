@@ -749,4 +749,11 @@
   "failed.uploadAvater": "Failed to upload avatar",
   "no.jobs.available": "There are no jobs available. Please try later",
   "no.matching.jobs": "There are no matching jobs"
+  "jobDetail.similarJobs": "Send me similar jobs",
+  "jobDetail.similarJobsTitle": "Create job alert",
+  "modal.confirm": "Confirm",
+  "modal.cancel": "Cancel",
+  "field.searchSkills": "Search by skill",
+  "jobDetail.note": "Note",
+  "modal.update": "Update"
 }

@@ -18,8 +18,8 @@ const AppliedCandidates: React.FC<AppliedCandidatesProps> = ({ job }) => {
   const { t } = useTranslation();
   const userLogin = useAppSelector((state: RootState) => state.user);
   const [upgradePacket, setUpgradePacket] = useState<string | null>(null);
-
   console.log(upgradePacket);
+
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     const storedUpgradePacket = localStorage.getItem('aXNfcHJlbWl1bV9zZWN0aW9u');

@@ -664,4 +664,11 @@
   "no.jobs.available": "Hiện tại chưa có việc làm. Hãy thử lại sau",
   "Found": "Tìm thấy",
   "no.matching.jobs": "Không tìm thấy việc làm phù hợp với từ khoá tìm kiếm"
+  "jobDetail.similarJobs": "Gửi tôi việc làm tương tự",
+  "jobDetail.similarJobsTitle": "Tạo thông báo việc làm",
+  "modal.confirm": "Xác nhận",
+  "modal.cancel": "Hủy",
+  "field.searchSkills": "Tìm theo skill",
+  "jobDetail.note": "Lưu ý",
+  "modal.update": "Cập nhật"
 }
