@@ -8,10 +8,9 @@ import dayjs from 'dayjs';
 import { Job } from '../model';
 import ApplyButton from '../applyButton/ApplyButton';
 import { RootState, useAppSelector } from '../../../store/store';
-import useLoginAlert from '@hooks/useLoginAlert';
-import useVerificationAlert from '@hooks/useVerificationAlert';
 import { Modal } from 'antd';
 import AppliedCandidates from './AppliedCandidates';
+import ModalSendJob from './ModalSendJob';
 
 interface JobCardProps {
   job: Job;
@@ -23,32 +22,18 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
     return dayjs(endDate).isBefore(dayjs(), 'day');
   };
   const userLogin = useAppSelector((state: RootState) => state.user);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<string>();
-  const { isLoginRequired } = useLoginAlert();
-  const { isVerificationRequired } = useVerificationAlert();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const handleOpenModal = () => setIsModalVisible(true);
+  const handleCloseModal = () => setIsModalVisible(false);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     setIsLoggedIn(!!token);
     setIsVerified(userLogin.userProfile?.isPremium);
   }, []);
-
-  const handleOpenModal = () => {
-    if (!isLoggedIn) {
-      isLoginRequired();
-      return;
-    }
-
-    if (!isVerified) {
-      isVerificationRequired();
-      return;
-    }
-    setIsModalVisible(true);
-  };
-
-  const handleCloseModal = () => setIsModalVisible(false);
 
   return (
     <div className={style['job-card']}>
@@ -95,11 +80,14 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
       <div className={style['job-card__lower-block']}>
         <div className={style['job-card__description-header-wrapper']}>
           <h4 className={style['job-card__description-header']}>{t('jobDetail.jobDescription')}</h4>
+          <button className={style['similar-job-button']} onClick={handleOpenModal}>
+            <span className={style['similar-job-icon']}>🔔</span> {t('jobDetail.similarJobs')}
+          </button>
         </div>
         <div dangerouslySetInnerHTML={{ __html: job.description }} />
       </div>
 
-      <Modal>hehe</Modal>
+      <ModalSendJob visible={isModalVisible} onClose={handleCloseModal} />
     </div>
   );
 };

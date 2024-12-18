@@ -27,7 +27,6 @@ const ApplyButton: React.FC<ApplyButtonProps> = ({ jobName, companyId, jobId, di
     const token = localStorage.getItem('access_token');
     setIsLoggedIn(!!token);
     setIsVerified(userLogin.userProfile?.isVerify);
-    console.log(setIsVerified);
   }, []);
 
   const handleOpenModal = () => {

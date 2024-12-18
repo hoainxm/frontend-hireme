@@ -1,5 +1,5 @@
 import { paymentAPIUrl, subscriberAPIUrl, userAPIUrl } from '../../common/utils/constants';
-import { ApiResponse, doGet, doPost } from '../../common/utils/baseAPI';
+import { ApiResponse, doGet, doPatch, doPost } from '../../common/utils/baseAPI';
 import axios from 'axios';
 
 /** @format */
@@ -32,4 +32,12 @@ export const setPremium = (data: { typePre: string }): Promise<ApiResponse<any>>
 
 export const setSubscriber = (data: { name: string; email: string; skills: string[] }): Promise<ApiResponse<any>> => {
   return doPost(`${subscriberAPIUrl}`, data);
+};
+
+export const getSkills = (): Promise<ApiResponse<any>> => {
+  return doPost(`${subscriberAPIUrl}/skills`);
+};
+
+export const updateSubscriber = (data: { name: string; email: string; skills: string[] }): Promise<ApiResponse<any>> => {
+  return doPatch(`${subscriberAPIUrl}`, data);
 };
