@@ -72,7 +72,7 @@ const JobDetail: React.FC = () => {
   }
 
   if (!job) {
-    return <div className={style['job-detail__no-data']}>{t('noData')}</div>;
+    return <div className={style['job-detail__no-data']}>{t('field.hint.noData')}</div>;
   }
 
   return (

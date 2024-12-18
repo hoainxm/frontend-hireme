@@ -5,6 +5,10 @@ import { companiesAPIUrl, jobsAPIUrl, resumeAPIUrl, userAPIUrl } from '../../com
 import { Job } from '../jobs/model';
 import { Resume, ResumeStatus } from './model';
 
+export const fetchUserById = async (id: string): Promise<ApiResponse<any>> => {
+  return doGet(`${userAPIUrl}/${id}`);
+};
+
 export const createJob = async (data: {
   name: string;
   skills: string[];
@@ -79,10 +83,6 @@ export const updateResumeStatus = async (id: string, status: ResumeStatus): Prom
 
 export const deleteResume = async (id: string): Promise<ApiResponse<void>> => {
   return doDelete(`${resumeAPIUrl}/${id}`);
-};
-
-export const fetchUserById = async (id: string): Promise<ApiResponse<any>> => {
-  return doGet(`${userAPIUrl}/${id}`);
 };
 
 export const fetchCompanyById = async (id: string): Promise<ApiResponse<any>> => {

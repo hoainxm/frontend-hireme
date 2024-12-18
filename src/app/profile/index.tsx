@@ -197,7 +197,7 @@ export const ProfileUser: FC<Props> = ({ sectionId }) => {
                     <Text className={style.label}>{t('field.birthday')}:</Text> {userInfo?.dateOfBirth}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
-                    <Text className={style.label}>{t('support.phone')}:</Text> {userInfo?.phone || t('field.notSet')}
+                    <Text className={style.label}>{t('support.phone')}:</Text> {userInfo?.phone}
                   </Col>
                   <Col span={12} className={style['detail-item']}>
                     <Text className={style.label}>{t('field.location')}:</Text> {userInfo?.address}

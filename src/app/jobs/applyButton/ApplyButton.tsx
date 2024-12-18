@@ -15,10 +15,10 @@ interface ApplyButtonProps {
 }
 
 const ApplyButton: React.FC<ApplyButtonProps> = ({ jobName, companyId, jobId, disabled }) => {
+  const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isVerified, setIsVerified] = useState<boolean>();
-  const { t } = useTranslation();
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const { isLoginRequired } = useLoginAlert();
   const { isVerificationRequired } = useVerificationAlert();
   const userLogin = useAppSelector((state: RootState) => state.user);
@@ -28,10 +28,14 @@ const ApplyButton: React.FC<ApplyButtonProps> = ({ jobName, companyId, jobId, di
     setIsLoggedIn(!!token);
     setIsVerified(userLogin.userProfile?.isVerify);
   }, []);
-
+  console.log(userLogin.userProfile);
   const handleOpenModal = () => {
     if (!isLoggedIn) {
       isLoginRequired();
+      return;
+    }
+    if (!isVerified) {
+      isVerificationRequired();
       return;
     }
     setIsModalVisible(true);

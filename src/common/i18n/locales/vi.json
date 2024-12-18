@@ -157,6 +157,7 @@
   "features.feature4": "Hiển thị số lượng ứng viên",
   "features.feature5": "Gửi thông báo việc làm phù hợp",
   "features.feature6": "Không giới hạn số lượng bài đăng",
+  "features.feature7": "Giới hạn số lượng việc làm",
   "title.selectPlan": "Chọn gói của bạn",
   "plans.lite": "Lite",
   "plans.plus": "Plus",
@@ -660,6 +661,9 @@
   "count.afterCount": "Sau {{value}} giây",
   "success.uploadAvatar": "Tải lên avatar thành công",
   "failed.uploadAvatar": "Tải lên avatar thất bại",
+  "no.jobs.available": "Hiện tại chưa có việc làm. Hãy thử lại sau",
+  "Found": "Tìm thấy",
+  "no.matching.jobs": "Không tìm thấy việc làm phù hợp với từ khoá tìm kiếm"
   "jobDetail.similarJobs": "Gửi tôi việc làm tương tự",
   "jobDetail.similarJobsTitle": "Tạo thông báo việc làm",
   "modal.confirm": "Xác nhận",
