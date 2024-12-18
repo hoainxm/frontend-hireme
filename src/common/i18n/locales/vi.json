@@ -659,5 +659,12 @@
   "noCVAvailable": "Hiện tại chưa có sẵn CV nào, hãy thử tải lên từ máy tính của bạn.",
   "count.afterCount": "Sau {{value}} giây",
   "success.uploadAvatar": "Tải lên avatar thành công",
-  "failed.uploadAvatar": "Tải lên avatar thất bại"
+  "failed.uploadAvatar": "Tải lên avatar thất bại",
+  "jobDetail.similarJobs": "Gửi tôi việc làm tương tự",
+  "jobDetail.similarJobsTitle": "Tạo thông báo việc làm",
+  "modal.confirm": "Xác nhận",
+  "modal.cancel": "Hủy",
+  "field.searchSkills": "Tìm theo skill",
+  "jobDetail.note": "Lưu ý",
+  "modal.update": "Cập nhật"
 }

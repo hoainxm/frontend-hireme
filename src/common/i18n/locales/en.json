@@ -746,5 +746,12 @@
   "field.error.endDateAfterStartDate": "The end date must be greater than the start date",
   "noCVAvailable": "Currently, there are no CVs available. Please try uploading one from your computer.",
   "success.uploadAvater": "Avatar uploaded successfully",
-  "failed.uploadAvater": "Failed to upload avatar"
+  "failed.uploadAvater": "Failed to upload avatar",
+  "jobDetail.similarJobs": "Send me similar jobs",
+  "jobDetail.similarJobsTitle": "Create job alert",
+  "modal.confirm": "Confirm",
+  "modal.cancel": "Cancel",
+  "field.searchSkills": "Search by skill",
+  "jobDetail.note": "Note",
+  "modal.update": "Update"
 }
