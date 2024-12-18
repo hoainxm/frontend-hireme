@@ -54,7 +54,7 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ idCompany, skills }) => {
   }, [idCompany, skills]);
 
   if (!relatedJobs || relatedJobs.length === 0) {
-    return <div>{t('noData')}</div>;
+    return <div>{t('field.hint.noData')}</div>;
   }
 
   const isJobExpired = (endDate: string): boolean => {

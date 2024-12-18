@@ -82,7 +82,7 @@ const CompanyDetail: React.FC = () => {
   }
 
   if (!company) {
-    return <div className={style['company-detail__no-data']}>{t('noData')}</div>;
+    return <div className={style['company-detail__no-data']}>{t('field.hint.noData')}</div>;
   }
 
   return (

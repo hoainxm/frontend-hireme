@@ -45,6 +45,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
     const { position, experience, skills, province } = filters;
 
     let filtered = jobList.filter((job) => {
+      if (isJobExpired(job.endDate)) return false;
       const matchesPosition = position ? job.name.toLowerCase().includes(position.toLowerCase()) : true;
       const matchesExperience = experience ? job.level.toLowerCase() === experience.toLowerCase() : true;
       const matchesSkills = skills.length ? skills.every((skill) => job.skills.includes(skill.toLowerCase())) : true;
@@ -87,7 +88,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
       </div>
 
       {listJobs.length === 0 ? (
-        <div className={style.noResults}>{t('No jobs available at the moment')}</div>
+        <div className={style.noResults}>{t('no.jobs.available')}</div>
       ) : (
         <div>
           {filteredJobs.length > 0 ? (
@@ -96,7 +97,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
                 <div className={style.jobCount}>
                   {t('Found')} {totalJobs} {t('job.match')}
                   <Button type='primary' onClick={handleSortToggle}>
-                    {sortOrder === 'recent' ? t('Sort by Oldest') : t('Sort by Recent')}
+                    {sortOrder === 'recent' ? t('sort.by.oldest') : t('sort.by.recent')}
                   </Button>
                 </div>
                 {currentJobs.map((job) => (
@@ -105,8 +106,7 @@ const JobList: React.FC<JobListProps> = ({ listJobs = [], isSavedJobs = false })
               </div>
             </>
           ) : (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>Không tìm thấy việc làm phù hợp với từ khoá tìm kiếm.</div>
-
+            <div style={{ display: 'flex', justifyContent: 'center' }}>{t('no.matching.jobs')}</div>
           )}
         </div>
       )}

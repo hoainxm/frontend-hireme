@@ -18,11 +18,13 @@ import JobTable from './JobTable';
 import True from '../../../common/ui/assets/images/Success.svg';
 import False from '../../../common/ui/assets/icon/Error.svg';
 import TrashIcon from '../../../common/ui/assets/ic/20px/trash-bin.svg';
+import Duplicate from '../../../common/ui/assets/ic/20px/copy.svg';
 import Edit from '../../../common/ui/assets/icon/Edit.svg';
 import { Image } from 'react-bootstrap';
 import locationData from '../../jobs/components/location.json';
 import EditJobModal from './EditJobModal';
 import AddJobModal from './AddJobModal';
+import DuplicateJobModal from './DuplicateJobModal';
 
 interface Props {
   id: string;
@@ -42,6 +44,8 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [form] = Form.useForm();
   const [idCompany, setIdCompany] = useState<string>();
+  const [isDuplicateModalVisible, setIsDuplicateModalVisible] = useState(false);
+  const [jobToDuplicate, setJobToDuplicate] = useState<Job | null>(null);
 
   const TABLE_HEADER = [
     t('field.numeric'),
@@ -104,6 +108,11 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
     });
   };
 
+  const handleDuplicateClick = (job: Job) => {
+    setJobToDuplicate(job);
+    setIsDuplicateModalVisible(true);
+  };
+
   const onChangePageSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(e.target.value, 10));
   };
@@ -141,8 +150,16 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
                     <Image src={job.isActive ? True : False} alt={job.isActive ? 'Active' : 'Inactive'} width={20} height={20} />
                   </div>,
                   <div style={{ display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <Image src={Edit} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleEditClick(job)} />
+                    <Image src={Edit} alt='edit' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleEditClick(job)} />
                     <Image src={TrashIcon} alt='delete' width={20} height={20} style={{ cursor: 'pointer' }} onClick={() => handleDelete(job._id)} />
+                    <Image
+                      src={Duplicate}
+                      alt='duplicate'
+                      width={20}
+                      height={20}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleDuplicateClick(job)}
+                    />
                   </div>,
                 ]}
               />
@@ -184,6 +201,20 @@ const JobListByHR: FC<Props> = ({ idHr }) => {
         }}
         job={selectedJob}
         companies={companies}
+      />
+      <DuplicateJobModal
+        visible={isDuplicateModalVisible}
+        onClose={() => setIsDuplicateModalVisible(false)}
+        onCreateSuccess={() => {
+          fetchData(currentPage);
+          setIsDuplicateModalVisible(false);
+        }}
+        job={jobToDuplicate}
+        skillsOptions={SkillsOptions.map((skill) => ({ value: skill, label: skill }))}
+        workFormOptions={WorkForm.map((form) => ({ value: form, label: form }))}
+        experienceOptions={experienceOptions.map((level) => ({ value: level, label: level }))}
+        statusOptions={Status.map((status) => ({ value: status, label: status }))}
+        genderOptions={GenderOptions.map((gender) => ({ value: gender, label: gender }))}
       />
     </div>
   );
