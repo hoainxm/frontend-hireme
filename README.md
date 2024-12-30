@@ -17,10 +17,10 @@ Dự án này là sản phẩm của khóa luận tốt nghiệp tại Trường
 ## 🚀 Hướng dẫn cài đặt
 1. Clone dự án:
    ```bash
-   git clone https://github.com/hoainxm/frontend-recruitment.git
+   git clone https://github.com/hoainxm/frontend-hireme.git
 2. Di chuyển vào thư mục dự án:
    ```bash
-   cd frontend-recruitment
+   cd frontend-hireme
 3. Khởi chạy
    ```bash
    npm start
@@ -44,10 +44,10 @@ This project is the final thesis product at Ho Chi Minh City University of Techn
 ## 🚀 Installation Guide
 1. Clone the project:
    ```bash
-   git clone https://github.com/hoainxm/frontend-recruitment.git
+   git clone https://github.com/hoainxm/frontend-hireme.git
 2. Navigate to the project directory:
    ```bash
-   cd frontend-recruitment
+   cd frontend-hireme
 3. Start the project:
    ```bash
    npm start
